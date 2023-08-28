@@ -31,6 +31,11 @@ function Login() {
     setLoginError("");
 
     try {
+      if (!username || !password) {
+        setLoginError("Introduce el usuario y la contraseña");
+        return;
+      }
+
       const fakeEmail = `${username.toLowerCase()}@fake.com`;
       const { error } = await supabase.auth.signInWithPassword({
         email: fakeEmail,
@@ -38,12 +43,13 @@ function Login() {
       });
 
       if (error) {
-        setLoginError(error.message);
+        setLoginError("Usuario o contraseña incorrectos");
+        return;
       }
 
-      router.replace("/");
-    } catch (error) {
-      console.error(error);
+      router.refresh();
+    } catch (error: unknown) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -61,9 +67,9 @@ function Login() {
         onSubmit={handleLogin}
         className="flex flex-col rounded-xl border bg-white p-8 shadow-xl"
       >
-        <h1 className="text-3xl font-bold mb-12 mx-2">Sign In</h1>
+        <h1 className="text-3xl font-bold mb-12 mx-2">Iniciar sesión</h1>
         <label htmlFor="username" className="mx-2 text-base mb-1">
-          Username
+          Usuario
         </label>
         <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
           <HiUser className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
@@ -75,12 +81,12 @@ function Login() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             disabled={isLoading}
-            placeholder="Type your username"
+            placeholder="Escriba su nombre de usuario"
             className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
           />
         </div>
         <label htmlFor="password" className="mx-2 text-base mb-1">
-          Password
+          Contraseña
         </label>
         <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
           <HiLockClosed className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
@@ -93,7 +99,7 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            placeholder="Type your password"
+            placeholder="Escriba su contraseña"
             className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition"
           />
           {showPassword ? (
@@ -115,7 +121,7 @@ function Login() {
 
         <div
           className={twMerge(
-            "text-red-700 bg-red-50 px-2 py-2 border-red-400 border rounded text-sm -mt-6 mb-6 flex items-center relative",
+            "text-red-700 bg-red-50 px-2 py-2 border-red-400 border rounded text-xs -mt-6 mb-6 flex items-center relative",
             !loginError && "hidden",
           )}
         >
@@ -136,7 +142,7 @@ function Login() {
           disabled={isLoading}
           className="bg-teal-800 text-white w-auto m-auto py-2 px-12 rounded-lg text-lg font-semibold shadow-lg transition hover:bg-teal-900 active:shadow-none disabled:bg-slate-400"
         >
-          Submit
+          Entrar
         </button>
       </form>
     </div>
