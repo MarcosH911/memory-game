@@ -4,6 +4,7 @@ import Square from "@/components/Square";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import StartPlaying from "./StartPlaying";
 
 function Game() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -51,7 +52,7 @@ function Game() {
       if (++timesRun === level) {
         isLastInterval = true;
       }
-    }, 1000);
+    }, 500);
 
     return () => clearInterval(interval);
   }, [isComputerTurn, isPlaying, level]);
@@ -91,31 +92,33 @@ function Game() {
   };
 
   return (
-    <div className="h-full flex items-center justify-center">
-      {hasLost && "You have lost"}
-      <button
-        onClick={() => setIsPlaying(true)}
-        className={twMerge(isPlaying && "hidden")}
-      >
-        Start
-      </button>
-      <div className="h-[40rem] w-[40rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
-        {Array(9)
-          .fill(true)
-          .map((_, i) => (
-            <Square
-              key={i}
-              selected={
-                generatedSequence.at(generatedSequence.length - 1) === i
-              }
-              lost={hasLost}
-              isPlayerTurn={isPlayerTurn}
-              isComputerTurn={isComputerTurn}
-              onClick={() => handleSquareClick(i)}
-            />
-          ))}
+    <>
+      {!isPlaying && (
+        <StartPlaying
+          onClick={() => setIsPlaying(true)}
+          className={twMerge(isPlaying && "hidden")}
+        />
+      )}
+      <div className="h-full flex items-center justify-center">
+        {hasLost && "You have lost"}
+        <div className="h-[40rem] w-[40rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
+          {Array(9)
+            .fill(true)
+            .map((_, i) => (
+              <Square
+                key={i}
+                selected={
+                  generatedSequence.at(generatedSequence.length - 1) === i
+                }
+                lost={hasLost}
+                isPlayerTurn={isPlayerTurn}
+                isComputerTurn={isComputerTurn}
+                onClick={() => handleSquareClick(i)}
+              />
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
