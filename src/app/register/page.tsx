@@ -1,7 +1,7 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Database } from "../../../types/supabase";
 import {
@@ -15,6 +15,7 @@ import {
   HiBuildingOffice,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+import { AuthError, Session } from "@supabase/supabase-js";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -30,10 +31,40 @@ function Register() {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
+  const userData = useRef<{ session: Session } | { session: null }>({
+    session: null,
+  });
+  const userError = useRef<AuthError | null>(null);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      userData.current = data;
+      userError.current = error;
+
+      if (
+        userData.current.session?.user.user_metadata.role !== "admin" ||
+        userError.current
+      ) {
+        router.replace("/");
+      }
+    };
+
+    checkAuthentication();
+  }, [router, supabase.auth]);
+
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setRegisterError("");
+
+    if (
+      userData.current.session?.user.user_metadata.role !== "admin" ||
+      userError.current
+    ) {
+      setRegisterError('Esta cuenta no tiene el rol "admin"');
+      return;
+    }
 
     try {
       if (!username || !password || !fullName || !role) {
@@ -43,7 +74,7 @@ function Register() {
 
       const fakeEmail = `${username.toLowerCase()}@fake.com`;
 
-      const { error: newUserError, data: newUserData } =
+      const { data: newUserData, error: newUserError } =
         await supabase.auth.signUp({
           email: fakeEmail,
           password,
@@ -57,10 +88,10 @@ function Register() {
         return;
       }
 
-      const { error: newProfileError } = await supabase
+      const { data, error: newProfileError } = await supabase
         .from("profiles")
         .insert({
-          user_id: newUserData.user?.id,
+          user_id: newUserData.user.id,
           username,
           full_name: fullName,
           role,
@@ -68,6 +99,18 @@ function Register() {
 
       if (newProfileError) {
         setRegisterError("Error creando el perfil");
+        return;
+      }
+
+      if (role === "student") {
+        const { error: pointsError } = await supabase.from("points").insert({
+          user_id: newUserData.user.id,
+        });
+
+        if (pointsError) {
+          setRegisterError("Error creando los puntos");
+          return;
+        }
       }
 
       setRegisterSuccess("Usuario registrado correctamente!");
@@ -207,7 +250,10 @@ function Register() {
           <span>{registerError}</span>
           <button
             type="button"
-            onClick={() => setRegisterError("")}
+            onClick={() => {
+              setRegisterError("");
+              setRegisterSuccess("");
+            }}
             className="text-xl hover:bg-red-200 rounded-full p-1 absolute right-1 transition"
           >
             <HiXMark />

@@ -1,10 +1,13 @@
 "use client";
 
 import Square from "@/components/Square";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StartPlaying from "./StartPlayingScreen";
 import { sleep } from "@/helpers/helpers";
 import { twMerge } from "tailwind-merge";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 function Game() {
   const [startGame, setStartGame] = useState(false);
@@ -18,6 +21,48 @@ function Game() {
 
   const [playWinAnimation, setPlayWinAnimation] = useState(false);
   const [playLooseAnimation, setPlayLooseAnimation] = useState(false);
+
+  const router = useRouter();
+  const supabase = createClientComponentClient();
+  const userId = useRef<string | undefined>();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = (await supabase.auth.getSession()).data.session?.user.id;
+      userId.current = user;
+    };
+
+    getUser();
+  }, [supabase.auth]);
+
+  const updateDatabase = async (coins = 0, diamonds = 0) => {
+    const { data: currentData, error: selectError } = await supabase
+      .from("points")
+      .select("coins, diamonds")
+      .eq("user_id", userId.current);
+
+    if (selectError || !currentData) {
+      console.error("There was an error selecting the points");
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from("points")
+      .update({
+        coins: coins + currentData[0].coins,
+        diamonds: diamonds + currentData[0].diamonds,
+      })
+      .eq("user_id", userId.current)
+      .select();
+
+    if (insertError) {
+      console.error("There was an error inserting the points");
+      console.error(insertError.message);
+      return;
+    }
+
+    router.refresh();
+  };
 
   const restartGame = () => {
     setStartGame(false);
@@ -90,6 +135,7 @@ function Game() {
     }
 
     if (i != generatedSequence.at(playerSequence.length)) {
+      updateDatabase((level * (level + 1)) / 2, level);
       setHasLost(true);
       await sleep(1);
       setIsPlayerTurn(false);
@@ -125,7 +171,7 @@ function Game() {
         <h1 className="text-7xl -mt-16 font-semibold border rounded-lg px-6 py-3 bg-teal-100 shadow-md border-teal-200 shadow-teal-200/50 text-teal-950">
           Level {level}
         </h1>
-        <div className="h-[40rem] w-[40rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
+        <div className="h-[30rem] w-[30rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
           {Array(9)
             .fill(true)
             .map((_, i) => (
