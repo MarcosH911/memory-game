@@ -1,12 +1,13 @@
 "use client";
 
 import Square from "@/components/Square";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import StartPlaying from "./StartPlayingScreen";
+import { sleep } from "@/helpers/helpers";
 import { twMerge } from "tailwind-merge";
-import StartPlaying from "./StartPlaying";
 
 function Game() {
+  const [startGame, setStartGame] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasLost, setHasLost] = useState(false);
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
@@ -15,7 +16,11 @@ function Game() {
   const [playerSequence, setPlayerSequence] = useState<number[]>([]);
   const [level, setLevel] = useState(1);
 
+  const [playWinAnimation, setPlayWinAnimation] = useState(false);
+  const [playLooseAnimation, setPlayLooseAnimation] = useState(false);
+
   const restartGame = () => {
+    setStartGame(false);
     setIsPlaying(false);
     setHasLost(false);
     setIsPlayerTurn(false);
@@ -24,6 +29,16 @@ function Game() {
     setPlayerSequence([]);
     setLevel(1);
   };
+
+  useEffect(() => {
+    if (!startGame) return;
+
+    const timeout = setTimeout(() => {
+      setIsPlaying(true);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [startGame]);
 
   useEffect(() => {
     if (!isPlaying || !isComputerTurn) {
@@ -64,43 +79,52 @@ function Game() {
 
     const timeout = setTimeout(() => {
       setIsPlayerTurn(true);
-    }, 300);
+    }, 250);
 
     return () => clearTimeout(timeout);
   }, [isComputerTurn]);
 
-  const handleSquareClick = (i: number) => {
+  const handleSquareClick = async (i: number) => {
     if (!isPlayerTurn) {
       return;
     }
 
-    setPlayerSequence((sequence) => {
-      if (i != generatedSequence.at(sequence.length)) {
-        setHasLost(true);
-        setIsPlaying(false);
-        restartGame();
-      } else if (sequence.length + 1 === generatedSequence.length) {
-        setIsPlayerTurn(false);
-        setIsComputerTurn(true);
-        setLevel((level) => level + 1);
-        setGeneratedSequence([]);
-        return [];
-      }
-
-      return [...sequence, i];
-    });
+    if (i != generatedSequence.at(playerSequence.length)) {
+      setHasLost(true);
+      await sleep(1);
+      setIsPlayerTurn(false);
+      setPlayLooseAnimation(true);
+      await sleep(500);
+      setPlayLooseAnimation(false);
+      restartGame();
+    } else if (playerSequence.length + 1 === generatedSequence.length) {
+      await sleep(1);
+      setIsPlayerTurn(false);
+      setPlayWinAnimation(true);
+      await sleep(500);
+      setPlayWinAnimation(false);
+      setLevel((level) => level + 1);
+      setGeneratedSequence([]);
+      setPlayerSequence([]);
+      setIsComputerTurn(true);
+    } else {
+      setPlayerSequence((sequence) => [...sequence, i]);
+    }
   };
 
   return (
     <>
-      {!isPlaying && (
-        <StartPlaying
-          onClick={() => setIsPlaying(true)}
-          className={twMerge(isPlaying && "hidden")}
-        />
-      )}
-      <div className="h-full flex items-center justify-center">
-        {hasLost && "You have lost"}
+      <StartPlaying onClick={() => setStartGame(true)} startGame={startGame} />
+      <div
+        className={twMerge(
+          "h-full flex items-center justify-center flex-col gap-7",
+          playWinAnimation && "animate-win-game",
+          playLooseAnimation && "animate-loose-game",
+        )}
+      >
+        <h1 className="text-7xl -mt-16 font-semibold border rounded-lg px-6 py-3 bg-teal-100 shadow-md border-teal-200 shadow-teal-200/50 text-teal-950">
+          Level {level}
+        </h1>
         <div className="h-[40rem] w-[40rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
           {Array(9)
             .fill(true)
@@ -110,7 +134,6 @@ function Game() {
                 selected={
                   generatedSequence.at(generatedSequence.length - 1) === i
                 }
-                lost={hasLost}
                 isPlayerTurn={isPlayerTurn}
                 isComputerTurn={isComputerTurn}
                 onClick={() => handleSquareClick(i)}
