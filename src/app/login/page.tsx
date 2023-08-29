@@ -49,7 +49,7 @@ function Login() {
 
       router.refresh();
     } catch (error: unknown) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
