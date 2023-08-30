@@ -1,7 +1,7 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Database } from "../../../types/supabase";
 import {
@@ -15,13 +15,13 @@ import {
   HiBuildingOffice,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
-import { AuthError, Session } from "@supabase/supabase-js";
 
 function Register() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [role, setRole] = useState("");
+  const [school, setSchool] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
@@ -31,37 +31,15 @@ function Register() {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
-  const userData = useRef<{ session: Session } | { session: null }>({
-    session: null,
-  });
-  const userError = useRef<AuthError | null>(null);
-
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      userData.current = data;
-      userError.current = error;
-
-      if (
-        userData.current.session?.user.user_metadata.role !== "admin" ||
-        userError.current
-      ) {
-        router.replace("/");
-      }
-    };
-
-    checkAuthentication();
-  }, [router, supabase.auth]);
-
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setRegisterError("");
 
-    if (
-      userData.current.session?.user.user_metadata.role !== "admin" ||
-      userError.current
-    ) {
+    const role = (await supabase.auth.getSession()).data.session?.user
+      .user_metadata.role;
+
+    if (role !== "admin") {
       setRegisterError('Esta cuenta no tiene el rol "admin"');
       return;
     }
@@ -150,7 +128,7 @@ function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             disabled={isLoading}
-            placeholder="Escriba su nombre de usuario"
+            placeholder="Escriba el nombre de usuario"
             className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
           />
         </div>
@@ -168,7 +146,7 @@ function Register() {
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             disabled={isLoading}
-            placeholder="Escriba su nombre y apellido"
+            placeholder="Escriba el nombre y apellido"
             className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
           />
         </div>
@@ -205,6 +183,30 @@ function Register() {
           </select>
         </div>
 
+        {role !== "admin" && (
+          <>
+            <label htmlFor="school" className="mx-2 text-base mb-1">
+              Colegio
+            </label>
+            <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
+              <HiUser className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+              <input
+                type="text"
+                name="school"
+                id="school"
+                autoComplete="off"
+                value={school}
+                onChange={(e) => setSchool(e.target.value)}
+                disabled={isLoading}
+                placeholder="Escriba el colegio"
+                className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
+              />
+            </div>
+          </>
+        )}
+
+        {/* TODO: School | New table with schools*/}
+
         <label htmlFor="password" className="mx-2 text-base mb-1">
           Contraseña
         </label>
@@ -219,7 +221,7 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            placeholder="Escriba su contraseña"
+            placeholder="Escriba la contraseña"
             className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition"
           />
           {showPassword ? (
@@ -277,8 +279,6 @@ function Register() {
             <HiXMark />
           </button>
         </div>
-
-        {/* TODO: School */}
 
         <button
           type="submit"

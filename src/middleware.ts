@@ -16,11 +16,14 @@ export const middleware = async (request: NextRequest) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // TODO check /register
-
   if (!session && request.nextUrl.pathname !== "/login") {
     return NextResponse.redirect(new URL("/login", request.url));
   } else if (session && request.nextUrl.pathname === "/login") {
+    return NextResponse.redirect(new URL("/", request.url));
+  } else if (
+    session?.user.user_metadata.role !== "admin" &&
+    request.nextUrl.pathname === "/register"
+  ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 

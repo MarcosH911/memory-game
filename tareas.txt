@@ -1,0 +1,17 @@
+Finish play layout
+  Account button
+  Logout
+
+Shop
+  Buy avatars
+    Buy the one you want (more expensive)
+    Buy randomly (cheaper)
+  Buy color packs
+
+Move profile images to server
+
+Login, Register and Logout route handler
+School in a new database table
+When registering only allow to choose schools from the schools table
+
+Play layout server component

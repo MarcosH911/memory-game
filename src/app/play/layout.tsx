@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import CoinsNavItem from "./CoinsNavItem";
 import DiamondsNavItem from "./DiamondsNavItem";
 import { cookies } from "next/headers";
+import ProfileButton from "./ProfileButton";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +30,7 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
         <div className="flex items-center gap-8">
           <DiamondsNavItem>{data?.[0].diamonds}</DiamondsNavItem>
           <CoinsNavItem>{data?.[0].coins}</CoinsNavItem>
-          <div>Perfil</div>
+          <ProfileButton />
         </div>
       </nav>
       <div className="h-[calc(100%-5rem)] relative">{children}</div>
