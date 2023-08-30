@@ -1,6 +1,17 @@
-Finish play layout
-  Account button
-  Logout
+School icon
+
+Leaderboards
+  Most coins
+  Most Diamonds
+  Highest level
+
+  By day
+  By week
+  By month
+  By year
+  All time
+
+Add tailwind prettier
 
 Shop
   Buy avatars
@@ -8,7 +19,11 @@ Shop
     Buy randomly (cheaper)
   Buy color packs
 
+Save the highest level the player has achieved
+
 Move profile images to server
+
+Disable admins entering /play in middleware
 
 Login, Register and Logout route handler
 School in a new database table

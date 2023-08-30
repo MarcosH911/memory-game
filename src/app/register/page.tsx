@@ -184,6 +184,7 @@ function Register() {
         </div>
 
         {role !== "admin" && (
+          // TODO: School icon
           <>
             <label htmlFor="school" className="mx-2 text-base mb-1">
               Colegio

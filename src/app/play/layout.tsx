@@ -22,7 +22,7 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <nav className="w-full h-20 border-b-2 flex justify-between items-center px-12">
+      <nav className="w-full h-20 border-b-2 flex justify-between items-center px-8">
         <div className="flex gap-8">
           <div>Jugar</div>
           <div>Tienda</div>
