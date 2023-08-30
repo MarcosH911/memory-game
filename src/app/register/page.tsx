@@ -13,6 +13,7 @@ import {
   HiXMark,
   HiUsers,
   HiBuildingOffice,
+  HiAcademicCap,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -190,7 +191,7 @@ function Register() {
               Colegio
             </label>
             <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-              <HiUser className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+              <HiAcademicCap className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
               <input
                 type="text"
                 name="school"
