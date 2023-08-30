@@ -6,7 +6,6 @@ import StartPlaying from "./StartPlayingScreen";
 import { sleep } from "@/helpers/helpers";
 import { twMerge } from "tailwind-merge";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
 function Game() {

@@ -3,6 +3,8 @@ import CoinsNavItem from "./CoinsNavItem";
 import DiamondsNavItem from "./DiamondsNavItem";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
+
 async function GameLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerComponentClient({ cookies });
 
