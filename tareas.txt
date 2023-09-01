@@ -1,7 +1,6 @@
 Leaderboards
   Most coins
   Most Diamonds
-    Change views
   Highest level
 
   By day
