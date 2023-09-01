@@ -16,9 +16,9 @@ export const middleware = async (request: NextRequest) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session && request.nextUrl.pathname !== "/login") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  } else if (session && request.nextUrl.pathname === "/login") {
+  if (!session && request.nextUrl.pathname !== "/iniciar-sesion") {
+    return NextResponse.redirect(new URL("/iniciar-sesion", request.url));
+  } else if (session && request.nextUrl.pathname === "/iniciar-sesion") {
     return NextResponse.redirect(new URL("/", request.url));
   } else if (
     session?.user.user_metadata.role !== "admin" &&
