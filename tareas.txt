@@ -1,21 +1,8 @@
-Leaderboards
-  Most coins
-  Most Diamonds
-  Highest level
-
-  By day
-  By week
-  By month
-  By year
-  All time
+Style leaderboards
 
 Reload button that refetches data
 
-Custom hook to select all ranking data
-
 Update avatar image to logout
-
-Change ranking/day to ranking/diario
 
 Install neovim
 
@@ -23,15 +10,13 @@ Subscribe to changes to update the users points
 
 Add tailwind prettier
 
+Organize files
+
 Shop
   Buy avatars
     Buy the one you want (more expensive)
     Buy randomly (cheaper)
   Buy color packs
-
-Save the highest level the player has achieved
-
-Move profile images to server
 
 Disable admins entering /play in middleware
 

@@ -27,8 +27,8 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
           <div>Tienda</div>
         </div>
         <div className="flex items-center gap-8">
-          <DiamondsNavItem>{data?.total_diamonds}</DiamondsNavItem>
-          <CoinsNavItem>{data?.total_coins}</CoinsNavItem>
+          <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>
+          <CoinsNavItem>{data?.total_coins || 0}</CoinsNavItem>
           <ProfileButton />
         </div>
       </nav>
