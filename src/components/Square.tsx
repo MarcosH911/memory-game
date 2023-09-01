@@ -15,7 +15,7 @@ function Square({
 }: SquareProps) {
   return (
     <div
-      onMouseDown={onClick}
+      onClick={onClick}
       className={twMerge(
         "bg-teal-300 rounded-2xl transition duration-250 select-none cursor-pointer border border-teal-600 border-opacity-30",
         isComputerTurn &&

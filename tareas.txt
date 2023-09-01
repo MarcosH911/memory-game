@@ -1,8 +1,7 @@
-School icon
-
 Leaderboards
   Most coins
   Most Diamonds
+    Change views
   Highest level
 
   By day
@@ -10,6 +9,18 @@ Leaderboards
   By month
   By year
   All time
+
+Reload button that refetches data
+
+Custom hook to select all ranking data
+
+Update avatar image to logout
+
+Change ranking/day to ranking/diario
+
+Install neovim
+
+Subscribe to changes to update the users points
 
 Add tailwind prettier
 
@@ -28,5 +39,12 @@ Disable admins entering /play in middleware
 Login, Register and Logout route handler
 School in a new database table
 When registering only allow to choose schools from the schools table
+Dropdown from RadixUI
 
 Play layout server component
+
+Create index for database
+
+Teachers
+  School
+  Students grade
