@@ -1,6 +1,5 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
-import { Database } from "../types/supabase";
 
 export const config = {
   matcher: ["/((?!_next/).*)"],

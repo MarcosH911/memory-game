@@ -1,10 +1,6 @@
-Style leaderboards
-
-Reload button that refetches data
-
-Update avatar image to logout
-
 Install neovim
+
+Navbar (with icon)
 
 Subscribe to changes to update the users points
 
@@ -20,6 +16,12 @@ Shop
 
 Disable admins entering /play in middleware
 
+Highlight user in ranking
+
+Tell the position of the user in the ranking
+
+Profile icon server component
+
 Login, Register and Logout route handler
 School in a new database table
 When registering only allow to choose schools from the schools table
@@ -29,6 +31,12 @@ Play layout server component
 
 Create index for database
 
+Loading states
+
 Teachers
   School
   Students grade
+
+Responsive
+
+Server actions

@@ -3,7 +3,6 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Database } from "../../../types/supabase";
 import {
   HiUser,
   HiLockClosed,

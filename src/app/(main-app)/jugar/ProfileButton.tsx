@@ -5,14 +5,29 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { HiOutlineLogout } from "react-icons/hi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Database } from "../../../types/supabase";
+import { useEffect, useState } from "react";
+import getAvatarImage from "@/utils/getAvatarImage";
 
 function ProfileButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
+
+  let avatarPath = null;
+
+  useEffect(() => {
+    const getAvatarPath = async () => {
+      const avatarPath = supabase
+        .from("profiles")
+        .select("avatar_path")
+        .eq("user_id", "auth.uid()")
+        .single();
+    };
+    getAvatarPath;
+  }, [supabase]);
+
+  const avatarUrl = getAvatarImage(avatarPath);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -32,12 +47,12 @@ function ProfileButton() {
       >
         <Popover.Trigger asChild>
           <button>
-            {/* <Image
-              src="/profile-avatars/Avatar-001.png"
+            <Image
+              src={avatarUrl}
               alt="profile-avatar"
               width={40}
               height={40}
-            /> */}
+            />
           </button>
         </Popover.Trigger>
         <Popover.Content asChild>

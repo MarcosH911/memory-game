@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts",
-    "src/app/registrar/api/callback/route.sx"
+    "src/app/(auth)/registrar/api/callback/route.sx"
   ],
   "exclude": ["node_modules"]
 }

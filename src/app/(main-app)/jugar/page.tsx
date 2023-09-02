@@ -7,7 +7,6 @@ import { sleep } from "@/helpers/helpers";
 import { twMerge } from "tailwind-merge";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { Database } from "../../../types/supabase";
 
 function Game() {
   const [startGame, setStartGame] = useState(false);

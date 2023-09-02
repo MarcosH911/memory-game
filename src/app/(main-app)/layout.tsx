@@ -1,9 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import CoinsNavItem from "./CoinsNavItem";
-import DiamondsNavItem from "./DiamondsNavItem";
+import CoinsNavItem from "./jugar/CoinsNavItem";
+import DiamondsNavItem from "./jugar/DiamondsNavItem";
 import { cookies } from "next/headers";
-import ProfileButton from "./ProfileButton";
-import { Database } from "../../../types/supabase";
+import ProfileButton from "./jugar/ProfileButton";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -22,10 +22,17 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <nav className="w-full h-20 border-b-2 flex justify-between items-center px-8">
-        <div className="flex gap-8">
-          <div>Jugar</div>
-          <div>Tienda</div>
-        </div>
+        <ul className="flex gap-8">
+          <Link href="/jugar">
+            <li>Jugar</li>
+          </Link>
+          <Link href="/tienda">
+            <li>Tienda</li>
+          </Link>
+          <Link href="/ranking">
+            <li>Ranking</li>
+          </Link>
+        </ul>
         <div className="flex items-center gap-8">
           <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>
           <CoinsNavItem>{data?.total_coins || 0}</CoinsNavItem>
