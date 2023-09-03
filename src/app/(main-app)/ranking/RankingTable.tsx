@@ -1,7 +1,8 @@
 import { twMerge } from "tailwind-merge";
-import RankingRow from "./RankingRow";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { HiMiniArrowPath } from "react-icons/hi2";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
+
+import RankingRow from "./RankingRow";
 
 interface RankingTableProps {
   data: Database["public"]["Views"]["points_ranking_all_time"]["Row"][];
@@ -17,26 +18,26 @@ function RankingTable({
   setIsReloading,
 }: RankingTableProps) {
   return (
-    <div className="shadow-xl rounded-lg relative">
+    <div className="relative rounded-lg shadow-xl">
       <button
         onClick={() => setIsReloading(true)}
-        className="absolute right-3.5 top-3.5 text-white text-2xl hover:bg-teal-800 transition rounded-md p-1.5"
+        className="absolute right-3.5 top-3.5 rounded-md p-1.5 text-2xl text-white transition hover:bg-teal-800"
       >
         <HiMiniArrowPath className={twMerge(isReloading && "animate-spin")} />
       </button>
       <table className="w-full">
         <thead>
-          <tr className="flex justify-around px-24 h-16 items-center bg-teal-700 text-teal-50 shadow-xl rounded-t-lg">
-            <th className="flex items-center justify-center w-[25%] text-lg font-bold">
+          <tr className="flex h-16 items-center justify-around rounded-t-lg bg-teal-700 px-24 text-teal-50 shadow-xl">
+            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
               Posición
             </th>
-            <th className="flex items-center justify-center w-[25%] text-lg font-bold">
+            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
               Avatar
             </th>
-            <th className="flex items-center justify-center w-[25%] text-lg font-bold">
+            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
               Nombre
             </th>
-            <th className="flex items-center justify-center w-[25%] text-lg font-bold">
+            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
               {type === "coins"
                 ? "Monedas"
                 : type === "diamonds"
@@ -47,7 +48,7 @@ function RankingTable({
         </thead>
       </table>
       <ScrollArea.Root type="auto" className="h-[60vh] overflow-hidden">
-        <ScrollArea.Viewport className="w-full h-full rounded-b-lg">
+        <ScrollArea.Viewport className="h-full w-full rounded-b-lg">
           <table className="w-full rounded-lg">
             <tbody className="rounded-lg">
               {data.map((item, index) => (
@@ -82,9 +83,9 @@ function RankingTable({
         </ScrollArea.Viewport>
         <ScrollArea.Scrollbar
           orientation="vertical"
-          className="w-2 bg-slate-300/80 rounded-full hover:bg-slate-300 transition mx-1 my-3 shadow-sm"
+          className="mx-1 my-3 w-2 rounded-full bg-slate-300/80 shadow-sm transition hover:bg-slate-300"
         >
-          <ScrollArea.Thumb className="bg-slate-400 rounded-full hover:bg-slate-500 transition-colors" />
+          <ScrollArea.Thumb className="rounded-full bg-slate-400 transition-colors hover:bg-slate-500" />
         </ScrollArea.Scrollbar>
       </ScrollArea.Root>
     </div>

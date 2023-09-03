@@ -1,8 +1,9 @@
 import { twMerge } from "tailwind-merge";
-import RankingViewButton from "./RankingViewButton";
 import { IoDiamond } from "react-icons/io5";
 import { BiSolidCoinStack } from "react-icons/bi";
 import { FaLevelUpAlt } from "react-icons/fa";
+
+import RankingViewButton from "./RankingViewButton";
 
 type rankingViewType =
   | "points_ranking_day"
@@ -35,8 +36,8 @@ function RankingFilters({
   setRankingType,
 }: RankingFiltersProps) {
   return (
-    <div className="flex justify-between items-center relative mb-6">
-      <ul className="bg-slate-200 shadow-inner shadow-slate-950/20 flex rounded-full">
+    <div className="relative mb-6 flex items-center justify-between">
+      <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
         {allRankingViews.map(({ view, text }, index) => (
           <RankingViewButton
             key={index}
@@ -48,18 +49,18 @@ function RankingFilters({
         ))}
       </ul>
 
-      <h1 className="text-5xl -mt-6 font-semibold text-teal-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <h1 className="absolute left-1/2 top-1/2 -mt-6 -translate-x-1/2 -translate-y-1/2 text-5xl font-semibold text-teal-800">
         Ranking
       </h1>
 
-      <ul className="flex bg-slate-200 rounded-full relative shadow-inner shadow-slate-950/20">
+      <ul className="relative flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
         <li>
           <button
             onClick={() => setRankingType("coins")}
             className={twMerge(
-              "rounded-full py-3 px-6 transition duration-200 hover:shadow-md hover:bg-slate-300 text-yellow-600 font-semibold flex gap-1.5 items-center",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "coins" &&
-                "bg-yellow-600 text-yellow-50 hover:border-transparent hover:bg-yellow-600 shadow-md",
+                "bg-yellow-600 text-yellow-50 shadow-md hover:border-transparent hover:bg-yellow-600",
             )}
           >
             <BiSolidCoinStack />
@@ -70,9 +71,9 @@ function RankingFilters({
           <button
             onClick={() => setRankingType("diamonds")}
             className={twMerge(
-              "rounded-full py-3 px-6 transition duration-200 hover:shadow-md hover:bg-slate-300 flex items-center gap-1.5 text-purple-600 font-semibold",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-purple-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "diamonds" &&
-                "bg-purple-600 text-purple-50 hover:border-transparent hover:bg-purple-600 shadow-md",
+                "bg-purple-600 text-purple-50 shadow-md hover:border-transparent hover:bg-purple-600",
             )}
           >
             <IoDiamond />
@@ -83,9 +84,9 @@ function RankingFilters({
           <button
             onClick={() => setRankingType("max_level")}
             className={twMerge(
-              "rounded-full py-3 px-6 transition duration-200 hover:shadow-md hover:bg-slate-300 text-green-600 font-semibold flex items-center gap-1.5",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-green-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "max_level" &&
-                "bg-green-600 text-green-50 hover:border-transparent hover:bg-green-600 shadow-md",
+                "bg-green-600 text-green-50 shadow-md hover:border-transparent hover:bg-green-600",
             )}
           >
             <FaLevelUpAlt />

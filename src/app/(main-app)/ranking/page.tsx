@@ -1,9 +1,10 @@
 "use client";
 
-import { getRanking } from "@/utils/getRanking";
 import { useEffect, useState } from "react";
+
 import RankingFilters from "./RankingFilters";
 import RankingTable from "./RankingTable";
+import { getRanking } from "@/utils/getRanking";
 
 type dataType = Database["public"]["Views"]["points_ranking_all_time"]["Row"][];
 
@@ -35,7 +36,7 @@ function Page() {
   }, [rankingView, rankingType, isReloading]);
 
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex h-full items-center justify-center">
       <div className="w-[80rem]">
         <RankingFilters
           rankingView={rankingView}

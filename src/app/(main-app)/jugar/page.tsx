@@ -1,12 +1,13 @@
 "use client";
 
-import Square from "@/components/Square";
 import { useEffect, useRef, useState } from "react";
-import StartPlaying from "./StartPlayingScreen";
-import { sleep } from "@/helpers/helpers";
 import { twMerge } from "tailwind-merge";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+
+import StartPlaying from "./StartPlayingScreen";
+import Square from "./Square";
+import { sleep } from "@/helpers/helpers";
 
 function Game() {
   const [startGame, setStartGame] = useState(false);
@@ -156,15 +157,15 @@ function Game() {
       <StartPlaying onClick={() => setStartGame(true)} startGame={startGame} />
       <div
         className={twMerge(
-          "h-full flex items-center justify-center flex-col gap-7",
+          "flex h-full flex-col items-center justify-center gap-7",
           playWinAnimation && "animate-win-game",
           playLooseAnimation && "animate-loose-game",
         )}
       >
-        <h1 className="text-7xl -mt-16 font-semibold border rounded-lg px-6 py-3 bg-teal-100 shadow-md border-teal-200 shadow-teal-200/50 text-teal-950">
+        <h1 className="-mt-16 rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-7xl font-semibold text-teal-950 shadow-md shadow-teal-200/50">
           Level {level}
         </h1>
-        <div className="h-[30rem] w-[30rem] grid grid-cols-3 grid-rows-3 gap-2 p-1">
+        <div className="grid h-[30rem] w-[30rem] grid-cols-3 grid-rows-3 gap-2 p-1">
           {Array(9)
             .fill(true)
             .map((_, i) => (

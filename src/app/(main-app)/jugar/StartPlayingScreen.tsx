@@ -11,28 +11,28 @@ function StartPlayingScreen({ onClick, startGame }: StartPlayingScreenProps) {
   return (
     <div
       className={twMerge(
-        "h-full w-full absolute flex items-center justify-center transition",
+        "absolute flex h-full w-full items-center justify-center transition",
         startGame && "animate-hide-start-playing",
         !startGame && "animate-show-start-playing",
       )}
     >
       <div
         className={twMerge(
-          "h-full w-full absolute backdrop-blur-sm",
+          "absolute h-full w-full backdrop-blur-sm",
           startGame && "animate-fade-out-start-playing",
           !startGame && "animate-fade-in-start-playing",
         )}
       ></div>
       <div
         className={twMerge(
-          "w-[36rem] h-[18rem] z-10 flex items-center justify-center bg-white/50 backdrop-blur-md border-2 border-white/50 rounded-xl shadow-md",
+          "z-10 flex h-[18rem] w-[36rem] items-center justify-center rounded-xl border-2 border-white/50 bg-white/50 shadow-md backdrop-blur-md",
           startGame && "animate-fade-out-start-playing",
           !startGame && "animate-fade-in-start-playing",
         )}
       >
         <button
           onClick={onClick}
-          className="uppercase font-bold tracking-wide text-3xl border-2 border-teal-400 px-6 py-3 rounded-md bg-teal-300 shadow-md hover:bg-teal-400 transition text-teal-950 active:shadow-sm"
+          className="rounded-md border-2 border-teal-400 bg-teal-300 px-6 py-3 text-3xl font-bold uppercase tracking-wide text-teal-950 shadow-md transition hover:bg-teal-400 active:shadow-sm"
         >
           Start
         </button>

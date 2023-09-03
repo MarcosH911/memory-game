@@ -113,13 +113,13 @@ function Register() {
         onSubmit={handleRegister}
         className="flex flex-col rounded-xl border bg-white p-8 shadow-xl"
       >
-        <h1 className="text-3xl font-bold mb-12 mx-2">Registrar un usuario</h1>
+        <h1 className="mx-2 mb-12 text-3xl font-bold">Registrar un usuario</h1>
 
-        <label htmlFor="username" className="mx-2 text-base mb-1">
+        <label htmlFor="username" className="mx-2 mb-1 text-base">
           Usuario
         </label>
-        <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-          <HiUser className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+        <div className="group mb-10 flex items-center justify-start border-b px-2 py-1 transition focus-within:border-teal-800">
+          <HiUser className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
           <input
             type="text"
             name="username"
@@ -129,15 +129,15 @@ function Register() {
             onChange={(e) => setUsername(e.target.value)}
             disabled={isLoading}
             placeholder="Escriba el nombre de usuario"
-            className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
+            className="w-64 bg-transparent px-2 py-1 text-base transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0"
           />
         </div>
 
-        <label htmlFor="fullName" className="mx-2 text-base mb-1">
+        <label htmlFor="fullName" className="mx-2 mb-1 text-base">
           Nombre
         </label>
-        <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-          <HiUsers className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+        <div className="group mb-10 flex items-center justify-start border-b px-2 py-1 transition focus-within:border-teal-800">
+          <HiUsers className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
           <input
             type="text"
             name="fullName"
@@ -147,15 +147,15 @@ function Register() {
             onChange={(e) => setFullName(e.target.value)}
             disabled={isLoading}
             placeholder="Escriba el nombre y apellido"
-            className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
+            className="w-64 bg-transparent px-2 py-1 text-base transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0"
           />
         </div>
 
-        <label htmlFor="role" className="mx-2 text-base mb-1">
+        <label htmlFor="role" className="mx-2 mb-1 text-base">
           Rol
         </label>
-        <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-          <HiBuildingOffice className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+        <div className="group mb-10 flex items-center justify-start border-b px-2 py-1 transition focus-within:border-teal-800">
+          <HiBuildingOffice className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
           <select
             name="role"
             id="role"
@@ -164,7 +164,7 @@ function Register() {
             onChange={(e) => setRole(e.target.value)}
             disabled={isLoading}
             className={twMerge(
-              "text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none transition w-72 pl-1 rounded-md",
+              "w-72 rounded-md bg-transparent px-2 py-1 pl-1 text-base transition placeholder:text-base focus:outline-none",
               !role && "text-gray-400",
             )}
           >
@@ -186,11 +186,11 @@ function Register() {
         {role !== "admin" && (
           // TODO: School icon
           <>
-            <label htmlFor="school" className="mx-2 text-base mb-1">
+            <label htmlFor="school" className="mx-2 mb-1 text-base">
               Colegio
             </label>
-            <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-              <HiAcademicCap className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+            <div className="group mb-10 flex items-center justify-start border-b px-2 py-1 transition focus-within:border-teal-800">
+              <HiAcademicCap className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
               <input
                 type="text"
                 name="school"
@@ -200,7 +200,7 @@ function Register() {
                 onChange={(e) => setSchool(e.target.value)}
                 disabled={isLoading}
                 placeholder="Escriba el colegio"
-                className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition w-64"
+                className="w-64 bg-transparent px-2 py-1 text-base transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0"
               />
             </div>
           </>
@@ -208,11 +208,11 @@ function Register() {
 
         {/* TODO: School | New table with schools*/}
 
-        <label htmlFor="password" className="mx-2 text-base mb-1">
+        <label htmlFor="password" className="mx-2 mb-1 text-base">
           Contraseña
         </label>
-        <div className="flex mb-10 justify-start items-center border-b focus-within:border-teal-800 transition px-2 py-1 group">
-          <HiLockClosed className="text-slate-400 translate-y-0.5 group-focus-within:text-teal-800 transition" />
+        <div className="group mb-10 flex items-center justify-start border-b px-2 py-1 transition focus-within:border-teal-800">
+          <HiLockClosed className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
           <input
             type={showPassword ? "text" : "password"}
             name="password"
@@ -223,18 +223,18 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
             placeholder="Escriba la contraseña"
-            className="text-base px-2 py-1 placeholder:text-base bg-transparent focus:outline-none group-focus-within:placeholder:opacity-0 transition"
+            className="bg-transparent px-2 py-1 text-base transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0"
           />
           {showPassword ? (
             <HiOutlineEyeSlash
-              className="ml-auto text-slate-400 text-lg transition hover:text-slate-700 cursor-pointer"
+              className="ml-auto cursor-pointer text-lg text-slate-400 transition hover:text-slate-700"
               onClick={handleShowPassword}
               onMouseUp={(e: React.MouseEvent) => e.preventDefault()}
               disabled={isLoading}
             />
           ) : (
             <HiOutlineEye
-              className="ml-auto text-slate-400 text-lg transition hover:text-slate-700 cursor-pointer"
+              className="ml-auto cursor-pointer text-lg text-slate-400 transition hover:text-slate-700"
               onClick={handleShowPassword}
               onMouseUp={(e: React.MouseEvent) => e.preventDefault()}
               disabled={isLoading}
@@ -244,7 +244,7 @@ function Register() {
 
         <div
           className={twMerge(
-            "text-red-700 bg-red-50 px-2 py-2 border-red-400 border rounded text-xs -mt-6 mb-6 flex items-center relative",
+            "relative -mt-6 mb-6 flex items-center rounded border border-red-400 bg-red-50 px-2 py-2 text-xs text-red-700",
             !registerError && "hidden",
           )}
         >
@@ -257,7 +257,7 @@ function Register() {
               setRegisterError("");
               setRegisterSuccess("");
             }}
-            className="text-xl hover:bg-red-200 rounded-full p-1 absolute right-1 transition"
+            className="absolute right-1 rounded-full p-1 text-xl transition hover:bg-red-200"
           >
             <HiXMark />
           </button>
@@ -265,7 +265,7 @@ function Register() {
 
         <div
           className={twMerge(
-            "text-teal-700 bg-teal-50 px-2 py-2 border-teal-400 border rounded text-xs -mt-6 mb-6 flex items-center relative",
+            "relative -mt-6 mb-6 flex items-center rounded border border-teal-400 bg-teal-50 px-2 py-2 text-xs text-teal-700",
             !registerSuccess && "hidden",
           )}
         >
@@ -275,7 +275,7 @@ function Register() {
           <button
             type="button"
             onClick={() => setRegisterSuccess("")}
-            className="text-xl hover:bg-teal-200 rounded-full p-1 absolute right-1 transition"
+            className="absolute right-1 rounded-full p-1 text-xl transition hover:bg-teal-200"
           >
             <HiXMark />
           </button>
@@ -284,7 +284,7 @@ function Register() {
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-teal-800 text-white w-auto m-auto py-2 px-10 rounded-lg text-lg font-semibold shadow-lg transition hover:bg-teal-900 active:shadow-none disabled:bg-slate-400"
+          className="m-auto w-auto rounded-lg bg-teal-800 px-10 py-2 text-lg font-semibold text-white shadow-lg transition hover:bg-teal-900 active:shadow-none disabled:bg-slate-400"
         >
           Registrar
         </button>

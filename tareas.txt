@@ -1,8 +1,4 @@
-Add tailwind prettier
-
-Organize files
-
-Clean imports
+Vim autocomplete tab
 
 Name in profile icon
 

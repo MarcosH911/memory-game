@@ -1,11 +1,12 @@
 "use client";
 
-import * as Popover from "@radix-ui/react-popover";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { HiOutlineLogout } from "react-icons/hi";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Image from "next/image";
+import * as Popover from "@radix-ui/react-popover";
+import { HiOutlineLogout } from "react-icons/hi";
+
 import getAvatarImage from "@/utils/getAvatarImage";
 
 function ProfileButton() {
@@ -57,11 +58,11 @@ function ProfileButton() {
         </Popover.Trigger>
         <Popover.Content asChild>
           <div className="z-30">
-            <ul className="absolute flex flex-col z-30 bg-teal-50 w-40 -right-10 top-2 border rounded-lg justify-center items-start divide-y shadow-lg">
+            <ul className="absolute -right-10 top-2 z-30 flex w-40 flex-col items-start justify-center divide-y rounded-lg border bg-teal-50 shadow-lg">
               <li className="w-full">
                 <button
                   onClick={handleLogout}
-                  className="w-full py-2 px-4 hover:bg-slate-200 active:bg-slate-300 transition flex items-center justify-start gap-1 rounded-lg"
+                  className="flex w-full items-center justify-start gap-1 rounded-lg px-4 py-2 transition hover:bg-slate-200 active:bg-slate-300"
                 >
                   <HiOutlineLogout className="text-lg" />
                   <span className="font-semibold">Cerrar sesión</span>
