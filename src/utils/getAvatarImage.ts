@@ -5,7 +5,7 @@ function getAvatarImage(avatarPath: string | null) {
     data: { publicUrl: avatarUrl },
   } = supabaseClient.storage
     .from("avatar_images")
-    .getPublicUrl(avatarPath || "Avatar-001.png");
+    .getPublicUrl(avatarPath || "Default-Avatar.png");
 
   return avatarUrl;
 }

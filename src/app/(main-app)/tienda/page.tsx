@@ -1,5 +1,11 @@
+import AvatarsStore from "./AvatarsStore";
+
 function Page() {
-  return <div>Tienda</div>;
+  return (
+    <div>
+      <AvatarsStore />
+    </div>
+  );
 }
 
 export default Page;

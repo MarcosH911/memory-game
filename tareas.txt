@@ -1,12 +1,10 @@
-Vim autocomplete tab
-
-Name in profile icon
-
 Shop
   Buy avatars
     Buy the one you want (more expensive)
     Buy randomly (cheaper)
   Buy color packs
+
+Button to see my avatars
   
 Disable admins entering /play in middleware
 
