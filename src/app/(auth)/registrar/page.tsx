@@ -81,9 +81,11 @@ function Register() {
       }
 
       if (role === "student") {
-        const { error: pointsError } = await supabase.from("points").insert({
-          user_id: newUserData.user.id,
-        });
+        const { error: pointsError } = await supabase
+          .from("points_transactions")
+          .insert({
+            user_id: newUserData.user.id,
+          });
 
         if (pointsError) {
           setRegisterError("Error creando los puntos");

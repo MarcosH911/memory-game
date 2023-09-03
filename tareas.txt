@@ -4,6 +4,12 @@ Shop
     Buy randomly (cheaper)
   Buy color packs
 
+Display when the avatar was bought in collection
+
+Lift userId up to main layout
+
+Change the component name of all the pages to "Page"
+
 Button to see my avatars
   
 Disable admins entering /play in middleware
@@ -11,6 +17,8 @@ Disable admins entering /play in middleware
 Highlight user in ranking
 
 Tell the position of the user in the ranking
+
+Table with avatars to include price...
 
 Profile icon server component
 

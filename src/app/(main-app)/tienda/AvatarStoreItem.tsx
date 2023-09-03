@@ -2,14 +2,16 @@ import { FileObject } from "@supabase/storage-js";
 import Image from "next/image";
 
 import getAvatarImage from "@/utils/getAvatarImage";
-import { BiSolidCoinStack } from "react-icons/bi";
-import { IoDiamond } from "react-icons/io5";
+import AvatarStoreBuyButtons from "./AvatarStoreBuyButtons";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 interface AvatarStoreItemProps {
   data: FileObject;
 }
 
-function AvatarStoreItem({ data }: AvatarStoreItemProps) {
+async function AvatarStoreItem({ data }: AvatarStoreItemProps) {
+  const supabase = createServerComponentClient<Database>({ cookies });
   if (
     data.name === ".emptyFolderPlaceholder" ||
     data.name === "Default-Avatar.png"
@@ -17,6 +19,13 @@ function AvatarStoreItem({ data }: AvatarStoreItemProps) {
     return;
   }
   const imageUrl = getAvatarImage(data.name);
+
+  const { data: userAvatarData } = await supabase
+    .from("user_avatars")
+    .select("*")
+    .eq("avatar_path", data.name);
+
+  const userHasAvatar = userAvatarData?.length === 0;
 
   return (
     <div className="flex items-center justify-center flex-col bg-teal-300 border shadow-xl rounded-lg py-6 transition group duration-300">
@@ -27,14 +36,11 @@ function AvatarStoreItem({ data }: AvatarStoreItemProps) {
         alt={data.name}
         className="border-4 border-teal-950 bg-teal-950 rounded-full mb-4 shadow-md transition duration-250 hover:scale-[1.15] hover:shadow-xl backface-hidden"
       />
-      <button className="flex items-center justify-center bg-yellow-50 shadow-[0_0_10px_1px] shadow-yellow-600/20 text-yellow-600 w-3/4 gap-1 py-1 rounded-md border-yellow-600 border mb-2 hover:bg-yellow-100 hover:shadow-yellow-600/40 transition duration-200">
-        <span className="font-bold text-lg">100</span>
-        <BiSolidCoinStack className="text-xl" />
-      </button>
-      <button className="flex items-center justify-center shadow-[0_0_10px_1px] w-3/4 gap-1 py-1 rounded-md border-purple-600 border bg-purple-600 text-purple-50 shadow-purple-600/30 transition duration-200 hover:shadow-purple-600/60 hover:bg-purple-700 hover:border-purple-700">
-        <span className="font-bold text-lg">25</span>
-        <IoDiamond className="text-xl" />
-      </button>
+      {userHasAvatar ? (
+        <AvatarStoreBuyButtons avatarPath={data.name} />
+      ) : (
+        <span className="text-xl font-semibold py-7">Comprado</span>
+      )}
     </div>
   );
 }

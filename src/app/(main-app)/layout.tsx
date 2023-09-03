@@ -12,7 +12,7 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const { data, error } = await supabase
-    .from("total_points")
+    .from("user_points")
     .select("*")
     .single();
 
@@ -21,8 +21,8 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="h-full">
-      <nav className="flex h-20 w-full items-center justify-between border-b-2 pl-14 pr-8">
+    <div className="h-full pt-20">
+      <nav className="flex h-20 w-full items-center justify-between border-b-2 pl-14 pr-8 fixed top-0 bg-teal-50/90 backdrop-blur-md z-50">
         <MenuNavbar />
         <div className="flex items-center gap-8">
           <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>
@@ -30,7 +30,7 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
           <ProfileButton />
         </div>
       </nav>
-      <div className="relative h-[calc(100%-5rem)]">{children}</div>
+      <div className="relative h-full">{children}</div>
     </div>
   );
 }

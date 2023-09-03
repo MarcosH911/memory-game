@@ -17,7 +17,7 @@ function ProfileButton() {
   const [fullName, setFullName] = useState("");
 
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient<Database>();
 
   useEffect(() => {
     const getUserData = async () => {
@@ -38,8 +38,9 @@ function ProfileButton() {
       } else {
         setAvatarUrl(getAvatarImage("Default-Avatar.png"));
       }
-
-      setFullName(data?.full_name);
+      if (data) {
+        setFullName(data?.full_name);
+      }
     };
 
     getUserData();

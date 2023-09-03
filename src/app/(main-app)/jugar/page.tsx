@@ -44,7 +44,7 @@ function Game() {
     }
 
     const { error: insertError } = await supabase
-      .from("points")
+      .from("points_transactions")
       .insert({
         user_id: userId.current,
         coins,
