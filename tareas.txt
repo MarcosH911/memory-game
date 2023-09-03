@@ -1,19 +1,17 @@
-Install neovim
-
-Navbar (with icon)
-
-Subscribe to changes to update the users points
-
 Add tailwind prettier
 
 Organize files
+
+Clean imports
+
+Name in profile icon
 
 Shop
   Buy avatars
     Buy the one you want (more expensive)
     Buy randomly (cheaper)
   Buy color packs
-
+  
 Disable admins entering /play in middleware
 
 Highlight user in ranking
@@ -31,12 +29,16 @@ Play layout server component
 
 Create index for database
 
-Loading states
-
 Teachers
   School
   Students grade
 
+Loading states
+
+Error handling
+
 Responsive
+
+Safari bug
 
 Server actions
