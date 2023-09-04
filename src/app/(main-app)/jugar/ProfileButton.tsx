@@ -12,7 +12,6 @@ import { HiOutlineUser } from "react-icons/hi2";
 
 function ProfileButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userId, setUserId] = useState<string | undefined>();
   const [avatarUrl, setAvatarUrl] = useState("");
   const [fullName, setFullName] = useState("");
 

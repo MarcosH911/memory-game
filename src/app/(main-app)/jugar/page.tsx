@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import StartPlaying from "./StartPlayingScreen";
 import Square from "./Square";
-import { sleep } from "@/helpers/helpers";
+import sleep from "@/helpers/sleep";
 
 function Game() {
   const [startGame, setStartGame] = useState(false);

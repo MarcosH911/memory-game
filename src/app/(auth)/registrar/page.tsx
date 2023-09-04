@@ -66,7 +66,7 @@ function Register() {
         return;
       }
 
-      const { data, error: newProfileError } = await supabase
+      const { error: newProfileError } = await supabase
         .from("profiles")
         .insert({
           user_id: newUserData.user.id,
@@ -81,14 +81,15 @@ function Register() {
       }
 
       if (role === "student") {
-        const { error: pointsError } = await supabase
-          .from("points_transactions")
+        const { error: avatarsError } = await supabase
+          .from("avatars_transactions")
           .insert({
             user_id: newUserData.user.id,
+            avatar_path: "Default-Avatar.png",
           });
 
-        if (pointsError) {
-          setRegisterError("Error creando los puntos");
+        if (avatarsError) {
+          setRegisterError("Error insertando el avatar");
           return;
         }
       }

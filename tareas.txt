@@ -4,9 +4,15 @@ Shop
     Buy randomly (cheaper)
   Buy color packs
 
+100 avatars and random
+
+Lower quality of the avatar in the middle of the roulette
+
 Display when the avatar was bought in collection
 
 Lift userId up to main layout
+
+Update profile avatar when selecting new avatar
 
 Change the component name of all the pages to "Page"
 
@@ -42,5 +48,7 @@ Error handling
 Responsive
 
 Safari bug
+
+Lighthouse
 
 Server actions

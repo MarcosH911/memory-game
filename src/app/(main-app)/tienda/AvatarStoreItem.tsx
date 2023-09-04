@@ -3,29 +3,14 @@ import Image from "next/image";
 
 import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreBuyButtons from "./AvatarStoreBuyButtons";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 
 interface AvatarStoreItemProps {
   data: FileObject;
+  userHasAvatar: boolean;
 }
 
-async function AvatarStoreItem({ data }: AvatarStoreItemProps) {
-  const supabase = createServerComponentClient<Database>({ cookies });
-  if (
-    data.name === ".emptyFolderPlaceholder" ||
-    data.name === "Default-Avatar.png"
-  ) {
-    return;
-  }
+async function AvatarStoreItem({ data, userHasAvatar }: AvatarStoreItemProps) {
   const imageUrl = getAvatarImage(data.name);
-
-  const { data: userAvatarData } = await supabase
-    .from("user_avatars")
-    .select("*")
-    .eq("avatar_path", data.name);
-
-  const userHasAvatar = userAvatarData?.length === 0;
 
   return (
     <div className="flex items-center justify-center flex-col bg-teal-300 border shadow-xl rounded-lg py-6 transition group duration-300">

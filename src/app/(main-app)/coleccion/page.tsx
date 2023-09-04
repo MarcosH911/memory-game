@@ -4,18 +4,34 @@ import AvatarCollectionItem from "./AvatarCollectionItem";
 
 async function Page() {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data } = await supabase.from("user_avatars").select("*");
+
+  const userId = (await supabase.auth.getSession()).data.session?.user.id;
+
+  if (!userId) return null;
+
+  const { data: userAvatarsData } = await supabase
+    .from("user_avatars")
+    .select("*");
+
+  const { data: selectedAvatarData } = await supabase
+    .from("profiles")
+    .select("avatar_path")
+    .eq("user_id", userId)
+    .single();
 
   return (
     <div>
-      {data ? (
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-x-3 gap-y-3">
-          {data.map((item, index) => (
-            <AvatarCollectionItem key={index} data={item} />
+      {userAvatarsData && (
+        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-x-6 gap-y-10">
+          {userAvatarsData.map((item, index) => (
+            <AvatarCollectionItem
+              key={index}
+              data={item}
+              isSelected={item.avatar_path === selectedAvatarData?.avatar_path}
+              userId={userId}
+            />
           ))}
         </div>
-      ) : (
-        <div>Prueba a comprarte un avatar</div>
       )}
     </div>
   );

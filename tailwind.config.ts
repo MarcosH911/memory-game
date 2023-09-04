@@ -44,6 +44,20 @@ const config: Config = {
           "50%": { "background-color": "#fecaca" },
           "100%": { "background-color": "inherit" },
         },
+        "show-modal": {
+          from: {
+            transform: "translate(-50%, -50%) scale(0.5)",
+            opacity: "0",
+          },
+          to: {
+            transform: "translate(-50%, -50%) scale(1)",
+            opacity: "100",
+          },
+        },
+        "show-modal-overlay": {
+          from: { opacity: "0" },
+          to: { opacity: "100" },
+        },
       },
       animation: {
         "up-down": "up-down 3s ease-in-out infinite",
@@ -55,6 +69,8 @@ const config: Config = {
         "show-start-playing": "show-start-playing 0s linear 300ms 1 forwards",
         "win-game": "win-game 500ms ease-out 1 forwards",
         "loose-game": "loose-game 500ms ease-out 1 forwards",
+        "show-modal": "show-modal 300ms ease-in-out forwards",
+        "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
       },
     },
   },

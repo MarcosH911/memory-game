@@ -1,14 +1,40 @@
-import supabaseClient from "@/utils/supabaseClient";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import AvatarStoreItem from "./AvatarStoreItem";
+import { cookies } from "next/headers";
 
 async function AvatarsStore() {
-  const { data, error } = await supabaseClient.storage
-    .from("avatar_images")
-    .list("");
+  const supabase = createServerComponentClient<Database>({ cookies });
+
+  const { data, error } = await supabase.storage.from("avatar_images").list("");
+
+  const { data: userAvatarsData } = await supabase
+    .from("user_avatars")
+    .select("avatar_path");
+
+  if (!userAvatarsData) return null;
 
   return (
-    <div className="grid grid-cols-6 max-w-7xl mx-auto gap-y-4 gap-x-8 px-8">
-      {data?.map((item, index) => <AvatarStoreItem key={index} data={item} />)}
+    <div className="grid grid-cols-6 max-w-7xl mx-auto gap-8 px-8">
+      {data?.map((item, index) => {
+        if (
+          item.name === ".emptyFolderPlaceholder" ||
+          item.name === "Default-Avatar.png"
+        ) {
+          return null;
+        }
+        const userHasAvatar = !userAvatarsData.find(
+          (avatar) => avatar.avatar_path === item.name,
+        );
+
+        return (
+          <AvatarStoreItem
+            key={index}
+            data={item}
+            userHasAvatar={userHasAvatar}
+          />
+        );
+      })}
     </div>
   );
 }
