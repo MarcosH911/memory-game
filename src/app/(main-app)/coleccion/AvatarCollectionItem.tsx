@@ -7,17 +7,13 @@ import getAvatarImage from "@/utils/getAvatarImage";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-interface AvatarCollectionItemProps {
+interface Props {
   data: { avatar_path: string | null };
   isSelected: boolean;
   userId: string;
 }
 
-function AvatarCollectionItem({
-  data,
-  isSelected,
-  userId,
-}: AvatarCollectionItemProps) {
+function AvatarCollectionItem({ data, isSelected, userId }: Props) {
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 

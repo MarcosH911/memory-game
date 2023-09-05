@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-interface AvatarStoreBuyButtonsProps {
+interface Props {
   avatarPath: string;
 }
 
-function AvatarStoreBuyButtons({ avatarPath }: AvatarStoreBuyButtonsProps) {
+function AvatarStoreBuyButtons({ avatarPath }: Props) {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
@@ -19,6 +19,28 @@ function AvatarStoreBuyButtons({ avatarPath }: AvatarStoreBuyButtonsProps) {
 
     if (!userId) {
       console.error("There was an error getting the user");
+      return;
+    }
+
+    const { data: userPointsData, error: userPointsError } = await supabase
+      .from("user_points")
+      .select("*")
+      .single();
+
+    if (
+      userPointsError ||
+      !userPointsData.total_coins ||
+      !userPointsData.total_diamonds
+    ) {
+      console.error("Ha habido un error seleccionando los puntos del usuario");
+      return;
+    }
+
+    if (type === "coins" && userPointsData.total_coins < 100) {
+      console.error("No tienes suficientes monedas para comprar esto");
+      return;
+    } else if (type === "diamonds" && userPointsData.total_diamonds < 25) {
+      console.error("No tienes suficientes diamantes para comprar esto");
       return;
     }
 

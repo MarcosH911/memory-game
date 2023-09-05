@@ -7,19 +7,14 @@ type rankingViewType =
   | "points_ranking_year"
   | "points_ranking_all_time";
 
-interface RankingViewButtonProps {
+interface Props {
   setRankingView: React.Dispatch<React.SetStateAction<rankingViewType>>;
   view: rankingViewType;
   text: string;
   active: boolean;
 }
 
-function RankingViewButton({
-  setRankingView,
-  view,
-  text,
-  active,
-}: RankingViewButtonProps) {
+function RankingViewButton({ setRankingView, view, text, active }: Props) {
   return (
     <div>
       <li>

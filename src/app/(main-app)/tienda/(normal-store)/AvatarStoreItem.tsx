@@ -4,12 +4,12 @@ import Image from "next/image";
 import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreBuyButtons from "./AvatarStoreBuyButtons";
 
-interface AvatarStoreItemProps {
+interface Props {
   data: FileObject;
   userHasAvatar: boolean;
 }
 
-async function AvatarStoreItem({ data, userHasAvatar }: AvatarStoreItemProps) {
+async function AvatarStoreItem({ data, userHasAvatar }: Props) {
   const imageUrl = getAvatarImage(data.name);
 
   return (

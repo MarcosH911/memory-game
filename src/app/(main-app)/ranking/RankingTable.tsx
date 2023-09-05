@@ -4,19 +4,14 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 import RankingRow from "./RankingRow";
 
-interface RankingTableProps {
+interface Props {
   data: Database["public"]["Views"]["points_ranking_all_time"]["Row"][];
   type: string;
   isReloading: boolean;
   setIsReloading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function RankingTable({
-  data,
-  type,
-  isReloading,
-  setIsReloading,
-}: RankingTableProps) {
+function RankingTable({ data, type, isReloading, setIsReloading }: Props) {
   return (
     <div className="relative rounded-lg shadow-xl">
       <button

@@ -1,14 +1,11 @@
 import Image from "next/image";
 
-interface AvatarStoreRouletteItemProps {
+interface Props {
   data: string;
   index: number;
 }
 
-function AvatarStoreRouletteItem({
-  data,
-  index,
-}: AvatarStoreRouletteItemProps) {
+function AvatarStoreRouletteItem({ data, index }: Props) {
   if (!data) return null;
 
   return (

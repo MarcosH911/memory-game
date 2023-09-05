@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 
-interface RootLayoutProps {
+interface Props {
   children: React.ReactNode;
 }
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "An amazing game to test and to improve your visual memory!",
 };
 
-function RootLayout({ children }: RootLayoutProps) {
+function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className="h-screen bg-teal-50">

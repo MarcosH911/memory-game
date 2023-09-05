@@ -17,6 +17,8 @@ Update profile avatar when selecting new avatar
 Change the component name of all the pages to "Page"
 
 Button to see my avatars
+
+Toast instead of console.error()
   
 Disable admins entering /play in middleware
 
@@ -43,7 +45,7 @@ Teachers
 
 Loading states
 
-Error handling
+Error handling/states
 
 Responsive
 

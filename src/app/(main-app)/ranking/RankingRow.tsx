@@ -6,13 +6,13 @@ import { twMerge } from "tailwind-merge";
 
 import getAvatarImage from "@/utils/getAvatarImage";
 
-interface RankingTableProps {
+interface Props {
   data: Database["public"]["Views"]["points_ranking_all_time"]["Row"];
   index: number;
   type: string;
 }
 
-function RankingRow({ data, index, type }: RankingTableProps) {
+function RankingRow({ data, index, type }: Props) {
   const avatarUrl = getAvatarImage(data.avatar_path);
 
   return (

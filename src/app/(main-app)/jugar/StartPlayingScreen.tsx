@@ -2,12 +2,12 @@
 
 import { twMerge } from "tailwind-merge";
 
-interface StartPlayingScreenProps {
+interface Props {
   onClick: () => void;
   startGame: boolean;
 }
 
-function StartPlayingScreen({ onClick, startGame }: StartPlayingScreenProps) {
+function StartPlayingScreen({ onClick, startGame }: Props) {
   return (
     <div
       className={twMerge(
