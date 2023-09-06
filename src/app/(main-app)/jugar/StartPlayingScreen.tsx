@@ -32,7 +32,7 @@ function StartPlayingScreen({ onClick, startGame }: Props) {
       >
         <button
           onClick={onClick}
-          className="rounded-md border-2 border-teal-400 bg-teal-300 px-6 py-3 text-3xl font-bold uppercase tracking-wide text-teal-950 shadow-md transition hover:bg-teal-400 active:shadow-sm"
+          className="rounded-md border-2 border-teal-400 bg-teal-300 px-6 py-3 text-3xl font-extrabold uppercase tracking-wide text-teal-950 shadow-md transition hover:bg-teal-400 active:shadow-sm"
         >
           Start
         </button>

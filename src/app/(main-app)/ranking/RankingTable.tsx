@@ -48,30 +48,6 @@ function RankingTable({ data, type, isReloading, setIsReloading }: Props) {
             <tbody className="rounded-lg">
               {data.map((item, index) => (
                 <RankingRow key={index} index={index} data={item} type={type} />
-                // {/* <RankingRow
-                //   key={index}
-                //   index={index}
-                //   data={item}
-                //   type={type}
-                // />
-                // <RankingRow
-                //   key={index}
-                //   index={index}
-                //   data={item}
-                //   type={type}
-                // />
-                // <RankingRow
-                //   key={index}
-                //   index={index}
-                //   data={item}
-                //   type={type}
-                // />
-                // <RankingRow
-                //   key={index}
-                //   index={index}
-                //   data={item}
-                //   type={type}
-                // /> */}
               ))}
             </tbody>
           </table>

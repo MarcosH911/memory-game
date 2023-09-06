@@ -9,7 +9,7 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
   if (!data) return null;
 
   return (
-    <div className="h-64 w-64 flex items-center justify-center flex-shrink-0 bg-teal-600">
+    <div className="flex h-64 w-64 flex-shrink-0 items-center justify-center bg-gradient-to-b from-pink-500 via-red-500 to-yellow-400">
       <Image
         priority
         src={data}
@@ -17,7 +17,7 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
         width={200}
         quality={index > 5 && index < 90 ? 1 : 75}
         alt="Avatar image"
-        className="border-4 border-teal-950 rounded-full bg-teal-950"
+        className="rounded-full border-4 border-teal-950 bg-teal-950"
       />
     </div>
   );

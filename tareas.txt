@@ -4,9 +4,23 @@ Shop
     Buy randomly (cheaper)
   Buy color packs
 
-100 avatars and random
+Change font size and weight to account for new font
 
-Lower quality of the avatar in the middle of the roulette
+Fix font jitter on page load
+
+Style store
+
+Style collection
+
+Show the number of avatars you have in the collection
+
+Handle only buy once
+
+Handle roulette spin lag
+
+Handle roulette for devices with worse connection
+
+Do something with the button when you don't have enough money
 
 Display when the avatar was bought in collection
 
@@ -33,7 +47,7 @@ Profile icon server component
 Login, Register and Logout route handler
 School in a new database table
 When registering only allow to choose schools from the schools table
-Dropdown from RadixUI
+Register dropdown from RadixUI
 
 Play layout server component
 

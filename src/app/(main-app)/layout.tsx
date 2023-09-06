@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 import CoinsNavItem from "./CoinsNavItem";
 import DiamondsNavItem from "./DiamondsNavItem";
-import ProfileButton from "./jugar/ProfileButton";
+import ProfileButton from "./ProfileButton";
 import MenuNavbar from "./MenuNavbar";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-full pt-20">
-      <nav className="flex h-20 w-full items-center justify-between border-b-2 pl-14 pr-8 fixed top-0 bg-teal-50/90 backdrop-blur-md z-50">
+      <nav className="fixed top-0 z-50 flex h-20 w-full items-center justify-between border-b-2 bg-teal-50/90 pl-14 pr-8 backdrop-blur-md">
         <MenuNavbar />
         <div className="flex items-center gap-8">
           <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>

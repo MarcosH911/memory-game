@@ -38,13 +38,13 @@ function AvatarCollectionItem({ data, isSelected, userId }: Props) {
   };
 
   return (
-    <div className="relative group">
+    <div className="group relative">
       <button
         onClick={handleAvatarSelect}
         className={twMerge(
-          "flex items-center justify-center border-4 border-transparent p-6 rounded-2xl group-hover:bg-slate-300 group-hover:shadow-lg group-hover:duration-150 group-hover:delay-0 duration-300",
+          "flex items-center justify-center rounded-2xl border-4 border-transparent p-6 duration-300 group-hover:bg-slate-300 group-hover:shadow-lg group-hover:delay-0 group-hover:duration-150",
           isSelected &&
-            "border-teal-600 group-hover:border-teal-600 bg-teal-100 group-hover:bg-teal-300 group-hover:duration-150 transition duration-300",
+            "border-teal-600 bg-teal-100 transition duration-300 group-hover:border-teal-600 group-hover:bg-teal-300 group-hover:duration-150",
         )}
       >
         <Image
@@ -52,12 +52,12 @@ function AvatarCollectionItem({ data, isSelected, userId }: Props) {
           height={260}
           width={260}
           alt="Avatar image"
-          className="border-8 border-slate-950 bg-slate-950 rounded-full"
+          className="rounded-full border-8 border-slate-950 bg-slate-950"
         />
       </button>
       <div
         className={twMerge(
-          "uppercase font-semibold bg-teal-600 text-teal-50 absolute px-4 pb-2 pt-1 right-4 rounded-b-md group-hover:shadow-lg group-hover:duration-150 group-hover:delay-0 duration-300 tracking-wide opacity-0",
+          "absolute right-4 rounded-b-md bg-teal-600 px-4 pb-2 pt-1 font-bold uppercase tracking-wider text-teal-50 opacity-0 duration-300 group-hover:shadow-lg group-hover:delay-0 group-hover:duration-150",
           isSelected && "opacity-100",
         )}
       >

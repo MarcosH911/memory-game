@@ -15,7 +15,7 @@ async function AvatarsStore() {
   if (!userAvatarsData) return null;
 
   return (
-    <div className="grid grid-cols-6 max-w-7xl mx-auto gap-8 px-8">
+    <div className="mx-auto grid max-w-7xl grid-cols-6 gap-8 px-8">
       {data?.map((item, index) => {
         if (
           item.name === ".emptyFolderPlaceholder" ||

@@ -78,16 +78,16 @@ function AvatarStoreBuyButtons({ avatarPath }: Props) {
     <>
       <button
         onClick={() => handleBuy("coins")}
-        className="flex items-center justify-center bg-yellow-50 shadow-[0_0_10px_1px] shadow-yellow-600/20 text-yellow-600 w-3/4 gap-1 py-1 rounded-md border-yellow-600 border mb-2 hover:bg-yellow-100 hover:shadow-yellow-600/40 transition duration-200"
+        className="mb-2 flex w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40"
       >
-        <span className="font-bold text-lg">100</span>
+        <span className="text-lg font-bold">100</span>
         <BiSolidCoinStack className="text-xl" />
       </button>
       <button
         onClick={() => handleBuy("diamonds")}
-        className="flex items-center justify-center shadow-[0_0_10px_1px] w-3/4 gap-1 py-1 rounded-md border-purple-600 border bg-purple-600 text-purple-50 shadow-purple-600/30 transition duration-200 hover:shadow-purple-600/60 hover:bg-purple-700 hover:border-purple-700"
+        className="flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60"
       >
-        <span className="font-bold text-lg">25</span>
+        <span className="text-lg font-bold">25</span>
         <IoDiamond className="text-xl" />
       </button>
     </>

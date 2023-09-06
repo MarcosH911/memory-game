@@ -22,7 +22,7 @@ async function Page() {
   return (
     <div>
       {userAvatarsData && (
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-x-6 gap-y-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-6 gap-y-10">
           {userAvatarsData.map((item, index) => (
             <AvatarCollectionItem
               key={index}

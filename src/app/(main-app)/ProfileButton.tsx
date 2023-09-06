@@ -76,9 +76,9 @@ function ProfileButton() {
         <Popover.Content asChild>
           <div className="z-30">
             <ul className="absolute -right-10 top-2 flex w-56 flex-col items-start justify-center divide-y rounded-lg border bg-teal-50 shadow-lg">
-              <li className="w-full flex items-center justify-start gap-1.5 rounded-lg px-4 py-2">
+              <li className="flex w-full items-center justify-start gap-1.5 rounded-lg px-4 py-2">
                 <HiOutlineUser className="text-lg" />
-                <span>{fullName}</span>
+                <span className="font-medium">{fullName}</span>
               </li>
               <li className="w-full">
                 <button
@@ -86,7 +86,7 @@ function ProfileButton() {
                   className="flex w-full items-center justify-start gap-1.5 rounded-b-lg px-4 py-2 transition hover:bg-slate-200 active:bg-slate-300"
                 >
                   <HiOutlineLogout className="text-lg" />
-                  <span className="font-semibold">Cerrar sesión</span>
+                  <span className="font-bold">Cerrar sesión</span>
                 </button>
               </li>
             </ul>

@@ -17,13 +17,13 @@ function RankingRow({ data, index, type }: Props) {
 
   return (
     <tr className="flex h-14 items-center justify-around px-24 even:bg-teal-100">
-      <td className="flex w-[25%] items-center justify-center text-lg font-semibold">
+      <td className="flex w-[25%] items-center justify-center text-lg font-bold">
         {index + 1}º
       </td>
       <td className="flex w-[25%] items-center justify-center">
         <Image src={avatarUrl} width={40} height={40} alt="Avatar Image" />
       </td>
-      <td className="flex w-[25%] items-center justify-center">
+      <td className="flex w-[25%] items-center justify-center font-medium">
         {data.full_name}
       </td>
       <td
@@ -36,17 +36,17 @@ function RankingRow({ data, index, type }: Props) {
       >
         {type === "coins" ? (
           <>
-            <span>{data.coins}</span>
+            <span className="font-bold">{data.coins}</span>
             <BiSolidCoinStack />
           </>
         ) : type === "diamonds" ? (
           <>
-            <span>{data.diamonds}</span>
+            <span className="font-bold">{data.diamonds}</span>
             <IoDiamond />
           </>
         ) : (
           <>
-            <span>{data.max_level}</span>
+            <span className="font-bold">{data.max_level}</span>
             <FaLevelUpAlt />
           </>
         )}

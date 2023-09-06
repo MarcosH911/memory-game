@@ -162,7 +162,7 @@ function Game() {
           playLooseAnimation && "animate-loose-game",
         )}
       >
-        <h1 className="-mt-16 rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-7xl font-semibold text-teal-950 shadow-md shadow-teal-200/50">
+        <h1 className="-mt-16 rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-7xl font-bold text-teal-950 shadow-md shadow-teal-200/50">
           Level {level}
         </h1>
         <div className="grid h-[30rem] w-[30rem] grid-cols-3 grid-rows-3 gap-2 p-1">

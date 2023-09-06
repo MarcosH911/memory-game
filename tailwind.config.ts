@@ -9,6 +9,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: { sans: ["var(--font-nunito)"] },
       transitionDuration: {
         "250": "250ms",
       },

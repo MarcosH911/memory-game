@@ -49,7 +49,7 @@ function RankingFilters({
         ))}
       </ul>
 
-      <h1 className="absolute left-1/2 top-1/2 -mt-6 -translate-x-1/2 -translate-y-1/2 text-5xl font-semibold text-teal-800">
+      <h1 className="absolute left-1/2 top-1/2 -mt-6 -translate-x-1/2 -translate-y-1/2 text-6xl font-bold text-teal-800">
         Ranking
       </h1>
 
@@ -58,39 +58,39 @@ function RankingFilters({
           <button
             onClick={() => setRankingType("coins")}
             className={twMerge(
-              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "coins" &&
                 "bg-yellow-600 text-yellow-50 shadow-md hover:border-transparent hover:bg-yellow-600",
             )}
           >
             <BiSolidCoinStack />
-            <span>Monedas</span>
+            <span className="font-bold">Monedas</span>
           </button>
         </li>
         <li>
           <button
             onClick={() => setRankingType("diamonds")}
             className={twMerge(
-              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-purple-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 text-purple-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "diamonds" &&
                 "bg-purple-600 text-purple-50 shadow-md hover:border-transparent hover:bg-purple-600",
             )}
           >
             <IoDiamond />
-            <span>Diamantes</span>
+            <span className="font-bold">Diamantes</span>
           </button>
         </li>
         <li>
           <button
             onClick={() => setRankingType("max_level")}
             className={twMerge(
-              "flex items-center gap-1.5 rounded-full px-6 py-3 font-semibold text-green-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
+              "flex items-center gap-1.5 rounded-full px-6 py-3 text-green-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
               rankingType === "max_level" &&
                 "bg-green-600 text-green-50 shadow-md hover:border-transparent hover:bg-green-600",
             )}
           >
             <FaLevelUpAlt />
-            <span>Máximo nivel</span>
+            <span className="font-bold">Máximo nivel</span>
           </button>
         </li>
         <li>

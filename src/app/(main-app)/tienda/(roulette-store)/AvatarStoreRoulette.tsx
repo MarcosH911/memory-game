@@ -168,9 +168,12 @@ function AvatarStoreRoulette() {
   };
 
   return (
-    <div className="h-[800px] flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="font-sans text-8xl tracking-tight text-emerald-950">
+        Ruleta
+      </h1>
       <div className="relative">
-        <div className="h-64 max-w-7xl overflow-hidden relative rounded-lg">
+        <div className="relative h-64 max-w-7xl overflow-hidden rounded-lg">
           <div
             style={
               isAnimationPlaying
@@ -180,7 +183,7 @@ function AvatarStoreRoulette() {
                 : {}
             }
             className={twMerge(
-              "flex flex-row justify-start items-center flex-shrink-0 flex-nowrap rounded-lg divide-x-2",
+              "flex flex-shrink-0 flex-row flex-nowrap items-center justify-start space-x-0.5 rounded-lg bg-teal-50",
               isAnimationPlaying &&
                 `transition duration-[10s] ease-[cubic-bezier(0.25,1,0.25,1)]`,
             )}
@@ -189,9 +192,10 @@ function AvatarStoreRoulette() {
               <AvatarStoreRouletteItem key={index} index={index} data={item} />
             ))}
           </div>
-          <div className="absolute h-full w-0.5 bg-red-600 top-0 left-1/2 border-none -translate-x-1/2 z-20">
-            <div className="absolute h-1 w-1 border-[1.25rem] border-transparent border-b-red-600 bottom-0 left-1/2 -translate-x-1/2"></div>
-            <div className="absolute h-1 w-1 border-[1.25rem] border-transparent border-t-red-600 top-0 left-1/2 -translate-x-1/2"></div>
+          <div>
+            <div className="absolute left-1/2 top-0 z-20 h-full w-0.5 -translate-x-1/2 border-none bg-red-600 drop-shadow-[0_0_3px_rgba(255,0,0,1)]"></div>
+            <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
+            <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
           </div>
         </div>
         <AvatarStoreRouletteBuyButtons

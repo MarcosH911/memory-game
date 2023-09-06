@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
 
 import "./globals.css";
 
@@ -12,9 +13,11 @@ export const metadata: Metadata = {
   description: "An amazing game to test and to improve your visual memory!",
 };
 
+const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
+
 function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
+    <html lang="en" className={nunito.className}>
       <body className="h-screen bg-teal-50">
         {children}
         <Analytics />
