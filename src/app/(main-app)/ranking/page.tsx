@@ -38,6 +38,9 @@ function Page() {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="w-[80rem]">
+        <h1 className="text-7xl font-semibold text-teal-800 mb-4 text-center">
+          Ranking
+        </h1>
         <RankingFilters
           rankingView={rankingView}
           rankingType={rankingType}
@@ -52,6 +55,7 @@ function Page() {
             setIsReloading={setIsReloading}
           />
         )}
+        hh1
       </div>
     </div>
   );

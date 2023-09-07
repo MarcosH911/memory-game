@@ -49,10 +49,6 @@ function RankingFilters({
         ))}
       </ul>
 
-      <h1 className="absolute left-1/2 top-1/2 -mt-6 -translate-x-1/2 -translate-y-1/2 text-6xl font-bold text-teal-800">
-        Ranking
-      </h1>
-
       <ul className="relative flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
         <li>
           <button

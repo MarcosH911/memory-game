@@ -1,9 +1,5 @@
 Buy color packs
 
-Style collection
-
-Show the number of avatars you have in the collection
-
 Handle only buy once
 
 Handle roulette spin lag
