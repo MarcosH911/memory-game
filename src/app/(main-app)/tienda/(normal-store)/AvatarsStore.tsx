@@ -15,26 +15,31 @@ async function AvatarsStore() {
   if (!userAvatarsData) return null;
 
   return (
-    <div className="mx-auto grid max-w-7xl grid-cols-6 gap-8 px-8">
-      {data?.map((item, index) => {
-        if (
-          item.name === ".emptyFolderPlaceholder" ||
-          item.name === "Default-Avatar.png"
-        ) {
-          return null;
-        }
-        const userHasAvatar = !userAvatarsData.find(
-          (avatar) => avatar.avatar_path === item.name,
-        );
+    <div>
+      <h1 className="mb-6 block text-center text-7xl font-semibold text-emerald-950">
+        O compra tu favorito
+      </h1>
+      <div className="mx-auto grid max-w-7xl grid-cols-6 gap-8">
+        {data?.map((item, index) => {
+          if (
+            item.name === ".emptyFolderPlaceholder" ||
+            item.name === "Default-Avatar.png"
+          ) {
+            return null;
+          }
+          const userHasAvatar = !userAvatarsData.find(
+            (avatar) => avatar.avatar_path === item.name,
+          );
 
-        return (
-          <AvatarStoreItem
-            key={index}
-            data={item}
-            userHasAvatar={userHasAvatar}
-          />
-        );
-      })}
+          return (
+            <AvatarStoreItem
+              key={index}
+              data={item}
+              userHasAvatar={userHasAvatar}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

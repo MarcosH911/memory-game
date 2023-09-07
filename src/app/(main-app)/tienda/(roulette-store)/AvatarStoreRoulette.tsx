@@ -66,7 +66,7 @@ function AvatarStoreRoulette() {
         }
       });
 
-      while (remainingAvatarsPaths.length < 100) {
+      while (remainingAvatarsPaths.length < 106) {
         remainingAvatarsPaths.push(...remainingAvatarsPaths);
       }
       shuffleArray(remainingAvatarsPaths);
@@ -168,9 +168,9 @@ function AvatarStoreRoulette() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="font-sans text-8xl tracking-tight text-emerald-950">
-        Ruleta
+    <div className="mb-24 flex flex-col items-center justify-center">
+      <h1 className="mb-6 text-7xl font-semibold tracking-tight text-emerald-950">
+        ¡Gira la ruleta!
       </h1>
       <div className="relative">
         <div className="relative h-64 max-w-7xl overflow-hidden rounded-lg">
@@ -183,7 +183,7 @@ function AvatarStoreRoulette() {
                 : {}
             }
             className={twMerge(
-              "flex flex-shrink-0 flex-row flex-nowrap items-center justify-start space-x-0.5 rounded-lg bg-teal-50",
+              "flex flex-shrink-0 flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg border-teal-50 bg-teal-50",
               isAnimationPlaying &&
                 `transition duration-[10s] ease-[cubic-bezier(0.25,1,0.25,1)]`,
             )}

@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-const plugin = require("tailwindcss/plugin");
 
 const config: Config = {
   content: [
@@ -75,17 +74,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    plugin(function ({ addUtilities }: { addUtilities: ({}) => any }) {
-      addUtilities({
-        ".backface-hidden": {
-          "backface-visibility": "hidden",
-        },
-        ".animate-paused": {
-          "animation-play-state": "paused",
-        },
-      });
-    }),
-  ],
+  plugins: [],
 };
 export default config;

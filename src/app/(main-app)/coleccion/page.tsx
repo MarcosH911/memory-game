@@ -20,7 +20,7 @@ async function Page() {
     .single();
 
   return (
-    <div>
+    <div className="py-8">
       {userAvatarsData && (
         <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-6 gap-y-10">
           {userAvatarsData.map((item, index) => (

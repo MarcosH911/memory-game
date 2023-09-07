@@ -1,14 +1,4 @@
-Shop
-  Buy avatars
-    Buy the one you want (more expensive)
-    Buy randomly (cheaper)
-  Buy color packs
-
-Change font size and weight to account for new font
-
-Fix font jitter on page load
-
-Style store
+Buy color packs
 
 Style collection
 

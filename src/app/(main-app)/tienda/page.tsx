@@ -3,7 +3,7 @@ import AvatarStoreRoulette from "./(roulette-store)/AvatarStoreRoulette";
 
 function Page() {
   return (
-    <div>
+    <div className="py-8">
       <AvatarStoreRoulette />
       <AvatarsStore />
     </div>

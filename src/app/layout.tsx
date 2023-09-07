@@ -13,11 +13,14 @@ export const metadata: Metadata = {
   description: "An amazing game to test and to improve your visual memory!",
 };
 
-const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+});
 
 function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={nunito.className}>
+    <html lang="en" className={nunito.variable}>
       <body className="h-screen bg-teal-50">
         {children}
         <Analytics />
