@@ -94,6 +94,8 @@ function AvatarStoreRoulette() {
   }, [isGettingAvatars, supabase]);
 
   const handleSpinRoulette = async (type: "coins" | "diamonds") => {
+    if (isAnimationPlaying) return;
+
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
     if (!userId) {

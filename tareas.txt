@@ -16,7 +16,11 @@ Update profile avatar when selecting new avatar
 
 Change the component name of all the pages to "Page"
 
+Use search params to optimize into server components
+
 Button to see my avatars
+
+Parallel fetching when possible (nextjs data fetching patterns)
 
 Toast instead of console.error()
   
@@ -44,6 +48,18 @@ Teachers
   Students grade
 
 Loading states
+
+--------------------------------
+Keep input after failed login
+
+Prevent sign in after register
+--------------------------------
+
+Students grade in supabase
+Students grade in ranking
+Students school in ranking
+
+Add security to admin users creating other users
 
 Error handling/states
 

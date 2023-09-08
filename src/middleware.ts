@@ -21,7 +21,7 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/", request.url));
   } else if (
     session?.user.user_metadata.role !== "admin" &&
-    request.nextUrl.pathname === "/register"
+    request.nextUrl.pathname === "/registrar"
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
