@@ -15,6 +15,7 @@ import {
   HiAcademicCap,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+import getFakeEmail from "@/helpers/getFakeEmail";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -50,7 +51,7 @@ function Register() {
         return;
       }
 
-      const fakeEmail = `${username.toLowerCase()}@fake.com`;
+      const fakeEmail = getFakeEmail(username);
 
       const { data: newUserData, error: newUserError } =
         await supabase.auth.signUp({

@@ -13,6 +13,8 @@ import {
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import getFakeEmail from "@/helpers/getFakeEmail";
+
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +37,7 @@ function Login() {
         return;
       }
 
-      const fakeEmail = `${username.toLowerCase()}@fake.com`;
+      const fakeEmail = getFakeEmail(username);
       const { error } = await supabase.auth.signInWithPassword({
         email: fakeEmail,
         password,
