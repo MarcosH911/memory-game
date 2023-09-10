@@ -1,6 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import AvatarCollectionItem from "./AvatarCollectionItem";
+import CollectionAvatarItem from "./(components)/CollectionAvatarItem";
 
 export const dynamic = "force-dynamic";
 
@@ -33,13 +33,13 @@ async function Page() {
   }
 
   return (
-    <div className="py-8 max-w-7xl mx-auto">
-      <h1 className="text-7xl font-semibold text-teal-950 mb-4 text-center">
+    <div className="mx-auto max-w-7xl py-8">
+      <h1 className="mb-4 text-center text-7xl font-semibold text-teal-950">
         Avatares ({userAvatarsData.length})
       </h1>
       <div className="grid grid-cols-4 gap-x-6 gap-y-10">
         {userAvatarsData.map((item, index) => (
-          <AvatarCollectionItem
+          <CollectionAvatarItem
             key={index}
             data={item}
             isSelected={item.avatar_path === selectedAvatarData?.avatar_path}

@@ -1,5 +1,5 @@
-import AvatarsStore from "./(normal-store)/AvatarsStore";
-import AvatarStoreRoulette from "./(roulette-store)/AvatarStoreRoulette";
+import AvatarsStore from "./(components)/(normal-store)/AvatarsStore";
+import AvatarStoreRoulette from "./(components)/(roulette-store)/AvatarStoreRoulette";
 
 function Page() {
   return (

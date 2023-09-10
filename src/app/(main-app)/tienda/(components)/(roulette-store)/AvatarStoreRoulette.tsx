@@ -99,7 +99,7 @@ function AvatarStoreRoulette() {
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
     if (!userId) {
-      console.error("Ha habido un error consiguiendo el usuario");
+      console.error("There was an error getting the user");
       return;
     }
 
@@ -113,15 +113,15 @@ function AvatarStoreRoulette() {
       !userPointsData.total_coins ||
       !userPointsData.total_diamonds
     ) {
-      console.error("Ha habido un error seleccionando los puntos del usuario");
+      console.error("There was an error selecting the user points");
       return;
     }
 
     if (type === "coins" && userPointsData.total_coins < 60) {
-      console.error("No tienes suficientes monedas para comprar esto");
+      console.error("You don't have enough coins to buy this");
       return;
     } else if (type === "diamonds" && userPointsData.total_diamonds < 15) {
-      console.error("No tienes suficientes diamantes para comprar esto");
+      console.error("You don't have enough diamonds to buy this");
       return;
     }
 
@@ -130,7 +130,7 @@ function AvatarStoreRoulette() {
       .insert({ user_id: userId, avatar_path: selectedAvatarPath.current });
 
     if (insertAvatarError) {
-      console.error("Ha habido un error insertando el avatar");
+      console.error("There was an error inserting the avatar");
       return;
     }
 
@@ -140,7 +140,7 @@ function AvatarStoreRoulette() {
         .insert({ user_id: userId, coins: -60 });
 
       if (insertCoinsError) {
-        console.error("Ha habido un error insertando las monedas");
+        console.error("There was an error inserting the coins");
       }
     } else if (type === "diamonds") {
       const { error: insertDiamondsError } = await supabase
@@ -148,7 +148,7 @@ function AvatarStoreRoulette() {
         .insert({ user_id: userId, diamonds: -15 });
 
       if (insertDiamondsError) {
-        console.error("Ha habido un error insertando los diamantes");
+        console.error("There was an error inserting the diamonds");
       }
     }
     router.refresh();

@@ -19,7 +19,7 @@ async function AvatarStoreItem({ data, userHasAvatar }: Props) {
         width={130}
         height={130}
         alt={data.name}
-        className="mb-4 rounded-full border-4 border-slate-950 bg-slate-950 shadow-md transition duration-250 backface-hidden hover:scale-[1.15] hover:shadow-xl"
+        className="backface-hidden mb-4 rounded-full border-4 border-slate-950 bg-slate-950 shadow-md transition duration-250 hover:scale-[1.15] hover:shadow-xl"
       />
       {userHasAvatar ? (
         <AvatarStoreBuyButtons avatarPath={data.name} />

@@ -13,7 +13,7 @@ interface Props {
   userId: string;
 }
 
-function AvatarCollectionItem({ data, isSelected, userId }: Props) {
+function CollectionAvatarItem({ data, isSelected, userId }: Props) {
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -30,7 +30,7 @@ function AvatarCollectionItem({ data, isSelected, userId }: Props) {
       .eq("user_id", userId);
 
     if (error) {
-      console.error("Ha habido un error seleccionando el avatar");
+      console.error("There was an error selecting the avatar");
       return;
     }
 
@@ -67,4 +67,4 @@ function AvatarCollectionItem({ data, isSelected, userId }: Props) {
   );
 }
 
-export default AvatarCollectionItem;
+export default CollectionAvatarItem;

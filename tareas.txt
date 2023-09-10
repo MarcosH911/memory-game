@@ -1,87 +1,63 @@
-Buy color packs
+------------ BUGS ------------
 
-Style space bar
-
-Hide layout when playing
+Fix ref prop bug
 
 Prevent buy multiple roulettes
 
-Loading state on buttons
-
-Split game into components
-
 Fix crash when hitting play too soon
-
-Fix env baseurl server component
-
-Error messages in english
-
-Route handlers for selecting data and revalidateTag
 
 Handle only buy once
 
-Handle roulette spin lag
+Add security to admin users creating other users
+
+Safari bug
+
+
+-------- ORGANIZATION --------
+
+Route handlers types
+
+Order imports
+
+
+--------- OPTIMIZING ---------
+
+Route handlers for selecting data and revalidateTag
+
+Update database level only when session ends
+
+userId route handler
+
+Use search params to optimize into server components
+
+Parallel fetching when possible (nextjs data fetching patterns)
+
+Server component when possible
+
+Create index for database
+
+
+-------- IMPROVEMENTS --------
+
+Loading state on buttons
+
+Hide layout when playing
+
+Load image on roulette
 
 Handle roulette for devices with worse connection
 
 Do something with the button when you don't have enough money
 
-Change ranking refresh to spinner
-
-Display when the avatar was bought in collection
-
-Update database level only when session ends
-
-Lift userId up to main layout
-
-Update profile avatar when selecting new avatar
-
-Change the component name of all the pages to "Page"
-
-Use search params to optimize into server components
-
-Button to see my avatars
-
-Parallel fetching when possible (nextjs data fetching patterns)
-
 Toast instead of console.error()
-  
-Disable admins entering /play in middleware
 
-Highlight user in ranking
+Only accept schools from the schools table
 
-Tell the position of the user in the ranking
-
-Table with avatars to include price...
-
-Profile icon server component
-
-Login, Register and Logout route handler
-School in a new database table
 When registering only allow to choose schools from the schools table
-Register dropdown from RadixUI
-
-Play layout server component
-
-Create index for database
-
-Teachers
-  School
-  Students grade
-
-Route handlers types
 
 Loading states
 
-Keep input after failed login
-
 Prevent sign in after register
-
-Students grade in supabase
-Students grade in ranking
-Students school in ranking
-
-Add security to admin users creating other users
 
 Try catch in route handlers
 
@@ -89,10 +65,47 @@ Return status in route handlers
 
 Error handling/states
 
-Responsive
 
-Safari bug
+---------- FEATURES ----------
+
+Change ranking refresh to spinner
+
+Buy color packs
+
+Display when the avatar was bought in collection
+
+Update profile avatar when selecting new avatar
+
+Dark mode
+
+Highlight user in ranking
+
+Tell the position of the user in the ranking
+
+Table with avatars to include price in supabase
+
+Different avatar categories
+
+Login, Register and Logout route handler
+
+Register dropdown from RadixUI
+
+Teachers
+  School
+  Students grade
+
+Students grade in supabase
+
+Students grade in ranking
+
+Students school in ranking
+
+Responsive
 
 Lighthouse
 
 Server actions
+
+Feedback button
+
+Landing page

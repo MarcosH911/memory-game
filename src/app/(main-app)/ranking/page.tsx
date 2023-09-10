@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import RankingFilters from "./RankingFilters";
-import RankingTable from "./RankingTable";
 import { getRanking } from "@/utils/getRanking";
+import RankingFilters from "./(components)/RankingFilters";
+import RankingTable from "./(components)/RankingTable";
 
 type dataType = Database["public"]["Views"]["points_ranking_all_time"]["Row"][];
 
@@ -38,7 +38,7 @@ function Page() {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="w-[80rem]">
-        <h1 className="text-7xl font-semibold text-teal-800 mb-4 text-center">
+        <h1 className="mb-4 text-center text-7xl font-semibold text-teal-800">
           Ranking
         </h1>
         <RankingFilters

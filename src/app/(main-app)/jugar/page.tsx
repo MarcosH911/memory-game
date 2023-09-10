@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import Square from "./Square";
 import sleep from "@/helpers/sleep";
-import { twMerge } from "tailwind-merge";
-import StartPlayingScreen from "./StartPlayingScreen";
+import PlaySquare from "./(components)/PlaySquare";
+import PlayStartScreen from "./(components)/PlayStartScreen";
+import PlayLevelTitle from "./(components)/PlayLevelTitle";
+import PlayCenterCrosshair from "./(components)/PlayCenterCrosshair";
+import PlaySpaceButton from "./(components)/PlaySpaceButton";
 
 const baseSequenceLength = 20;
 const numTargets = 6;
@@ -170,8 +172,8 @@ function Page() {
   }, []);
 
   return (
-    <div className="h-full flex items-center justify-start flex-col">
-      <StartPlayingScreen
+    <div className="flex h-full flex-col items-center justify-start">
+      <PlayStartScreen
         onClick={playGame}
         isFirstTime={isFirstTime.current}
         levelChange={levelChange.current}
@@ -179,35 +181,24 @@ function Page() {
         correctHits={correctHits.current}
         mistakes={incorrectHits.current + (numTargets - correctHits.current)}
       />
-      <h1 className="rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-7xl font-bold text-teal-950 shadow-md shadow-teal-200/50 mb-4 mt-6">
-        Level {level}
-      </h1>
-      <div className="relative grid grid-cols-3 grid-rows-3 aspect-square h-2/3 mb-4">
+      <PlayLevelTitle level={level} />
+      <div className="relative mb-4 grid aspect-square h-2/3 grid-cols-3 grid-rows-3">
         {Array(8)
           .fill(true)
           .map((_, index) => (
-            <Square
+            <PlaySquare
               key={index}
               index={index}
               isSelected={selectedSquare === index}
             />
           ))}
-        <div className="absolute right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 w-[calc(1%-1px)] h-[calc(7.5%-1px)] rounded-full bg-teal-300"></div>
-        <div className="absolute right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 w-[calc(7.5%-1px)] h-[calc(1%-1px)] rounded-full bg-teal-300"></div>
-        <div className="absolute right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 w-[1%] h-[7.5%] rounded-full bg-teal-600 -z-10"></div>
-        <div className="absolute right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 w-[7.5%] h-[1%] rounded-full bg-teal-600 -z-10"></div>
+        <PlayCenterCrosshair />
       </div>
-      <button
+      <PlaySpaceButton
         onClick={() => setIsSpacePressed(true)}
-        ref={spaceButtonRef}
-        className={twMerge(
-          "relative h-28 max-w-3xl w-full border-slate-600 border-4 rounded-lg bg-slate-100 -translate-y-2 shadow-xl shadow-black/60 transition duration-300 focus:outline-none -z-10",
-          isSpacePressed &&
-            "shadow-sm shadow-black/30 translate-y-0 bg-slate-200",
-        )}
-      >
-        <div className="absolute h-1.5 w-1/6 bg-slate-600 rounded-full right-1/2 translate-x-1/2 top-5"></div>
-      </button>
+        spaceButtonRef={spaceButtonRef}
+        isSpacePressed={isSpacePressed}
+      />
     </div>
   );
 }

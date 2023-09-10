@@ -32,15 +32,15 @@ function AvatarStoreBuyButtons({ avatarPath }: Props) {
       !userPointsData.total_coins ||
       !userPointsData.total_diamonds
     ) {
-      console.error("Ha habido un error seleccionando los puntos del usuario");
+      console.error("There was an error selecting the user points");
       return;
     }
 
     if (type === "coins" && userPointsData.total_coins < 100) {
-      console.error("No tienes suficientes monedas para comprar esto");
+      console.error("You don't have enough coins to buy this");
       return;
     } else if (type === "diamonds" && userPointsData.total_diamonds < 25) {
-      console.error("No tienes suficientes diamantes para comprar esto");
+      console.error("You don't have enough diamonds to buy this");
       return;
     }
 

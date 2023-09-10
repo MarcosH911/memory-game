@@ -1,14 +1,14 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-import CoinsNavItem from "./CoinsNavItem";
-import DiamondsNavItem from "./DiamondsNavItem";
-import ProfileButton from "./ProfileButton";
-import MenuNavbar from "./MenuNavbar";
+import CoinsNavItem from "./(components)/CoinsNavItem";
+import DiamondsNavItem from "./(components)/DiamondsNavItem";
+import ProfileButton from "./(components)/ProfileButton";
+import MenuNavbar from "./(components)/MenuNavbar";
 
 export const dynamic = "force-dynamic";
 
-async function GameLayout({ children }: { children: React.ReactNode }) {
+async function Layout({ children }: { children: React.ReactNode }) {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const { data, error } = await supabase
@@ -35,4 +35,4 @@ async function GameLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default GameLayout;
+export default Layout;
