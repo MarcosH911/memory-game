@@ -74,6 +74,7 @@ function Register() {
           username,
           full_name: fullName,
           role,
+          school,
         });
 
       if (newProfileError) {

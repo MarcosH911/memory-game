@@ -1,7 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 import AvatarStoreItem from "./AvatarStoreItem";
-import { cookies } from "next/headers";
+
+export const dynamic = "force-dynamic";
 
 async function AvatarsStore() {
   const supabase = createServerComponentClient<Database>({ cookies });
