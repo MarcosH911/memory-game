@@ -1,0 +1,23 @@
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  const supabase = createRouteHandlerClient<Database>({ cookies });
+
+  const { data, error } = await supabase.from("user_level").select("level");
+
+  let userLevel = data?.[0]?.level;
+
+  if (error) {
+    console.error("There was an error getting the level of the user");
+    console.log(error.message);
+    return NextResponse.error();
+  }
+
+  if (!userLevel) {
+    userLevel = 1;
+  }
+
+  return NextResponse.json(userLevel);
+}

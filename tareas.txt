@@ -1,5 +1,23 @@
 Buy color packs
 
+Style space bar
+
+Hide layout when playing
+
+Prevent buy multiple roulettes
+
+Loading state on buttons
+
+Split game into components
+
+Fix crash when hitting play too soon
+
+Fix env baseurl server component
+
+Error messages in english
+
+Route handlers for selecting data and revalidateTag
+
 Handle only buy once
 
 Handle roulette spin lag
@@ -8,7 +26,11 @@ Handle roulette for devices with worse connection
 
 Do something with the button when you don't have enough money
 
+Change ranking refresh to spinner
+
 Display when the avatar was bought in collection
+
+Update database level only when session ends
 
 Lift userId up to main layout
 
@@ -47,19 +69,23 @@ Teachers
   School
   Students grade
 
+Route handlers types
+
 Loading states
 
---------------------------------
 Keep input after failed login
 
 Prevent sign in after register
---------------------------------
 
 Students grade in supabase
 Students grade in ranking
 Students school in ranking
 
 Add security to admin users creating other users
+
+Try catch in route handlers
+
+Return status in route handlers
 
 Error handling/states
 

@@ -2,7 +2,7 @@ import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/((?!_next/).*)"],
+  matcher: ["/((?!_next/|api/).*)"],
 };
 
 export const middleware = async (request: NextRequest) => {
