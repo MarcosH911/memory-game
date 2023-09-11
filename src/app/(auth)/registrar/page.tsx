@@ -78,7 +78,6 @@ function Page() {
           type="text"
           value={username}
           setValue={setUsername}
-          autoComplete="off"
         />
 
         <AuthInputField

@@ -4,8 +4,6 @@ Prevent buy multiple roulettes
 
 Fix crash when hitting play too soon
 
-Handle only buy once
-
 Add security to admin users creating other users
 
 Safari bug
@@ -23,8 +21,6 @@ Order imports
 - Route handlers for selecting data and revalidateTag
 
 Update database level only when session ends
-
-userId route handler
 
 Use search params to optimize into server components
 
@@ -49,17 +45,15 @@ Do something with the button when you don't have enough money
 
 Toast instead of console.error()
 
-Only accept schools from the schools table
-
 When registering only allow to choose schools from the schools table
 
 Loading states
 
-Prevent sign in after register
-
 Try catch in route handlers
 
 Return status in route handlers
+
+Handle errors in route handlers
 
 Error handling/states
 

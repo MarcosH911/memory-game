@@ -20,30 +20,16 @@ function ProfileButton() {
 
   useEffect(() => {
     const getUserData = async () => {
-      const userId = (await supabase.auth.getSession()).data.session?.user.id;
-
-      if (!userId) return;
-
-      const { data } = await supabase
-        .from("profiles")
-        .select("avatar_path, full_name")
-        .eq("user_id", userId)
-        .single();
-
-      const avatarPath = data?.avatar_path;
-
-      if (typeof avatarPath === "string") {
-        setAvatarUrl(getAvatarImage(avatarPath));
-      } else {
-        setAvatarUrl(getAvatarImage("Default-Avatar.png"));
-      }
-      if (data) {
-        setFullName(data?.full_name);
-      }
+      const profileDataResponse = await fetch("/api/profile/profile-data", {
+        method: "get",
+      });
+      const { data: profileData } = await profileDataResponse.json();
+      setAvatarUrl(getAvatarImage(profileData.avatar_path));
+      setFullName(profileData.full_name);
     };
 
     getUserData();
-  }, [supabase]);
+  }, []);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -63,14 +49,12 @@ function ProfileButton() {
       >
         <Popover.Trigger asChild>
           <button>
-            {avatarUrl && (
-              <Image
-                src={avatarUrl}
-                alt="profile-avatar"
-                width={40}
-                height={40}
-              />
-            )}
+            <Image
+              src={avatarUrl || "/Default-Avatar.png"}
+              alt="profile-avatar"
+              width={40}
+              height={40}
+            />
           </button>
         </Popover.Trigger>
         <Popover.Content asChild>

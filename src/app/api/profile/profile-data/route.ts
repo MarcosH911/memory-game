@@ -6,20 +6,21 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const supabase = createRouteHandlerClient<Database>({ cookies });
+  const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
-  const { data, error } = await supabase.from("user_level").select("level");
-
-  let userLevel = data?.[0]?.level;
-
-  if (error) {
-    console.error("There was an error getting the level of the user");
-    console.log(error.message);
+  if (!userId) {
     return NextResponse.error();
   }
 
-  if (!userLevel) {
-    userLevel = 1;
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+  if (error || !data) {
+    return NextResponse.error();
   }
 
-  return NextResponse.json({ userLevel }, { status: 200 });
+  return NextResponse.json({ data }, { status: 200 });
 }

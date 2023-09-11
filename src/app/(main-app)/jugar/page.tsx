@@ -156,10 +156,11 @@ function Page() {
 
   useEffect(() => {
     const getUserLevel = async () => {
-      const res = await fetch("/api/play/user-level", {
+      const userLevelDataResponse = await fetch("/api/play/user-level", {
         method: "GET",
       });
-      setLevel(await res.json());
+      const { userLevel } = await userLevelDataResponse.json();
+      setLevel(userLevel);
     };
 
     getUserLevel();
