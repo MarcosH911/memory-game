@@ -63,6 +63,8 @@ Return status in route handlers
 
 Error handling/states
 
+Remove all console.log() / console.error()
+
 
 ---------- FEATURES ----------
 

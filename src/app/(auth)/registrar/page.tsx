@@ -50,65 +50,58 @@ function Page() {
       return;
     }
 
-    try {
-      if (!username || !password || !fullName || !role) {
-        setErrorMessage("Introduce todas las credenciales");
-        return;
-      }
+    if (!username || !password || !fullName || !role) {
+      setErrorMessage("Introduce todas las credenciales");
+      return;
+    }
 
-      const fakeEmail = getFakeEmail(username);
+    const fakeEmail = getFakeEmail(username);
 
-      const { data: newUserData, error: newUserError } =
-        await supabase.auth.signUp({
-          email: fakeEmail,
-          password,
-          options: {
-            data: { role },
-          },
-        });
+    const { data: newUserData, error: newUserError } =
+      await supabase.auth.signUp({
+        email: fakeEmail,
+        password,
+        options: {
+          data: { role },
+        },
+      });
 
-      if (newUserError || !newUserData.user) {
-        setErrorMessage("Error creando el usuario");
-        return;
-      }
+    if (newUserError || !newUserData.user) {
+      setErrorMessage("Error creando el usuario");
+      return;
+    }
 
-      const { error: newProfileError } = await supabase
-        .from("profiles")
+    const { error: newProfileError } = await supabase.from("profiles").insert({
+      user_id: newUserData.user.id,
+      username,
+      full_name: fullName,
+      role,
+      school,
+    });
+
+    if (newProfileError) {
+      setErrorMessage("Error creando el perfil");
+      return;
+    }
+
+    if (role === "student") {
+      const { error: avatarsError } = await supabase
+        .from("avatars_transactions")
         .insert({
           user_id: newUserData.user.id,
-          username,
-          full_name: fullName,
-          role,
-          school,
+          avatar_path: "Default-Avatar.png",
         });
 
-      if (newProfileError) {
-        setErrorMessage("Error creando el perfil");
+      if (avatarsError) {
+        setErrorMessage("Error insertando el avatar");
         return;
       }
-
-      if (role === "student") {
-        const { error: avatarsError } = await supabase
-          .from("avatars_transactions")
-          .insert({
-            user_id: newUserData.user.id,
-            avatar_path: "Default-Avatar.png",
-          });
-
-        if (avatarsError) {
-          setErrorMessage("Error insertando el avatar");
-          return;
-        }
-      }
-
-      setSuccessMessage("Usuario registrado correctamente!");
-
-      router.refresh();
-    } catch (error: unknown) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
     }
+
+    setSuccessMessage("Usuario registrado correctamente!");
+
+    setIsLoading(false);
+    router.refresh();
   };
 
   const handleShowPassword = () => {

@@ -1,6 +1,5 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiUser, HiLockClosed } from "react-icons/hi2";
@@ -15,46 +14,26 @@ function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
+  const router = useRouter();
+
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+
     setLoginError("");
+    setIsLoading(true);
 
     const loginDataResponse = await fetch("/api/auth/login", {
       method: "post",
       body: JSON.stringify({ username, password }),
     });
 
-    const loginData = await loginDataResponse.json();
-    if (loginData.status === 400) {
-      setLoginError(loginData.message);
+    if (loginDataResponse.status === 400) {
+      const { message } = await loginDataResponse.json();
+      setLoginError(message);
     }
 
     setIsLoading(false);
-
-    // try {
-    //   if (!username || !password) {
-    //     setLoginError("Introduce el usuario y la contraseña");
-    //     return;
-    //   }
-
-    //   const fakeEmail = getFakeEmail(username);
-    //   const { error } = await supabase.auth.signInWithPassword({
-    //     email: fakeEmail,
-    //     password,
-    //   });
-
-    //   if (error) {
-    //     setLoginError("Usuario o contraseña incorrectos");
-    //     return;
-    //   }
-
-    //   router.refresh();
-    // } catch (error: unknown) {
-    //   console.error(error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    router.refresh();
   };
 
   return (

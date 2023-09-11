@@ -17,7 +17,7 @@ async function Layout({ children }: { children: React.ReactNode }) {
     .single();
 
   if (error) {
-    console.error(error.message);
+    console.error("There was an error selecting the user points");
   }
 
   return (

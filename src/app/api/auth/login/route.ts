@@ -1,7 +1,8 @@
-import getFakeEmail from "@/helpers/getFakeEmail";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+
+import getFakeEmail from "@/helpers/getFakeEmail";
 
 export const dynamic = "force-dynamic";
 
@@ -10,10 +11,14 @@ export async function POST(request: Request) {
   const supabase = createRouteHandlerClient<Database>({ cookies });
 
   if (!response.username || !response.password) {
-    return NextResponse.json({
-      message: "Introduce el usuario y la contraseña",
-      status: 400,
-    });
+    return NextResponse.json(
+      {
+        message: "Introduce el usuario y la contraseña",
+      },
+      {
+        status: 400,
+      },
+    );
   }
 
   const fakeEmail = getFakeEmail(response.username);
@@ -24,11 +29,16 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    return NextResponse.json({
-      message: "Usuario o contraseña incorrectos",
-      status: 400,
-    });
+    return NextResponse.json(
+      {
+        message: "Usuario o contraseña incorrectos",
+      },
+      {
+        status: 400,
+      },
+    );
   }
 
-  return NextResponse.redirect(new URL("/", request.url));
+  console.log(new URL("/hola", request.url));
+  return NextResponse.redirect(new URL("/jugar", request.url));
 }
