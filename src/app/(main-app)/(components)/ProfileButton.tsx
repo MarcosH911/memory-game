@@ -16,7 +16,6 @@ function ProfileButton() {
   const [fullName, setFullName] = useState("");
 
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
 
   useEffect(() => {
     const getUserData = async () => {
@@ -32,12 +31,7 @@ function ProfileButton() {
   }, []);
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      console.error("There was an error logging out");
-    }
-
+    await fetch("/api/auth/logout", { method: "post" });
     router.refresh();
   };
 

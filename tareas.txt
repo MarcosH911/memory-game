@@ -8,6 +8,8 @@ Add security to admin users creating other users
 
 Safari bug
 
+Redirect without router.refresh()
+
 
 -------- ORGANIZATION --------
 
