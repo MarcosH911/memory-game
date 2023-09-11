@@ -1,20 +1,15 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   HiUser,
   HiLockClosed,
-  HiOutlineEyeSlash,
-  HiOutlineEye,
-  HiMiniInformationCircle,
-  HiXMark,
   HiUsers,
   HiBuildingOffice,
   HiAcademicCap,
 } from "react-icons/hi2";
-import { twMerge } from "tailwind-merge";
 import getFakeEmail from "@/helpers/getFakeEmail";
 import AuthInputField from "../(components)/AuthInputField";
 import AuthMessageBox from "../(components)/AuthMessageBox";
@@ -26,87 +21,41 @@ function Page() {
   const [role, setRole] = useState("");
   const [school, setSchool] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+
     setErrorMessage("");
+    setIsLoading(true);
 
-    const role = (await supabase.auth.getSession()).data.session?.user
-      .user_metadata.role;
-
-    if (role !== "admin") {
-      setErrorMessage('Esta cuenta no tiene el rol "admin"');
-      return;
-    }
-
-    if (!username || !password || !fullName || !role) {
-      setErrorMessage("Introduce todas las credenciales");
-      return;
-    }
-
-    const fakeEmail = getFakeEmail(username);
-
-    const { data: newUserData, error: newUserError } =
-      await supabase.auth.signUp({
-        email: fakeEmail,
+    const registerDataResponse = await fetch("/api/auth/register", {
+      method: "post",
+      body: JSON.stringify({
+        username,
         password,
-        options: {
-          data: { role },
-        },
-      });
-
-    if (newUserError || !newUserData.user) {
-      setErrorMessage("Error creando el usuario");
-      return;
-    }
-
-    const { error: newProfileError } = await supabase.from("profiles").insert({
-      user_id: newUserData.user.id,
-      username,
-      full_name: fullName,
-      role,
-      school,
+        fullName,
+        newUserRole: role,
+        school,
+      }),
     });
 
-    if (newProfileError) {
-      setErrorMessage("Error creando el perfil");
-      return;
+    const registerData = await registerDataResponse.json();
+
+    if (registerDataResponse.status === 400) {
+      setErrorMessage(registerData.message);
+    } else if (registerDataResponse.status === 200) {
+      setSuccessMessage(registerData.message);
     }
-
-    if (role === "student") {
-      const { error: avatarsError } = await supabase
-        .from("avatars_transactions")
-        .insert({
-          user_id: newUserData.user.id,
-          avatar_path: "Default-Avatar.png",
-        });
-
-      if (avatarsError) {
-        setErrorMessage("Error insertando el avatar");
-        return;
-      }
-    }
-
-    setSuccessMessage("Usuario registrado correctamente!");
 
     setIsLoading(false);
     router.refresh();
-  };
-
-  const handleShowPassword = () => {
-    setShowPassword((show) => !show);
-    passwordInputRef?.current?.focus();
   };
 
   return (
