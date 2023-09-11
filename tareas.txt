@@ -1,7 +1,5 @@
 ------------ BUGS ------------
 
-Fix ref prop bug
-
 Prevent buy multiple roulettes
 
 Fix crash when hitting play too soon
@@ -22,7 +20,7 @@ Order imports
 
 --------- OPTIMIZING ---------
 
-Route handlers for selecting data and revalidateTag
+- Route handlers for selecting data and revalidateTag
 
 Update database level only when session ends
 

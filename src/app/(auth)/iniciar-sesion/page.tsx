@@ -30,6 +30,11 @@ function Page() {
     setIsLoading(true);
     setLoginError("");
 
+    fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+
     try {
       if (!username || !password) {
         setLoginError("Introduce el usuario y la contraseña");
