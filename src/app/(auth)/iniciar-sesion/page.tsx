@@ -1,17 +1,10 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  HiUser,
-  HiLockClosed,
-  HiMiniInformationCircle,
-  HiXMark,
-} from "react-icons/hi2";
-import { twMerge } from "tailwind-merge";
+import { HiUser, HiLockClosed } from "react-icons/hi2";
 
-import getFakeEmail from "@/helpers/getFakeEmail";
 import AuthInputField from "../(components)/AuthInputField";
 import AuthSubmitButton from "../(components)/AuthSubmitButton";
 import AuthMessageBox from "../(components)/AuthMessageBox";
@@ -22,42 +15,46 @@ function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
-
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setLoginError("");
 
-    fetch("/api/login", {
-      method: "POST",
+    const loginDataResponse = await fetch("/api/auth/login", {
+      method: "post",
       body: JSON.stringify({ username, password }),
     });
 
-    try {
-      if (!username || !password) {
-        setLoginError("Introduce el usuario y la contraseña");
-        return;
-      }
-
-      const fakeEmail = getFakeEmail(username);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: fakeEmail,
-        password,
-      });
-
-      if (error) {
-        setLoginError("Usuario o contraseña incorrectos");
-        return;
-      }
-
-      router.refresh();
-    } catch (error: unknown) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+    const loginData = await loginDataResponse.json();
+    if (loginData.status === 400) {
+      setLoginError(loginData.message);
     }
+
+    setIsLoading(false);
+
+    // try {
+    //   if (!username || !password) {
+    //     setLoginError("Introduce el usuario y la contraseña");
+    //     return;
+    //   }
+
+    //   const fakeEmail = getFakeEmail(username);
+    //   const { error } = await supabase.auth.signInWithPassword({
+    //     email: fakeEmail,
+    //     password,
+    //   });
+
+    //   if (error) {
+    //     setLoginError("Usuario o contraseña incorrectos");
+    //     return;
+    //   }
+
+    //   router.refresh();
+    // } catch (error: unknown) {
+    //   console.error(error);
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (

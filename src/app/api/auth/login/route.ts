@@ -10,10 +10,10 @@ export async function POST(request: Request) {
   const supabase = createRouteHandlerClient<Database>({ cookies });
 
   if (!response.username || !response.password) {
-    return NextResponse.json(
-      { message: "Introduce el usuario y la contraseña" },
-      { status: 400 },
-    );
+    return NextResponse.json({
+      message: "Introduce el usuario y la contraseña",
+      status: 400,
+    });
   }
 
   const fakeEmail = getFakeEmail(response.username);
@@ -24,10 +24,10 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    return NextResponse.json(
-      { message: "Usuario o contraseña incorrectos" },
-      { status: 400 },
-    );
+    return NextResponse.json({
+      message: "Usuario o contraseña incorrectos",
+      status: 400,
+    });
   }
 
   return NextResponse.redirect(new URL("/", request.url));

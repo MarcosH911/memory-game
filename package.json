@@ -20,6 +20,7 @@
     "@types/react-modal": "^3.16.0",
     "@vercel/analytics": "^1.0.2",
     "autoprefixer": "10.4.15",
+    "dependencies": "^0.0.1",
     "encoding": "^0.1.13",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
