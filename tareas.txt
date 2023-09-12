@@ -61,8 +61,6 @@ Error handling/states
 
 Remove all console.log() / console.error()
 
-Use optimistic to update before fetch
-
 
 ---------- FEATURES ----------
 
