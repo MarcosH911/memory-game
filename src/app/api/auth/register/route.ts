@@ -65,8 +65,6 @@ export async function POST(request: Request) {
       },
     });
 
-  console.log(newUserError);
-
   if (newUserError || !newUserData.user) {
     return NextResponse.json(
       {

@@ -13,7 +13,6 @@ export async function GET() {
 
   if (error) {
     console.error("There was an error getting the level of the user");
-    console.log(error.message);
     return NextResponse.error();
   }
 

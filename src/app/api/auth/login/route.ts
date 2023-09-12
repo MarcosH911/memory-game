@@ -39,6 +39,5 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log(new URL("/hola", request.url));
   return NextResponse.redirect(new URL("/jugar", request.url));
 }

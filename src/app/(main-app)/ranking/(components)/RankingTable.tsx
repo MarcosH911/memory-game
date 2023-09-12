@@ -1,24 +1,26 @@
-import { twMerge } from "tailwind-merge";
 import { HiMiniArrowPath } from "react-icons/hi2";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 import RankingRow from "./RankingRow";
 
+type dataType =
+  | Database["public"]["Views"]["points_ranking_all_time"]["Row"][]
+  | null;
+
 interface Props {
-  data: Database["public"]["Views"]["points_ranking_all_time"]["Row"][];
-  type: string;
-  isReloading: boolean;
-  setIsReloading: React.Dispatch<React.SetStateAction<boolean>>;
+  data: dataType;
+  pointsFilter: string;
 }
 
-function RankingTable({ data, type, isReloading, setIsReloading }: Props) {
+function RankingTable({ data, pointsFilter }: Props) {
   return (
     <div className="relative rounded-lg shadow-xl">
       <button
-        onClick={() => setIsReloading(true)}
+        // onClick={() => setIsReloading(true)}
         className="absolute right-3.5 top-3.5 rounded-md p-1.5 text-2xl text-white transition hover:bg-teal-800"
       >
-        <HiMiniArrowPath className={twMerge(isReloading && "animate-spin")} />
+        {/* <HiMiniArrowPath className={twMerge(isReloading && "animate-spin")} /> */}
+        <HiMiniArrowPath />
       </button>
       <table className="w-full">
         <thead>
@@ -33,11 +35,9 @@ function RankingTable({ data, type, isReloading, setIsReloading }: Props) {
               Nombre
             </th>
             <th className="flex w-[25%] items-center justify-center text-lg font-bold">
-              {type === "coins"
-                ? "Monedas"
-                : type === "diamonds"
-                ? "Diamantes"
-                : "Máximo nivel"}
+              {pointsFilter === "coins" && "Monedas"}
+              {pointsFilter === "diamonds" && "Diamantes"}
+              {pointsFilter === "max_level" && "Máximo nivel"}
             </th>
           </tr>
         </thead>
@@ -46,8 +46,13 @@ function RankingTable({ data, type, isReloading, setIsReloading }: Props) {
         <ScrollArea.Viewport className="h-full w-full rounded-b-lg">
           <table className="w-full rounded-lg">
             <tbody className="rounded-lg">
-              {data.map((item, index) => (
-                <RankingRow key={index} index={index} data={item} type={type} />
+              {data?.map((item, index) => (
+                <RankingRow
+                  key={index}
+                  index={index}
+                  data={item}
+                  type={pointsFilter}
+                />
               ))}
             </tbody>
           </table>

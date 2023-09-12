@@ -45,6 +45,8 @@ Check if fetching coins and diamonds is cached
 
 -------- IMPROVEMENTS --------
 
+Finish raking
+
 Loading state on buttons
 
 Hide layout when playing
