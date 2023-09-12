@@ -17,8 +17,6 @@ Route handlers types
 
 Order imports
 
-Make all top level functions not arrow functions
-
 
 --------- OPTIMIZING ---------
 
