@@ -21,6 +21,8 @@ Order imports
 
 Make all top level functions not arrow functions
 
+Change update POST request to PUT (or something)
+
 
 --------- OPTIMIZING ---------
 
@@ -68,6 +70,8 @@ Handle errors in route handlers
 Error handling/states
 
 Remove all console.log() / console.error()
+
+Use optimistic to update before fetch
 
 
 ---------- FEATURES ----------
