@@ -10,12 +10,16 @@ Safari bug
 
 Redirect without router.refresh()
 
+Don't load level/points till data arrived
+
 
 -------- ORGANIZATION --------
 
 Route handlers types
 
 Order imports
+
+Make all top level functions not arrow functions
 
 
 --------- OPTIMIZING ---------
@@ -31,6 +35,10 @@ Parallel fetching when possible (nextjs data fetching patterns)
 Server component when possible
 
 Create index for database
+
+Cache
+
+Check if fetching coins and diamonds is cached
 
 
 -------- IMPROVEMENTS --------
