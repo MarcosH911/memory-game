@@ -1,14 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { twMerge } from "tailwind-merge";
-
-type rankingViewType =
-  | "points_ranking_day"
-  | "points_ranking_week"
-  | "points_ranking_month"
-  | "points_ranking_year"
-  | "points_ranking_all_time";
 
 interface Props {
   itemType: string;
@@ -43,7 +38,7 @@ function RankingFiltersTimeItem({ itemType }: Props) {
             {itemType === "week" && "Semana"}
             {itemType === "month" && "Mes"}
             {itemType === "year" && "Año"}
-            {itemType === "all_time" && "Todos"}
+            {itemType === "all_time" && "Todo el tiempo"}
           </button>
         </li>
       </Link>

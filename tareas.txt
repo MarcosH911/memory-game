@@ -12,6 +12,8 @@ Redirect without router.refresh()
 
 Don't load level/points till data arrived
 
+Set default search params
+
 
 -------- ORGANIZATION --------
 
@@ -74,6 +76,14 @@ Error handling/states
 Remove all console.log() / console.error()
 
 Use optimistic to update before fetch
+
+Store ranking filters in local storage to preserve search params on change
+
+Revalidate data
+
+Cache data
+
+Spinner on ranking refresh
 
 
 ---------- FEATURES ----------

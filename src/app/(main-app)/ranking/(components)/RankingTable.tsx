@@ -1,7 +1,5 @@
-import { HiMiniArrowPath } from "react-icons/hi2";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
-
 import RankingRow from "./RankingRow";
+import RakingTableReloadButton from "./RankingTableReloadButton";
 
 type dataType =
   | Database["public"]["Views"]["points_ranking_all_time"]["Row"][]
@@ -15,13 +13,7 @@ interface Props {
 function RankingTable({ data, pointsFilter }: Props) {
   return (
     <div className="relative rounded-lg shadow-xl">
-      <button
-        // onClick={() => setIsReloading(true)}
-        className="absolute right-3.5 top-3.5 rounded-md p-1.5 text-2xl text-white transition hover:bg-teal-800"
-      >
-        {/* <HiMiniArrowPath className={twMerge(isReloading && "animate-spin")} /> */}
-        <HiMiniArrowPath />
-      </button>
+      <RakingTableReloadButton />
       <table className="w-full">
         <thead>
           <tr className="flex h-16 items-center justify-around rounded-t-lg bg-teal-700 px-24 text-teal-50 shadow-xl">
@@ -42,28 +34,21 @@ function RankingTable({ data, pointsFilter }: Props) {
           </tr>
         </thead>
       </table>
-      <ScrollArea.Root type="auto" className="h-[60vh] overflow-hidden">
-        <ScrollArea.Viewport className="h-full w-full rounded-b-lg">
-          <table className="w-full rounded-lg">
-            <tbody className="rounded-lg">
-              {data?.map((item, index) => (
-                <RankingRow
-                  key={index}
-                  index={index}
-                  data={item}
-                  type={pointsFilter}
-                />
-              ))}
-            </tbody>
-          </table>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar
-          orientation="vertical"
-          className="mx-1 my-3 w-2 rounded-full bg-slate-300/80 shadow-sm transition hover:bg-slate-300"
-        >
-          <ScrollArea.Thumb className="rounded-full bg-slate-400 transition-colors hover:bg-slate-500" />
-        </ScrollArea.Scrollbar>
-      </ScrollArea.Root>
+
+      <div className="h-[60vh] overflow-y-auto rounded-b-lg scrollbar-ranking">
+        <table className="w-full rounded-lg">
+          <tbody className="rounded-lg h-full">
+            {data?.map((item, index) => (
+              <RankingRow
+                key={index}
+                index={index}
+                data={item}
+                type={pointsFilter}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -18,7 +18,7 @@ function RankingRow({ data, index, type }: Props) {
   return (
     <tr className="flex h-14 items-center justify-around px-24 even:bg-teal-100">
       <td className="flex w-[25%] items-center justify-center text-lg font-bold">
-        {index + 1}º
+        {index + 1}
       </td>
       <td className="flex w-[25%] items-center justify-center">
         <Image src={avatarUrl} width={40} height={40} alt="Avatar Image" />
