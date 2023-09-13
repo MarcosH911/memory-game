@@ -18,6 +18,7 @@ function AvatarStoreRoulette() {
   const [avatarsUrls, setAvatarsUrls] = useState([""]);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [isGettingAvatars, setIsGettingAvatars] = useState(true);
+  const [isSpinningRoulette, setIsSpinningRoulette] = useState(false);
 
   const animationTranslation = useRef(0);
 
@@ -30,41 +31,46 @@ function AvatarStoreRoulette() {
   useEffect(() => {
     if (!isGettingAvatars) return;
 
-    const getRemainingAvatarsUrls = async () => {
-      const { data: allAvatarsData, error: allAvatarsError } =
-        await supabase.storage.from("avatar_images").list();
-
-      if (allAvatarsError || !allAvatarsData) {
-        console.error("There was an error getting all the avatars");
-        return;
-      }
-
-      const { data: userAvatarsData, error: userAvatarsError } = await supabase
-        .from("user_avatars")
-        .select("avatar_path");
-
-      if (userAvatarsError || !userAvatarsData) {
-        console.error("There was an error getting the user avatars");
-        return;
-      }
-
-      const allAvatarsPaths = allAvatarsData.map(
-        (avatarData) => avatarData.name,
-      );
-
-      const remainingAvatarsPaths = allAvatarsPaths.filter((avatarPath) => {
-        if (avatarPath === ".emptyFolderPlaceholder") {
-          return false;
-        } else if (
-          userAvatarsData.find(
-            (userAvatarData) => userAvatarData.avatar_path === avatarPath,
-          )
-        ) {
-          return false;
-        } else {
-          return true;
-        }
+    const getRemainingAvatars = async () => {
+      const userAvatarsResponse = await fetch("/api/avatars/user-avatars", {
+        method: "get",
       });
+
+      const { remainingAvatarsPaths } = await userAvatarsResponse.json();
+      // const { data: allAvatarsData, error: allAvatarsError } =
+      //   await supabase.storage.from("avatar_images").list();
+
+      // if (allAvatarsError || !allAvatarsData) {
+      //   console.error("There was an error getting all the avatars");
+      //   return;
+      // }
+
+      // const { data: userAvatarsData, error: userAvatarsError } = await supabase
+      //   .from("user_avatars")
+      //   .select("avatar_path");
+
+      // if (userAvatarsError || !userAvatarsData) {
+      //   console.error("There was an error getting the user avatars");
+      //   return;
+      // }
+
+      // const allAvatarsPaths = allAvatarsData.map(
+      //   (avatarData) => avatarData.name,
+      // );
+
+      // const remainingAvatarsPaths = allAvatarsPaths.filter((avatarPath) => {
+      //   if (avatarPath === ".emptyFolderPlaceholder") {
+      //     return false;
+      //   } else if (
+      //     userAvatarsData.find(
+      //       (userAvatarData) => userAvatarData.avatar_path === avatarPath,
+      //     )
+      //   ) {
+      //     return false;
+      //   } else {
+      //     return true;
+      //   }
+      // });
 
       while (remainingAvatarsPaths.length < 106) {
         remainingAvatarsPaths.push(...remainingAvatarsPaths);
@@ -72,8 +78,8 @@ function AvatarStoreRoulette() {
       shuffleArray(remainingAvatarsPaths);
       remainingAvatarsPaths.length = 106;
 
-      const remainingAvatarsUrls = remainingAvatarsPaths.map((avatarPath) =>
-        getAvatarImage(avatarPath),
+      const remainingAvatarsUrls = remainingAvatarsPaths.map(
+        (avatarPath: string) => getAvatarImage(avatarPath),
       );
 
       setAvatarsUrls(remainingAvatarsUrls);
@@ -90,11 +96,12 @@ function AvatarStoreRoulette() {
       selectedAvatarPath.current = remainingAvatarsPaths[102];
     };
 
-    getRemainingAvatarsUrls();
+    getRemainingAvatars();
   }, [isGettingAvatars, supabase]);
 
   const handleSpinRoulette = async (type: "coins" | "diamonds") => {
-    if (isAnimationPlaying) return;
+    if (isSpinningRoulette) return;
+    setIsSpinningRoulette(true);
 
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
@@ -157,6 +164,7 @@ function AvatarStoreRoulette() {
 
     setTimeout(() => {
       setShowAvatarModal(true);
+      setIsSpinningRoulette(false);
     }, 10000);
   };
 
