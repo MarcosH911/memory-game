@@ -1,7 +1,8 @@
-import PlayLevelTitle from "./(components)/PlayLevelTitle";
-import PlayGame from "./(components)/PlayGame";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+
+import PlayLevelTitle from "./(components)/PlayLevelTitle";
+import PlayGame from "./(components)/PlayGame";
 
 export const dynamic = "force-dynamic";
 

@@ -1,18 +1,10 @@
 ------------ BUGS ------------
 
-Prevent buy multiple roulettes
-
-Fix crash when hitting play too soon
-
 Add security to admin users creating other users
 
 Safari bug
 
 Redirect without router.refresh()
-
-Don't load level/points till data arrived
-
-Set default search params
 
 
 -------- ORGANIZATION --------
@@ -46,8 +38,6 @@ Check if fetching coins and diamonds is cached
 
 
 -------- IMPROVEMENTS --------
-
-Finish raking
 
 Loading state on buttons
 
@@ -105,8 +95,6 @@ Tell the position of the user in the ranking
 Table with avatars to include price in supabase
 
 Different avatar categories
-
-Login, Register and Logout route handler
 
 Register dropdown from RadixUI
 
