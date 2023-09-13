@@ -57,6 +57,8 @@ Loading states
 
 Try catch in route handlers
 
+Update things faster (when clicking navigation, selecting or buying an avatar...)
+
 Return status in route handlers
 
 Handle errors in route handlers
