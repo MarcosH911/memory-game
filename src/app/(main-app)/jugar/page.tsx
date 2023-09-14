@@ -67,15 +67,14 @@ async function Page() {
   }
 
   return (
-    <Loading />
-    // <div className="flex h-full flex-col items-center justify-start">
-    //   <PlayLevelTitle level={level} />
-    //   <PlayGame
-    //     generatedSequence={generatedSequence}
-    //     numTargets={numTargets}
-    //     level={level}
-    //   />
-    // </div>
+    <div className="flex h-full flex-col items-center justify-start">
+      <PlayLevelTitle level={level} />
+      <PlayGame
+        generatedSequence={generatedSequence}
+        numTargets={numTargets}
+        level={level}
+      />
+    </div>
   );
 }
 
