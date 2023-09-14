@@ -16,6 +16,7 @@ interface Props {
 
 function PlayGame({ generatedSequence, numTargets, level }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isInserting, setIsInserting] = useState(false);
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
   const [isSpacePressed, setIsSpacePressed] = useState(false);
 
@@ -30,6 +31,10 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
     if (isPlaying) return;
 
     setIsPlaying(true);
+
+    do {
+      await sleep(500);
+    } while (isInserting);
 
     await sleep(1000);
 
@@ -89,11 +94,14 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
     }
 
     setIsPlaying(false);
+
+    setIsInserting(true);
     if (insertLevelPromise) {
       await Promise.all([insertPointsPromise, insertLevelPromise]);
     } else {
       await Promise.all([insertPointsPromise]);
     }
+    setIsInserting(false);
 
     router.refresh();
   };

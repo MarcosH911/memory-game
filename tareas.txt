@@ -39,6 +39,8 @@ Check if fetching coins and diamonds is cached
 
 -------- IMPROVEMENTS --------
 
+Do something while inserting in play
+
 Loading state on buttons
 
 Hide layout when playing
