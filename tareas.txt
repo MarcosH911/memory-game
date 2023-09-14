@@ -41,6 +41,8 @@ Check if fetching coins and diamonds is cached
 
 Do something while inserting in play
 
+Static image to <Image />
+
 Loading state on buttons
 
 Hide layout when playing
