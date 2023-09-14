@@ -3,7 +3,9 @@ import { twMerge } from "tailwind-merge";
 function Loading() {
   return (
     <div className="flex h-full animate-pulse flex-col items-center justify-start">
-      <div className="mb-4 mt-6 h-[6.125rem] w-72 rounded-lg border-2 border-slate-400 bg-slate-200"></div>
+      <div className="mb-4 mt-6 h-[6.125rem] w-72 rounded-lg border-2 border-slate-400 bg-slate-200 flex items-center justify-center">
+        <div className="h-5 w-60 rounded-full bg-slate-400"></div>
+      </div>
       <div className="mb-4 grid aspect-square h-2/3 grid-cols-3 grid-rows-3">
         {Array(8)
           .fill(true)

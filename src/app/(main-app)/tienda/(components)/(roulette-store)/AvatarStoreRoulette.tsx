@@ -37,40 +37,6 @@ function AvatarStoreRoulette() {
       });
 
       const { remainingAvatarsPaths } = await userAvatarsResponse.json();
-      // const { data: allAvatarsData, error: allAvatarsError } =
-      //   await supabase.storage.from("avatar_images").list();
-
-      // if (allAvatarsError || !allAvatarsData) {
-      //   console.error("There was an error getting all the avatars");
-      //   return;
-      // }
-
-      // const { data: userAvatarsData, error: userAvatarsError } = await supabase
-      //   .from("user_avatars")
-      //   .select("avatar_path");
-
-      // if (userAvatarsError || !userAvatarsData) {
-      //   console.error("There was an error getting the user avatars");
-      //   return;
-      // }
-
-      // const allAvatarsPaths = allAvatarsData.map(
-      //   (avatarData) => avatarData.name,
-      // );
-
-      // const remainingAvatarsPaths = allAvatarsPaths.filter((avatarPath) => {
-      //   if (avatarPath === ".emptyFolderPlaceholder") {
-      //     return false;
-      //   } else if (
-      //     userAvatarsData.find(
-      //       (userAvatarData) => userAvatarData.avatar_path === avatarPath,
-      //     )
-      //   ) {
-      //     return false;
-      //   } else {
-      //     return true;
-      //   }
-      // });
 
       while (remainingAvatarsPaths.length < 106) {
         remainingAvatarsPaths.push(...remainingAvatarsPaths);
@@ -183,7 +149,7 @@ function AvatarStoreRoulette() {
         ¡Gira la ruleta!
       </h1>
       <div className="relative">
-        <div className="relative h-64 max-w-7xl overflow-hidden rounded-lg">
+        <div className="relative h-64 w-[80rem] overflow-hidden rounded-lg">
           <div
             style={
               isAnimationPlaying
@@ -193,9 +159,9 @@ function AvatarStoreRoulette() {
                 : {}
             }
             className={twMerge(
-              "flex flex-shrink-0 flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg border-teal-50 bg-teal-50",
+              "flex flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg divide-teal-50",
               isAnimationPlaying &&
-                `transition duration-[10s] ease-[cubic-bezier(0.25,1,0.25,1)]`,
+                "transition duration-[10s] ease-[cubic-bezier(0.25,1,0.25,1)]",
             )}
           >
             {avatarsUrls.map((item, index) => (

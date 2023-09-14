@@ -39,6 +39,14 @@ Check if fetching coins and diamonds is cached
 
 -------- IMPROVEMENTS --------
 
+Add titles to suspense
+
+Style ranking again
+
+Fix avatar border on loading suspense
+
+Think store / roulette into server component
+
 Do something while inserting in play
 
 Static image to <Image />

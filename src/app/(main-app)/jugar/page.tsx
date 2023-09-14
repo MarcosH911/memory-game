@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayGame from "./(components)/PlayGame";
+import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -66,14 +67,15 @@ async function Page() {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-start">
-      <PlayLevelTitle level={level} />
-      <PlayGame
-        generatedSequence={generatedSequence}
-        numTargets={numTargets}
-        level={level}
-      />
-    </div>
+    <Loading />
+    // <div className="flex h-full flex-col items-center justify-start">
+    //   <PlayLevelTitle level={level} />
+    //   <PlayGame
+    //     generatedSequence={generatedSequence}
+    //     numTargets={numTargets}
+    //     level={level}
+    //   />
+    // </div>
   );
 }
 

@@ -5,6 +5,7 @@ import RankingFilters from "./(components)/RankingFilters";
 import RankingTable from "./(components)/RankingTable";
 import RankingFiltersLoading from "./(components)/RankingFiltersLoading";
 import RankingTableLoading from "./(components)/RankingTableLoading";
+import Loading from "./loading";
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };

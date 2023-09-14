@@ -5,10 +5,15 @@ import AvatarStoreItem from "./AvatarStoreItem";
 
 export const dynamic = "force-dynamic";
 
-async function AvatarsStore() {
+async function AvatarStore() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const { data, error } = await supabase.storage.from("avatar_images").list("");
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
 
   const { data: userAvatarsData } = await supabase
     .from("user_avatars")
@@ -21,7 +26,7 @@ async function AvatarsStore() {
       <h1 className="mb-6 block text-center text-7xl font-semibold text-emerald-950">
         O compra tu favorito
       </h1>
-      <div className="mx-auto grid max-w-7xl grid-cols-6 gap-8">
+      <div className="mx-auto grid w-[80rem] grid-cols-6 gap-8">
         {data?.map((item, index) => {
           if (
             item.name === ".emptyFolderPlaceholder" ||
@@ -46,4 +51,4 @@ async function AvatarsStore() {
   );
 }
 
-export default AvatarsStore;
+export default AvatarStore;
