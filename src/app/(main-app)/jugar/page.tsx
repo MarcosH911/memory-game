@@ -40,7 +40,7 @@ async function Page() {
   let targetsCount = getTargetsCount();
   while (targetsCount != numTargets) {
     const randomIndex = Math.trunc(
-      Math.random() * (generatedSequence.length - level) + level
+      Math.random() * (generatedSequence.length - level) + level,
     );
     const changeFirst = !Math.trunc(Math.random() * 2);
     if (

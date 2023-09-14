@@ -85,7 +85,7 @@ function AuthInputField({
             disabled={disabled}
             placeholder={placeholder}
             className={twMerge(
-              "w-64 bg-transparent px-2 py-1 text-base transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0 text-teal-950",
+              "w-64 bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0",
               disabled && "hover:cursor-not-allowed",
             )}
           />

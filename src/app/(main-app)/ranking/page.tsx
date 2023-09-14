@@ -1,6 +1,10 @@
+import { Suspense } from "react";
+
+import supabaseClient from "@/utils/supabaseClient";
 import RankingFilters from "./(components)/RankingFilters";
 import RankingTable from "./(components)/RankingTable";
-import supabaseClient from "@/utils/supabaseClient";
+import RankingFiltersLoading from "./(components)/RankingFiltersLoading";
+import RankingTableLoading from "./(components)/RankingTableLoading";
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -26,11 +30,16 @@ async function Page({ searchParams }: Props) {
   return (
     <div className="flex h-full justify-center">
       <div className="w-[80rem]">
-        <h1 className="mt-8 text-center text-7xl font-semibold text-teal-800">
+        <h1 className="-mb-6 mt-8 text-center text-7xl font-semibold text-teal-800">
           Ranking
         </h1>
-        <RankingFilters />
-        <RankingTable data={data} pointsFilter={pointsFilter} />
+
+        <Suspense fallback={<RankingFiltersLoading />}>
+          <RankingFilters />
+        </Suspense>
+        <Suspense fallback={<RankingTableLoading />}>
+          <RankingTable data={data} pointsFilter={pointsFilter} />
+        </Suspense>
       </div>
     </div>
   );

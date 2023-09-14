@@ -13,7 +13,7 @@ interface Props {
 function RankingTable({ data, pointsFilter }: Props) {
   return (
     <div className="relative rounded-lg shadow-xl">
-      <RakingTableReloadButton />
+      <RakingTableReloadButton finishedReloading={true} />
       <table className="w-full">
         <thead>
           <tr className="flex h-16 items-center justify-around rounded-t-lg bg-teal-700 px-24 text-teal-50 shadow-xl">
@@ -35,9 +35,9 @@ function RankingTable({ data, pointsFilter }: Props) {
         </thead>
       </table>
 
-      <div className="h-[60vh] overflow-y-auto rounded-b-lg scrollbar-ranking">
+      <div className="scrollbar-ranking h-[60vh] overflow-y-auto rounded-b-lg">
         <table className="w-full rounded-lg">
-          <tbody className="rounded-lg h-full">
+          <tbody className="h-full rounded-lg">
             {data?.map((item, index) => (
               <RankingRow
                 key={index}
