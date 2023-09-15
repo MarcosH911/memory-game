@@ -1,18 +1,32 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { HiMiniXMark } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
 
 interface Props {
   showAvatarModal: boolean;
-  handleModalChange: () => void;
   selectedAvatarUrl: string;
+  setShowAvatarModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAnimationPlaying: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function AvatarStoreRouletteModal({
   showAvatarModal,
-  handleModalChange,
   selectedAvatarUrl,
+  setShowAvatarModal,
+  setIsAnimationPlaying,
 }: Props) {
+  const router = useRouter();
+
+  const handleModalChange = () => {
+    setShowAvatarModal((show) => {
+      if (show) {
+        router.refresh();
+        setIsAnimationPlaying(false);
+      }
+      return !show;
+    });
+  };
+
   return (
     <Dialog.Root open={showAvatarModal} onOpenChange={handleModalChange}>
       <Dialog.Overlay className="fixed inset-0 z-50 animate-show-modal-overlay bg-black/10" />

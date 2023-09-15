@@ -1,27 +1,15 @@
-import {
-  createClientComponentClient,
-  createServerComponentClient,
-} from "@supabase/auth-helpers-nextjs";
-import { useEffect, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { useRouter } from "next/navigation";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 import shuffleArray from "@/helpers/shuffleArray";
 import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
-import AvatarStoreRouletteModal from "./AvatarStoreRouletteModal";
-import AvatarStoreRouletteBuyButtons from "./AvatarStoreRouletteBuyButtons";
 import AvatarStoreRouletteBox from "./AvatarStoreRouletteBox";
-import { cookies } from "next/headers";
 
 const defaultAnimationTranslation = 1600;
 
 async function AvatarStoreRoulette() {
-  const [isGettingAvatars, setIsGettingAvatars] = useState(true);
-
   const supabase = createServerComponentClient({ cookies });
-
-  if (!isGettingAvatars) return;
 
   const getUserAvatars = async () => {
     const { data: allAvatarsData, error: allAvatarsError } =
@@ -43,12 +31,12 @@ async function AvatarStoreRoulette() {
 
     const allAvatarsPaths = allAvatarsData.map((avatarData) => avatarData.name);
 
-    const remainingAvatarsPaths = allAvatarsPaths.filter((avatarPath) => {
+    const avatarsPaths = allAvatarsPaths.filter((avatarPath) => {
       if (avatarPath === ".emptyFolderPlaceholder") {
         return false;
       } else if (
         userAvatarsData.find(
-          (userAvatarData) => userAvatarData.avatar_path === avatarPath
+          (userAvatarData) => userAvatarData.avatar_path === avatarPath,
         )
       ) {
         return false;
@@ -57,115 +45,38 @@ async function AvatarStoreRoulette() {
       }
     });
 
-    return remainingAvatarsPaths;
+    return avatarsPaths;
   };
 
-  const remainingAvatarsPaths = await getUserAvatars();
+  const avatarsPaths = await getUserAvatars();
 
-  while (remainingAvatarsPaths.length < 106) {
-    remainingAvatarsPaths.push(...remainingAvatarsPaths);
+  while (avatarsPaths.length < 106) {
+    avatarsPaths.push(...avatarsPaths);
   }
-  shuffleArray(remainingAvatarsPaths);
-  remainingAvatarsPaths.length = 106;
+  shuffleArray(avatarsPaths);
+  avatarsPaths.length = 106;
 
-  const remainingAvatarsUrls = remainingAvatarsPaths.map((avatarPath: string) =>
-    getAvatarImage(avatarPath)
+  const avatarsUrls = avatarsPaths.map((avatarPath: string) =>
+    getAvatarImage(avatarPath),
   );
-
-  setIsAnimationPlaying(false);
-  setIsGettingAvatars(false);
 
   const randomTranslation = Math.random() * 16 - 8;
 
   const animationTranslation = defaultAnimationTranslation + randomTranslation;
 
-  const selectedAvatarUrl = remainingAvatarsUrls[102];
-  const selectedAvatarPath = remainingAvatarsPaths[102];
-
-  const handleSpinRoulette = async (type: "coins" | "diamonds") => {
-    if (isSpinningRoulette) return;
-    setIsSpinningRoulette(true);
-
-    const userId = (await supabase.auth.getSession()).data.session?.user.id;
-
-    if (!userId) {
-      console.error("There was an error getting the user");
-      return;
-    }
-
-    const { data: userPointsData, error: userPointsError } = await supabase
-      .from("user_points")
-      .select("*")
-      .single();
-
-    if (
-      userPointsError ||
-      !userPointsData.total_coins ||
-      !userPointsData.total_diamonds
-    ) {
-      console.error("There was an error selecting the user points");
-      return;
-    }
-
-    if (type === "coins" && userPointsData.total_coins < 60) {
-      console.error("You don't have enough coins to buy this");
-      return;
-    } else if (type === "diamonds" && userPointsData.total_diamonds < 15) {
-      console.error("You don't have enough diamonds to buy this");
-      return;
-    }
-
-    const { error: insertAvatarError } = await supabase
-      .from("avatars_transactions")
-      .insert({ user_id: userId, avatar_path: selectedAvatarPath.current });
-
-    if (insertAvatarError) {
-      console.error("There was an error inserting the avatar");
-      return;
-    }
-
-    if (type === "coins") {
-      const { error: insertCoinsError } = await supabase
-        .from("points_transactions")
-        .insert({ user_id: userId, coins: -60 });
-
-      if (insertCoinsError) {
-        console.error("There was an error inserting the coins");
-      }
-    } else if (type === "diamonds") {
-      const { error: insertDiamondsError } = await supabase
-        .from("points_transactions")
-        .insert({ user_id: userId, diamonds: -15 });
-
-      if (insertDiamondsError) {
-        console.error("There was an error inserting the diamonds");
-      }
-    }
-    router.refresh();
-
-    setIsAnimationPlaying(true);
-
-    setTimeout(() => {
-      setShowAvatarModal(true);
-      setIsSpinningRoulette(false);
-    }, 10000);
-  };
-
-  const handleModalChange = () => {
-    setShowAvatarModal((show) => {
-      if (show) {
-        setIsGettingAvatars(true);
-      }
-      return !show;
-    });
-  };
+  const selectedAvatarUrl = avatarsUrls[102];
+  const selectedAvatarPath = avatarsPaths[102];
 
   return (
     <div className="mb-24 flex flex-col items-center justify-center">
       <h1 className="mb-6 text-7xl font-semibold tracking-tight text-emerald-950">
         ¡Gira la ruleta!
       </h1>
-      <AvatarStoreRouletteBox>
+      <AvatarStoreRouletteBox
+        animationTranslation={animationTranslation}
+        selectedAvatarUrl={selectedAvatarUrl}
+        selectedAvatarPath={selectedAvatarPath}
+      >
         {avatarsUrls.map((item, index) => (
           <AvatarStoreRouletteItem key={index} index={index} data={item} />
         ))}

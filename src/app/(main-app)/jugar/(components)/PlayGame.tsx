@@ -67,7 +67,7 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
   };
 
   const insertData = async () => {
-    const insertPointsPromise = fetch("/api/play/insert-points", {
+    const insertPointsPromise = fetch("/api/points/insert-points", {
       method: "post",
       body: JSON.stringify({ coins: level, diamonds: 1 }),
     });

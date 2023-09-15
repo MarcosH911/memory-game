@@ -1,5 +1,9 @@
 ------------ BUGS ------------
 
+No redirect to /play in login route handler
+
+No loading state from / to /play when hitting the button
+
 Add security to admin users creating other users
 
 Safari bug
@@ -40,6 +44,10 @@ Check if fetching coins and diamonds is cached
 
 
 -------- IMPROVEMENTS --------
+
+Suspense in roulette items
+
+Suspense in roulette items when spinning animation finishes
 
 Add titles to suspense
 
