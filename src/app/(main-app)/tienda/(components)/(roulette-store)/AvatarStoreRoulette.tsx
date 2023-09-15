@@ -1,6 +1,7 @@
-"use client";
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createClientComponentClient,
+  createServerComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
@@ -10,60 +11,76 @@ import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
 import AvatarStoreRouletteModal from "./AvatarStoreRouletteModal";
 import AvatarStoreRouletteBuyButtons from "./AvatarStoreRouletteBuyButtons";
+import AvatarStoreRouletteBox from "./AvatarStoreRouletteBox";
+import { cookies } from "next/headers";
 
 const defaultAnimationTranslation = 1600;
 
-function AvatarStoreRoulette() {
-  const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
-  const [avatarsUrls, setAvatarsUrls] = useState([""]);
-  const [showAvatarModal, setShowAvatarModal] = useState(false);
+async function AvatarStoreRoulette() {
   const [isGettingAvatars, setIsGettingAvatars] = useState(true);
-  const [isSpinningRoulette, setIsSpinningRoulette] = useState(false);
 
-  const animationTranslation = useRef(0);
+  const supabase = createServerComponentClient({ cookies });
 
-  const supabase = createClientComponentClient<Database>();
-  const router = useRouter();
+  if (!isGettingAvatars) return;
 
-  const selectedAvatarUrl = useRef("");
-  const selectedAvatarPath = useRef("");
+  const getUserAvatars = async () => {
+    const { data: allAvatarsData, error: allAvatarsError } =
+      await supabase.storage.from("avatar_images").list();
 
-  useEffect(() => {
-    if (!isGettingAvatars) return;
+    if (allAvatarsError || !allAvatarsData) {
+      console.error("There was an error getting all the avatars");
+      return [];
+    }
 
-    const getRemainingAvatars = async () => {
-      const userAvatarsResponse = await fetch("/api/avatars/user-avatars", {
-        method: "get",
-      });
+    const { data: userAvatarsData, error: userAvatarsError } = await supabase
+      .from("user_avatars")
+      .select("avatar_path");
 
-      const { remainingAvatarsPaths } = await userAvatarsResponse.json();
+    if (userAvatarsError || !userAvatarsData) {
+      console.error("There was an error getting the user avatars");
+      return [];
+    }
 
-      while (remainingAvatarsPaths.length < 106) {
-        remainingAvatarsPaths.push(...remainingAvatarsPaths);
+    const allAvatarsPaths = allAvatarsData.map((avatarData) => avatarData.name);
+
+    const remainingAvatarsPaths = allAvatarsPaths.filter((avatarPath) => {
+      if (avatarPath === ".emptyFolderPlaceholder") {
+        return false;
+      } else if (
+        userAvatarsData.find(
+          (userAvatarData) => userAvatarData.avatar_path === avatarPath
+        )
+      ) {
+        return false;
+      } else {
+        return true;
       }
-      shuffleArray(remainingAvatarsPaths);
-      remainingAvatarsPaths.length = 106;
+    });
 
-      const remainingAvatarsUrls = remainingAvatarsPaths.map(
-        (avatarPath: string) => getAvatarImage(avatarPath),
-      );
+    return remainingAvatarsPaths;
+  };
 
-      setAvatarsUrls(remainingAvatarsUrls);
+  const remainingAvatarsPaths = await getUserAvatars();
 
-      setIsAnimationPlaying(false);
-      setIsGettingAvatars(false);
+  while (remainingAvatarsPaths.length < 106) {
+    remainingAvatarsPaths.push(...remainingAvatarsPaths);
+  }
+  shuffleArray(remainingAvatarsPaths);
+  remainingAvatarsPaths.length = 106;
 
-      const randomTranslation = Math.random() * 16 - 8;
+  const remainingAvatarsUrls = remainingAvatarsPaths.map((avatarPath: string) =>
+    getAvatarImage(avatarPath)
+  );
 
-      animationTranslation.current =
-        defaultAnimationTranslation + randomTranslation;
+  setIsAnimationPlaying(false);
+  setIsGettingAvatars(false);
 
-      selectedAvatarUrl.current = remainingAvatarsUrls[102];
-      selectedAvatarPath.current = remainingAvatarsPaths[102];
-    };
+  const randomTranslation = Math.random() * 16 - 8;
 
-    getRemainingAvatars();
-  }, [isGettingAvatars, supabase]);
+  const animationTranslation = defaultAnimationTranslation + randomTranslation;
+
+  const selectedAvatarUrl = remainingAvatarsUrls[102];
+  const selectedAvatarPath = remainingAvatarsPaths[102];
 
   const handleSpinRoulette = async (type: "coins" | "diamonds") => {
     if (isSpinningRoulette) return;
@@ -148,41 +165,11 @@ function AvatarStoreRoulette() {
       <h1 className="mb-6 text-7xl font-semibold tracking-tight text-emerald-950">
         ¡Gira la ruleta!
       </h1>
-      <div className="relative">
-        <div className="relative h-64 w-[80rem] overflow-hidden rounded-lg">
-          <div
-            style={
-              isAnimationPlaying
-                ? {
-                    transform: `translateX(-${animationTranslation.current}rem)`,
-                  }
-                : {}
-            }
-            className={twMerge(
-              "flex flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg divide-teal-50",
-              isAnimationPlaying &&
-                "transition duration-[10s] ease-[cubic-bezier(0.25,1,0.25,1)]",
-            )}
-          >
-            {avatarsUrls.map((item, index) => (
-              <AvatarStoreRouletteItem key={index} index={index} data={item} />
-            ))}
-          </div>
-          <div>
-            <div className="absolute left-1/2 top-0 z-20 h-full w-0.5 -translate-x-1/2 border-none bg-red-600 drop-shadow-[0_0_3px_rgba(255,0,0,1)]"></div>
-            <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
-            <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
-          </div>
-        </div>
-        <AvatarStoreRouletteBuyButtons
-          handleSpinRoulette={handleSpinRoulette}
-        />
-        <AvatarStoreRouletteModal
-          handleModalChange={handleModalChange}
-          selectedAvatarUrl={selectedAvatarUrl.current}
-          showAvatarModal={showAvatarModal}
-        />
-      </div>
+      <AvatarStoreRouletteBox>
+        {avatarsUrls.map((item, index) => (
+          <AvatarStoreRouletteItem key={index} index={index} data={item} />
+        ))}
+      </AvatarStoreRouletteBox>
     </div>
   );
 }

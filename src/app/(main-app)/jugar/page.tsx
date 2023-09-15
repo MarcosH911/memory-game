@@ -6,7 +6,7 @@ import PlayGame from "./(components)/PlayGame";
 
 export const dynamic = "force-dynamic";
 
-const baseSequenceLength = 6;
+const baseSequenceLength = 20;
 const numTargets = 6;
 
 async function Page() {

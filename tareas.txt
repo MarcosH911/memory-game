@@ -6,6 +6,8 @@ Safari bug
 
 Redirect without router.refresh()
 
+Level doesn't update
+
 
 -------- ORGANIZATION --------
 
