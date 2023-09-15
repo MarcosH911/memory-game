@@ -1,12 +1,13 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 interface Props {
   showAvatarModal: boolean;
   selectedAvatarUrl: string;
   setShowAvatarModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAnimationPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  updateAvatarsUrls: () => void;
+  handleAnimateRoulette: (type: "start" | "finish") => void;
 }
 
 function AvatarStoreRouletteModal({
@@ -14,14 +15,15 @@ function AvatarStoreRouletteModal({
   selectedAvatarUrl,
   setShowAvatarModal,
   setIsAnimationPlaying,
+  updateAvatarsUrls,
+  handleAnimateRoulette,
 }: Props) {
-  const router = useRouter();
-
   const handleModalChange = () => {
     setShowAvatarModal((show) => {
       if (show) {
-        router.refresh();
         setIsAnimationPlaying(false);
+        handleAnimateRoulette("finish");
+        updateAvatarsUrls();
       }
       return !show;
     });

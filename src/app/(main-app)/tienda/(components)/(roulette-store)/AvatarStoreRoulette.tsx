@@ -73,14 +73,11 @@ async function AvatarStoreRoulette() {
         ¡Gira la ruleta!
       </h1>
       <AvatarStoreRouletteBox
+        avatarsUrls={avatarsUrls}
         animationTranslation={animationTranslation}
         selectedAvatarUrl={selectedAvatarUrl}
         selectedAvatarPath={selectedAvatarPath}
-      >
-        {avatarsUrls.map((item, index) => (
-          <AvatarStoreRouletteItem key={index} index={index} data={item} />
-        ))}
-      </AvatarStoreRouletteBox>
+      />
     </div>
   );
 }
