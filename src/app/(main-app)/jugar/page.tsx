@@ -3,11 +3,10 @@ import { cookies } from "next/headers";
 
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayGame from "./(components)/PlayGame";
-import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
-const baseSequenceLength = 20;
+const baseSequenceLength = 6;
 const numTargets = 6;
 
 async function Page() {
@@ -41,7 +40,7 @@ async function Page() {
   let targetsCount = getTargetsCount();
   while (targetsCount != numTargets) {
     const randomIndex = Math.trunc(
-      Math.random() * (generatedSequence.length - level) + level,
+      Math.random() * (generatedSequence.length - level) + level
     );
     const changeFirst = !Math.trunc(Math.random() * 2);
     if (
