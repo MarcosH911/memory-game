@@ -5,42 +5,32 @@ import { IoDiamond } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRef } from "react";
 
 interface Props {
   avatarPath: string;
+  userPoints: { coins: number; diamonds: number };
 }
 
-function AvatarStoreBuyButtons({ avatarPath }: Props) {
+function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
+  const hasEnoughCoins = useRef(userPoints.coins >= 100);
+  const hasEnoughDiamonds = useRef(userPoints.coins >= 25);
+
   const handleBuy = async (type: "coins" | "diamonds") => {
+    if (
+      (!hasEnoughCoins.current && type == "coins") ||
+      (!hasEnoughDiamonds.current && type == "diamonds")
+    ) {
+      return;
+    }
+
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
     if (!userId) {
       console.error("There was an error getting the user");
-      return;
-    }
-
-    const { data: userPointsData, error: userPointsError } = await supabase
-      .from("user_points")
-      .select("*")
-      .single();
-
-    if (
-      userPointsError ||
-      !userPointsData.total_coins ||
-      !userPointsData.total_diamonds
-    ) {
-      console.error("There was an error selecting the user points");
-      return;
-    }
-
-    if (type === "coins" && userPointsData.total_coins < 100) {
-      console.error("You don't have enough coins to buy this");
-      return;
-    } else if (type === "diamonds" && userPointsData.total_diamonds < 25) {
-      console.error("You don't have enough diamonds to buy this");
       return;
     }
 
@@ -78,14 +68,16 @@ function AvatarStoreBuyButtons({ avatarPath }: Props) {
     <>
       <button
         onClick={() => handleBuy("coins")}
-        className="mb-2 flex w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40"
+        disabled={!hasEnoughCoins.current}
+        className="mb-2 flex w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:border-slate-600 disabled:text-slate-600 disabled:shadow-none"
       >
         <span className="text-lg font-bold">100</span>
         <BiSolidCoinStack className="text-xl" />
       </button>
       <button
+        disabled={!hasEnoughDiamonds.current}
         onClick={() => handleBuy("diamonds")}
-        className="flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60"
+        className="flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60 disabled:cursor-not-allowed disabled:bg-slate-500 disabled:border-slate-500 disabled:text-slate-50 disabled:shadow-none"
       >
         <span className="text-lg font-bold">25</span>
         <IoDiamond className="text-xl" />

@@ -12,6 +12,8 @@ interface Props {
   animationTranslation: number;
   selectedAvatarUrl: string;
   selectedAvatarPath: string;
+  hasEnoughCoins: boolean;
+  hasEnoughDiamonds: boolean;
 }
 
 function AvatarStoreRouletteBox({
@@ -19,9 +21,12 @@ function AvatarStoreRouletteBox({
   animationTranslation,
   selectedAvatarUrl,
   selectedAvatarPath,
+  hasEnoughCoins,
+  hasEnoughDiamonds,
 }: Props) {
-  const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+  // TODO: router.refresh() reload avatar images
 
   const rouletteItemsRef = useRef<HTMLDivElement | null>(null);
   const isSpinningRoulette = useRef(false);
@@ -55,15 +60,10 @@ function AvatarStoreRouletteBox({
 
     updateSelectedAvatarUrl();
 
-    const pointsDataResponse = await fetch("/api/points/user-points", {
-      method: "get",
-    });
-    const pointsData = await pointsDataResponse.json();
-
-    if (type === "coins" && pointsData.total_coins < 60) {
+    if (type === "coins" && !hasEnoughCoins) {
       console.error("You don't have enough coins to buy this");
       return;
-    } else if (type === "diamonds" && pointsData.total_diamonds < 15) {
+    } else if (type === "diamonds" && !hasEnoughDiamonds) {
       console.error("You don't have enough diamonds to buy this");
       return;
     }
@@ -81,16 +81,12 @@ function AvatarStoreRouletteBox({
       }),
     });
 
-    setIsAnimationPlaying(true);
     handleAnimateRoulette("start");
 
     router.refresh();
-
-    // setTimeout(() => {
-    //   setShowAvatarModal(true);
-    //   isSpinningRoulette.current = false;
-    // }, 10000);
   };
+
+  console.log(currentAvatarsUrls.current);
 
   return (
     <div className="relative">
@@ -113,12 +109,15 @@ function AvatarStoreRouletteBox({
           <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
         </div>
       </div>
-      <AvatarStoreRouletteBuyButtons handleSpinRoulette={handleSpinRoulette} />
+      <AvatarStoreRouletteBuyButtons
+        handleSpinRoulette={handleSpinRoulette}
+        hasEnoughCoins={hasEnoughCoins}
+        hasEnoughDiamonds={hasEnoughDiamonds}
+      />
       <AvatarStoreRouletteModal
         selectedAvatarUrl={currentSelectedAvatarUrl.current}
         showAvatarModal={showAvatarModal}
         setShowAvatarModal={setShowAvatarModal}
-        setIsAnimationPlaying={setIsAnimationPlaying}
         updateAvatarsUrls={updateAvatarsUrls}
         handleAnimateRoulette={handleAnimateRoulette}
       />

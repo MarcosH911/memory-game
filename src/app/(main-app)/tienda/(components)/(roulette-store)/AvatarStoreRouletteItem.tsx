@@ -8,6 +8,8 @@ interface Props {
 function AvatarStoreRouletteItem({ data, index }: Props) {
   if (!data) return null;
 
+  console.log(data);
+
   return (
     <div className="flex h-64 w-64 flex-shrink-0 items-center justify-center bg-gradient-to-b from-pink-500 via-red-500 to-yellow-400">
       <Image

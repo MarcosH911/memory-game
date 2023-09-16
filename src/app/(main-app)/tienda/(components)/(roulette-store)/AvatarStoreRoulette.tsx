@@ -3,60 +3,32 @@ import { cookies } from "next/headers";
 
 import shuffleArray from "@/helpers/shuffleArray";
 import getAvatarImage from "@/utils/getAvatarImage";
-import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
 import AvatarStoreRouletteBox from "./AvatarStoreRouletteBox";
 
 const defaultAnimationTranslation = 1600;
 
-async function AvatarStoreRoulette() {
-  const supabase = createServerComponentClient({ cookies });
+interface Props {
+  userAvatars: (string | null)[];
+  userPoints: { coins: number; diamonds: number };
+  allAvatars: string[];
+}
 
-  const getUserAvatars = async () => {
-    const { data: allAvatarsData, error: allAvatarsError } =
-      await supabase.storage.from("avatar_images").list();
+async function AvatarStoreRoulette({
+  userAvatars,
+  userPoints,
+  allAvatars,
+}: Props) {
+  const avatarPaths = allAvatars.filter(
+    (avatarPath) => !userAvatars.includes(avatarPath),
+  );
 
-    if (allAvatarsError || !allAvatarsData) {
-      console.error("There was an error getting all the avatars");
-      return [];
-    }
-
-    const { data: userAvatarsData, error: userAvatarsError } = await supabase
-      .from("user_avatars")
-      .select("avatar_path");
-
-    if (userAvatarsError || !userAvatarsData) {
-      console.error("There was an error getting the user avatars");
-      return [];
-    }
-
-    const allAvatarsPaths = allAvatarsData.map((avatarData) => avatarData.name);
-
-    const avatarsPaths = allAvatarsPaths.filter((avatarPath) => {
-      if (avatarPath === ".emptyFolderPlaceholder") {
-        return false;
-      } else if (
-        userAvatarsData.find(
-          (userAvatarData) => userAvatarData.avatar_path === avatarPath,
-        )
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    });
-
-    return avatarsPaths;
-  };
-
-  const avatarsPaths = await getUserAvatars();
-
-  while (avatarsPaths.length < 106) {
-    avatarsPaths.push(...avatarsPaths);
+  while (avatarPaths.length < 106) {
+    avatarPaths.push(...avatarPaths);
   }
-  shuffleArray(avatarsPaths);
-  avatarsPaths.length = 106;
+  shuffleArray(avatarPaths);
+  avatarPaths.length = 106;
 
-  const avatarsUrls = avatarsPaths.map((avatarPath: string) =>
+  const avatarsUrls = avatarPaths.map((avatarPath: string) =>
     getAvatarImage(avatarPath),
   );
 
@@ -65,7 +37,10 @@ async function AvatarStoreRoulette() {
   const animationTranslation = defaultAnimationTranslation + randomTranslation;
 
   const selectedAvatarUrl = avatarsUrls[102];
-  const selectedAvatarPath = avatarsPaths[102];
+  const selectedAvatarPath = avatarPaths[102];
+
+  const hasEnoughCoins = userPoints.coins >= 60;
+  const hasEnoughDiamonds = userPoints.coins >= 15;
 
   return (
     <div className="mb-24 flex flex-col items-center justify-center">
@@ -77,6 +52,8 @@ async function AvatarStoreRoulette() {
         animationTranslation={animationTranslation}
         selectedAvatarUrl={selectedAvatarUrl}
         selectedAvatarPath={selectedAvatarPath}
+        hasEnoughCoins={hasEnoughCoins}
+        hasEnoughDiamonds={hasEnoughDiamonds}
       />
     </div>
   );

@@ -16,17 +16,17 @@ export async function GET() {
 
   const { data: userPointsData, error: userPointsError } = await supabase
     .from("user_points")
-    .select("*")
-    .single();
+    .select("*");
 
-  if (
-    userPointsError ||
-    !userPointsData.total_coins ||
-    !userPointsData.total_diamonds
-  ) {
+  if (userPointsError) {
     console.error("There was an error selecting the user points");
     return NextResponse.error();
   }
 
-  return NextResponse.json({ data: userPointsData }, { status: 200 });
+  let points = {
+    coins: userPointsData?.[0].total_coins || 0,
+    diamonds: userPointsData?.[0].total_diamonds || 0,
+  };
+
+  return NextResponse.json({ data: points }, { status: 200 });
 }

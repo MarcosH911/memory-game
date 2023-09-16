@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+You can get in the roulette and avatar you just bought in the normal store
+
 Don't let buy when not enough money
 
 No redirect to /play in login route handler
@@ -27,6 +29,8 @@ Change update POST request to PUT (or something)
 
 
 --------- OPTIMIZING ---------
+
+Move fetching from roulette store to global store
 
 - Route handlers for selecting data and revalidateTag
 
@@ -109,6 +113,8 @@ Spinner on ranking refresh
 Change ranking refresh to spinner
 
 Buy color packs
+
+Ranking with number of avatars
 
 Display when the avatar was bought in collection
 

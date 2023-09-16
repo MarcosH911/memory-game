@@ -5,7 +5,6 @@ interface Props {
   showAvatarModal: boolean;
   selectedAvatarUrl: string;
   setShowAvatarModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsAnimationPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   updateAvatarsUrls: () => void;
   handleAnimateRoulette: (type: "start" | "finish") => void;
 }
@@ -14,14 +13,12 @@ function AvatarStoreRouletteModal({
   showAvatarModal,
   selectedAvatarUrl,
   setShowAvatarModal,
-  setIsAnimationPlaying,
   updateAvatarsUrls,
   handleAnimateRoulette,
 }: Props) {
   const handleModalChange = () => {
     setShowAvatarModal((show) => {
       if (show) {
-        setIsAnimationPlaying(false);
         handleAnimateRoulette("finish");
         updateAvatarsUrls();
       }
