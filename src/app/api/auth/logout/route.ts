@@ -13,5 +13,5 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
-  return NextResponse.redirect(new URL("/iniciar-sesion", request.url));
+  return NextResponse.json({ status: 200 });
 }

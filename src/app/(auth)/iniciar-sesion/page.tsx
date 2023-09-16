@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { HiUser, HiLockClosed } from "react-icons/hi2";
 
 import AuthInputField from "../(components)/AuthInputField";
@@ -30,6 +30,8 @@ function Page() {
     if (loginDataResponse.status === 400) {
       const { message } = await loginDataResponse.json();
       setLoginError(message);
+    } else {
+      router.replace("/jugar");
     }
 
     setIsLoading(false);

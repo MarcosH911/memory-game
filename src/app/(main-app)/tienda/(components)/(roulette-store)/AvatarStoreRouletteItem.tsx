@@ -13,10 +13,12 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
       <Image
         priority
         src={data}
+        alt="Avatar image"
+        placeholder="blur"
+        blurDataURL="/Default-Avatar.png"
         height={200}
         width={200}
         quality={index > 5 && index < 90 ? 1 : 75}
-        alt="Avatar image"
         className="rounded-full border-4 border-teal-950 bg-teal-950"
       />
     </div>

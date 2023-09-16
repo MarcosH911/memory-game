@@ -38,6 +38,5 @@ export async function POST(request: Request) {
       },
     );
   }
-
-  return NextResponse.redirect(new URL("/jugar", request.url));
+  return NextResponse.json({ status: 200 });
 }

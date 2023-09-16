@@ -18,13 +18,12 @@ export const middleware = async (request: NextRequest) => {
   if (!session && request.nextUrl.pathname !== "/iniciar-sesion") {
     return NextResponse.redirect(new URL("/iniciar-sesion", request.url));
   } else if (session && request.nextUrl.pathname === "/iniciar-sesion") {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/jugar", request.url));
   } else if (
     session?.user.user_metadata.role !== "admin" &&
     request.nextUrl.pathname === "/registrar"
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/jugar", request.url));
   }
-
   return response;
 };

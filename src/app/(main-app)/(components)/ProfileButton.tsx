@@ -31,8 +31,10 @@ function ProfileButton() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "post" });
-    router.refresh();
+    const response = await fetch("/api/auth/logout", { method: "post" });
+    if (response.status === 200) {
+      router.push("/iniciar-sesion");
+    }
   };
 
   return (
@@ -45,7 +47,9 @@ function ProfileButton() {
           <button>
             <Image
               src={avatarUrl || "/Default-Avatar.png"}
-              alt="profile-avatar"
+              alt="Profile Avatar"
+              placeholder="blur"
+              blurDataURL="/Default-Avatar.png"
               width={40}
               height={40}
             />

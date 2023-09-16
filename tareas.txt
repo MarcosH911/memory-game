@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Don't let buy when not enough money
+
 No redirect to /play in login route handler
 
 No loading state from / to /play when hitting the button
@@ -27,6 +29,8 @@ Change update POST request to PUT (or something)
 --------- OPTIMIZING ---------
 
 - Route handlers for selecting data and revalidateTag
+
+Create a 10px image as placeholder
 
 Update database level only when session ends
 
