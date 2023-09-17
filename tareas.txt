@@ -20,6 +20,8 @@ Change update POST request to PUT (or something)
 
 --------- OPTIMIZING ---------
 
+Make mobile navbar server component
+
 Route handlers for selecting data and revalidateTag
 
 Update database level only when session ends

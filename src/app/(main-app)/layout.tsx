@@ -6,6 +6,7 @@ import DiamondsNavItem from "./(components)/DiamondsNavItem";
 import ProfileButton from "./(components)/ProfileButton";
 import MenuNavbar from "./(components)/MenuNavbar";
 import FeedbackButton from "../(components)/FeedbackButton";
+import MobileNavbar from "./(components)/MobileNavbar";
 
 export const dynamic = "force-dynamic";
 
@@ -23,9 +24,14 @@ async function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-full pt-20">
-      <nav className="fixed top-0 z-40 flex h-20 w-full items-center justify-between border-b-2 bg-teal-50/90 pl-14 pr-8 backdrop-blur-md">
-        <MenuNavbar />
-        <div className="flex items-center gap-8">
+      <nav className="fixed top-0 z-40 flex h-20 w-full items-center justify-between border-b-2 bg-teal-50/90 pl-14 pr-4 xs:pr-8 backdrop-blur-md">
+        <ul className="gap-6 flex-row items-start justify-center hidden lg:flex">
+          <MenuNavbar />
+        </ul>
+        <div className="lg:hidden">
+          <MobileNavbar />
+        </div>
+        <div className="flex items-center gap-2 xs:gap-8 z-20">
           <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>
           <CoinsNavItem>{data?.total_coins || 0}</CoinsNavItem>
           <ProfileButton />

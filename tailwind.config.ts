@@ -13,6 +13,9 @@ const config: Config = {
       transitionDuration: {
         "250": "250ms",
       },
+      screens: {
+        xs: "425px",
+      },
       keyframes: {
         "up-down": {
           "0%": { transform: "translateY(0.5rem)" },

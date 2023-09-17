@@ -38,7 +38,7 @@ function ProfileButton() {
   };
 
   return (
-    <div className="relative ml-2">
+    <div className="relative ml-2 hidden sm:block">
       <Popover.Root
         open={isModalOpen}
         onOpenChange={() => setIsModalOpen((open) => !open)}
