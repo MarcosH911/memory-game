@@ -78,8 +78,8 @@ function MobileNavbar() {
       <div
         onClick={() => setIsOpen(false)}
         className={twMerge(
-          "w-full h-screen bg-black/30 fixed right-0 top-0 z-30 opacity-0 transition duration-300",
-          isOpen && "opacity-100",
+          "w-full h-screen bg-black/30 fixed right-0 top-0 z-30 opacity-0 transition duration-300 animate-hide-mobile-navbar",
+          isOpen && "opacity-100 animate-show-mobile-navbar",
         )}
       ></div>
     </div>

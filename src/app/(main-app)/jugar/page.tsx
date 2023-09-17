@@ -66,7 +66,7 @@ async function Page() {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-start">
+    <div className="flex h-full flex-col items-center justify-center">
       <PlayLevelTitle level={level} />
       <PlayGame
         generatedSequence={generatedSequence}

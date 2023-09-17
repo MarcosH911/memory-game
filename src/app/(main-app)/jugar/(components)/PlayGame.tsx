@@ -127,7 +127,7 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
         correctHits={correctHits.current}
         mistakes={incorrectHits.current + (numTargets - correctHits.current)}
       />
-      <div className="relative mb-4 grid aspect-square h-2/3 grid-cols-3 grid-rows-3">
+      <div className="relative mb-16 sm:mb-4 grid aspect-square h-[min(66.7%,95vw)] grid-cols-3 grid-rows-3">
         {Array(8)
           .fill(true)
           .map((_, index) => (

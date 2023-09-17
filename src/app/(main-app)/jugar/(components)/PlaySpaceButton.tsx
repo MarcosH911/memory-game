@@ -32,12 +32,12 @@ function PlaySpaceButton({ isSpacePressed, setIsSpacePressed }: Props) {
       onClick={() => setIsSpacePressed(true)}
       ref={spaceButtonRef}
       className={twMerge(
-        "relative h-28 w-full max-w-3xl -translate-y-2 rounded-lg border-4 border-slate-600 bg-slate-100 shadow-xl shadow-black/60 transition duration-300 focus:outline-none",
+        "relative xl:h-24 xl:max-w-xl md:max-w-lg h-20 2xl:h-28 w-[min(24rem,95vw)] 2xl:max-w-3xl -translate-y-2 rounded-lg border-4 border-slate-600 bg-slate-100 shadow-xl shadow-black/60 transition duration-300 focus:outline-none my-2 sm:max-w-md",
         isSpacePressed &&
           "translate-y-0 bg-slate-200 shadow-sm shadow-black/30",
       )}
     >
-      <div className="absolute right-1/2 top-5 h-1.5 w-1/6 translate-x-1/2 rounded-full bg-slate-600"></div>
+      <div className="absolute right-1/2 top-[17.5%] h-1.5 w-1/6 translate-x-1/2 rounded-full bg-slate-600"></div>
     </button>
   );
 }

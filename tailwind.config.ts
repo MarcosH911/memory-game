@@ -30,11 +30,11 @@ const config: Config = {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
-        "hide-start-playing-screen": {
+        "hide-animation": {
           from: { display: "none" },
           to: { display: "none" },
         },
-        "show-start-playing-screen": {
+        "show-animation": {
           from: { display: "flex" },
           to: { display: "flex" },
         },
@@ -70,13 +70,15 @@ const config: Config = {
         "fade-in-start-playing-screen":
           "fade-in-start-playing-screen 300ms ease-out 1 forwards",
         "hide-start-playing-screen":
-          "hide-start-playing-screen 0s linear 300ms 1 forwards",
+          "hide-animation 0s linear 300ms 1 forwards",
         "show-start-playing-screen":
-          "show-start-playing-screen 0s linear 300ms 1 forwards",
+          "show-animation 0s linear 300ms 1 forwards",
         "win-game": "win-game 500ms ease-out 1 forwards",
         "loose-game": "loose-game 500ms ease-out 1 forwards",
         "show-modal": "show-modal 300ms ease-in-out forwards",
         "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
+        "hide-mobile-navbar": "hide-animation 0s linear 500ms 1 forwards",
+        "show-mobile-navbar": "show-animation 0s linear 300ms 1 forwards",
       },
     },
   },
