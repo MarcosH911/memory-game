@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { HiUser, HiLockClosed } from "react-icons/hi2";
 
 import AuthInputField from "../(components)/AuthInputField";
@@ -39,8 +39,8 @@ function Page() {
   };
 
   return (
-    <div className="flex h-full items-center justify-center">
-      <div className="w-full flex items-center justify-center h-full md:h-fit md:w-fit rounded-xl border bg-white p-8 shadow-xl align-middle">
+    <div className="flex min-h-full items-center justify-center bg-white md:bg-transparent">
+      <div className="w-full flex items-center justify-center h-full md:h-fit md:w-fit md:rounded-xl md:border bg-white p-8 md:shadow-xl">
         <form
           autoComplete="on"
           onSubmit={handleLogin}

@@ -10,7 +10,7 @@ import {
   HiBuildingOffice,
   HiAcademicCap,
 } from "react-icons/hi2";
-import getFakeEmail from "@/helpers/getFakeEmail";
+
 import AuthInputField from "../(components)/AuthInputField";
 import AuthMessageBox from "../(components)/AuthMessageBox";
 import AuthSubmitButton from "../(components)/AuthSubmitButton";
@@ -59,86 +59,88 @@ function Page() {
   };
 
   return (
-    <div className="flex h-full items-center justify-center">
-      <form
-        autoComplete="off"
-        onSubmit={handleRegister}
-        className="flex flex-col rounded-xl border bg-white p-8 shadow-xl"
-      >
-        <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
-          Registrar un usuario
-        </h1>
+    <div className="flex min-h-full items-center justify-center bg-white md:bg-transparent">
+      <div className="flex items-center justify-center h-full w-full md:h-fit md:w-fit md:rounded-xl md:border bg-white p-8 md:shadow-xl">
+        <form
+          autoComplete="off"
+          onSubmit={handleRegister}
+          className="flex flex-col max-w-sm w-full"
+        >
+          <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
+            Registrar un usuario
+          </h1>
 
-        <AuthInputField
-          label="Usuario"
-          name="username"
-          disabled={isLoading}
-          Icon={HiUser}
-          placeholder="Escriba el nombre de usuario"
-          type="text"
-          value={username}
-          setValue={setUsername}
-        />
+          <AuthInputField
+            label="Usuario"
+            name="username"
+            disabled={isLoading}
+            Icon={HiUser}
+            placeholder="Escriba el nombre de usuario"
+            type="text"
+            value={username}
+            setValue={setUsername}
+          />
 
-        <AuthInputField
-          label="Nombre"
-          name="fullName"
-          disabled={isLoading}
-          Icon={HiUsers}
-          placeholder="Escriba el nombre y apellido"
-          type="text"
-          value={fullName}
-          setValue={setFullName}
-        />
+          <AuthInputField
+            label="Nombre"
+            name="fullName"
+            disabled={isLoading}
+            Icon={HiUsers}
+            placeholder="Escriba el nombre y apellido"
+            type="text"
+            value={fullName}
+            setValue={setFullName}
+          />
 
-        <AuthInputField
-          Icon={HiBuildingOffice}
-          disabled={isLoading}
-          label="Rol"
-          name="role"
-          type="select"
-          placeholder="Seleccione un rol"
-          setValue={setRole}
-          value={role}
-          options={[
-            { value: "", text: "Seleccione un rol" },
-            { value: "student", text: "Estudiante" },
-            { value: "teacher", text: "Profesor" },
-            { value: "admin", text: "Admin" },
-          ]}
-        />
+          <AuthInputField
+            Icon={HiBuildingOffice}
+            disabled={isLoading}
+            label="Rol"
+            name="role"
+            type="select"
+            placeholder="Seleccione un rol"
+            setValue={setRole}
+            value={role}
+            options={[
+              { value: "", text: "Seleccione un rol" },
+              { value: "student", text: "Estudiante" },
+              { value: "teacher", text: "Profesor" },
+              { value: "admin", text: "Admin" },
+            ]}
+          />
 
-        <AuthInputField
-          disabled={isLoading || role === "admin"}
-          Icon={HiAcademicCap}
-          label="Colegio"
-          name="school"
-          type="text"
-          placeholder={role === "admin" ? "No aplica" : "Escriba el colegio"}
-          value={school}
-          setValue={setSchool}
-        />
+          <AuthInputField
+            disabled={isLoading || role === "admin"}
+            Icon={HiAcademicCap}
+            label="Colegio"
+            name="school"
+            type="text"
+            placeholder={role === "admin" ? "No aplica" : "Escriba el colegio"}
+            value={school}
+            setValue={setSchool}
+          />
 
-        <AuthInputField
-          Icon={HiLockClosed}
-          disabled={isLoading}
-          label="Contraseña"
-          name="password"
-          type="password"
-          placeholder="Escriba la contraseña"
-          value={password}
-          setValue={setPassword}
-        />
+          <AuthInputField
+            Icon={HiLockClosed}
+            disabled={isLoading}
+            label="Contraseña"
+            name="password"
+            type="password"
+            placeholder="Escriba la contraseña"
+            value={password}
+            setValue={setPassword}
+          />
 
-        <AuthMessageBox
-          errorMessage={errorMessage}
-          successMessage={successMessage}
-          setErrorMessage={setErrorMessage}
-          setSuccessMessage={setSuccessMessage}
-        />
+          <AuthMessageBox
+            errorMessage={errorMessage}
+            successMessage={successMessage}
+            setErrorMessage={setErrorMessage}
+            setSuccessMessage={setSuccessMessage}
+          />
 
-        <AuthSubmitButton disabled={isLoading} text="Registrar" />
-      </form>
+          <AuthSubmitButton disabled={isLoading} text="Registrar" />
+        </form>
+      </div>
     </div>
   );
 }

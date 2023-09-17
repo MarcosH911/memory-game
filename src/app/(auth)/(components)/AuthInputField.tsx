@@ -55,7 +55,7 @@ function AuthInputField({
             onChange={(e) => setValue(e.target.value)}
             disabled={disabled}
             className={twMerge(
-              "w-72 rounded-md bg-transparent px-2 py-1 pl-1 text-base transition placeholder:text-base focus:outline-none",
+              "w-full rounded-md bg-transparent px-2 py-1 pl-1 text-base transition placeholder:text-base focus:outline-none",
               !value && "text-gray-400",
               disabled && "hover:cursor-not-allowed",
             )}
