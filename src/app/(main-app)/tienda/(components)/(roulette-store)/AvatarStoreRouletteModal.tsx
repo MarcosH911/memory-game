@@ -36,8 +36,6 @@ function AvatarStoreRouletteModal({
         <Image
           priority
           src={selectedAvatarUrl}
-          placeholder="blur"
-          blurDataURL="/Default-Avatar.png"
           alt="Avatar image"
           height={400}
           width={400}

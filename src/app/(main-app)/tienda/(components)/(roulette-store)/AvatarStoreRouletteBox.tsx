@@ -29,7 +29,7 @@ function AvatarStoreRouletteBox({
   // TODO: router.refresh() reload avatar images
 
   const rouletteItemsRef = useRef<HTMLDivElement | null>(null);
-  const isSpinningRoulette = useRef(false);
+  const [isSpinningRoulette, setIsSpinningRoulette] = useState(false);
   const currentSelectedAvatarUrl = useRef(selectedAvatarUrl);
   const currentAvatarsUrls = useRef<string[]>(avatarsUrls);
 
@@ -71,31 +71,25 @@ function AvatarStoreRouletteBox({
   };
 
   const handleSpinRoulette = async (type: "coins" | "diamonds") => {
-    if (isSpinningRoulette.current) return;
-    isSpinningRoulette.current = true;
+    if (isSpinningRoulette) return;
+    setIsSpinningRoulette(true);
 
     updateSelectedAvatarUrl();
 
-    if (type === "coins" && !hasEnoughCoins) {
-      console.error("You don't have enough coins to buy this");
-      return;
-    } else if (type === "diamonds" && !hasEnoughDiamonds) {
-      console.error("You don't have enough diamonds to buy this");
-      return;
-    }
-
-    fetch("/api/avatars/insert-avatar", {
+    const insertAvatarPromise = fetch("/api/avatars/insert-avatar", {
       method: "post",
       body: JSON.stringify({ avatarPath: selectedAvatarPath }),
     });
 
-    fetch("/api/points/insert-points", {
+    const insertPointsPromise = fetch("/api/points/insert-points", {
       method: "post",
       body: JSON.stringify({
         coins: type === "coins" ? -60 : 0,
         diamonds: type === "diamonds" ? -15 : 0,
       }),
     });
+
+    await Promise.all([insertAvatarPromise, insertPointsPromise]);
 
     handleAnimateRoulette("start");
 
@@ -109,7 +103,7 @@ function AvatarStoreRouletteBox({
           ref={rouletteItemsRef}
           onTransitionEnd={() => {
             setShowAvatarModal(true);
-            isSpinningRoulette.current = false;
+            setIsSpinningRoulette(false);
           }}
           className="flex flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg"
         >
@@ -127,6 +121,7 @@ function AvatarStoreRouletteBox({
         handleSpinRoulette={handleSpinRoulette}
         hasEnoughCoins={hasEnoughCoins}
         hasEnoughDiamonds={hasEnoughDiamonds}
+        isSpinningRoulette={isSpinningRoulette}
       />
       <AvatarStoreRouletteModal
         selectedAvatarUrl={currentSelectedAvatarUrl.current}

@@ -21,14 +21,7 @@ function RankingRow({ data, index, type }: Props) {
         {index + 1}
       </td>
       <td className="flex w-[25%] items-center justify-center">
-        <Image
-          src={avatarUrl}
-          placeholder="blur"
-          blurDataURL="/Default-Avatar.png"
-          alt="Avatar Image"
-          width={40}
-          height={40}
-        />
+        <Image src={avatarUrl} alt="Avatar Image" width={40} height={40} />
       </td>
       <td className="flex w-[25%] items-center justify-center font-medium">
         {data.full_name}

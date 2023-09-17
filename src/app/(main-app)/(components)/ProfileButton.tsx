@@ -48,8 +48,6 @@ function ProfileButton() {
             <Image
               src={avatarUrl || "/Default-Avatar.png"}
               alt="Profile Avatar"
-              placeholder="blur"
-              blurDataURL="/Default-Avatar.png"
               width={40}
               height={40}
             />

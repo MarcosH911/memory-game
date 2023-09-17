@@ -50,8 +50,6 @@ function CollectionAvatarItem({ data, isSelected, userId }: Props) {
         <Image
           src={avatarUrl}
           alt="Avatar image"
-          placeholder="blur"
-          blurDataURL="/Default-Avatar.png"
           height={260}
           width={260}
           className="rounded-full border-8 border-slate-950 bg-slate-950"

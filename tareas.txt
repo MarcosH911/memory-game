@@ -1,7 +1,5 @@
 ------------ BUGS ------------
 
-No redirect to /play in login route handler
-
 No loading state from / to /play when hitting the button
 
 Add security to admin users creating other users
@@ -26,9 +24,7 @@ Change update POST request to PUT (or something)
 
 --------- OPTIMIZING ---------
 
-Move fetching from roulette store to global store
-
-- Route handlers for selecting data and revalidateTag
+Route handlers for selecting data and revalidateTag
 
 Create a 10px image as placeholder
 
@@ -51,15 +47,9 @@ Check if fetching coins and diamonds is cached
 
 Suspense in roulette items
 
-Suspense in roulette items when spinning animation finishes
-
-Add titles to suspense
-
 Style ranking again
 
 Fix avatar border on loading suspense
-
-Think store / roulette into server component
 
 Do something while inserting in play
 
@@ -68,8 +58,6 @@ Static image to <Image />
 Loading state on buttons
 
 Hide layout when playing
-
-Load image on roulette
 
 Handle roulette for devices with worse connection
 

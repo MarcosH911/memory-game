@@ -21,8 +21,6 @@ async function AvatarStoreItem({
     <div className="group flex flex-col items-center justify-center rounded-lg border bg-gradient-to-b from-yellow-100 to-teal-100 py-6 shadow-xl transition duration-300">
       <Image
         src={imageUrl}
-        placeholder="blur"
-        blurDataURL="/Default-Avatar.png"
         alt={"Avatar Image"}
         width={130}
         height={130}
