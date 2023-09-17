@@ -40,45 +40,47 @@ function Page() {
 
   return (
     <div className="flex h-full items-center justify-center">
-      <form
-        autoComplete="on"
-        onSubmit={handleLogin}
-        className="flex flex-col rounded-xl border bg-white p-8 shadow-xl"
-      >
-        <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
-          Iniciar sesión
-        </h1>
+      <div className="w-full flex items-center justify-center h-full md:h-fit md:w-fit rounded-xl border bg-white p-8 shadow-xl align-middle">
+        <form
+          autoComplete="on"
+          onSubmit={handleLogin}
+          className="flex flex-col max-w-sm w-full align-middle"
+        >
+          <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
+            Iniciar sesión
+          </h1>
 
-        <AuthInputField
-          Icon={HiUser}
-          label="Usuario"
-          placeholder="Escriba su nombre de usuario"
-          name="username"
-          value={username}
-          setValue={setUsername}
-          autoComplete="username"
-          disabled={isLoading}
-        />
+          <AuthInputField
+            Icon={HiUser}
+            label="Usuario"
+            placeholder="Escriba su nombre de usuario"
+            name="username"
+            value={username}
+            setValue={setUsername}
+            autoComplete="username"
+            disabled={isLoading}
+          />
 
-        <AuthInputField
-          Icon={HiLockClosed}
-          label="Contraseña"
-          placeholder="Escriba su contraseña"
-          type="password"
-          name="password"
-          value={password}
-          setValue={setPassword}
-          autoComplete="current-password"
-          disabled={isLoading}
-        />
+          <AuthInputField
+            Icon={HiLockClosed}
+            label="Contraseña"
+            placeholder="Escriba su contraseña"
+            type="password"
+            name="password"
+            value={password}
+            setValue={setPassword}
+            autoComplete="current-password"
+            disabled={isLoading}
+          />
 
-        <AuthMessageBox
-          errorMessage={loginError}
-          setErrorMessage={setLoginError}
-        />
+          <AuthMessageBox
+            errorMessage={loginError}
+            setErrorMessage={setLoginError}
+          />
 
-        <AuthSubmitButton text="Entrar" disabled={isLoading} />
-      </form>
+          <AuthSubmitButton text="Entrar" disabled={isLoading} />
+        </form>
+      </div>
     </div>
   );
 }

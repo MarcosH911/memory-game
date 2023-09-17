@@ -1,14 +1,10 @@
 ------------ BUGS ------------
 
-No loading state from / to /play when hitting the button
-
 Add security to admin users creating other users
 
 Safari bug
 
-Redirect without router.refresh()
-
-Level doesn't update
+Loading state takes too long
 
 
 -------- ORGANIZATION --------
@@ -26,11 +22,7 @@ Change update POST request to PUT (or something)
 
 Route handlers for selecting data and revalidateTag
 
-Create a 10px image as placeholder
-
 Update database level only when session ends
-
-Use search params to optimize into server components
 
 Parallel fetching when possible (nextjs data fetching patterns)
 
@@ -39,8 +31,6 @@ Server component when possible
 Create index for database
 
 Cache
-
-Check if fetching coins and diamonds is cached
 
 
 -------- IMPROVEMENTS --------
@@ -53,21 +43,13 @@ Fix avatar border on loading suspense
 
 Do something while inserting in play
 
-Static image to <Image />
-
-Loading state on buttons
-
 Hide layout when playing
 
 Handle roulette for devices with worse connection
 
-Do something with the button when you don't have enough money
-
 Toast instead of console.error()
 
 When registering only allow to choose schools from the schools table
-
-Loading states
 
 Try catch in route handlers
 
@@ -101,8 +83,6 @@ Buy color packs
 Ranking with number of avatars
 
 Display when the avatar was bought in collection
-
-Update profile avatar when selecting new avatar
 
 Dark mode
 
