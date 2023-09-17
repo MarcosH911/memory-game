@@ -87,11 +87,11 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
       <button
         onClick={() => handleBuy("coins")}
         disabled={!hasEnoughCoins || isLoading !== ""}
-        className="mb-2 flex relative w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:border-slate-600 disabled:text-slate-600 disabled:shadow-none"
+        className="relative mb-2 flex w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40 disabled:cursor-not-allowed disabled:border-slate-600 disabled:bg-slate-100 disabled:text-slate-600 disabled:shadow-none"
       >
         <CgSpinnerTwoAlt
           className={twMerge(
-            "animate-spin text-2xl opacity-0 absolute inset-0 m-auto",
+            "absolute inset-0 m-auto animate-spin text-2xl opacity-0",
             isLoading === "coins" && "opacity-100",
           )}
         />
@@ -113,11 +113,11 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
       <button
         disabled={!hasEnoughDiamonds || isLoading !== ""}
         onClick={() => handleBuy("diamonds")}
-        className="relative flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60 disabled:cursor-not-allowed disabled:bg-slate-500 disabled:border-slate-500 disabled:text-slate-50 disabled:shadow-none"
+        className="relative flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60 disabled:cursor-not-allowed disabled:border-slate-500 disabled:bg-slate-500 disabled:text-slate-50 disabled:shadow-none"
       >
         <CgSpinnerTwoAlt
           className={twMerge(
-            "animate-spin text-2xl opacity-0 absolute inset-0 m-auto",
+            "absolute inset-0 m-auto animate-spin text-2xl opacity-0",
             isLoading === "diamonds" && "opacity-100",
           )}
         />

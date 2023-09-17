@@ -22,7 +22,7 @@ const allItems = [
 
 function Page() {
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-6">
+    <div className="mx-auto flex max-w-3xl flex-col gap-6">
       <FeedbackTextBox />
 
       {allItems.map((item) => (

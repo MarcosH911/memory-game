@@ -1,7 +1,7 @@
 function Loading() {
   return (
-    <div className="flex flex-col items-center h-full animate-pulse">
-      <div className="mt-8 -mb-6 h-[4.5rem] flex items-center justify-center">
+    <div className="flex h-full animate-pulse flex-col items-center">
+      <div className="-mb-6 mt-8 flex h-[4.5rem] items-center justify-center">
         <div className="h-5 w-72 rounded-full bg-slate-400"></div>
       </div>
       <div className="w-[80rem]">
