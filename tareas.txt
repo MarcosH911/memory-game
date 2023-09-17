@@ -37,6 +37,8 @@ Cache
 
 -------- IMPROVEMENTS --------
 
+Spinner in login and register button
+
 Suspense in roulette items
 
 Style ranking again

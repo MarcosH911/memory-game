@@ -1,12 +1,12 @@
 "use client";
 
-import { use, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import PlayCenterCrosshair from "./PlayCenterCrosshair";
 import PlaySpaceButton from "./PlaySpaceButton";
 import PlaySquare from "./PlaySquare";
 import PlayStartScreen from "./PlayStartScreen";
 import sleep from "@/helpers/sleep";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   generatedSequence: number[];
@@ -26,11 +26,13 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
   const levelChange = useRef<1 | 0 | -1>(0);
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const playGame = async () => {
     if (isPlaying) return;
 
     setIsPlaying(true);
+    router.replace(pathname + "?playing=true");
 
     do {
       await sleep(500);
@@ -93,6 +95,7 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
       levelChange.current = 0;
     }
 
+    router.push(pathname);
     setIsPlaying(false);
 
     isInserting.current = true;
@@ -105,6 +108,14 @@ function PlayGame({ generatedSequence, numTargets, level }: Props) {
 
     router.refresh();
   };
+
+  useEffect(() => {
+    if (isPlaying) {
+      router.push(pathname + "?playing=true");
+    } else {
+      router.push(pathname);
+    }
+  }, [isPlaying, pathname, router]);
 
   return (
     <>

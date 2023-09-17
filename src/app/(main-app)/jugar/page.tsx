@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayGame from "./(components)/PlayGame";
-import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
