@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import AvatarStoreRouletteBuyButtons from "./AvatarStoreRouletteBuyButtons";
 import AvatarStoreRouletteModal from "./AvatarStoreRouletteModal";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
 
 interface Props {
@@ -34,14 +34,30 @@ function AvatarStoreRouletteBox({
   const currentAvatarsUrls = useRef<string[]>(avatarsUrls);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  const updateSelectedAvatarUrl = () => {
+  const updateSelectedAvatarUrl = useCallback(() => {
     currentSelectedAvatarUrl.current = selectedAvatarUrl;
-  };
+  }, [selectedAvatarUrl]);
 
-  const updateAvatarsUrls = () => {
+  const updateAvatarsUrls = useCallback(() => {
     currentAvatarsUrls.current = avatarsUrls;
-  };
+  }, [avatarsUrls]);
+
+  useEffect(() => {
+    if (searchParams.has("hasBoughtAvatar", "true")) {
+      updateSelectedAvatarUrl();
+      updateAvatarsUrls();
+      router.replace(pathname, { scroll: false });
+    }
+  }, [
+    pathname,
+    router,
+    searchParams,
+    updateAvatarsUrls,
+    updateSelectedAvatarUrl,
+  ]);
 
   const handleAnimateRoulette = (type: "start" | "finish") => {
     if (type === "start") {
@@ -85,8 +101,6 @@ function AvatarStoreRouletteBox({
 
     router.refresh();
   };
-
-  console.log(currentAvatarsUrls.current);
 
   return (
     <div className="relative">

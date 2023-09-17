@@ -1,9 +1,5 @@
 ------------ BUGS ------------
 
-You can get in the roulette and avatar you just bought in the normal store
-
-Don't let buy when not enough money
-
 No redirect to /play in login route handler
 
 No loading state from / to /play when hitting the button
