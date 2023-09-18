@@ -41,7 +41,7 @@ Cache
 
 -------- IMPROVEMENTS --------
 
-Adjust loading state to mobile
+Logout spinner
 
 Move mobile login further up
 

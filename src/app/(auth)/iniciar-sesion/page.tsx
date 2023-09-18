@@ -32,6 +32,7 @@ function Page() {
       setLoginError(message);
     } else {
       router.replace("/jugar");
+      return;
     }
 
     setIsLoading(false);

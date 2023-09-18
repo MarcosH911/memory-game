@@ -9,8 +9,11 @@ import { HiOutlineLogout } from "react-icons/hi";
 
 import getAvatarImage from "@/utils/getAvatarImage";
 import { HiOutlineUser } from "react-icons/hi2";
+import Spinner from "@/components/Spinner";
+import { twMerge } from "tailwind-merge";
 
 function ProfileButton() {
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [fullName, setFullName] = useState("");
@@ -31,10 +34,13 @@ function ProfileButton() {
   }, []);
 
   const handleLogout = async () => {
+    setIsLoading(true);
     const response = await fetch("/api/auth/logout", { method: "post" });
     if (response.status === 200) {
-      router.push("/iniciar-sesion");
+      router.replace("/iniciar-sesion");
+      return;
     }
+    setIsLoading(false);
   };
 
   return (
@@ -63,10 +69,18 @@ function ProfileButton() {
               <li className="w-full">
                 <button
                   onClick={handleLogout}
-                  className="flex w-full items-center justify-start gap-1.5 rounded-b-lg px-4 py-2 transition hover:bg-slate-200 active:bg-slate-300"
+                  className="relative flex w-full items-center justify-start gap-1.5 rounded-b-lg px-4 py-2 transition hover:bg-slate-200 active:bg-slate-300"
                 >
-                  <HiOutlineLogout className="text-lg" />
-                  <span className="font-bold">Cerrar sesión</span>
+                  <Spinner visible={isLoading} size="2xl" />
+                  <div
+                    className={twMerge(
+                      "visible flex items-center justify-start gap-1.5",
+                      isLoading && "invisible",
+                    )}
+                  >
+                    <HiOutlineLogout className="text-lg" />
+                    <span className="font-bold">Cerrar sesión</span>
+                  </div>
                 </button>
               </li>
             </ul>

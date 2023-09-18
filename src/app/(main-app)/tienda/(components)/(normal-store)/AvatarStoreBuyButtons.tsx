@@ -3,11 +3,11 @@
 import { BiSolidCoinStack } from "react-icons/bi";
 import { IoDiamond } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useRef, useState } from "react";
-import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { twMerge } from "tailwind-merge";
+
+import Spinner from "@/components/Spinner";
 
 interface Props {
   avatarPath: string;
@@ -89,24 +89,19 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         disabled={!hasEnoughCoins || isLoading !== ""}
         className="relative mb-2 flex w-3/4 items-center justify-center gap-1 rounded-md border border-yellow-600 bg-yellow-50 py-1 text-yellow-600 shadow-[0_0_10px_1px] shadow-yellow-600/20 transition duration-200 hover:bg-yellow-100 hover:shadow-yellow-600/40 disabled:cursor-not-allowed disabled:border-slate-600 disabled:bg-slate-100 disabled:text-slate-600 disabled:shadow-none"
       >
-        <CgSpinnerTwoAlt
-          className={twMerge(
-            "absolute inset-0 m-auto animate-spin text-2xl opacity-0",
-            isLoading === "coins" && "opacity-100",
-          )}
-        />
+        <Spinner visible={isLoading === "coins"} size="2xl" />
         <span
           className={twMerge(
-            "text-lg font-bold opacity-100",
-            isLoading === "coins" && "opacity-0",
+            "text-lg font-bold visible",
+            isLoading === "coins" && "invisible",
           )}
         >
           100
         </span>
         <BiSolidCoinStack
           className={twMerge(
-            "text-xl opacity-100",
-            isLoading === "coins" && "opacity-0",
+            "text-xl visible",
+            isLoading === "coins" && "invisible",
           )}
         />
       </button>
@@ -115,24 +110,19 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         onClick={() => handleBuy("diamonds")}
         className="relative flex w-3/4 items-center justify-center gap-1 rounded-md border border-purple-600 bg-purple-600 py-1 text-purple-50 shadow-[0_0_10px_1px] shadow-purple-600/30 transition duration-200 hover:border-purple-700 hover:bg-purple-700 hover:shadow-purple-600/60 disabled:cursor-not-allowed disabled:border-slate-500 disabled:bg-slate-500 disabled:text-slate-50 disabled:shadow-none"
       >
-        <CgSpinnerTwoAlt
-          className={twMerge(
-            "absolute inset-0 m-auto animate-spin text-2xl opacity-0",
-            isLoading === "diamonds" && "opacity-100",
-          )}
-        />
+        <Spinner visible={isLoading === "diamonds"} size="2xl" />
         <span
           className={twMerge(
-            "text-lg font-bold opacity-100",
-            isLoading === "diamonds" && "opacity-0",
+            "text-lg font-bold visible",
+            isLoading === "diamonds" && "invisible",
           )}
         >
           25
         </span>
         <IoDiamond
           className={twMerge(
-            "text-xl opacity-100",
-            isLoading === "diamonds" && "opacity-0",
+            "text-xl visible",
+            isLoading === "diamonds" && "invisible",
           )}
         />
       </button>
