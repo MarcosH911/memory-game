@@ -2,6 +2,8 @@
 
 Add security to admin users creating other users
 
+Avatar bug in ranking
+
 Safari bug
 
 Loading state takes too long
