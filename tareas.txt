@@ -20,6 +20,8 @@ Change update POST request to PUT (or something)
 
 --------- OPTIMIZING ---------
 
+Make login faster
+
 Make mobile navbar server component
 
 Route handlers for selecting data and revalidateTag
@@ -37,7 +39,7 @@ Cache
 
 -------- IMPROVEMENTS --------
 
-Font in safari
+Adjust loading state to mobile
 
 Move mobile login further up
 
