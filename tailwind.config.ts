@@ -65,20 +65,8 @@ const config: Config = {
       },
       animation: {
         "up-down": "up-down 3s ease-in-out infinite",
-        "fade-out-start-playing-screen":
-          "fade-out-start-playing-screen 300ms ease-in 1 forwards",
-        "fade-in-start-playing-screen":
-          "fade-in-start-playing-screen 300ms ease-out 1 forwards",
-        "hide-start-playing-screen":
-          "hide-animation 0s linear 300ms 1 forwards",
-        "show-start-playing-screen":
-          "show-animation 0s linear 300ms 1 forwards",
-        "win-game": "win-game 500ms ease-out 1 forwards",
-        "loose-game": "loose-game 500ms ease-out 1 forwards",
         "show-modal": "show-modal 300ms ease-in-out forwards",
         "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
-        "hide-mobile-navbar": "hide-animation 0s linear 500ms 1 forwards",
-        "show-mobile-navbar": "show-animation 0s linear 300ms 1 forwards",
       },
     },
   },

@@ -28,26 +28,20 @@ function PlayStartScreen({
   return (
     <div
       className={twMerge(
-        "absolute flex h-full w-full items-center justify-center",
-        isPlaying
-          ? "animate-hide-start-playing-screen"
-          : "animate-show-start-playing-screen",
+        "absolute flex h-full w-full items-center justify-center visible transition-all duration-500",
+        isPlaying && "invisible",
       )}
     >
       <div
         className={twMerge(
-          "absolute z-10 h-full w-full backdrop-blur-sm",
-          isPlaying
-            ? "animate-fade-out-start-playing-screen"
-            : "animate-fade-in-start-playing-screen",
+          "absolute z-10 h-full w-full backdrop-blur-sm opacity-100 transition duration-500",
+          isPlaying && "opacity-0",
         )}
       ></div>
       <div
         className={twMerge(
-          "z-10 flex items-center justify-center flex-col rounded-xl border-2 border-teal-300/30 bg-teal-100/70 w-full h-full 2xl:w-fit 2xl:h-fit 2xl:px-40 2xl:py-20 shadow-2xl shadow-black/40 backdrop-blur-md",
-          isPlaying
-            ? "animate-fade-out-start-playing-screen"
-            : "animate-fade-in-start-playing-screen",
+          "z-10 flex items-center justify-center flex-col 2xl:rounded-xl 2xl:border-2 border-teal-300/30 bg-teal-100/70 w-full h-full 2xl:w-fit 2xl:h-fit 2xl:px-40 2xl:py-20 shadow-2xl shadow-black/40 backdrop-blur-md opacity-100 transition duration-500",
+          isPlaying && "opacity-0",
         )}
       >
         {isFirstTime ? (

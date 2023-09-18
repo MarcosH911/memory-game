@@ -37,6 +37,14 @@ Cache
 
 -------- IMPROVEMENTS --------
 
+Font in safari
+
+Move mobile login further up
+
+Padding top in mobile register
+
+Fix mobile loading state
+
 Spinner in login and register button
 
 Suspense in roulette items
