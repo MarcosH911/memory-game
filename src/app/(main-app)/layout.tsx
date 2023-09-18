@@ -5,7 +5,7 @@ import CoinsNavItem from "./(components)/CoinsNavItem";
 import DiamondsNavItem from "./(components)/DiamondsNavItem";
 import ProfileButton from "./(components)/ProfileButton";
 import MenuNavbar from "./(components)/MenuNavbar";
-import FeedbackButton from "../(components)/FeedbackButton";
+import FeedbackButton from "./(components)/FeedbackButton";
 import MobileNavbar from "./(components)/MobileNavbar";
 import NavbarWrapper from "./(components)/NavbarWrapper";
 import MainAppLayoutWrapper from "./(components)/MainAppLayoutWrapper";
@@ -39,8 +39,8 @@ async function Layout({ children }: { children: React.ReactNode }) {
           <ProfileButton />
         </div>
       </NavbarWrapper>
-      <div className="relative h-full">{children}</div>
       <FeedbackButton />
+      <div className="relative h-full">{children}</div>
     </MainAppLayoutWrapper>
   );
 }
