@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 
-import supabaseClient from "@/utils/supabaseClient";
 import RankingFilters from "./(components)/RankingFilters";
 import RankingTable from "./(components)/RankingTable";
 import RankingFiltersLoading from "./(components)/RankingFiltersLoading";
@@ -16,17 +15,6 @@ async function Page({ searchParams }: Props) {
   }`;
   const pointsFilter = (searchParams.pointsFilter as string) || "coins";
 
-  const { data, error } = await supabaseClient
-    .from(timeFilter)
-    .select("*")
-    .order(pointsFilter, {
-      ascending: false,
-    });
-
-  if (error) {
-    console.error(error);
-  }
-
   return (
     <div className="flex h-full justify-center">
       <div className="w-[80rem]">
@@ -38,7 +26,7 @@ async function Page({ searchParams }: Props) {
           <RankingFilters />
         </Suspense>
         <Suspense fallback={<RankingTableLoading />}>
-          <RankingTable data={data} pointsFilter={pointsFilter} />
+          <RankingTable timeFilter={timeFilter} pointsFilter={pointsFilter} />
         </Suspense>
       </div>
     </div>
