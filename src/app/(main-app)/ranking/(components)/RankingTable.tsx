@@ -2,6 +2,8 @@ import supabaseClient from "@/utils/supabaseClient";
 import RankingRow from "./RankingRow";
 import RakingTableReloadButton from "./RankingTableReloadButton";
 
+export const revalidate = 20;
+
 interface Props {
   pointsFilter: string;
   timeFilter: string;
