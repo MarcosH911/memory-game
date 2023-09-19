@@ -73,15 +73,15 @@ function Page() {
   };
 
   return (
-    <div className="flex py-8 md:pt-0 md:h-full min-h-full h-fit items-center justify-center bg-white md:bg-transparent">
-      <div className="flex items-center justify-center h-full w-full md:h-fit md:w-fit md:rounded-xl md:border bg-white p-8 md:shadow-xl">
+    <div className="flex h-fit min-h-full items-center justify-center bg-white py-8 md:h-full md:bg-transparent md:pt-0">
+      <div className="flex h-full w-full items-center justify-center bg-white p-8 md:h-fit md:w-fit md:rounded-xl md:border md:shadow-xl">
         <form
           autoComplete="off"
           onSubmit={handleRegister}
-          className="flex flex-col max-w-sm md:max-w-2xl w-full"
+          className="flex w-full max-w-sm flex-col md:max-w-2xl"
         >
-          <h1 className="mx-2 mb-12 text-3xl text-left md:text-center font-bold text-teal-950">
-            Registrar un usuario
+          <h1 className="mx-2 mb-12 text-left text-3xl font-bold text-teal-950 md:text-center">
+            Registrar a un usuario
           </h1>
 
           <div className="grid md:grid-cols-2 md:gap-x-20">

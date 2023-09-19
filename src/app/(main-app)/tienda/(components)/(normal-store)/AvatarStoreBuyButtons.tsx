@@ -92,7 +92,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         <Spinner visible={isLoading === "coins"} size="2xl" />
         <span
           className={twMerge(
-            "text-lg font-bold visible",
+            "visible text-lg font-bold",
             isLoading === "coins" && "invisible",
           )}
         >
@@ -100,7 +100,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         </span>
         <BiSolidCoinStack
           className={twMerge(
-            "text-xl visible",
+            "visible text-xl",
             isLoading === "coins" && "invisible",
           )}
         />
@@ -113,7 +113,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         <Spinner visible={isLoading === "diamonds"} size="2xl" />
         <span
           className={twMerge(
-            "text-lg font-bold visible",
+            "visible text-lg font-bold",
             isLoading === "diamonds" && "invisible",
           )}
         >
@@ -121,7 +121,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
         </span>
         <IoDiamond
           className={twMerge(
-            "text-xl visible",
+            "visible text-xl",
             isLoading === "diamonds" && "invisible",
           )}
         />

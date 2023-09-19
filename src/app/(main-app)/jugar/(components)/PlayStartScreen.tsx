@@ -28,19 +28,19 @@ function PlayStartScreen({
   return (
     <div
       className={twMerge(
-        "absolute flex h-full w-full items-center justify-center visible transition-all duration-500",
+        "visible absolute flex h-full w-full items-center justify-center transition-all duration-500",
         isPlaying && "invisible",
       )}
     >
       <div
         className={twMerge(
-          "absolute z-10 h-full w-full backdrop-blur-sm opacity-100 transition duration-500",
+          "absolute z-10 h-full w-full opacity-100 backdrop-blur-sm transition duration-500",
           isPlaying && "opacity-0",
         )}
       ></div>
       <div
         className={twMerge(
-          "z-10 flex items-center justify-center flex-col 2xl:rounded-xl 2xl:border-2 border-teal-300/30 bg-teal-100/70 w-full h-full 2xl:w-fit 2xl:h-fit 2xl:px-40 2xl:py-20 shadow-2xl shadow-black/40 backdrop-blur-md opacity-100 transition duration-500",
+          "z-10 flex h-full w-full flex-col items-center justify-center border-teal-300/30 bg-teal-100/70 opacity-100 shadow-2xl shadow-black/40 backdrop-blur-md transition duration-500 2xl:h-fit 2xl:w-fit 2xl:rounded-xl 2xl:border-2 2xl:px-40 2xl:py-20",
           isPlaying && "opacity-0",
         )}
       >
@@ -64,15 +64,15 @@ function PlayStartScreen({
           </div>
         ) : (
           <>
-            <div className="flex flex-col sm:flex-row gap-4 items-center sm:gap-8 pb-4">
-              <div className="flex items-center justify-center gap-2 rounded-full border border-green-700 bg-green-100/80 px-6 py-3 w-[16.5rem] sm:w-fit">
+            <div className="flex flex-col items-center gap-4 pb-4 sm:flex-row sm:gap-8">
+              <div className="flex w-[16.5rem] items-center justify-center gap-2 rounded-full border border-green-700 bg-green-100/80 px-6 py-3 sm:w-fit">
                 <span className="text-2xl font-semibold text-green-700">
                   <span className="font-bold">{correctHits}</span> Acierto
                   {correctHits === 1 ? "" : "s"}
                 </span>
                 <HiMiniCheck className="text-3xl text-green-700" />
               </div>
-              <div className="flex items-center gap-2 justify-center rounded-full border border-red-700 bg-red-100/80 px-6 py-3 w-[16.5rem] sm:w-fit">
+              <div className="flex w-[16.5rem] items-center justify-center gap-2 rounded-full border border-red-700 bg-red-100/80 px-6 py-3 sm:w-fit">
                 <span className="text-2xl font-semibold text-red-700">
                   <span className="font-bold">{mistakes}</span> Fallo
                   {mistakes === 1 ? "" : "s"}
@@ -82,21 +82,21 @@ function PlayStartScreen({
             </div>
             <div>
               {levelChange === 1 ? (
-                <div className="mb-20 flex items-center justify-center gap-1 rounded-md border border-green-700 bg-green-600/90 py-3 sm:px-[6.7rem] sm:w-fit w-[16.5rem]">
+                <div className="mb-20 flex w-[16.5rem] items-center justify-center gap-1 rounded-md border border-green-700 bg-green-600/90 py-3 sm:w-fit sm:px-[6.7rem]">
                   <FaLevelUpAlt className="text-xl text-green-50" />
                   <span className="text-xl font-semibold text-green-50">
                     Subes de nivel
                   </span>
                 </div>
               ) : levelChange === -1 ? (
-                <div className="mb-20 flex items-center justify-center gap-1 rounded-md border border-red-700 bg-red-600/90 py-3 sm:px-[6.7rem] sm:w-fit w-[16.5rem]">
+                <div className="mb-20 flex w-[16.5rem] items-center justify-center gap-1 rounded-md border border-red-700 bg-red-600/90 py-3 sm:w-fit sm:px-[6.7rem]">
                   <FaLevelDownAlt className="text-xl text-red-50" />
                   <span className="text-xl font-semibold text-red-50">
                     Bajas de nivel
                   </span>
                 </div>
               ) : (
-                <div className="sm:mb-20 mb-16 mt-4 flex items-center justify-center gap-1 rounded-md border border-teal-700 bg-teal-600/90 py-3 sm:px-[6.7rem] sm:w-fit w-[16.5rem]">
+                <div className="mb-16 mt-4 flex w-[16.5rem] items-center justify-center gap-1 rounded-md border border-teal-700 bg-teal-600/90 py-3 sm:mb-20 sm:w-fit sm:px-[6.7rem]">
                   <FaLongArrowAltRight className="text-xl text-teal-50" />
                   <span className="text-xl font-semibold text-teal-50">
                     Mantienes el nivel

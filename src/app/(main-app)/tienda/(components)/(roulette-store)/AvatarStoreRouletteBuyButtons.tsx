@@ -42,7 +42,7 @@ function AvatarStoreRouletteBuyButtons({
         <Spinner visible={isLoading === "coins"} size="4xl" />
         <span
           className={twMerge(
-            "text-3xl font-bold visible",
+            "visible text-3xl font-bold",
             isLoading === "coins" && "invisible",
           )}
         >
@@ -50,7 +50,7 @@ function AvatarStoreRouletteBuyButtons({
         </span>
         <BiSolidCoinStack
           className={twMerge(
-            "text-2xl visible",
+            "visible text-2xl",
             isLoading === "coins" && "invisible",
           )}
         />
@@ -63,7 +63,7 @@ function AvatarStoreRouletteBuyButtons({
         <Spinner visible={isLoading === "diamonds"} size="4xl" />
         <span
           className={twMerge(
-            "text-3xl font-bold visible",
+            "visible text-3xl font-bold",
             isLoading === "diamonds" && "invisible",
           )}
         >
@@ -71,7 +71,7 @@ function AvatarStoreRouletteBuyButtons({
         </span>
         <IoDiamond
           className={twMerge(
-            "text-2xl visible",
+            "visible text-2xl",
             isLoading === "diamonds" && "invisible",
           )}
         />

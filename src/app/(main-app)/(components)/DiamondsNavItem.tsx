@@ -2,7 +2,7 @@ import { IoDiamond } from "react-icons/io5";
 
 const DiamondsNavItem = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex w-28 xs:w-32 items-center justify-between rounded-full border-2 border-purple-600 px-2 py-1">
+    <div className="flex w-28 items-center justify-between rounded-full border-2 border-purple-600 px-2 py-1 xs:w-32">
       <span className="ml-1 font-bold text-purple-600">{children}</span>
       <IoDiamond className="text-lg text-purple-600" />
     </div>

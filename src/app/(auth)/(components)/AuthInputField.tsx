@@ -67,7 +67,7 @@ function AuthInputField({
                 key={index}
                 value={item.value}
                 className={twMerge(
-                  "text-teal-950 cursor-pointer",
+                  "cursor-pointer text-teal-950",
                   !item.value && "text-gray-400",
                 )}
               >
@@ -87,7 +87,7 @@ function AuthInputField({
             disabled={disabled}
             placeholder={placeholder}
             className={twMerge(
-              "max-w-xs w-full bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0",
+              "w-full max-w-xs bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0 md:w-64",
               disabled && "hover:cursor-not-allowed",
             )}
           />

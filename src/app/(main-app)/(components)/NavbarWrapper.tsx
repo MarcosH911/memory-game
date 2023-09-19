@@ -14,7 +14,7 @@ function NavbarWrapper({ children }: Props) {
   return (
     <nav
       className={twMerge(
-        "fixed top-0 z-40 flex h-20 w-full items-center justify-between border-b-2 bg-teal-50/90 pl-14 transition duration-500 opacity-100 translate-y-0 pr-4 xs:pr-8 backdrop-blur-md",
+        "fixed top-0 z-40 flex h-20 w-full translate-y-0 items-center justify-between border-b-2 bg-teal-50/90 pl-14 pr-4 opacity-100 backdrop-blur-md transition duration-500 xs:pr-8",
         isPlaying && "-translate-y-full opacity-100",
       )}
     >
