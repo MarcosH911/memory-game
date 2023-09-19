@@ -14,6 +14,7 @@ import {
 import AuthInputField from "../(components)/AuthInputField";
 import AuthMessageBox from "../(components)/AuthMessageBox";
 import AuthSubmitButton from "../(components)/AuthSubmitButton";
+import { SCHOOLS } from "../../../../data/constants";
 
 function Page() {
   const [username, setUsername] = useState("");
@@ -146,12 +147,7 @@ function Page() {
                 placeholder="Seleccione un colegio"
                 value={school}
                 setValue={setSchool}
-                options={[
-                  { value: "", text: "Seleccione un colegio" },
-                  { value: "colegio_1", text: "Colegio 1" },
-                  { value: "colegio_2", text: "Colegio 2" },
-                  { value: "colegio_3", text: "Colegio 3" },
-                ]}
+                options={SCHOOLS}
               />
 
               <AuthInputField
