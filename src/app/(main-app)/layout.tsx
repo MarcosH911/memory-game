@@ -9,20 +9,44 @@ import FeedbackButton from "./(components)/FeedbackButton";
 import MobileNavbar from "./(components)/MobileNavbar";
 import NavbarWrapper from "./(components)/NavbarWrapper";
 import MainAppLayoutWrapper from "./(components)/MainAppLayoutWrapper";
+import getAvatarImage from "@/utils/getAvatarImage";
 
 export const dynamic = "force-dynamic";
 
 async function Layout({ children }: { children: React.ReactNode }) {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data, error } = await supabase
-    .from("user_points")
+  const userId = (await supabase.auth.getSession()).data.session?.user.id;
+
+  if (!userId) {
+    console.error("There was an error getting the user");
+    return null;
+  }
+
+  const pointsDataPromise = supabase.from("user_points").select("*").single();
+
+  const profileDataPromise = supabase
+    .from("profiles")
     .select("*")
+    .eq("user_id", userId)
     .single();
 
-  if (error) {
+  const [
+    { data: profileData, error: profileError },
+    { data: pointsData, error: pointsError },
+  ] = await Promise.all([profileDataPromise, pointsDataPromise]);
+
+  if (pointsError) {
     console.error("There was an error selecting the user points");
+    return;
   }
+  if (profileError || !profileData) {
+    console.error("There was an error selecting the user profile");
+    return;
+  }
+
+  const avatarUrl = getAvatarImage(profileData.avatar_path);
+  const fullName = profileData.full_name;
 
   return (
     <MainAppLayoutWrapper>
@@ -31,11 +55,11 @@ async function Layout({ children }: { children: React.ReactNode }) {
           <MenuNavbar />
         </ul>
         <div className="lg:hidden">
-          <MobileNavbar />
+          <MobileNavbar avatarUrl={avatarUrl} fullName={fullName} />
         </div>
         <div className="flex items-center gap-2 xs:gap-8 z-20">
-          <DiamondsNavItem>{data?.total_diamonds || 0}</DiamondsNavItem>
-          <CoinsNavItem>{data?.total_coins || 0}</CoinsNavItem>
+          <DiamondsNavItem>{pointsData?.total_diamonds || 0}</DiamondsNavItem>
+          <CoinsNavItem>{pointsData?.total_coins || 0}</CoinsNavItem>
           <ProfileButton />
         </div>
       </NavbarWrapper>

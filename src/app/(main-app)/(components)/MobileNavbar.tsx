@@ -1,18 +1,22 @@
 "use client";
 
-import getAvatarImage from "@/utils/getAvatarImage";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
-import MenuNavbar from "./MenuNavbar";
 import { useRouter } from "next/navigation";
 import { HiOutlineLogout } from "react-icons/hi";
 
-function MobileNavbar() {
+import getAvatarImage from "@/utils/getAvatarImage";
+import MenuNavbar from "./MenuNavbar";
+
+interface Props {
+  avatarUrl: string;
+  fullName: string;
+}
+
+function MobileNavbar({ avatarUrl, fullName }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [fullName, setFullName] = useState("");
 
   const router = useRouter();
 
@@ -22,19 +26,6 @@ function MobileNavbar() {
       router.push("/iniciar-sesion");
     }
   };
-
-  useEffect(() => {
-    const getUserData = async () => {
-      const profileDataResponse = await fetch("/api/profile/profile-data", {
-        method: "get",
-      });
-      const { data: profileData } = await profileDataResponse.json();
-      setAvatarUrl(getAvatarImage(profileData.avatar_path));
-      setFullName(profileData.full_name);
-    };
-
-    getUserData();
-  }, []);
 
   return (
     <div className="lg:hidden">
@@ -51,7 +42,7 @@ function MobileNavbar() {
       <nav
         className={twMerge(
           "fixed left-0 top-0 translate-x-0 transition duration-300 h-screen bg-teal-50 z-40 px-6 py-28 w-full xs:w-fit",
-          !isOpen && "-translate-x-full opacity-0",
+          !isOpen && "-translate-x-full opacity-0"
         )}
       >
         <ul className="gap-6 flex-col items-start justify-center flex">
@@ -79,7 +70,7 @@ function MobileNavbar() {
         onClick={() => setIsOpen(false)}
         className={twMerge(
           "w-full h-screen bg-black/30 fixed right-0 top-0 z-30 opacity-0 transition-all invisible duration-300",
-          isOpen && "opacity-100 visible",
+          isOpen && "opacity-100 visible"
         )}
       ></div>
     </div>
