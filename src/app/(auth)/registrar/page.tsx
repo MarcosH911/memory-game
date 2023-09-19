@@ -20,6 +20,9 @@ function Page() {
   const [fullName, setFullName] = useState("");
   const [role, setRole] = useState("");
   const [school, setSchool] = useState("");
+  const [stage, setStage] = useState("");
+  const [grade, setGrade] = useState("");
+  const [schoolClass, setSchoolClass] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +30,6 @@ function Page() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
 
   const handleRegister = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,78 +60,155 @@ function Page() {
     router.refresh();
   };
 
+  const handleSelectRole = (value: string) => {
+    setRole(value);
+    setSchool("");
+    setStage("");
+    setGrade("");
+    setSchoolClass("");
+  };
+
   return (
-    <div className="flex min-h-full items-center justify-center bg-white md:bg-transparent">
+    <div className="flex py-8 md:pt-0 md:h-full min-h-full h-fit items-center justify-center bg-white md:bg-transparent">
       <div className="flex items-center justify-center h-full w-full md:h-fit md:w-fit md:rounded-xl md:border bg-white p-8 md:shadow-xl">
         <form
           autoComplete="off"
           onSubmit={handleRegister}
-          className="flex flex-col max-w-sm w-full"
+          className="flex flex-col max-w-sm md:max-w-2xl w-full"
         >
-          <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
+          <h1 className="mx-2 mb-12 text-3xl text-left md:text-center font-bold text-teal-950">
             Registrar un usuario
           </h1>
 
-          <AuthInputField
-            label="Usuario"
-            name="username"
-            disabled={isLoading}
-            Icon={HiUser}
-            placeholder="Escriba el nombre de usuario"
-            type="text"
-            value={username}
-            setValue={setUsername}
-          />
+          <div className="grid md:grid-cols-2 md:gap-x-20">
+            <div>
+              <AuthInputField
+                label="Usuario"
+                name="username"
+                disabled={isLoading}
+                Icon={HiUser}
+                placeholder="Escriba el nombre de usuario"
+                type="text"
+                value={username}
+                setValue={setUsername}
+              />
 
-          <AuthInputField
-            label="Nombre"
-            name="fullName"
-            disabled={isLoading}
-            Icon={HiUsers}
-            placeholder="Escriba el nombre y apellido"
-            type="text"
-            value={fullName}
-            setValue={setFullName}
-          />
+              <AuthInputField
+                label="Nombre"
+                name="fullName"
+                disabled={isLoading}
+                Icon={HiUsers}
+                placeholder="Escriba el nombre y apellido"
+                type="text"
+                value={fullName}
+                setValue={setFullName}
+              />
 
-          <AuthInputField
-            Icon={HiBuildingOffice}
-            disabled={isLoading}
-            label="Rol"
-            name="role"
-            type="select"
-            placeholder="Seleccione un rol"
-            setValue={setRole}
-            value={role}
-            options={[
-              { value: "", text: "Seleccione un rol" },
-              { value: "student", text: "Estudiante" },
-              { value: "teacher", text: "Profesor" },
-              { value: "admin", text: "Admin" },
-            ]}
-          />
+              <AuthInputField
+                Icon={HiBuildingOffice}
+                disabled={isLoading}
+                label="Rol"
+                name="role"
+                type="select"
+                placeholder="Seleccione un rol"
+                setValue={handleSelectRole}
+                value={role}
+                options={[
+                  { value: "", text: "Seleccione un rol" },
+                  { value: "student", text: "Estudiante" },
+                  { value: "teacher", text: "Profesor" },
+                  { value: "admin", text: "Admin" },
+                ]}
+              />
 
-          <AuthInputField
-            disabled={isLoading || role === "admin"}
-            Icon={HiAcademicCap}
-            label="Colegio"
-            name="school"
-            type="text"
-            placeholder={role === "admin" ? "No aplica" : "Escriba el colegio"}
-            value={school}
-            setValue={setSchool}
-          />
+              <AuthInputField
+                Icon={HiLockClosed}
+                disabled={isLoading}
+                label="Contraseña"
+                name="password"
+                type="password"
+                placeholder="Escriba la contraseña"
+                value={password}
+                setValue={setPassword}
+              />
+            </div>
+            <div>
+              <AuthInputField
+                disabled={isLoading || role === "admin"}
+                Icon={HiAcademicCap}
+                label="Colegio"
+                name="school"
+                type="select"
+                placeholder="Seleccione un colegio"
+                value={school}
+                setValue={setSchool}
+                options={[
+                  { value: "", text: "Seleccione un colegio" },
+                  { value: "colegio_1", text: "Colegio 1" },
+                  { value: "colegio_2", text: "Colegio 2" },
+                  { value: "colegio_3", text: "Colegio 3" },
+                ]}
+              />
 
-          <AuthInputField
-            Icon={HiLockClosed}
-            disabled={isLoading}
-            label="Contraseña"
-            name="password"
-            type="password"
-            placeholder="Escriba la contraseña"
-            value={password}
-            setValue={setPassword}
-          />
+              <AuthInputField
+                disabled={isLoading || role === "admin"}
+                Icon={HiAcademicCap}
+                label="Etapa"
+                name="stage"
+                type="select"
+                placeholder="Seleccione una etapa"
+                value={stage}
+                setValue={setStage}
+                options={[
+                  { value: "", text: "Seleccione una etapa" },
+                  { value: "infantil", text: "Infantil" },
+                  { value: "primaria", text: "Primaria" },
+                  { value: "secundaria", text: "Secundaria" },
+                  { value: "bachillerato", text: "Bachillerato" },
+                ]}
+              />
+
+              <AuthInputField
+                disabled={isLoading || role === "admin"}
+                Icon={HiAcademicCap}
+                label="Curso"
+                name="grade"
+                type="select"
+                placeholder="Seleccione un curso"
+                value={grade}
+                setValue={setGrade}
+                options={[
+                  { value: "", text: "Seleccione un curso" },
+                  { value: "primero", text: "Primero" },
+                  { value: "segundo", text: "Segundo" },
+                  { value: "tercero", text: "Tercero" },
+                  { value: "cuarto", text: "Cuarto" },
+                  { value: "quinto", text: "Quinto" },
+                  { value: "sexto", text: "Sexto" },
+                ]}
+              />
+
+              <AuthInputField
+                disabled={isLoading || role === "admin"}
+                Icon={HiAcademicCap}
+                label="Clase"
+                name="class"
+                type="select"
+                placeholder="Seleccione una clase"
+                value={schoolClass}
+                setValue={setSchoolClass}
+                options={[
+                  { value: "", text: "Seleccione una clase" },
+                  { value: "a", text: "A" },
+                  { value: "b", text: "B" },
+                  { value: "c", text: "C" },
+                  { value: "d", text: "D" },
+                  { value: "e", text: "E" },
+                  { value: "f", text: "F" },
+                ]}
+              />
+            </div>
+          </div>
 
           <AuthMessageBox
             errorMessage={errorMessage}

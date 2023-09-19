@@ -24,10 +24,6 @@ Change update POST request to PUT (or something)
 
 Make login faster
 
-Make mobile navbar server component
-
-Route handlers for selecting data and revalidateTag
-
 Update database level only when session ends
 
 Parallel fetching when possible (nextjs data fetching patterns)
@@ -40,6 +36,8 @@ Cache
 
 
 -------- IMPROVEMENTS --------
+
+Make a list of schools
 
 Logout spinner
 

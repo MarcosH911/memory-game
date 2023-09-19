@@ -13,7 +13,9 @@ interface Props {
   type?: "text" | "password" | "select";
   name: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue:
+    | React.Dispatch<React.SetStateAction<string>>
+    | ((value: string) => void);
   autoComplete?: string;
   disabled: boolean;
   options?: { value: string; text: string }[];
@@ -40,7 +42,7 @@ function AuthInputField({
   };
 
   return (
-    <>
+    <div>
       <label htmlFor={name} className="mx-2 mb-1 text-base text-teal-950">
         {label}
       </label>
@@ -65,7 +67,7 @@ function AuthInputField({
                 key={index}
                 value={item.value}
                 className={twMerge(
-                  "text-teal-950",
+                  "text-teal-950 cursor-pointer",
                   !item.value && "text-gray-400",
                 )}
               >
@@ -107,7 +109,7 @@ function AuthInputField({
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 
