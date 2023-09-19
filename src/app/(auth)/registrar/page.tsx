@@ -35,6 +35,7 @@ function Page() {
     e.preventDefault();
 
     setErrorMessage("");
+    setSuccessMessage("");
     setIsLoading(true);
 
     const registerDataResponse = await fetch("/api/auth/register", {
@@ -43,8 +44,11 @@ function Page() {
         username,
         password,
         fullName,
-        newUserRole: role,
+        role,
         school,
+        stage,
+        grade,
+        schoolClass,
       }),
     });
 

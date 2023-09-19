@@ -50,8 +50,8 @@ function AuthInputField({
         <Icon className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
         {type === "select" ? (
           <select
-            name="role"
-            id="role"
+            name={name}
+            id={name}
             autoComplete="off"
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -87,7 +87,7 @@ function AuthInputField({
             disabled={disabled}
             placeholder={placeholder}
             className={twMerge(
-              "w-64 bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0",
+              "max-w-xs w-full bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0",
               disabled && "hover:cursor-not-allowed",
             )}
           />

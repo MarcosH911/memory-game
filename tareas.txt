@@ -1,5 +1,11 @@
 ------------ BUGS ------------
 
+Unique id #role (register)
+
+Register Teachers
+
+Register
+
 Add security to admin users creating other users
 
 Avatar bug in ranking

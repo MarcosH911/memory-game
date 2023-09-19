@@ -31,8 +31,13 @@ export async function POST(request: Request) {
     !response.username ||
     !response.password ||
     !response.fullName ||
-    !response.school ||
-    !response.newUserRole
+    !response.role ||
+    (response.role === "student" &&
+      (!response.school ||
+        !response.stage ||
+        !response.grade ||
+        !response.schoolClass)) ||
+    (response.role === "teacher" && !response.school)
   ) {
     return NextResponse.json(
       {
@@ -62,7 +67,7 @@ export async function POST(request: Request) {
       email: fakeEmail,
       password: response.password,
       user_metadata: {
-        data: { role: response.newUserRole },
+        data: { role: response.role },
       },
     });
 
@@ -72,7 +77,7 @@ export async function POST(request: Request) {
         message: "Error al crear el usuario",
       },
       {
-        status: 500,
+        status: 400,
       },
     );
   }
@@ -81,8 +86,11 @@ export async function POST(request: Request) {
     user_id: newUserData.user.id,
     username: response.username,
     full_name: response.fullName,
-    role: response.newUserRole,
-    school: response.school,
+    role: response.role,
+    school: response.school || null,
+    stage: response.stage || null,
+    grade: response.grade || null,
+    class: response.schoolClass || null,
   });
 
   if (newProfileError) {
@@ -91,7 +99,7 @@ export async function POST(request: Request) {
         message: "Error al crear el perfil",
       },
       {
-        status: 500,
+        status: 400,
       },
     );
   }
@@ -109,7 +117,7 @@ export async function POST(request: Request) {
         message: "Error al insertar el avatar",
       },
       {
-        status: 500,
+        status: 400,
       },
     );
   }
