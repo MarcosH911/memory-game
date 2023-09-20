@@ -42,7 +42,7 @@ function CollectionAvatarItem({ data, isSelected, userId }: Props) {
       <button
         onClick={handleAvatarSelect}
         className={twMerge(
-          "flex items-center justify-center rounded-2xl border-[3px] border-transparent p-3 duration-300 group-hover:bg-slate-300 group-hover:shadow-lg group-hover:delay-0 group-hover:duration-150 xs:border-4 xs:p-4 lg:p-6",
+          "flex items-center justify-center rounded-2xl border-[3px] border-transparent p-3 duration-300 group-hover:bg-slate-300 group-hover:shadow-lg group-hover:duration-150 xs:border-4 xs:p-4 lg:p-6",
           isSelected &&
             "border-teal-600 bg-teal-100 transition duration-300 group-hover:border-teal-600 group-hover:bg-teal-300 group-hover:duration-150",
         )}
@@ -57,7 +57,7 @@ function CollectionAvatarItem({ data, isSelected, userId }: Props) {
       </button>
       <div
         className={twMerge(
-          "absolute right-4 hidden rounded-b-md bg-teal-600 px-2.5 pb-1 pt-0.5 text-sm font-bold uppercase tracking-wider text-teal-50 opacity-0 duration-300 group-hover:shadow-lg group-hover:delay-0 group-hover:duration-150 xs:block sm:px-4 sm:pb-2 sm:pt-1 sm:text-base",
+          "absolute right-4 hidden rounded-b-md bg-teal-600 px-2.5 pb-1 pt-0.5 text-sm font-bold uppercase tracking-wider text-teal-50 opacity-0 duration-300 group-hover:shadow-lg group-hover:duration-150 xs:block sm:px-4 sm:pb-2 sm:pt-1 sm:text-base",
           isSelected && "opacity-100",
         )}
       >
