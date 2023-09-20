@@ -31,7 +31,7 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
     <div className="lg:hidden">
       <button
         onClick={() => setIsOpen((open) => !open)}
-        className="relative z-50 flex items-center justify-center -ml-8"
+        className="relative z-50 -ml-8 flex items-center justify-center"
       >
         {isOpen ? (
           <HiXMark className="text-4xl xs:text-5xl" />
@@ -41,11 +41,11 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
       </button>
       <nav
         className={twMerge(
-          "fixed left-0 top-0 translate-x-0 transition duration-300 h-screen bg-teal-50 z-40 px-6 py-28 w-full xs:w-fit",
-          !isOpen && "-translate-x-full opacity-0"
+          "fixed left-0 top-0 z-40 h-screen w-full translate-x-0 bg-teal-50 px-6 py-28 transition duration-300 xs:w-fit",
+          !isOpen && "-translate-x-full opacity-0",
         )}
       >
-        <ul className="gap-6 flex-col items-start justify-center flex">
+        <ul className="flex flex-col items-start justify-center gap-6">
           <li className="flex items-center justify-start gap-3 pr-6">
             <Image
               src={avatarUrl || "/Default-Avatar.png"}
@@ -55,11 +55,11 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
             />
             <span className="text-2xl font-semibold">{fullName}</span>
           </li>
-          <hr className="border border-slate-300 w-full -mt-1 mb-1" />
+          <hr className="-mt-1 mb-1 w-full border border-slate-300" />
           <MenuNavbar onClick={() => setIsOpen(false)} />
           <li
             onClick={handleLogout}
-            className="flex items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600 cursor-pointer"
+            className="flex cursor-pointer items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600"
           >
             <HiOutlineLogout />
             <span>Cerrar sesión</span>
@@ -69,8 +69,8 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
       <div
         onClick={() => setIsOpen(false)}
         className={twMerge(
-          "w-full h-screen bg-black/30 fixed right-0 top-0 z-30 opacity-0 transition-all invisible duration-300",
-          isOpen && "opacity-100 visible"
+          "invisible fixed right-0 top-0 z-30 h-screen w-full bg-black/30 opacity-0 transition-all duration-300",
+          isOpen && "visible opacity-100",
         )}
       ></div>
     </div>

@@ -24,10 +24,6 @@ Change update POST request to PUT (or something)
 
 Make login faster
 
-Make mobile navbar server component
-
-Route handlers for selecting data and revalidateTag
-
 Update database level only when session ends
 
 Parallel fetching when possible (nextjs data fetching patterns)
@@ -41,15 +37,11 @@ Cache
 
 -------- IMPROVEMENTS --------
 
-Logout spinner
+Add school to database
 
-Move mobile login further up
-
-Padding top in mobile register
+Make a list of schools
 
 Fix mobile loading state
-
-Spinner in login and register button
 
 Suspense in roulette items
 
@@ -59,13 +51,9 @@ Fix avatar border on loading suspense
 
 Do something while inserting in play
 
-Hide layout when playing
-
 Handle roulette for devices with worse connection
 
 Toast instead of console.error()
-
-When registering only allow to choose schools from the schools table
 
 Try catch in route handlers
 
@@ -91,8 +79,6 @@ Spinner on ranking refresh
 
 
 ---------- FEATURES ----------
-
-Change ranking refresh to spinner
 
 Buy color packs
 

@@ -51,13 +51,13 @@ async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <MainAppLayoutWrapper>
       <NavbarWrapper>
-        <ul className="gap-6 flex-row items-start justify-center hidden lg:flex">
+        <ul className="hidden flex-row items-start justify-center gap-6 lg:flex">
           <MenuNavbar />
         </ul>
         <div className="lg:hidden">
           <MobileNavbar avatarUrl={avatarUrl} fullName={fullName} />
         </div>
-        <div className="flex items-center gap-2 xs:gap-8 z-20">
+        <div className="z-20 flex items-center gap-2 xs:gap-8">
           <DiamondsNavItem>{pointsData?.total_diamonds || 0}</DiamondsNavItem>
           <CoinsNavItem>{pointsData?.total_coins || 0}</CoinsNavItem>
           <ProfileButton />

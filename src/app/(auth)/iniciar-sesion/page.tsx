@@ -40,12 +40,12 @@ function Page() {
   };
 
   return (
-    <div className="flex min-h-full items-center justify-center bg-white md:bg-transparent">
-      <div className="w-full flex items-center justify-center h-full md:h-fit md:w-fit md:rounded-xl md:border bg-white p-8 md:shadow-xl">
+    <div className="flex min-h-full items-center justify-center bg-white py-8 md:bg-transparent md:py-0">
+      <div className="-mt-16 flex h-full w-full items-center justify-center bg-white p-8 md:mt-0 md:h-fit md:w-fit md:rounded-xl md:border md:shadow-xl">
         <form
           autoComplete="on"
           onSubmit={handleLogin}
-          className="flex flex-col max-w-sm w-full align-middle"
+          className="flex w-full max-w-sm flex-col align-middle"
         >
           <h1 className="mx-2 mb-12 text-3xl font-bold text-teal-950">
             Iniciar sesión

@@ -19,7 +19,7 @@ function MenuNavbarItem({ href, Icon, text, onClick }: Props) {
       <li
         onClick={onClick}
         className={twMerge(
-          "flex items-center gap-1.5 border-b-2 border-transparent py-1 pr-2 lg:pl-2 lg:pr-3 text-lg font-semibold text-teal-950 transition hover:text-teal-600 cursor-pointer",
+          "flex cursor-pointer items-center gap-1.5 border-b-2 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600 lg:pl-2 lg:pr-3",
           pathname === href && "border-teal-950 hover:border-teal-600",
         )}
       >

@@ -10,7 +10,7 @@ function Spinner({ visible, size }: Props) {
   return (
     <CgSpinnerTwoAlt
       className={twMerge(
-        "absolute inset-0 m-auto animate-spin invisible",
+        "invisible absolute inset-0 m-auto animate-spin",
         size === "lg" && "text-lg",
         size === "xl" && "text-xl",
         size === "2xl" && "text-2xl",

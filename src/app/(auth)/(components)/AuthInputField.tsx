@@ -13,7 +13,9 @@ interface Props {
   type?: "text" | "password" | "select";
   name: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue:
+    | React.Dispatch<React.SetStateAction<string>>
+    | ((value: string) => void);
   autoComplete?: string;
   disabled: boolean;
   options?: { value: string; text: string }[];
@@ -40,7 +42,7 @@ function AuthInputField({
   };
 
   return (
-    <>
+    <div>
       <label htmlFor={name} className="mx-2 mb-1 text-base text-teal-950">
         {label}
       </label>
@@ -48,8 +50,8 @@ function AuthInputField({
         <Icon className="translate-y-0.5 text-slate-400 transition group-focus-within:text-teal-800" />
         {type === "select" ? (
           <select
-            name="role"
-            id="role"
+            name={name}
+            id={name}
             autoComplete="off"
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -65,7 +67,7 @@ function AuthInputField({
                 key={index}
                 value={item.value}
                 className={twMerge(
-                  "text-teal-950",
+                  "cursor-pointer text-teal-950",
                   !item.value && "text-gray-400",
                 )}
               >
@@ -85,7 +87,7 @@ function AuthInputField({
             disabled={disabled}
             placeholder={placeholder}
             className={twMerge(
-              "w-64 bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0",
+              "w-full max-w-xs bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0 md:w-64",
               disabled && "hover:cursor-not-allowed",
             )}
           />
@@ -107,7 +109,7 @@ function AuthInputField({
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 
