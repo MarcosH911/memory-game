@@ -1,7 +1,6 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   HiUser,
@@ -26,6 +25,8 @@ function Page() {
   const [schoolClass, setSchoolClass] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const schoolsList = useRef<{ text: string; value: string }[]>([]);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -67,14 +68,36 @@ function Page() {
 
   const handleSelectRole = (value: string) => {
     setRole(value);
-    setSchool("");
-    setStage("");
-    setGrade("");
-    setSchoolClass("");
+    if (value === "admin") {
+      setSchool("");
+      setStage("");
+      setGrade("");
+      setSchoolClass("");
+    } else if (value === "teacher") {
+      setStage("");
+      setGrade("");
+      setSchoolClass("");
+    }
   };
 
+  useEffect(() => {
+    const fetchSchools = async () => {
+      const schoolsResponse = await fetch("/api/schools");
+      const schools = await schoolsResponse.json();
+
+      schoolsList.current = schools.data.map(
+        (school: { school_name: string; school_value: string }) => ({
+          text: school.school_name,
+          value: school.school_value,
+        }),
+      );
+    };
+
+    fetchSchools();
+  });
+
   return (
-    <div className="flex h-fit min-h-full items-center justify-center bg-white py-8 md:h-full md:bg-transparent md:pt-0">
+    <div className="flex h-fit min-h-full items-center justify-center bg-white py-8 md:h-full md:bg-transparent">
       <div className="flex h-full w-full items-center justify-center bg-white p-8 md:h-fit md:w-fit md:rounded-xl md:border md:shadow-xl">
         <form
           autoComplete="off"
@@ -147,11 +170,14 @@ function Page() {
                 placeholder="Seleccione un colegio"
                 value={school}
                 setValue={setSchool}
-                options={SCHOOLS}
+                options={[
+                  { value: "", text: "Seleccione un colegio" },
+                  ...schoolsList.current,
+                ]}
               />
 
               <AuthInputField
-                disabled={isLoading || role === "admin"}
+                disabled={isLoading || role === "admin" || role === "teacher"}
                 Icon={HiAcademicCap}
                 label="Etapa"
                 name="stage"
@@ -169,7 +195,7 @@ function Page() {
               />
 
               <AuthInputField
-                disabled={isLoading || role === "admin"}
+                disabled={isLoading || role === "admin" || role === "teacher"}
                 Icon={HiAcademicCap}
                 label="Curso"
                 name="grade"
@@ -189,7 +215,7 @@ function Page() {
               />
 
               <AuthInputField
-                disabled={isLoading || role === "admin"}
+                disabled={isLoading || role === "admin" || role === "teacher"}
                 Icon={HiAcademicCap}
                 label="Clase"
                 name="class"

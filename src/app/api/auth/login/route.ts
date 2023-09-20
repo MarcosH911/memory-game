@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import getFakeEmail from "@/helpers/getFakeEmail";
+import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
 
@@ -39,5 +40,6 @@ export async function POST(request: Request) {
     );
   }
 
+  revalidatePath("/");
   return NextResponse.json({ status: 200 });
 }

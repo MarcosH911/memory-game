@@ -4,8 +4,6 @@ Add security to admin users creating other users
 
 Avatar bug in ranking
 
-Safari bug
-
 Loading state takes too long
 
 
@@ -37,17 +35,13 @@ Cache
 
 -------- IMPROVEMENTS --------
 
-Add school to database
-
-Make a list of schools
+Make store loading by parts
 
 Fix mobile loading state
 
 Suspense in roulette items
 
 Style ranking again
-
-Fix avatar border on loading suspense
 
 Do something while inserting in play
 
@@ -75,7 +69,7 @@ Revalidate data
 
 Cache data
 
-Spinner on ranking refresh
+Spinner on ranking refresh while router.refresh()
 
 
 ---------- FEATURES ----------
@@ -101,8 +95,6 @@ Register dropdown from RadixUI
 Teachers
   School
   Students grade
-
-Students grade in supabase
 
 Students grade in ranking
 
