@@ -34,11 +34,11 @@ async function Page() {
   }
 
   return (
-    <div className="mx-auto md:max-w-[60rem] xl:max-w-7xl py-8">
-      <h1 className="mb-4 text-center text-6xl lg:text-7xl font-semibold text-teal-950">
+    <div className="mx-auto py-8 xs:max-w-[40rem] md:max-w-[60rem] xl:max-w-[80rem]">
+      <h1 className="mb-8 text-center text-5xl font-semibold text-teal-950 xs:text-6xl lg:text-7xl">
         Avatares ({userAvatarsData.length})
       </h1>
-      <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 mx-8">
+      <div className="mx-3 grid grid-cols-2 gap-x-3 gap-y-3 xs:mx-8 xs:gap-x-6 xs:gap-y-10 md:grid-cols-3 xl:grid-cols-4">
         {userAvatarsData.map((item, index) => (
           <CollectionAvatarItem
             key={index}
