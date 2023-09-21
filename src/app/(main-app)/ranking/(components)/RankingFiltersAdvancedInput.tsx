@@ -22,6 +22,7 @@ function RankingFiltersAdvancedInput({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       >
+        <option value="todos">Todos</option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {option.text}
