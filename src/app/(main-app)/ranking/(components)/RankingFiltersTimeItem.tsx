@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 import { twMerge } from "tailwind-merge";
+
+import setSearchParams from "@/helpers/setSearchParams";
 
 interface Props {
   itemType: string;
@@ -14,18 +15,13 @@ function RankingFiltersTimeItem({ itemType }: Props) {
   const searchParams = useSearchParams();
   const rankingType = searchParams.get("timeFilter") || "day";
 
-  const getQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams],
-  );
-
   return (
     <div>
-      <Link href={pathname + "?" + getQueryString("timeFilter", itemType)}>
+      <Link
+        href={setSearchParams(pathname, searchParams, [
+          ["timeFilter", itemType],
+        ])}
+      >
         <li>
           <button
             className={twMerge(

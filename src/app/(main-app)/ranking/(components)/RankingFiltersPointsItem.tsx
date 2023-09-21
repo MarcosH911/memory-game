@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 import { BiSolidCoinStack } from "react-icons/bi";
 import { FaLevelUpAlt } from "react-icons/fa";
 import { IoDiamond } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
+
+import setSearchParams from "@/helpers/setSearchParams";
 
 interface Props {
   itemType: string;
@@ -17,17 +18,12 @@ function RankingFiltersPointsItem({ itemType }: Props) {
   const searchParams = useSearchParams();
   const rankingType = searchParams.get("pointsFilter") || "coins";
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams],
-  );
-
   return (
-    <Link href={pathname + "?" + createQueryString("pointsFilter", itemType)}>
+    <Link
+      href={setSearchParams(pathname, searchParams, [
+        ["pointsFilter", itemType],
+      ])}
+    >
       <li>
         <button
           className={twMerge(

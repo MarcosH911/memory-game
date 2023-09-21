@@ -2,8 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { usePathname, useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
+
 import RankingFiltersAdvancedInput from "./RankingFiltersAdvancedInput";
+import useSetSearchParams from "@/helpers/setSearchParams";
+import setSearchParams from "@/helpers/setSearchParams";
 
 const gradesList = [
   { value: "primero", text: "Primero" },
@@ -23,6 +27,9 @@ function RankingFiltersAdvanced() {
 
   const schoolsList = useRef<{ text: string; value: string }[]>([]);
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const getGrades = () => {
     if (stage === "bachillerato") {
       return gradesList.slice(0, 3);
@@ -30,6 +37,25 @@ function RankingFiltersAdvanced() {
       return gradesList.slice(0, 5);
     } else {
       return gradesList;
+    }
+  };
+
+  const handleApplyFilters = () => {
+    const params: [string, string][] = [];
+    if (school) {
+      params.push(["school", school]);
+    }
+    if (stage) {
+      params.push(["stage", stage]);
+    }
+    if (grade) {
+      params.push(["grade", grade]);
+    }
+    if (schoolClass) {
+      params.push(["school_class", schoolClass]);
+    }
+    if (params.length !== 0) {
+      setSearchParams(pathname, searchParams, params);
     }
   };
 
@@ -105,11 +131,11 @@ function RankingFiltersAdvanced() {
           </div>
 
           <div className="mt-12 flex items-center justify-center gap-6">
-            <button className="w-40 rounded-md border border-slate-300 bg-slate-200 py-3 text-2xl font-semibold text-slate-950">
-              Cancelar
-            </button>
             <button className="w-40 rounded-md border border-teal-900 bg-teal-800 py-3 text-2xl font-semibold text-slate-50">
               Aplicar
+            </button>
+            <button className="w-40 rounded-md border border-slate-300 bg-slate-200 py-3 text-2xl font-semibold text-slate-950">
+              Cancelar
             </button>
           </div>
           <Dialog.Close asChild></Dialog.Close>
@@ -125,5 +151,4 @@ function RankingFiltersAdvanced() {
     </>
   );
 }
-
 export default RankingFiltersAdvanced;

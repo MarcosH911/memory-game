@@ -4,10 +4,11 @@ import { BiSolidCoinStack } from "react-icons/bi";
 import { IoDiamond } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import Spinner from "@/components/Spinner";
+import setSearchParams from "@/helpers/setSearchParams";
 
 interface Props {
   avatarPath: string;
@@ -24,15 +25,6 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
 
   const hasEnoughCoins = userPoints.coins >= 100;
   const hasEnoughDiamonds = userPoints.coins >= 25;
-
-  const getQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams],
-  );
 
   const handleBuy = async (type: "coins" | "diamonds") => {
     if (
@@ -76,9 +68,12 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
       return;
     }
 
-    router.replace(pathname + "?" + getQueryString("hasBoughtAvatar", "true"), {
-      scroll: false,
-    });
+    router.replace(
+      setSearchParams(pathname, searchParams, [["hasBoughtAvatar", "true"]]),
+      {
+        scroll: false,
+      },
+    );
     router.refresh();
   };
 
