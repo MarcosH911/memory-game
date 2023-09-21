@@ -13,7 +13,16 @@ import {
 import AuthInputField from "../(components)/AuthInputField";
 import AuthMessageBox from "../(components)/AuthMessageBox";
 import AuthSubmitButton from "../(components)/AuthSubmitButton";
-import { SCHOOLS } from "../../../../data/constants";
+
+const gradesList = [
+  { value: "", text: "Seleccione un curso" },
+  { value: "primero", text: "Primero" },
+  { value: "segundo", text: "Segundo" },
+  { value: "tercero", text: "Tercero" },
+  { value: "cuarto", text: "Cuarto" },
+  { value: "quinto", text: "Quinto" },
+  { value: "sexto", text: "Sexto" },
+];
 
 function Page() {
   const [username, setUsername] = useState("");
@@ -80,6 +89,16 @@ function Page() {
     }
   };
 
+  const getGrades = () => {
+    if (stage === "bachillerato") {
+      return gradesList.slice(0, 3);
+    } else if (stage === "secundaria") {
+      return gradesList.slice(0, 5);
+    } else {
+      return gradesList;
+    }
+  };
+
   useEffect(() => {
     const fetchSchools = async () => {
       const schoolsResponse = await fetch("/api/schools");
@@ -89,7 +108,7 @@ function Page() {
         (school: { school_name: string; school_value: string }) => ({
           text: school.school_name,
           value: school.school_value,
-        }),
+        })
       );
     };
 
@@ -203,15 +222,7 @@ function Page() {
                 placeholder="Seleccione un curso"
                 value={grade}
                 setValue={setGrade}
-                options={[
-                  { value: "", text: "Seleccione un curso" },
-                  { value: "primero", text: "Primero" },
-                  { value: "segundo", text: "Segundo" },
-                  { value: "tercero", text: "Tercero" },
-                  { value: "cuarto", text: "Cuarto" },
-                  { value: "quinto", text: "Quinto" },
-                  { value: "sexto", text: "Sexto" },
-                ]}
+                options={getGrades()}
               />
 
               <AuthInputField
