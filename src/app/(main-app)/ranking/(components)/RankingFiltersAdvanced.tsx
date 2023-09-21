@@ -42,7 +42,7 @@ function RankingFiltersAdvanced() {
         (school: { school_name: string; school_value: string }) => ({
           text: school.school_name,
           value: school.school_value,
-        })
+        }),
       );
     };
 
@@ -53,50 +53,65 @@ function RankingFiltersAdvanced() {
     <>
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal grid grid-cols-2 grid-rows-2 bg-slate-50">
-          <RankingFiltersAdvancedInput
-            name="school"
-            label="Colegio"
-            options={schoolsList.current}
-            value={school}
-            setValue={setSchool}
-          />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal bg-slate-50 p-12">
+          <h1 className="mb-14 block text-center text-4xl font-semibold text-teal-950">
+            Filtros avanzados
+          </h1>
 
-          <RankingFiltersAdvancedInput
-            name="stage"
-            label="Curso"
-            options={[
-              { value: "infantil", text: "infantil" },
-              { value: "primaria", text: "Primaria" },
-              { value: "secundaria", text: "Secundaria" },
-              { value: "bachillerato", text: "Bachillerato" },
-            ]}
-            value={stage}
-            setValue={setStage}
-          />
+          <div className="grid grid-cols-2 grid-rows-2 gap-x-12 gap-y-8">
+            <RankingFiltersAdvancedInput
+              name="school"
+              label="Colegio"
+              options={schoolsList.current}
+              value={school}
+              setValue={setSchool}
+            />
 
-          <RankingFiltersAdvancedInput
-            name="grade"
-            label="Curso"
-            options={getGrades()}
-            value={grade}
-            setValue={setGrade}
-          />
+            <RankingFiltersAdvancedInput
+              name="stage"
+              label="Etapa"
+              options={[
+                { value: "infantil", text: "Infantil" },
+                { value: "primaria", text: "Primaria" },
+                { value: "secundaria", text: "Secundaria" },
+                { value: "bachillerato", text: "Bachillerato" },
+              ]}
+              value={stage}
+              setValue={setStage}
+            />
 
-          <RankingFiltersAdvancedInput
-            name="schoolClass"
-            label="Clase"
-            options={[
-              { value: "a", text: "A" },
-              { value: "b", text: "B" },
-              { value: "c", text: "C" },
-              { value: "d", text: "D" },
-              { value: "e", text: "E" },
-              { value: "f", text: "F" },
-            ]}
-            value={schoolClass}
-            setValue={setSchoolClass}
-          />
+            <RankingFiltersAdvancedInput
+              name="grade"
+              label="Curso"
+              options={getGrades()}
+              value={grade}
+              setValue={setGrade}
+            />
+
+            <RankingFiltersAdvancedInput
+              name="schoolClass"
+              label="Clase"
+              options={[
+                { value: "a", text: "A" },
+                { value: "b", text: "B" },
+                { value: "c", text: "C" },
+                { value: "d", text: "D" },
+                { value: "e", text: "E" },
+                { value: "f", text: "F" },
+              ]}
+              value={schoolClass}
+              setValue={setSchoolClass}
+            />
+          </div>
+
+          <div className="mt-12 flex items-center justify-center gap-6">
+            <button className="w-40 rounded-md border border-slate-300 bg-slate-200 py-3 text-2xl font-semibold text-slate-950">
+              Cancelar
+            </button>
+            <button className="w-40 rounded-md border border-teal-900 bg-teal-800 py-3 text-2xl font-semibold text-slate-50">
+              Aplicar
+            </button>
+          </div>
           <Dialog.Close asChild></Dialog.Close>
         </Dialog.Content>
       </Dialog.Root>
