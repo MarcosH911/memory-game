@@ -62,11 +62,16 @@ const config: Config = {
           from: { opacity: "0" },
           to: { opacity: "100" },
         },
+        "fade-out": {
+          from: { opacity: "100" },
+          to: { opacity: "0" },
+        },
       },
       animation: {
         "up-down": "up-down 3s ease-in-out infinite",
         "show-modal": "show-modal 300ms ease-in-out forwards",
         "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
+        "fade-out": "fade-out 3000ms ease-in-out forwards",
       },
     },
   },

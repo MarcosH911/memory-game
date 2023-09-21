@@ -5,6 +5,10 @@ function setSearchParams(
   searchParams: ReadonlyURLSearchParams,
   newSearchParams: [string, string][],
 ) {
+  if (!newSearchParams.length) {
+    return pathname;
+  }
+
   const params = new URLSearchParams(searchParams);
   newSearchParams.forEach(([name, value]) => {
     params.set(name, value);

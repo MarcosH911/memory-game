@@ -1,5 +1,11 @@
 ------------ BUGS ------------
 
+Refetch on logout and login
+
+Animate modal on close
+
+Redirecting when no search params
+
 Add security to admin users creating other users
 
 Avatar bug in ranking
