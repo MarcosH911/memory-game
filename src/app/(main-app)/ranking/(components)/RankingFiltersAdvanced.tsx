@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiAdjustmentsHorizontal, HiMiniXMark } from "react-icons/hi2";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 
 import RankingFiltersAdvancedInput from "./RankingFiltersAdvancedInput";
-import useSetSearchParams from "@/helpers/setSearchParams";
 import setSearchParams from "@/helpers/setSearchParams";
 
 const gradesList = [
