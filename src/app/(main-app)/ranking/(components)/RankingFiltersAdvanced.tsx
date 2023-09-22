@@ -45,16 +45,16 @@ function RankingFiltersAdvanced() {
 
     const params: [string, string][] = [];
     if (school) {
-      params.push(["school", school]);
+      params.push(["schoolFilter", school]);
     }
     if (stage) {
-      params.push(["stage", stage]);
+      params.push(["stageFilter", stage]);
     }
     if (grade) {
-      params.push(["grade", grade]);
+      params.push(["gradeFilter", grade]);
     }
     if (schoolClass) {
-      params.push(["school_class", schoolClass]);
+      params.push(["classFilter", schoolClass]);
     }
     if (params.length !== 0) {
       setSearchParams(pathname, searchParams, params);
@@ -70,7 +70,7 @@ function RankingFiltersAdvanced() {
         (school: { school_name: string; school_value: string }) => ({
           text: school.school_name,
           value: school.school_value,
-        }),
+        })
       );
     };
 

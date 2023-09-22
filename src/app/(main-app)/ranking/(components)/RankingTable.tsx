@@ -7,9 +7,20 @@ export const revalidate = 20;
 interface Props {
   pointsFilter: string;
   timeFilter: string;
+  schoolFilter: string;
+  stageFilter: string;
+  gradeFilter: string;
+  classFilter: string;
 }
 
-async function RankingTable({ timeFilter, pointsFilter }: Props) {
+async function RankingTable({
+  timeFilter,
+  pointsFilter,
+  schoolFilter,
+  stageFilter,
+  gradeFilter,
+  classFilter,
+}: Props) {
   const { data, error } = await supabaseClient
     .from(timeFilter)
     .select("*")

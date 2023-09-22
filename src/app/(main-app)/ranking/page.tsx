@@ -14,11 +14,15 @@ async function Page({ searchParams }: Props) {
     (searchParams.timeFilter as string) || "day"
   }`;
   const pointsFilter = (searchParams.pointsFilter as string) || "coins";
+  const schoolFilter = searchParams.schoolFilter as string;
+  const stageFilter = searchParams.stageFilter as string;
+  const gradeFilter = searchParams.gradeFilter as string;
+  const classFilter = searchParams.classFilter as string;
 
   return (
     <div className="flex h-full justify-center">
       <div className="w-[80rem]">
-        <h1 className=" mb-6 mt-8 text-center text-7xl font-semibold text-teal-800">
+        <h1 className="mb-6 mt-8 text-center text-7xl font-semibold text-teal-800">
           Ranking
         </h1>
 
@@ -26,7 +30,14 @@ async function Page({ searchParams }: Props) {
           <RankingFilters />
         </Suspense>
         <Suspense fallback={<RankingTableLoading />}>
-          <RankingTable timeFilter={timeFilter} pointsFilter={pointsFilter} />
+          <RankingTable
+            timeFilter={timeFilter}
+            pointsFilter={pointsFilter}
+            schoolFilter={schoolFilter}
+            stageFilter={stageFilter}
+            gradeFilter={gradeFilter}
+            classFilter={classFilter}
+          />
         </Suspense>
       </div>
     </div>
