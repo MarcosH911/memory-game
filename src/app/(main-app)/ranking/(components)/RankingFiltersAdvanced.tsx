@@ -78,7 +78,7 @@ function RankingFiltersAdvanced() {
     <>
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10 data-[state=closed]:animate-fade-out" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal bg-slate-50 p-12 data-[state=closed]:animate-fade-out">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 p-12 shadow-2xl data-[state=closed]:animate-fade-out">
           <h1 className="mb-14 block text-center text-4xl font-semibold text-teal-950">
             Filtros avanzados
           </h1>
