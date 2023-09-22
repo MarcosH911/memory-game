@@ -7,6 +7,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 
 import RankingFiltersAdvancedInput from "./RankingFiltersAdvancedInput";
 import setSearchParams from "@/helpers/setSearchParams";
+import { twMerge } from "tailwind-merge";
+import RankingFiltersTimeItem from "./RankingFiltersTimeItem";
+import RankingFiltersPointsItem from "./RankingFiltersPointsItem";
+
+interface Props {
+  type?: "normal" | "advanced";
+}
 
 const gradesList = [
   { value: "primero", text: "Primero" },
@@ -17,7 +24,9 @@ const gradesList = [
   { value: "sexto", text: "Sexto" },
 ];
 
-function RankingFiltersAdvanced() {
+const allRankingViews = ["day", "week", "month", "year", "all_time"];
+
+function RankingFiltersAdvanced({ type = "normal" }: Props) {
   const [school, setSchool] = useState("");
   const [stage, setStage] = useState("");
   const [grade, setGrade] = useState("");
@@ -74,17 +83,49 @@ function RankingFiltersAdvanced() {
   });
 
   return (
-    <>
+    <div
+      className={twMerge(
+        type === "normal" && "block xl:hidden",
+        type === "advanced" && "hidden xl:block",
+      )}
+    >
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10 data-[state=closed]:animate-fade-out" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 p-12 shadow-2xl data-[state=closed]:animate-fade-out">
-          <h1 className="mb-14 block text-center text-4xl font-semibold text-teal-950">
-            Filtros avanzados
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 py-20 sm:py-12 px-2 sm:px-12 shadow-2xl data-[state=closed]:animate-fade-out w-screen h-screen sm:h-fit sm:w-fit">
+          <h1 className="mb-14 block text-center text-3xl sm:text-4xl font-semibold text-teal-950">
+            {type === "normal" ? "Filtros" : "Filtros avanzados"}
           </h1>
 
-          <div className="grid grid-cols-2 grid-rows-2 gap-x-16 gap-y-8">
+          <div
+            className={twMerge(
+              "flex flex-col items-center justify-center -mt-4 gap-6 mb-8",
+              type === "advanced" && "hidden",
+            )}
+          >
+            <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
+              {allRankingViews.map((itemType, index) => (
+                <RankingFiltersTimeItem
+                  key={index}
+                  itemType={itemType}
+                  index={index}
+                />
+              ))}
+            </ul>
+
+            <ul className="relative flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
+              {["coins", "diamonds", "max_level"].map((itemType, index) => (
+                <RankingFiltersPointsItem
+                  key={index}
+                  itemType={itemType}
+                  index={index}
+                />
+              ))}
+            </ul>
+          </div>
+
+          <div className="mx-auto w-[19.05rem] xs:w-[21.3rem] sm:w-[28.5rem] grid grid-cols-2 grid-rows-2 xl:gap-x-16 gap-x-6 xs:gap-x-8 gap-y-4 xs:gap-y-6 sm:gap-y-8">
             <RankingFiltersAdvancedInput
-              name="school"
+              name={"school" + type}
               label="Colegio"
               options={schoolsList}
               value={school}
@@ -92,7 +133,7 @@ function RankingFiltersAdvanced() {
             />
 
             <RankingFiltersAdvancedInput
-              name="grade"
+              name={"grade" + type}
               label="Curso"
               options={getGrades()}
               value={grade}
@@ -100,7 +141,7 @@ function RankingFiltersAdvanced() {
             />
 
             <RankingFiltersAdvancedInput
-              name="stage"
+              name={"stage" + type}
               label="Etapa"
               options={[
                 { value: "infantil", text: "Infantil" },
@@ -113,7 +154,7 @@ function RankingFiltersAdvanced() {
             />
 
             <RankingFiltersAdvancedInput
-              name="schoolClass"
+              name={"schoolClass" + type}
               label="Clase"
               options={[
                 { value: "a", text: "A" },
@@ -128,16 +169,19 @@ function RankingFiltersAdvanced() {
             />
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-8">
+          <div className="mt-12 flex items-center justify-center gap-4 xs:gap-6 sm:gap-8">
             <button
               onClick={handleApplyFilters}
-              className="w-40 rounded-md border border-teal-900 bg-teal-700 py-3 text-2xl font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg"
+              className="sm:w-40 w-24 sx:w-28 py-1.5 xs:py-2 rounded-md border border-teal-900 bg-teal-700 sm:py-3 text-lg xs:text-xl sm:text-2xl font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg"
             >
               Aplicar
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="w-40 rounded-md border border-slate-300/50 bg-slate-200 py-3 text-2xl font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg"
+              className={twMerge(
+                "sm:w-40 xs:w-28 xs:py-2 w-24 py-1.5 rounded-md border border-slate-300/50 bg-slate-200 sm:py-3 text-lg xs:text-xl sm:text-2xl font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg",
+                type === "normal" && "hidden",
+              )}
             >
               Cancelar
             </button>
@@ -150,12 +194,15 @@ function RankingFiltersAdvanced() {
       </Dialog.Root>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg"
+        className={twMerge(
+          "flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg",
+          type === "normal" && "mb-4 mt-6 mx-auto",
+        )}
       >
         <HiAdjustmentsHorizontal className="text-xl" />
-        <span>Filtros avanzados</span>
+        <span>{type === "normal" ? "Filtros" : "Filtros avanzados"}</span>
       </button>
-    </>
+    </div>
   );
 }
 export default RankingFiltersAdvanced;

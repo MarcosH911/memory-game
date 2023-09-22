@@ -11,9 +11,10 @@ import setSearchParams from "@/helpers/setSearchParams";
 
 interface Props {
   itemType: string;
+  index?: number;
 }
 
-function RankingFiltersPointsItem({ itemType }: Props) {
+function RankingFiltersPointsItem({ itemType, index }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const rankingType = searchParams.get("pointsFilter") || "coins";
@@ -27,7 +28,9 @@ function RankingFiltersPointsItem({ itemType }: Props) {
       <li>
         <button
           className={twMerge(
-            "flex items-center gap-1.5 rounded-full px-6 py-3 text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md",
+            "flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 rounded-full sm:px-6 sm:py-3 px-1.5 xs:px-3 py-2 text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md sm:text-base text-sm",
+            index === 0 && "pl-2",
+            index === 2 && "pr-2",
             itemType === "coins" && "text-yellow-600",
             itemType === "diamonds" && "text-purple-600",
             itemType === "max_level" && "text-green-600",

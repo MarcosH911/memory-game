@@ -1,26 +1,29 @@
 import RankingFiltersPointsItem from "./RankingFiltersPointsItem";
 import RankingFiltersTimeItem from "./RankingFiltersTimeItem";
-import RankingFiltersAdvanced from "./RankingFiltersAdvanced";
+import RankingFiltersModal from "./RankingFiltersModal";
 
 const allRankingViews = ["day", "week", "month", "year", "all_time"];
 
 function RankingFilters() {
   return (
-    <div className="relative mb-4 flex items-center justify-between">
-      <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
-        {allRankingViews.map((itemType, index) => (
-          <RankingFiltersTimeItem key={index} itemType={itemType} />
-        ))}
-      </ul>
+    <>
+      <RankingFiltersModal />
+      <div className="mt-8 relative mb-4 xl:flex items-center xl:flex-row justify-between hidden">
+        <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
+          {allRankingViews.map((itemType, index) => (
+            <RankingFiltersTimeItem key={index} itemType={itemType} />
+          ))}
+        </ul>
 
-      <RankingFiltersAdvanced />
+        <RankingFiltersModal type="advanced" />
 
-      <ul className="relative flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
-        {["coins", "diamonds", "max_level"].map((itemType, index) => (
-          <RankingFiltersPointsItem key={index} itemType={itemType} />
-        ))}
-      </ul>
-    </div>
+        <ul className="relative flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
+          {["coins", "diamonds", "max_level"].map((itemType, index) => (
+            <RankingFiltersPointsItem key={index} itemType={itemType} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 

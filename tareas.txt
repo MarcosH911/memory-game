@@ -43,6 +43,8 @@ Cache
 
 -------- IMPROVEMENTS --------
 
+Ranking mobile filters only accept button
+
 Make store loading by parts
 
 Fix mobile loading state

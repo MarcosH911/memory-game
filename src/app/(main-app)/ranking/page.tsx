@@ -21,23 +21,19 @@ async function Page({ searchParams }: Props) {
 
   return (
     <div className="flex h-full justify-center">
-      <div className="w-[80rem]">
-        <h1 className="mb-6 mt-8 text-center text-7xl font-semibold text-teal-800">
-          Ranking
-        </h1>
-
+      <div className="w-full xl:w-[80rem] mx-4">
         <Suspense fallback={<RankingFiltersLoading />}>
           <RankingFilters />
         </Suspense>
         <Suspense fallback={<RankingTableLoading />}>
-          <RankingTable
+          {/* <RankingTable
             timeFilter={timeFilter}
             pointsFilter={pointsFilter}
             schoolFilter={schoolFilter}
             stageFilter={stageFilter}
             gradeFilter={gradeFilter}
             classFilter={classFilter}
-          />
+          /> */}
         </Suspense>
       </div>
     </div>
