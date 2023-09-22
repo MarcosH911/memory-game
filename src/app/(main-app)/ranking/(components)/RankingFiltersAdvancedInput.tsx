@@ -25,7 +25,7 @@ function RankingFiltersAdvancedInput({
         onChange={(e) => setValue(e.target.value)}
         className="block w-72 rounded-[0.25rem] border border-teal-950 p-1.5 text-xl font-semibold text-teal-950 shadow-md"
       >
-        <option value="todos">Todos</option>
+        <option value="">Todos</option>
         {options.map((option, index) => (
           <option key={index} value={option.value} className="text-teal-950">
             {option.text}

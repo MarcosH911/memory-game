@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Ranking refetch data
+
 Refetch on logout and login
 
 Animate modal on close

@@ -69,6 +69,7 @@ export async function POST(request: Request) {
       user_metadata: {
         data: { role: response.role },
       },
+      email_confirm: true,
     });
 
   if (newUserError || !newUserData.user) {

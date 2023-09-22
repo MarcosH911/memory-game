@@ -21,9 +21,30 @@ async function RankingTable({
   gradeFilter,
   classFilter,
 }: Props) {
+  const advancedFilters: {
+    school?: string;
+    stage?: string;
+    grade?: string;
+    class?: string;
+  } = {};
+
+  if (schoolFilter) {
+    advancedFilters.school = schoolFilter;
+  }
+  if (stageFilter) {
+    advancedFilters.stage = stageFilter;
+  }
+  if (gradeFilter) {
+    advancedFilters.grade = gradeFilter;
+  }
+  if (classFilter) {
+    advancedFilters.class = classFilter;
+  }
+
   const { data, error } = await supabaseClient
     .from(timeFilter)
     .select("*")
+    .match(advancedFilters)
     .order(pointsFilter, {
       ascending: false,
     });

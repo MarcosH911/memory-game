@@ -35,7 +35,9 @@ function Page() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const schoolsList = useRef<{ text: string; value: string }[]>([]);
+  const [schoolsList, setSchoolsList] = useState<
+    { text: string; value: string }[]
+  >([]);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -104,11 +106,13 @@ function Page() {
       const schoolsResponse = await fetch("/api/schools");
       const schools = await schoolsResponse.json();
 
-      schoolsList.current = schools.data.map(
-        (school: { school_name: string; school_value: string }) => ({
-          text: school.school_name,
-          value: school.school_value,
-        })
+      setSchoolsList(
+        schools.data.map(
+          (school: { school_name: string; school_value: string }) => ({
+            text: school.school_name,
+            value: school.school_value,
+          }),
+        ),
       );
     };
 
@@ -191,7 +195,7 @@ function Page() {
                 setValue={setSchool}
                 options={[
                   { value: "", text: "Seleccione un colegio" },
-                  ...schoolsList.current,
+                  ...schoolsList,
                 ]}
               />
 

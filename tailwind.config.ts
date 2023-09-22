@@ -71,7 +71,7 @@ const config: Config = {
         "up-down": "up-down 3s ease-in-out infinite",
         "show-modal": "show-modal 300ms ease-in-out forwards",
         "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
-        "fade-out": "fade-out 3000ms ease-in-out forwards",
+        "fade-out": "fade-out 300ms ease-in-out forwards",
       },
     },
   },

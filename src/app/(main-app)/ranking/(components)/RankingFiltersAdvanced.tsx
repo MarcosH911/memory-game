@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HiAdjustmentsHorizontal, HiMiniXMark } from "react-icons/hi2";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 
 import RankingFiltersAdvancedInput from "./RankingFiltersAdvancedInput";
@@ -25,10 +25,13 @@ function RankingFiltersAdvanced() {
   const [schoolClass, setSchoolClass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const schoolsList = useRef<{ text: string; value: string }[]>([]);
+  const [schoolsList, setSchoolsList] = useState<
+    { text: string; value: string }[]
+  >([]);
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const getGrades = () => {
     if (stage === "bachillerato") {
@@ -43,22 +46,14 @@ function RankingFiltersAdvanced() {
   const handleApplyFilters = () => {
     setIsOpen(false);
 
-    const params: [string, string][] = [];
-    if (school) {
-      params.push(["schoolFilter", school]);
-    }
-    if (stage) {
-      params.push(["stageFilter", stage]);
-    }
-    if (grade) {
-      params.push(["gradeFilter", grade]);
-    }
-    if (schoolClass) {
-      params.push(["classFilter", schoolClass]);
-    }
-    if (params.length !== 0) {
-      setSearchParams(pathname, searchParams, params);
-    }
+    router.replace(
+      setSearchParams(pathname, searchParams, [
+        ["schoolFilter", school],
+        ["stageFilter", stage],
+        ["gradeFilter", grade],
+        ["classFilter", schoolClass],
+      ]),
+    );
   };
 
   useEffect(() => {
@@ -66,11 +61,13 @@ function RankingFiltersAdvanced() {
       const schoolsResponse = await fetch("/api/schools");
       const schools = await schoolsResponse.json();
 
-      schoolsList.current = schools.data.map(
-        (school: { school_name: string; school_value: string }) => ({
-          text: school.school_name,
-          value: school.school_value,
-        })
+      setSchoolsList(
+        schools.data.map(
+          (school: { school_name: string; school_value: string }) => ({
+            text: school.school_name,
+            value: school.school_value,
+          }),
+        ),
       );
     };
 
@@ -80,8 +77,8 @@ function RankingFiltersAdvanced() {
   return (
     <>
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
-        <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10" />
-        <Dialog.Content className="data-[state=closed]:animate-fade-out fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal bg-slate-50 p-12">
+        <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10 data-[state=closed]:animate-fade-out" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-40 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal bg-slate-50 p-12 data-[state=closed]:animate-fade-out">
           <h1 className="mb-14 block text-center text-4xl font-semibold text-teal-950">
             Filtros avanzados
           </h1>
@@ -90,9 +87,17 @@ function RankingFiltersAdvanced() {
             <RankingFiltersAdvancedInput
               name="school"
               label="Colegio"
-              options={schoolsList.current}
+              options={schoolsList}
               value={school}
               setValue={setSchool}
+            />
+
+            <RankingFiltersAdvancedInput
+              name="grade"
+              label="Curso"
+              options={getGrades()}
+              value={grade}
+              setValue={setGrade}
             />
 
             <RankingFiltersAdvancedInput
@@ -106,14 +111,6 @@ function RankingFiltersAdvanced() {
               ]}
               value={stage}
               setValue={setStage}
-            />
-
-            <RankingFiltersAdvancedInput
-              name="grade"
-              label="Curso"
-              options={getGrades()}
-              value={grade}
-              setValue={setGrade}
             />
 
             <RankingFiltersAdvancedInput

@@ -11,7 +11,11 @@ function setSearchParams(
 
   const params = new URLSearchParams(searchParams);
   newSearchParams.forEach(([name, value]) => {
-    params.set(name, value);
+    if (value) {
+      params.set(name, value);
+    } else {
+      params.delete(name);
+    }
   });
   return pathname + "?" + params.toString();
 }
