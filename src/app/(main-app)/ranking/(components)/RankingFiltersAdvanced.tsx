@@ -151,7 +151,7 @@ function RankingFiltersAdvanced() {
       </Dialog.Root>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center gap-1.5 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg"
+        className="flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg"
       >
         <HiAdjustmentsHorizontal className="text-xl" />
         <span>Filtros avanzados</span>

@@ -82,6 +82,8 @@ Spinner on ranking refresh while router.refresh()
 
 ---------- FEATURES ----------
 
+School logo in ranking
+
 Buy color packs
 
 Ranking with number of avatars
@@ -117,3 +119,5 @@ Server actions
 Feedback button
 
 Landing page
+
+Brand page with school colors, logo and domain
