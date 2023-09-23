@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Updating level
+
 Ranking refetch data
 
 Refetch on logout and login
