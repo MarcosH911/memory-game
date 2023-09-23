@@ -28,7 +28,7 @@ function RakingTableReloadButton({
   }, [finishedReloading]);
 
   return (
-    <div>
+    <div className="hidden sm:block">
       <button
         onClick={handleReload}
         className="absolute right-3.5 top-3.5 rounded-md p-1.5 text-2xl text-white transition hover:bg-teal-800"

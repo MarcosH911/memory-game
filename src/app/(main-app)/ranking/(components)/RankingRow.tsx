@@ -16,14 +16,14 @@ function RankingRow({ data, index, type }: Props) {
   const avatarUrl = getAvatarImage(data.avatar_path);
 
   return (
-    <tr className="flex h-14 items-center justify-around px-24 even:bg-teal-100">
-      <td className="flex w-[25%] items-center justify-center text-lg font-bold">
+    <tr className="flex h-14 items-center justify-around px-0 sm:pl-4 sm:pr-8 md:px-12 lg:px-24 even:bg-teal-100">
+      <td className="flex w-[22.5%] xs:w-[25%] items-center justify-center text-lg font-bold">
         {index + 1}
       </td>
-      <td className="flex w-[25%] items-center justify-center">
+      <td className="flex w-[22.5%] xs:w-[25%] items-center justify-center">
         <Image src={avatarUrl} alt="Avatar Image" width={40} height={40} />
       </td>
-      <td className="flex w-[25%] items-center justify-center font-medium">
+      <td className="flex w-[30%] xs:w-[25%] items-center justify-center font-medium text-center">
         {data.full_name}
       </td>
       <td

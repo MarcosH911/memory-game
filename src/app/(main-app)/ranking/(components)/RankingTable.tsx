@@ -54,21 +54,21 @@ async function RankingTable({
   }
 
   return (
-    <div className="relative rounded-lg shadow-xl">
+    <div className="relative rounded-lg sm:shadow-xl">
       <RakingTableReloadButton finishedReloading={true} />
       <table className="w-full">
         <thead>
-          <tr className="flex h-16 items-center justify-around rounded-t-lg bg-teal-700 px-24 text-teal-50 shadow-xl">
-            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
+          <tr className="flex h-16 items-center justify-around sm:rounded-t-lg bg-teal-700 px-0 sm:pl-4 sm:pr-8 md:px-12 lg:px-24 text-teal-50 shadow-xl xs:font-bold xs:text-lg text-base font-semibold">
+            <th className="flex w-[22.5%] xs:w-[25%] items-center justify-center">
               Posición
             </th>
-            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
+            <th className="flex w-[22.5%] xs:w-[25%] items-center justify-center">
               Avatar
             </th>
-            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
+            <th className="flex w-[30%] xs:w-[25%] items-center justify-center">
               Nombre
             </th>
-            <th className="flex w-[25%] items-center justify-center text-lg font-bold">
+            <th className="flex w-[25%] items-center justify-center">
               {pointsFilter === "coins" && "Monedas"}
               {pointsFilter === "diamonds" && "Diamantes"}
               {pointsFilter === "max_level" && "Máximo nivel"}
@@ -77,7 +77,7 @@ async function RankingTable({
         </thead>
       </table>
 
-      <div className="scrollbar-ranking 2xl:h-[calc(100vh-18rem)] h-[calc(100vh-16rem)] overflow-y-auto rounded-b-lg">
+      <div className="scrollbar-ranking 2xl:h-[calc(100vh-18rem)] h-[calc(100vh-14.7rem)] sm:h-[calc(100vh-16rem)] overflow-y-auto sm:rounded-b-lg">
         <table className="w-full rounded-lg">
           <tbody className="h-full rounded-lg">
             {data?.map((item, index) => (
