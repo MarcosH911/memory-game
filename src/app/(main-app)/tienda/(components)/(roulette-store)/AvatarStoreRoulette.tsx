@@ -1,6 +1,3 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-
 import shuffleArray from "@/helpers/shuffleArray";
 import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreRouletteBox from "./AvatarStoreRouletteBox";

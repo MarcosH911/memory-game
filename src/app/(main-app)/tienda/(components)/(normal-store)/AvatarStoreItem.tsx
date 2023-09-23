@@ -1,4 +1,3 @@
-import { FileObject } from "@supabase/storage-js";
 import Image from "next/image";
 
 import getAvatarImage from "@/utils/getAvatarImage";

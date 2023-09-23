@@ -25,11 +25,9 @@ function AvatarStoreRouletteBox({
   hasEnoughDiamonds,
 }: Props) {
   const [showAvatarModal, setShowAvatarModal] = useState(false);
-
-  // TODO: router.refresh() reload avatar images
+  const [isSpinningRoulette, setIsSpinningRoulette] = useState(false);
 
   const rouletteItemsRef = useRef<HTMLDivElement | null>(null);
-  const [isSpinningRoulette, setIsSpinningRoulette] = useState(false);
   const currentSelectedAvatarUrl = useRef(selectedAvatarUrl);
   const currentAvatarsUrls = useRef<string[]>(avatarsUrls);
 
