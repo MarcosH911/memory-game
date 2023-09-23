@@ -28,7 +28,7 @@ function RankingFiltersPointsItem({ itemType, index }: Props) {
       <li>
         <button
           className={twMerge(
-            "flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 rounded-full sm:px-6 sm:py-3 px-1.5 xs:px-3 py-2 text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md sm:text-base text-sm",
+            "flex items-center gap-0.5 rounded-full px-1.5 py-2 text-sm text-yellow-600 transition duration-200 hover:bg-slate-300 hover:shadow-md xs:gap-1 xs:px-3 sm:gap-1.5 sm:px-6 sm:py-3 sm:text-base",
             index === 0 && "pl-2",
             index === 2 && "pr-2",
             itemType === "coins" && "text-yellow-600",

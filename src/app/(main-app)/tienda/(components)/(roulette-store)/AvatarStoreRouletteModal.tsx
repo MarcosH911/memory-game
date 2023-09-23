@@ -1,7 +1,5 @@
-import sleep from "@/helpers/sleep";
-import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { useEffect } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 interface Props {
   showAvatarModal: boolean;

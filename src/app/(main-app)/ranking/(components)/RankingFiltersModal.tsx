@@ -91,14 +91,14 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
     >
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10 data-[state=closed]:animate-fade-out" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 py-20 sm:py-12 px-2 sm:px-12 shadow-2xl data-[state=closed]:animate-fade-out w-screen h-screen sm:h-fit sm:w-fit">
-          <h1 className="mb-14 block text-center text-3xl sm:text-4xl font-semibold text-teal-950">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 h-screen w-screen origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 px-2 py-20 shadow-2xl data-[state=closed]:animate-fade-out sm:h-fit sm:w-fit sm:px-12 sm:py-12">
+          <h1 className="mb-14 block text-center text-3xl font-semibold text-teal-950 sm:text-4xl">
             {type === "normal" ? "Filtros" : "Filtros avanzados"}
           </h1>
 
           <div
             className={twMerge(
-              "flex flex-col items-center justify-center -mt-4 gap-6 mb-8",
+              "-mt-4 mb-8 flex flex-col items-center justify-center gap-6",
               type === "advanced" && "hidden",
             )}
           >
@@ -123,7 +123,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
             </ul>
           </div>
 
-          <div className="mx-auto w-[19.05rem] xs:w-[21.3rem] sm:w-[28.5rem] grid grid-cols-2 grid-rows-2 xl:gap-x-16 gap-x-6 xs:gap-x-8 gap-y-4 xs:gap-y-6 sm:gap-y-8">
+          <div className="mx-auto grid w-[19.05rem] grid-cols-2 grid-rows-2 gap-x-6 gap-y-4 xs:w-[21.3rem] xs:gap-x-8 xs:gap-y-6 sm:w-[28.5rem] sm:gap-y-8 xl:gap-x-16">
             <RankingFiltersAdvancedInput
               name={"school" + type}
               label="Colegio"
@@ -172,14 +172,14 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
           <div className="mt-12 flex items-center justify-center gap-4 xs:gap-6 sm:gap-8">
             <button
               onClick={handleApplyFilters}
-              className="sm:w-40 w-24 sx:w-28 py-1.5 xs:py-2 rounded-md border border-teal-900 bg-teal-700 sm:py-3 text-lg xs:text-xl sm:text-2xl font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg"
+              className="sx:w-28 w-24 rounded-md border border-teal-900 bg-teal-700 py-1.5 text-lg font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg xs:py-2 xs:text-xl sm:w-40 sm:py-3 sm:text-2xl"
             >
               Aplicar
             </button>
             <button
               onClick={() => setIsOpen(false)}
               className={twMerge(
-                "sm:w-40 xs:w-28 xs:py-2 w-24 py-1.5 rounded-md border border-slate-300/50 bg-slate-200 sm:py-3 text-lg xs:text-xl sm:text-2xl font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg",
+                "w-24 rounded-md border border-slate-300/50 bg-slate-200 py-1.5 text-lg font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg xs:w-28 xs:py-2 xs:text-xl sm:w-40 sm:py-3 sm:text-2xl",
                 type === "normal" && "hidden",
               )}
             >
@@ -196,7 +196,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
         onClick={() => setIsOpen(true)}
         className={twMerge(
           "flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg",
-          type === "normal" && "mb-4 mt-6 mx-auto",
+          type === "normal" && "mx-auto mb-4 mt-6",
         )}
       >
         <HiAdjustmentsHorizontal className="text-xl" />

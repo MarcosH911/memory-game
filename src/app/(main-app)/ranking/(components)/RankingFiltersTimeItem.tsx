@@ -23,7 +23,7 @@ function RankingFiltersTimeItem({ itemType, index }: Props) {
       <li>
         <button
           className={twMerge(
-            "rounded-full px-2 py-1.5 xs:px-3 sm:px-5 sm:py-3 font-semibold text-slate-950 transition duration-200 hover:bg-slate-300 hover:shadow-md text-sm sm:text-base",
+            "rounded-full px-2 py-1.5 text-sm font-semibold text-slate-950 transition duration-200 hover:bg-slate-300 hover:shadow-md xs:px-3 sm:px-5 sm:py-3 sm:text-base",
             rankingType === itemType &&
               "bg-slate-600 text-slate-50 shadow-md hover:bg-slate-600 hover:text-slate-50",
             index === 0 && "pl-2.5",

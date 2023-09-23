@@ -21,7 +21,7 @@ async function Page({ searchParams }: Props) {
 
   return (
     <div className="flex h-full justify-center">
-      <div className="w-full xl:w-[80rem] sm:mx-4">
+      <div className="w-full sm:mx-4 xl:w-[80rem]">
         <Suspense fallback={<RankingFiltersLoading />}>
           <RankingFilters />
         </Suspense>

@@ -8,7 +8,7 @@ function RankingFilters() {
   return (
     <>
       <RankingFiltersModal />
-      <div className="mt-8 relative mb-4 xl:flex items-center xl:flex-row justify-between hidden">
+      <div className="relative mb-4 mt-8 hidden items-center justify-between xl:flex xl:flex-row">
         <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
           {allRankingViews.map((itemType, index) => (
             <RankingFiltersTimeItem key={index} itemType={itemType} />
