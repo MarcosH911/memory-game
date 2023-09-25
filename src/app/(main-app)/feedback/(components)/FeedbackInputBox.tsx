@@ -28,6 +28,14 @@ function FeedbackInputBox() {
       // TODO: handle warning
       return;
     }
+
+    fetch("/api/feedback", {
+      method: "post",
+      body: JSON.stringify({
+        text,
+        tags,
+      }),
+    });
   };
 
   const handleSetTags = (newTag: string) => {
