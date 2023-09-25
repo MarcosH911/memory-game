@@ -24,7 +24,7 @@ function Page() {
   return (
     <div>
       <h1 className="text-6xl font-bold text-emerald-950 mt-8 text-center">
-        Sugerencias
+        Feedback
       </h1>
       <h2 className="text-xl text-center text-teal-800 mt-6 mb-10">
         Ayúdanos a mejorar
