@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Login is slow because it redirects to /play
+
 Updating level
 
 Ranking refetch data
