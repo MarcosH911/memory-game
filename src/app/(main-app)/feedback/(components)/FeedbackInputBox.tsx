@@ -6,15 +6,36 @@ import { HiMiniCheck, HiMiniPlus, HiPlus } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 function FeedbackInputBox() {
-  const [inputText, setInputText] = useState("");
-  const [isBugTagSelected, setIsBugTagSelected] = useState(false);
-  const [isSuggestionTagSelected, setIsSuggestionTagSelected] = useState(false);
+  const [text, setText] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+
+  const isBugTagSelected = tags.includes("bug");
+  const isSuggestionTagSelected = tags.includes("suggestion");
 
   const handleReload = (e: BeforeUnloadEvent) => {
-    if (inputText !== "") {
+    if (text !== "") {
       e.preventDefault();
       e.returnValue = "";
     }
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (text === "") return;
+
+    if (text.length > 500) {
+      // TODO: handle warning
+      return;
+    }
+  };
+
+  const handleSetTags = (newTag: string) => {
+    setTags((tags) =>
+      tags.includes(newTag)
+        ? tags.filter((tag) => tag !== newTag)
+        : [...tags, "bug"]
+    );
   };
 
   useEffect(() => {
@@ -23,12 +44,6 @@ function FeedbackInputBox() {
     return () => window.removeEventListener("beforeunload", handleReload);
   });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-
-    if (inputText === "") return;
-  }
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -36,7 +51,7 @@ function FeedbackInputBox() {
     >
       <span
         role="textbox"
-        onInput={(e) => setInputText(e.currentTarget.innerText)}
+        onInput={(e) => setText(e.currentTarget.innerText)}
         spellCheck="true"
         contentEditable
         className="text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950"
@@ -45,7 +60,7 @@ function FeedbackInputBox() {
       <div
         className={twMerge(
           "hidden group-focus-within:block",
-          inputText !== "" && "block"
+          text !== "" && "block"
         )}
       >
         <hr className="border-slate-200" />
@@ -53,7 +68,7 @@ function FeedbackInputBox() {
         <div className="flex w-full justify-between items-center mt-4 mb-6">
           <div className="flex items-center justify-center gap-5">
             <button
-              onClick={() => setIsBugTagSelected((selected) => !selected)}
+              onClick={() => handleSetTags("bug")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-red-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-red-600 transition duration-100",
                 isBugTagSelected && "bg-red-600 text-red-50"
@@ -67,9 +82,7 @@ function FeedbackInputBox() {
               <span>Error</span>
             </button>
             <button
-              onClick={() =>
-                setIsSuggestionTagSelected((selected) => !selected)
-              }
+              onClick={() => handleSetTags("suggestion")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-blue-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-blue-600 transition duration-100",
                 isSuggestionTagSelected && "bg-blue-600 text-blue-50"
