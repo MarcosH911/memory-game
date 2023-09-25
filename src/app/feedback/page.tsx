@@ -1,5 +1,5 @@
 import FeedbackItem from "./(components)/FeedbackItem";
-import FeedbackTextBox from "./(components)/FeedbackTextBox";
+import FeedbackInputBox from "./(components)/FeedbackInputBox";
 
 const allItems = [
   {
@@ -22,12 +22,20 @@ const allItems = [
 
 function Page() {
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-6">
-      <FeedbackTextBox />
+    <div>
+      <h1 className="text-6xl font-bold text-emerald-950 mt-8 text-center">
+        Sugerencias
+      </h1>
+      <h2 className="text-xl text-center text-teal-800 mt-6 mb-10">
+        Ayúdanos a mejorar
+      </h2>
+      <div className="mx-auto flex max-w-3xl flex-col justify-start gap-6">
+        <FeedbackInputBox />
 
-      {allItems.map((item) => (
-        <FeedbackItem key={item.id} data={item} />
-      ))}
+        {allItems.map((item) => (
+          <FeedbackItem key={item.id} data={item} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ const nunito = Nunito({
 
 function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={nunito.variable}>
+    <html lang="es" className={nunito.variable}>
       <body className="h-screen bg-teal-50">
         {children}
         <Analytics />
