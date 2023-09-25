@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/Spinner";
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { HiMiniCheck, HiMiniPlus, HiPlus } from "react-icons/hi2";
@@ -8,6 +9,9 @@ import { twMerge } from "tailwind-merge";
 function FeedbackInputBox() {
   const [text, setText] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const inputRef = useRef<HTMLSpanElement>(null);
 
   const isBugTagSelected = tags.includes("bug");
   const isSuggestionTagSelected = tags.includes("suggestion");
@@ -19,30 +23,49 @@ function FeedbackInputBox() {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     e.preventDefault();
 
-    if (text === "") return;
-
-    if (text.length > 500) {
+    if (text === "") {
       // TODO: handle warning
+      setIsLoading(false);
       return;
     }
 
-    fetch("/api/feedback", {
-      method: "post",
-      body: JSON.stringify({
-        text,
-        tags,
-      }),
-    });
+    if (text.length > 500) {
+      // TODO: handle warning
+      setIsLoading(false);
+      return;
+    }
+
+    const insertFeedbackResponse = await fetch(
+      "/api/feedback/insert-feedback",
+      {
+        method: "post",
+        body: JSON.stringify({
+          text,
+          tags,
+        }),
+      },
+    );
+
+    if (insertFeedbackResponse.status === 200) {
+      setText("");
+      setTags([]);
+      inputRef.current!.textContent = "";
+      (document.activeElement as HTMLElement).blur();
+    }
+    setIsLoading(false);
   };
 
-  const handleSetTags = (newTag: string) => {
+  const handleSetTags = (e: React.MouseEvent, newTag: string) => {
+    e.preventDefault();
+
     setTags((tags) =>
       tags.includes(newTag)
         ? tags.filter((tag) => tag !== newTag)
-        : [...tags, "bug"]
+        : [...tags, newTag],
     );
   };
 
@@ -61,14 +84,16 @@ function FeedbackInputBox() {
         role="textbox"
         onInput={(e) => setText(e.currentTarget.innerText)}
         spellCheck="true"
-        contentEditable
-        className="text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950"
+        contentEditable={!isLoading}
+        ref={inputRef}
+        aria-disabled={isLoading}
+        className="text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950 aria-disabled:cursor-wait"
       ></span>
 
       <div
         className={twMerge(
           "hidden group-focus-within:block",
-          text !== "" && "block"
+          text !== "" && "block",
         )}
       >
         <hr className="border-slate-200" />
@@ -76,10 +101,10 @@ function FeedbackInputBox() {
         <div className="flex w-full justify-between items-center mt-4 mb-6">
           <div className="flex items-center justify-center gap-5">
             <button
-              onClick={() => handleSetTags("bug")}
+              onClick={(e) => handleSetTags(e, "bug")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-red-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-red-600 transition duration-100",
-                isBugTagSelected && "bg-red-600 text-red-50"
+                isBugTagSelected && "bg-red-600 text-red-50",
               )}
             >
               {isBugTagSelected ? (
@@ -90,10 +115,10 @@ function FeedbackInputBox() {
               <span>Error</span>
             </button>
             <button
-              onClick={() => handleSetTags("suggestion")}
+              onClick={(e) => handleSetTags(e, "suggestion")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-blue-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-blue-600 transition duration-100",
-                isSuggestionTagSelected && "bg-blue-600 text-blue-50"
+                isSuggestionTagSelected && "bg-blue-600 text-blue-50",
               )}
             >
               {isSuggestionTagSelected ? (
@@ -106,9 +131,15 @@ function FeedbackInputBox() {
           </div>
           <button
             type="submit"
-            className="bg-teal-600 px-5 py-1.5 rounded-lg font-bold text-lg text-teal-50 shadow-md hover:bg-teal-700 hover:shadow-lg transition duration-200"
+            className={twMerge(
+              "bg-teal-600 px-5 py-1.5 rounded-lg font-bold text-lg text-teal-50 shadow-md hover:bg-teal-700 hover:shadow-lg transition duration-200 relative",
+              isLoading && "cursor-wait bg-slate-400 hover:bg-slate-400",
+            )}
           >
-            Publicar
+            <Spinner visible={isLoading} size="2xl" />
+            <span className={twMerge("visible", isLoading && "invisible")}>
+              Publicar
+            </span>
           </button>
         </div>
       </div>
