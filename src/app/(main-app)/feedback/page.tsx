@@ -37,9 +37,7 @@ function Page() {
   useEffect(() => {
     const getItems = async () => {
       setIsLoading(true);
-      console.log("AAA");
       await getFeedbackItems(setFeedbackItems, offset);
-      console.log("BBB");
       setIsLoading(false);
     };
 
