@@ -10,9 +10,9 @@ export async function GET(request: Request) {
   const supabase = createRouteHandlerClient({ cookies });
 
   const { data, error } = await supabase
-    .from("feedback")
-    .select("text, tags, likes")
-    .order("likes", { ascending: false })
+    .from("feedback_posts")
+    .select("id, text, tags, votes")
+    .order("votes", { ascending: false })
     .range(offset, offset + 9);
 
   if (error) {

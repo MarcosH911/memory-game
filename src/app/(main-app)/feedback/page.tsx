@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
@@ -30,7 +30,7 @@ function Page() {
       id: string;
       text: string;
       tags: string;
-      likes: number;
+      votes: number;
     }[]
   >([]);
 

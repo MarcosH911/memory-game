@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import FeedbackLikes from "./FeedbackLikes";
+import FeedbackVotes from "./FeedbackVotes";
 import React from "react";
 
 interface Props {
-  data: { id: string; text: string; likes: number };
+  data: { id: string; text: string; votes: number };
   setOffset: React.Dispatch<React.SetStateAction<number>>;
   isLast: boolean;
 }
@@ -37,7 +37,7 @@ function FeedbackItem({ data, setOffset, isLast }: Props) {
       ref={itemRef}
       className="flex rounded-2xl bg-white py-6 pr-12 text-teal-950 shadow-lg"
     >
-      <FeedbackLikes likes={data.likes} />
+      <FeedbackVotes votes={data.votes} postId={data.id} />
       <span className="text-lg flex items-center">{data.text}</span>
     </div>
   );

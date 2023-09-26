@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Refetch after insert feedback and insert points
+
 Login is slow because it redirects to /play
 
 Updating level

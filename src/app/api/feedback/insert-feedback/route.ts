@@ -8,10 +8,8 @@ export async function POST(request: Request) {
   const response = await request.json();
   const supabase = createRouteHandlerClient<Database>({ cookies });
 
-  console.log("AAA");
-
   const { error } = await supabase
-    .from("feedback")
+    .from("feedback_posts")
     .insert({ text: response.text, tags: response.tags });
 
   if (error) {
