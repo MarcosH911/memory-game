@@ -28,7 +28,7 @@ async function Page() {
     }
 
     // TODO: Fix error
-    feedbackPosts.push(data);
+    feedbackPosts.push(...data);
     offset += 10;
   };
 

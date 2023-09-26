@@ -16,10 +16,11 @@ function FeedbackLikes({ likes }: Props) {
   const [userLike, setUserLike] = useState<"" | "like" | "dislike">("");
 
   return (
-    <div className="px-6">
+    <div className="px-6 flex items-center justify-center flex-col font-semibold">
       <div>
         {userLike === "like" ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
       </div>
+      <span>{likes}</span>
       <div>
         {userLike === "dislike" ? (
           <PiArrowFatDownFill />

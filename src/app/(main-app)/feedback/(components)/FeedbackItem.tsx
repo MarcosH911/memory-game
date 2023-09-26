@@ -5,8 +5,6 @@ interface Props {
 }
 
 function FeedbackItem({ data }: Props) {
-  console.log(data);
-
   return (
     <div className="flex rounded-2xl bg-white py-6 pr-12 text-teal-950 shadow-lg">
       <FeedbackLikes likes={data.likes} />
