@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface Props {
   visible: boolean;
-  size: "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl";
+  size: "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl";
 }
 
 function Spinner({ visible, size }: Props) {
@@ -17,6 +17,9 @@ function Spinner({ visible, size }: Props) {
         size === "3xl" && "text-3xl",
         size === "4xl" && "text-4xl",
         size === "5xl" && "text-5xl",
+        size === "6xl" && "text-6xl",
+        size === "7xl" && "text-7xl",
+        size === "8xl" && "text-8xl",
         visible && "visible",
       )}
     />

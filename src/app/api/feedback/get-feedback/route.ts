@@ -5,14 +5,15 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
-  const response = await request.json();
+  const { searchParams } = new URL(request.url);
+  const offset = Number(searchParams.get("offset"));
   const supabase = createRouteHandlerClient({ cookies });
 
   const { data, error } = await supabase
     .from("feedback")
     .select("text, tags, likes")
     .order("likes", { ascending: false })
-    .range(response.offset, response.offset + 9);
+    .range(offset, offset + 9);
 
   if (error) {
     console.error("There was an error getting the feedback");

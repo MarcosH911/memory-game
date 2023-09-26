@@ -1,44 +1,54 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import Spinner from "@/components/Spinner";
 
-const feedbackPosts: {
-  id: string;
-  text: string;
-  tags: string;
-  likes: number;
-}[] = [];
+const getFeedbackItems = async (
+  setFeedbackItems: React.Dispatch<any>,
+  offset: number,
+) => {
+  const feedbackItemsPromise = await fetch(
+    `/api/feedback/get-feedback?offset=${offset}`,
+    {
+      method: "get",
+    },
+  );
 
-async function Page() {
-  let offset = 0;
+  const { data: feedbackItemsData } = await feedbackItemsPromise.json();
 
-  const getFeedbackItems = async () => {
-    const supabase = createServerComponentClient<Database>({ cookies });
+  setFeedbackItems((items: any) => [...items, ...feedbackItemsData]);
+};
 
-    const { data, error } = await supabase
-      .from("feedback")
-      .select("id, text, tags, likes")
-      .order("likes", { ascending: false })
-      .range(offset, offset + 9);
+function Page() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const [feedbackItems, setFeedbackItems] = useState<
+    {
+      id: string;
+      text: string;
+      tags: string;
+      likes: number;
+    }[]
+  >([]);
 
-    if (error || !data) {
-      console.error("There was an error getting the feedback");
-      return;
-    }
+  useEffect(() => {
+    const getItems = async () => {
+      setIsLoading(true);
+      console.log("AAA");
+      await getFeedbackItems(setFeedbackItems, offset);
+      console.log("BBB");
+      setIsLoading(false);
+    };
 
-    // TODO: Fix error
-    feedbackPosts.push(...data);
-    offset += 10;
-  };
-
-  await getFeedbackItems();
-
-  // console.log(feedbackPosts);
+    getItems();
+  }, [offset]);
 
   return (
-    <div>
-      <h1 className="text-6xl font-bold text-emerald-950 mt-8 text-center">
+    <div className="pb-20">
+      <h1 className="text-6xl font-bold text-emerald-950 pt-8 text-center">
         Feedback
       </h1>
       <h2 className="text-xl text-center text-teal-800 mt-6 mb-10">
@@ -46,10 +56,17 @@ async function Page() {
       </h2>
       <div className="mx-auto flex max-w-3xl flex-col justify-start gap-6">
         <FeedbackInputBox />
-
-        {feedbackPosts.map((item) => (
-          <FeedbackItem key={item.id} data={item} />
+        {feedbackItems.map((item, index) => (
+          <FeedbackItem
+            key={index}
+            data={item}
+            setOffset={setOffset}
+            isLast={index === feedbackItems.length - 1}
+          />
         ))}
+      </div>
+      <div className="relative mt-20">
+        <Spinner visible={isLoading} size="5xl" />
       </div>
     </div>
   );
