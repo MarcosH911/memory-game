@@ -1,26 +1,41 @@
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const allItems = [
-  {
-    id: "1",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue sapien, tempor at diam vitae, varius molestie enim. Nulla commodo arcu pharetra consequat fringilla. Donec et nisi et lorem egestas rhoncus. Praesent ut mi sem. Fusce a ullamcorper massa. Nulla facilisi. Fusce semper nibh quis orci dictum dictum. Morbi hendrerit, libero a dictum vestibulum, lorem lectus rhoncus libero, eget porttitor quam dui ut neque. Cras tortor tellus, porttitor id dictum idlorem ipsum dolor sit amet consectetur adipisicing elit dolorem repudiandae nesciunt suscipit corrupti consequuntur",
-    likes: 1,
-  },
-  { id: "2", text: "No me carga la página", likes: 0 },
-  {
-    id: "3",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue sapien, tempor at diam vitae, varius molestie enim. Nulla commodo arcu pharetra consequat fringilla. Donec et nisi et lorem egestas rhoncus. Praesent ut mi sem. Fusce a ullamcorper massa. Nulla facilisi. Fusce semper nibh quis orci dictum dictum. Morbi hendrerit, libero a dictum vestibulum",
-    likes: 32,
-  },
-  {
-    id: "4",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue sapien, tempor at diam vitae, varius molestie enim. Nulla commodo arcu pharetra consequat fringilla. Donec et nisi et lorem egestas rhoncus.",
-    likes: 3,
-  },
-];
+const feedbackPosts: {
+  id: string;
+  text: string;
+  tags: string;
+  likes: number;
+}[] = [];
 
-function Page() {
+async function Page() {
+  let offset = 0;
+
+  const getFeedbackItems = async () => {
+    const supabase = createServerComponentClient<Database>({ cookies });
+
+    const { data, error } = await supabase
+      .from("feedback")
+      .select("id, text, tags, likes")
+      .order("likes", { ascending: false })
+      .range(offset, offset + 9);
+
+    if (error || !data) {
+      console.error("There was an error getting the feedback");
+      return;
+    }
+
+    // TODO: Fix error
+    feedbackPosts.push(data);
+    offset += 10;
+  };
+
+  await getFeedbackItems();
+
+  // console.log(feedbackPosts);
+
   return (
     <div>
       <h1 className="text-6xl font-bold text-emerald-950 mt-8 text-center">
@@ -32,7 +47,7 @@ function Page() {
       <div className="mx-auto flex max-w-3xl flex-col justify-start gap-6">
         <FeedbackInputBox />
 
-        {allItems.map((item) => (
+        {feedbackPosts.map((item) => (
           <FeedbackItem key={item.id} data={item} />
         ))}
       </div>

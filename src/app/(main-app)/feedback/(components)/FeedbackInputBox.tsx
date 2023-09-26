@@ -37,6 +37,10 @@ function FeedbackInputBox() {
       // TODO: handle warning
       setIsLoading(false);
       return;
+    } else if (text.length < 5) {
+      // TODO: handle warning
+      setIsLoading(false);
+      return;
     }
 
     const insertFeedbackResponse = await fetch(
@@ -47,7 +51,7 @@ function FeedbackInputBox() {
           text,
           tags,
         }),
-      },
+      }
     );
 
     if (insertFeedbackResponse.status === 200) {
@@ -65,7 +69,7 @@ function FeedbackInputBox() {
     setTags((tags) =>
       tags.includes(newTag)
         ? tags.filter((tag) => tag !== newTag)
-        : [...tags, newTag],
+        : [...tags, newTag]
     );
   };
 
@@ -93,7 +97,7 @@ function FeedbackInputBox() {
       <div
         className={twMerge(
           "hidden group-focus-within:block",
-          text !== "" && "block",
+          text !== "" && "block"
         )}
       >
         <hr className="border-slate-200" />
@@ -104,7 +108,7 @@ function FeedbackInputBox() {
               onClick={(e) => handleSetTags(e, "bug")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-red-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-red-600 transition duration-100",
-                isBugTagSelected && "bg-red-600 text-red-50",
+                isBugTagSelected && "bg-red-600 text-red-50"
               )}
             >
               {isBugTagSelected ? (
@@ -118,7 +122,7 @@ function FeedbackInputBox() {
               onClick={(e) => handleSetTags(e, "suggestion")}
               className={twMerge(
                 "flex items-center justify-center gap-0.5 uppercase text-xs border-blue-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-blue-600 transition duration-100",
-                isSuggestionTagSelected && "bg-blue-600 text-blue-50",
+                isSuggestionTagSelected && "bg-blue-600 text-blue-50"
               )}
             >
               {isSuggestionTagSelected ? (
@@ -133,7 +137,7 @@ function FeedbackInputBox() {
             type="submit"
             className={twMerge(
               "bg-teal-600 px-5 py-1.5 rounded-lg font-bold text-lg text-teal-50 shadow-md hover:bg-teal-700 hover:shadow-lg transition duration-200 relative",
-              isLoading && "cursor-wait bg-slate-400 hover:bg-slate-400",
+              isLoading && "cursor-wait bg-slate-400 hover:bg-slate-400"
             )}
           >
             <Spinner visible={isLoading} size="2xl" />
