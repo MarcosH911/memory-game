@@ -49,6 +49,8 @@ Cache
 
 -------- IMPROVEMENTS --------
 
+Style feedback votes
+
 Ranking mobile filters only accept button
 
 Make store loading by parts
