@@ -46,15 +46,15 @@ function Page() {
 
   return (
     <div className="pb-20 overflow-x-hidden">
-      <h1 className="text-6xl font-bold text-emerald-950 pt-8 text-center">
+      <h1 className="text-5xl sm:text-6xl font-bold text-emerald-950 pt-8 text-center">
         Feedback
       </h1>
-      <h2 className="text-xl text-center text-teal-800 mt-6 mb-10">
+      <h2 className="text-lg sm:text-xl text-center text-teal-800 mt-4 sm:mt-6 sm:mb-10 mb-8">
         Ayúdanos a mejorar
       </h2>
-      <div className="mx-auto flex max-w-3xl flex-col justify-start gap-6">
+      <div className="md:px-20 sm:px-10 xs:px-5 px-3 mx-auto flex max-w-4xl flex-col justify-start gap-6">
         <FeedbackInputBox />
-        <hr className="w-screen -mx-[calc((100vw-48rem)/2)] border-slate-300 my-6" />
+        <hr className="w-[200vw] -mx-[100vw] border-slate-300 my-4 sm:my-6" />
         {feedbackItems.map((item, index) => (
           <FeedbackItem
             key={index}

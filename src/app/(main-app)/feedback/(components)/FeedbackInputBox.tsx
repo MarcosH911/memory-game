@@ -81,7 +81,7 @@ function FeedbackInputBox() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="shadow-lg pl-16 pr-12 bg-white rounded-2xl group"
+      className="shadow-lg pl-10 xs:pl-12 pr-6 sm:pl-16 sm:pr-12 bg-white rounded-2xl group"
     >
       <span
         role="textbox"
@@ -90,7 +90,7 @@ function FeedbackInputBox() {
         contentEditable={!isLoading}
         ref={inputRef}
         aria-disabled={isLoading}
-        className="text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950 aria-disabled:cursor-wait"
+        className="text-base xs:text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950 aria-disabled:cursor-wait"
       ></span>
 
       <div
@@ -106,8 +106,8 @@ function FeedbackInputBox() {
           setErrorMessage={setErrorMessage}
         />
 
-        <div className="flex w-full justify-between items-center mt-4 mb-6">
-          <div className="flex items-center justify-center gap-5">
+        <div className="flex w-full justify-between xs:items-center flex-col xs:flex-row mt-4 mb-6 gap-4 xs:gap-0">
+          <div className="flex items-center justify-center gap-3 sm:gap-5">
             <button
               onClick={(e) => handleSetTags(e, "bug")}
               className={twMerge(

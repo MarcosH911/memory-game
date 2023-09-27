@@ -59,21 +59,13 @@ function FeedbackVotes({ votes, postId }: Props) {
   }, [postId]);
 
   return (
-    <div className="px-6 flex items-center justify-center flex-col font-semibold">
+    <div className="xs:px-4 px-3 sm:px-6 flex items-center justify-center flex-col font-semibold text-teal-800 xs:text-xl text-lg">
       <div onClick={() => handleVote(1)} className="cursor-pointer">
-        {userVote === 1 ? (
-          <PiArrowFatUpFill className="text-teal-800 text-xl" />
-        ) : (
-          <PiArrowFatUpBold className="text-teal-800 text-xl" />
-        )}
+        {userVote === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
       </div>
       <span className="font-bold text-lg text-teal-800">{totalVotes}</span>
       <div onClick={() => handleVote(-1)} className="cursor-pointer">
-        {userVote === -1 ? (
-          <PiArrowFatDownFill className="text-teal-800 text-xl" />
-        ) : (
-          <PiArrowFatDownBold className="text-teal-800 text-xl" />
-        )}
+        {userVote === -1 ? <PiArrowFatDownFill /> : <PiArrowFatDownBold />}
       </div>
     </div>
   );
