@@ -45,16 +45,16 @@ function Page() {
   }, [offset]);
 
   return (
-    <div className="pb-20 overflow-x-hidden">
-      <h1 className="text-5xl sm:text-6xl font-bold text-emerald-950 pt-8 text-center">
+    <div className="overflow-x-hidden pb-20">
+      <h1 className="pt-8 text-center text-5xl font-bold text-emerald-950 sm:text-6xl">
         Feedback
       </h1>
-      <h2 className="text-lg sm:text-xl text-center text-teal-800 mt-4 sm:mt-6 sm:mb-10 mb-8">
+      <h2 className="mb-8 mt-4 text-center text-lg text-teal-800 sm:mb-10 sm:mt-6 sm:text-xl">
         Ayúdanos a mejorar
       </h2>
-      <div className="md:px-20 sm:px-10 xs:px-5 px-3 mx-auto flex max-w-4xl flex-col justify-start gap-6">
+      <div className="mx-auto flex max-w-4xl flex-col justify-start gap-6 px-3 xs:px-5 sm:px-10 md:px-20">
         <FeedbackInputBox />
-        <hr className="w-[200vw] -mx-[100vw] border-slate-300 my-4 sm:my-6" />
+        <hr className="-mx-[100vw] my-4 w-[200vw] border-slate-300 sm:my-6" />
         {feedbackItems.map((item, index) => (
           <FeedbackItem
             key={index}

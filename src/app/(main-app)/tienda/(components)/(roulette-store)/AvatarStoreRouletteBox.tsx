@@ -110,7 +110,7 @@ function AvatarStoreRouletteBox({
 
   return (
     <div className="relative">
-      <div className="w-[calc(100vw-1rem)] h-[calc((100vw-1rem)/3)] md:h-[calc((100vw-1rem)/5)] relative xl:h-64 xl:w-[80rem] overflow-hidden rounded-lg">
+      <div className="relative h-[calc((100vw-1rem)/3)] w-[calc(100vw-1rem)] overflow-hidden rounded-lg md:h-[calc((100vw-1rem)/5)] xl:h-64 xl:w-[80rem]">
         <div
           ref={rouletteItemsRef}
           onTransitionEnd={async () => {
@@ -126,8 +126,8 @@ function AvatarStoreRouletteBox({
         </div>
         <div>
           <div className="absolute left-1/2 top-0 z-20 h-full w-0.5 -translate-x-1/2 border-none bg-red-600 drop-shadow-[0_0_3px_rgba(255,0,0,1)]"></div>
-          <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] sm:border-[1.25rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
-          <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] sm:border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
+          <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)] sm:border-[1.25rem]"></div>
+          <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)] sm:border-[1.25rem]"></div>
         </div>
       </div>
       <AvatarStoreRouletteBuyButtons

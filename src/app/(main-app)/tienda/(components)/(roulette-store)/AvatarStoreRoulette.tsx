@@ -35,7 +35,7 @@ async function AvatarStoreRoulette({
 
   return (
     <div className="mb-24 flex flex-col items-center justify-center">
-      <h1 className="mb-6 text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-emerald-950">
+      <h1 className="mb-6 text-4xl font-semibold tracking-tight text-emerald-950 xs:text-5xl sm:text-6xl lg:text-7xl">
         ¡Gira la ruleta!
       </h1>
       <AvatarStoreRouletteBox

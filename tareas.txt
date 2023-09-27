@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Fill images sizes (avatar store)
+
 Roulette bug where you get an avatar you shouldn't
 
 Fix responsive roulette

@@ -18,13 +18,14 @@ async function AvatarStoreItem({
 
   return (
     <div className="group flex flex-col items-center justify-center rounded-lg border bg-gradient-to-b from-yellow-100 to-teal-100 py-6 shadow-xl transition duration-300">
-      <Image
-        src={imageUrl}
-        alt={"Avatar Image"}
-        width={130}
-        height={130}
-        className="backface-hidden mb-4 rounded-full border-4 border-slate-950 bg-slate-950 shadow-md transition duration-250 hover:scale-[1.15] hover:shadow-xl"
-      />
+      <div className="backface-hidden relative mb-4 h-28 w-28 rounded-full border-4 border-slate-950 bg-slate-950 shadow-md transition duration-250 hover:scale-[1.15] hover:shadow-xl xs:h-32 xs:w-32">
+        <Image
+          fill
+          // TODO: sizes
+          src={imageUrl}
+          alt={"Avatar Image"}
+        />
+      </div>
       {!userHasAvatar ? (
         <AvatarStoreBuyButtons
           avatarPath={avatarPath}

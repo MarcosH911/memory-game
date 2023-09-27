@@ -59,11 +59,11 @@ function FeedbackVotes({ votes, postId }: Props) {
   }, [postId]);
 
   return (
-    <div className="xs:px-4 px-3 sm:px-6 flex items-center justify-center flex-col font-semibold text-teal-800 xs:text-xl text-lg">
+    <div className="flex flex-col items-center justify-center px-3 text-lg font-semibold text-teal-800 xs:px-4 xs:text-xl sm:px-6">
       <div onClick={() => handleVote(1)} className="cursor-pointer">
         {userVote === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
       </div>
-      <span className="font-bold text-lg text-teal-800">{totalVotes}</span>
+      <span className="text-lg font-bold text-teal-800">{totalVotes}</span>
       <div onClick={() => handleVote(-1)} className="cursor-pointer">
         {userVote === -1 ? <PiArrowFatDownFill /> : <PiArrowFatDownBold />}
       </div>

@@ -81,7 +81,7 @@ function FeedbackInputBox() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="shadow-lg pl-10 xs:pl-12 pr-6 sm:pl-16 sm:pr-12 bg-white rounded-2xl group"
+      className="group rounded-2xl bg-white pl-10 pr-6 shadow-lg xs:pl-12 sm:pl-16 sm:pr-12"
     >
       <span
         role="textbox"
@@ -90,7 +90,7 @@ function FeedbackInputBox() {
         contentEditable={!isLoading}
         ref={inputRef}
         aria-disabled={isLoading}
-        className="text-base xs:text-lg placeholder:text-slate-400 focus-visible:outline-none py-8 w-full block resize-y empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] cursor-text text-teal-950 aria-disabled:cursor-wait"
+        className="block w-full cursor-text resize-y py-8 text-base text-teal-950 placeholder:text-slate-400 empty:before:text-slate-400 empty:before:content-['Escribe\auna\asugerencia'] focus-visible:outline-none aria-disabled:cursor-wait xs:text-lg"
       ></span>
 
       <div
@@ -106,12 +106,12 @@ function FeedbackInputBox() {
           setErrorMessage={setErrorMessage}
         />
 
-        <div className="flex w-full justify-between xs:items-center flex-col xs:flex-row mt-4 mb-6 gap-4 xs:gap-0">
+        <div className="mb-6 mt-4 flex w-full flex-col justify-between gap-4 xs:flex-row xs:items-center xs:gap-0">
           <div className="flex items-center justify-center gap-3 sm:gap-5">
             <button
               onClick={(e) => handleSetTags(e, "bug")}
               className={twMerge(
-                "flex items-center justify-center gap-0.5 uppercase text-xs border-red-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-red-600 transition duration-100",
+                "flex items-center justify-center gap-0.5 rounded-full border-2 border-red-600 py-0.5 pl-1 pr-1.5 text-xs font-bold uppercase text-red-600 transition duration-100",
                 isBugTagSelected && "bg-red-600 text-red-50",
               )}
             >
@@ -125,7 +125,7 @@ function FeedbackInputBox() {
             <button
               onClick={(e) => handleSetTags(e, "suggestion")}
               className={twMerge(
-                "flex items-center justify-center gap-0.5 uppercase text-xs border-blue-600 border-2 rounded-full pl-1 pr-1.5 py-0.5 font-bold text-blue-600 transition duration-100",
+                "flex items-center justify-center gap-0.5 rounded-full border-2 border-blue-600 py-0.5 pl-1 pr-1.5 text-xs font-bold uppercase text-blue-600 transition duration-100",
                 isSuggestionTagSelected && "bg-blue-600 text-blue-50",
               )}
             >
@@ -140,7 +140,7 @@ function FeedbackInputBox() {
           <button
             type="submit"
             className={twMerge(
-              "bg-teal-600 px-5 py-1.5 rounded-lg font-bold text-lg text-teal-50 shadow-md hover:bg-teal-700 hover:shadow-lg transition duration-200 relative",
+              "relative rounded-lg bg-teal-600 px-5 py-1.5 text-lg font-bold text-teal-50 shadow-md transition duration-200 hover:bg-teal-700 hover:shadow-lg",
               isLoading && "cursor-wait bg-slate-400 hover:bg-slate-400",
             )}
           >
