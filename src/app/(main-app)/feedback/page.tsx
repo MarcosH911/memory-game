@@ -29,7 +29,7 @@ function Page() {
     {
       id: string;
       text: string;
-      tags: string;
+      tags: string[];
       votes: number;
     }[]
   >([]);
@@ -45,7 +45,7 @@ function Page() {
   }, [offset]);
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 overflow-x-hidden">
       <h1 className="text-6xl font-bold text-emerald-950 pt-8 text-center">
         Feedback
       </h1>
@@ -54,6 +54,7 @@ function Page() {
       </h2>
       <div className="mx-auto flex max-w-3xl flex-col justify-start gap-6">
         <FeedbackInputBox />
+        <hr className="w-screen -mx-[calc((100vw-48rem)/2)] border-slate-300 my-6" />
         {feedbackItems.map((item, index) => (
           <FeedbackItem
             key={index}

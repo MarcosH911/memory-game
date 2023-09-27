@@ -1,16 +1,19 @@
 "use client";
 
-import Spinner from "@/components/Spinner";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
-import { HiMiniCheck, HiMiniPlus, HiPlus } from "react-icons/hi2";
+
+import { useEffect, useRef, useState } from "react";
+import { HiMiniCheck, HiMiniPlus } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+
+import Spinner from "@/components/Spinner";
+import FeedbackInputMessageBox from "./FeedbackInputMessageBox";
 
 function FeedbackInputBox() {
   const [text, setText] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const inputRef = useRef<HTMLSpanElement>(null);
 
@@ -26,20 +29,15 @@ function FeedbackInputBox() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
+    setErrorMessage("");
     e.preventDefault();
 
-    if (text === "") {
-      // TODO: handle warning
+    if (text.length > 1000) {
+      setErrorMessage("El mensaje debe tener menos de 1000 carácteres");
       setIsLoading(false);
       return;
-    }
-
-    if (text.length > 500) {
-      // TODO: handle warning
-      setIsLoading(false);
-      return;
-    } else if (text.length < 5) {
-      // TODO: handle warning
+    } else if (text.length < 10) {
+      setErrorMessage("El mensaje debe tener al menos 10 carácteres");
       setIsLoading(false);
       return;
     }
@@ -102,6 +100,11 @@ function FeedbackInputBox() {
         )}
       >
         <hr className="border-slate-200" />
+
+        <FeedbackInputMessageBox
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
 
         <div className="flex w-full justify-between items-center mt-4 mb-6">
           <div className="flex items-center justify-center gap-5">

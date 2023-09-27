@@ -31,7 +31,7 @@ function FeedbackVotes({ votes, postId }: Props) {
       if (userVote === vote) {
         return totalVotes - userVote;
       } else {
-        return totalVotes + userVote;
+        return totalVotes - userVote + vote;
       }
     });
     setUserVote(userVote === vote ? 0 : vote);
@@ -43,7 +43,7 @@ function FeedbackVotes({ votes, postId }: Props) {
         `/api/feedback/get-user-vote?postId=${postId}`,
         {
           method: "get",
-        }
+        },
       );
 
       const { data: vote } = await response.json();
@@ -56,11 +56,19 @@ function FeedbackVotes({ votes, postId }: Props) {
   return (
     <div className="px-6 flex items-center justify-center flex-col font-semibold">
       <div onClick={() => handleVote(1)} className="cursor-pointer">
-        {userVote === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
+        {userVote === 1 ? (
+          <PiArrowFatUpFill className="text-teal-800 text-xl" />
+        ) : (
+          <PiArrowFatUpBold className="text-teal-800 text-xl" />
+        )}
       </div>
-      <span>{totalVotes}</span>
+      <span className="font-bold text-lg text-teal-800">{totalVotes}</span>
       <div onClick={() => handleVote(-1)} className="cursor-pointer">
-        {userVote === -1 ? <PiArrowFatDownFill /> : <PiArrowFatDownBold />}
+        {userVote === -1 ? (
+          <PiArrowFatDownFill className="text-teal-800 text-xl" />
+        ) : (
+          <PiArrowFatDownBold className="text-teal-800 text-xl" />
+        )}
       </div>
     </div>
   );
