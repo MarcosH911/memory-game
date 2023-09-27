@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   PiArrowFatDownBold,
   PiArrowFatDownFill,
@@ -17,7 +17,11 @@ function FeedbackVotes({ votes, postId }: Props) {
   const [userVote, setUserVote] = useState<-1 | 0 | 1>(0);
   const [totalVotes, setTotalVotes] = useState<number>(votes);
 
+  const isUpdatingVotes = useRef(false);
+
   const handleVote = async (vote: -1 | 1) => {
+    if (isUpdatingVotes.current) return;
+    isUpdatingVotes.current = true;
     await fetch("/api/feedback/insert-vote", {
       method: "post",
       body: JSON.stringify({
@@ -34,7 +38,8 @@ function FeedbackVotes({ votes, postId }: Props) {
         return totalVotes - userVote + vote;
       }
     });
-    setUserVote(userVote === vote ? 0 : vote);
+    setUserVote((userVote) => (userVote === vote ? 0 : vote));
+    isUpdatingVotes.current = false;
   };
 
   useEffect(() => {
