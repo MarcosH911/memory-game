@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   PiArrowFatDownBold,
@@ -16,6 +15,7 @@ interface Props {
 
 function FeedbackVotes({ votes, postId }: Props) {
   const [userVote, setUserVote] = useState<-1 | 0 | 1>(0);
+  const [totalVotes, setTotalVotes] = useState<number>(votes);
 
   const handleVote = async (vote: -1 | 1) => {
     await fetch("/api/feedback/insert-vote", {
@@ -27,6 +27,13 @@ function FeedbackVotes({ votes, postId }: Props) {
       }),
     });
 
+    setTotalVotes((totalVotes) => {
+      if (userVote === vote) {
+        return totalVotes - userVote;
+      } else {
+        return totalVotes + userVote;
+      }
+    });
     setUserVote(userVote === vote ? 0 : vote);
   };
 
@@ -36,7 +43,7 @@ function FeedbackVotes({ votes, postId }: Props) {
         `/api/feedback/get-user-vote?postId=${postId}`,
         {
           method: "get",
-        },
+        }
       );
 
       const { data: vote } = await response.json();
@@ -51,7 +58,7 @@ function FeedbackVotes({ votes, postId }: Props) {
       <div onClick={() => handleVote(1)} className="cursor-pointer">
         {userVote === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
       </div>
-      <span>{votes}</span>
+      <span>{totalVotes}</span>
       <div onClick={() => handleVote(-1)} className="cursor-pointer">
         {userVote === -1 ? <PiArrowFatDownFill /> : <PiArrowFatDownBold />}
       </div>
