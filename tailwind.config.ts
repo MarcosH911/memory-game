@@ -66,11 +66,38 @@ const config: Config = {
           from: { opacity: "100" },
           to: { opacity: "0" },
         },
+        "show-avatar-modal": {
+          "0%": {
+            opacity: "0",
+          },
+          "67%": {
+            transform: "translate(-50%, -50%) scale(0.5)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translate(-50%, -50%) scale(1)",
+            opacity: "100",
+          },
+        },
+        "show-avatar-modal-overlay": {
+          "0%": {
+            opacity: "0",
+          },
+          "67%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "100",
+          },
+        },
       },
       animation: {
         "up-down": "up-down 3s ease-in-out infinite",
         "show-modal": "show-modal 300ms ease-in-out forwards",
         "show-modal-overlay": "show-modal-overlay 300ms ease-in-out forwards",
+        "show-avatar-modal": "show-avatar-modal 900ms ease-in-out forwards",
+        "show-avatar-modal-overlay":
+          "show-avatar-modal-overlay 900ms ease-in-out forwards",
         "fade-out": "fade-out 300ms ease-in-out forwards",
       },
     },

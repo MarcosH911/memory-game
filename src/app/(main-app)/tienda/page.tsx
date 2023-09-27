@@ -98,11 +98,11 @@ async function Page() {
         userPoints={userPoints}
         allAvatars={allAvatars}
       />
-      <AvatarStore
+      {/* <AvatarStore
         userPoints={userPoints}
         userAvatars={userAvatars}
         allAvatars={allAvatars}
-      />
+      /> */}
     </div>
   );
 }

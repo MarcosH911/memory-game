@@ -2,8 +2,6 @@ import shuffleArray from "@/helpers/shuffleArray";
 import getAvatarImage from "@/utils/getAvatarImage";
 import AvatarStoreRouletteBox from "./AvatarStoreRouletteBox";
 
-const defaultAnimationTranslation = 1600;
-
 interface Props {
   userAvatars: (string | null)[];
   userPoints: { coins: number; diamonds: number };
@@ -29,10 +27,6 @@ async function AvatarStoreRoulette({
     getAvatarImage(avatarPath),
   );
 
-  const randomTranslation = Math.random() * 16 - 8;
-
-  const animationTranslation = defaultAnimationTranslation + randomTranslation;
-
   const selectedAvatarUrl = avatarsUrls[102];
   const selectedAvatarPath = avatarPaths[102];
 
@@ -41,12 +35,11 @@ async function AvatarStoreRoulette({
 
   return (
     <div className="mb-24 flex flex-col items-center justify-center">
-      <h1 className="mb-6 text-7xl font-semibold tracking-tight text-emerald-950">
+      <h1 className="mb-6 text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-emerald-950">
         ¡Gira la ruleta!
       </h1>
       <AvatarStoreRouletteBox
         avatarsUrls={avatarsUrls}
-        animationTranslation={animationTranslation}
         selectedAvatarUrl={selectedAvatarUrl}
         selectedAvatarPath={selectedAvatarPath}
         hasEnoughCoins={hasEnoughCoins}

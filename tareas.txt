@@ -1,5 +1,11 @@
 ------------ BUGS ------------
 
+Roulette bug where you get an avatar you shouldn't
+
+Fix responsive roulette
+
+Loading state in mobile log out
+
 School fetch bug
 
 Refetch after insert feedback and insert points

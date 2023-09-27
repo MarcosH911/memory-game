@@ -6,10 +6,10 @@ import AvatarStoreRouletteBuyButtons from "./AvatarStoreRouletteBuyButtons";
 import AvatarStoreRouletteModal from "./AvatarStoreRouletteModal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
+import sleep from "@/helpers/sleep";
 
 interface Props {
   avatarsUrls: string[];
-  animationTranslation: number;
   selectedAvatarUrl: string;
   selectedAvatarPath: string;
   hasEnoughCoins: boolean;
@@ -18,7 +18,6 @@ interface Props {
 
 function AvatarStoreRouletteBox({
   avatarsUrls,
-  animationTranslation,
   selectedAvatarUrl,
   selectedAvatarPath,
   hasEnoughCoins,
@@ -30,6 +29,7 @@ function AvatarStoreRouletteBox({
   const rouletteItemsRef = useRef<HTMLDivElement | null>(null);
   const currentSelectedAvatarUrl = useRef(selectedAvatarUrl);
   const currentAvatarsUrls = useRef<string[]>(avatarsUrls);
+  const animationTranslation = useRef<number>(0);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,25 +43,11 @@ function AvatarStoreRouletteBox({
     currentAvatarsUrls.current = avatarsUrls;
   }, [avatarsUrls]);
 
-  useEffect(() => {
-    if (searchParams.has("hasBoughtAvatar", "true")) {
-      updateSelectedAvatarUrl();
-      updateAvatarsUrls();
-      router.replace(pathname, { scroll: false });
-    }
-  }, [
-    pathname,
-    router,
-    searchParams,
-    updateAvatarsUrls,
-    updateSelectedAvatarUrl,
-  ]);
-
   const handleAnimateRoulette = (type: "start" | "finish") => {
     if (type === "start") {
       rouletteItemsRef.current!.style.transition =
         "all 10s cubic-bezier(0.25, 1, 0.25, 1)";
-      rouletteItemsRef.current!.style.transform = `translateX(-${animationTranslation}rem)`;
+      rouletteItemsRef.current!.style.transform = `translateX(-${animationTranslation.current}rem)`;
     } else if (type === "finish") {
       rouletteItemsRef.current!.style.transition = "none";
       rouletteItemsRef.current!.style.transform = `translateX(0)`;
@@ -94,13 +80,42 @@ function AvatarStoreRouletteBox({
     router.refresh();
   };
 
+  useEffect(() => {
+    if (searchParams.has("hasBoughtAvatar", "true")) {
+      updateSelectedAvatarUrl();
+      updateAvatarsUrls();
+      router.replace(pathname, { scroll: false });
+    }
+  }, [
+    pathname,
+    router,
+    searchParams,
+    updateAvatarsUrls,
+    updateSelectedAvatarUrl,
+  ]);
+
+  useEffect(() => {
+    const viewportWidth = window.innerWidth || 0;
+    let squareWidth = viewportWidth / 16 - 1;
+    squareWidth /= viewportWidth < 768 ? 3 : 5;
+    squareWidth = Math.min(squareWidth, 16);
+
+    const defaultAnimationTranslation =
+      squareWidth * (viewportWidth < 768 ? 101 : 100);
+    const randomTranslation = ((Math.random() * 2 - 1) * squareWidth) / 2;
+
+    animationTranslation.current =
+      defaultAnimationTranslation + randomTranslation;
+  });
+
   return (
     <div className="relative">
-      <div className="relative h-64 w-[80rem] overflow-hidden rounded-lg">
+      <div className="w-[calc(100vw-1rem)] h-[calc((100vw-1rem)/3)] md:h-[calc((100vw-1rem)/5)] relative xl:h-64 xl:w-[80rem] overflow-hidden rounded-lg">
         <div
           ref={rouletteItemsRef}
-          onTransitionEnd={() => {
+          onTransitionEnd={async () => {
             setShowAvatarModal(true);
+            await sleep(600);
             setIsSpinningRoulette(false);
           }}
           className="flex flex-row flex-nowrap items-center justify-start divide-x-2 rounded-lg"
@@ -111,8 +126,8 @@ function AvatarStoreRouletteBox({
         </div>
         <div>
           <div className="absolute left-1/2 top-0 z-20 h-full w-0.5 -translate-x-1/2 border-none bg-red-600 drop-shadow-[0_0_3px_rgba(255,0,0,1)]"></div>
-          <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
-          <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
+          <div className="absolute bottom-0 left-1/2 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] sm:border-[1.25rem] border-transparent border-b-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
+          <div className="absolute left-1/2 top-0 z-20 h-1 w-1 -translate-x-1/2 border-[0.75rem] sm:border-[1.25rem] border-transparent border-t-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
         </div>
       </div>
       <AvatarStoreRouletteBuyButtons
