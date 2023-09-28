@@ -64,6 +64,7 @@ async function Page({ searchParams }: Props) {
       stage: stageFilter,
       grade: gradeFilter,
       class: classFilter,
+      role: "student",
     });
 
   if (studentsDiamondsError) {
