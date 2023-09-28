@@ -21,7 +21,7 @@ async function AvatarStoreItem({
       <div className="backface-hidden relative mb-4 h-28 w-28 rounded-full border-4 border-slate-950 bg-slate-950 shadow-md transition duration-250 hover:scale-[1.15] hover:shadow-xl xs:h-32 xs:w-32">
         <Image
           fill
-          // TODO: sizes
+          sizes="112px, (min-width: 425px) 128px"
           src={imageUrl}
           alt={"Avatar Image"}
         />

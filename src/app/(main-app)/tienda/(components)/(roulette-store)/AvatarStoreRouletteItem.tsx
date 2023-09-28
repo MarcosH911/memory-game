@@ -17,8 +17,7 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
           src={data}
           alt="Avatar image"
           fill
-          // TODO: sizes
-          sizes="(max-width: 768px) 100px, 200px"
+          sizes="calc((100vw-1rem)/3, (min-width: 768px) h-[calc((100vw-1rem)/5)], (min-width: 1280px) 220px"
           quality={index > 5 && index < 90 ? 1 : 75}
           className="rounded-full border-2 border-teal-950 bg-teal-950 xs:border-4"
         />
