@@ -6,8 +6,9 @@ Dia, semana, mes, año, todo el tiempo
 */
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import TeacherFilters from "./(components)/TeacherFilters";
 import { cookies } from "next/headers";
+
+import TeacherFilters from "./(components)/TeacherFilters";
 import TeacherItem from "./(components)/TeacherItem";
 
 interface Props {
@@ -85,9 +86,9 @@ async function Page({ searchParams }: Props) {
   });
 
   return (
-    <div className="px-6">
+    <div className="px-8 xs:px-4 lg:px-6 flex items-center justify-center">
       {/* <TeacherFilters /> */}
-      <div className="grid xl:grid-cols-4 grid-cols-1 gap-y-6">
+      <div className="grid xl:grid-cols-4 grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-4 lg:gap-x-6 max-w-7xl w-full">
         {allStudentsData?.map((item, index) => (
           <TeacherItem key={index} data={item} />
         ))}
