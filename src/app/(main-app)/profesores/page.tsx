@@ -45,10 +45,11 @@ async function Page({ searchParams }: Props) {
     .from("profiles")
     .select("username, full_name, avatar_path")
     .match({
-      school: schoolFilter,
+      school: schoolFilter?.school,
       stage: stageFilter,
       grade: gradeFilter,
       class: classFilter,
+      role: "student",
     })
     .order("full_name", {
       ascending: false,
@@ -59,24 +60,27 @@ async function Page({ searchParams }: Props) {
   }
 
   const { data: studentsDiamondsData, error: studentsDiamondsError } =
-    await supabase.from(timeFilter).select("username, diamonds").match({
-      school: schoolFilter,
-      stage: stageFilter,
-      grade: gradeFilter,
-      class: classFilter,
-      role: "student",
-    });
+    await supabase
+      .from(timeFilter)
+      .select("username, diamonds")
+      .match({
+        school: schoolFilter?.school,
+        stage: stageFilter,
+        grade: gradeFilter,
+        class: classFilter,
+      });
 
   if (studentsDiamondsError) {
-    console.error("Error getting student data");
+    console.error("Error getting student diamonds");
   }
 
   const allStudentsData = studentsData?.map((item) => {
     return {
       ...item,
-      diamonds: studentsDiamondsData?.find(
-        (student) => student.username === item.username,
-      )?.diamonds,
+      diamonds:
+        studentsDiamondsData?.find(
+          (student) => student.username === item.username,
+        )?.diamonds || 0,
     };
   });
 

@@ -75,14 +75,6 @@ function TeacherFilters() {
 
           <div className="mx-auto grid w-[19.05rem] grid-cols-2 grid-rows-2 gap-x-6 gap-y-4 xs:w-[21.3rem] xs:gap-x-8 xs:gap-y-6 sm:w-[28.5rem] sm:gap-y-8 xl:gap-x-16">
             <TeacherFiltersInput
-              name={"grade"}
-              label="Curso"
-              options={getGrades()}
-              value={grade}
-              setValue={setGrade}
-            />
-
-            <TeacherFiltersInput
               name={"stage"}
               label="Etapa"
               options={[
@@ -93,6 +85,14 @@ function TeacherFilters() {
               ]}
               value={stage}
               setValue={setStage}
+            />
+
+            <TeacherFiltersInput
+              name={"grade"}
+              label="Curso"
+              options={getGrades()}
+              value={grade}
+              setValue={setGrade}
             />
 
             <TeacherFiltersInput
