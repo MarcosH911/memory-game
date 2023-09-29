@@ -66,10 +66,9 @@ function AuthInputField({
               <option
                 key={index}
                 value={item.value}
-                className={twMerge(
-                  "cursor-pointer text-teal-950",
-                  !item.value && "text-gray-400",
-                )}
+                disabled={!item.value}
+                hidden={!item.value}
+                className="cursor-pointer text-teal-950"
               >
                 {item.text}
               </option>

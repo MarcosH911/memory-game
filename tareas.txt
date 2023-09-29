@@ -37,6 +37,10 @@ Loading state takes too long
 
 -------- ORGANIZATION --------
 
+Refactor info messages
+
+Refactor filters
+
 Route handlers types
 
 Order imports

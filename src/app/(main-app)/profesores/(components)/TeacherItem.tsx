@@ -18,15 +18,14 @@ function TeacherItem({ data }: Props) {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center bg-slate-300 rounded-lg w-full h-fit py-8 px-4">
-        <div className="relative h-24 w-24 rounded-full shadow-sm">
-          <Image
-            src={avatarUrl}
-            alt={data.full_name}
-            fill
-            // TODO: sizes
-          />
-        </div>
+      <div className="flex flex-col items-center justify-center bg-slate-200 shadow-xl border border-slate-300 rounded-lg w-full h-full py-8 px-4">
+        <Image
+          src={avatarUrl}
+          alt={data.full_name}
+          height={96}
+          width={96}
+          className="shadow-sm border-2 border-slate-950 rounded-full bg-slate-950"
+        />
         <div className="font-bold mt-1.5 mb-4 text-xl text-center">
           {data.full_name}
         </div>

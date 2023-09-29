@@ -8,6 +8,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import TeacherFiltersInput from "./TeacherFiltersInput";
 import TeacherFiltersTimeItem from "./TeacherFiltersTimeItem";
 import setSearchParams from "@/helpers/setSearchParams";
+import TeacherMessageBox from "./TeacherMessageBox";
+import sleep from "@/helpers/sleep";
 
 const gradesList = [
   { value: "primero", text: "Primero" },
@@ -21,10 +23,12 @@ const gradesList = [
 const allRankingViews = ["day", "week", "month", "year", "all_time"];
 
 function TeacherFilters() {
+  const [timeFilter, setTimeFilter] = useState("day");
   const [stage, setStage] = useState("");
   const [grade, setGrade] = useState("");
   const [schoolClass, setSchoolClass] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -41,14 +45,22 @@ function TeacherFilters() {
   };
 
   const handleApplyFilters = () => {
+    setErrorMessage("");
+
+    if (!stage || !grade || !schoolClass) {
+      setErrorMessage("Por favor, complete todos los campos");
+      return;
+    }
+
     setIsOpen(false);
 
     router.replace(
       setSearchParams(pathname, searchParams, [
+        ["timeFilter", timeFilter],
         ["stageFilter", stage],
         ["gradeFilter", grade],
         ["classFilter", schoolClass],
-      ])
+      ]),
     );
   };
 
@@ -57,6 +69,15 @@ function TeacherFilters() {
     setGrade(searchParams.get("gradeFilter") || "");
     setSchoolClass(searchParams.get("classFilter") || "");
   }, [searchParams]);
+
+  useEffect(() => {
+    const hideErrorMessage = async () => {
+      if (!isOpen) {
+        await sleep(300);
+        setErrorMessage("");
+      }
+    };
+  }, [isOpen]);
 
   return (
     <div>
@@ -73,6 +94,8 @@ function TeacherFilters() {
                 <TeacherFiltersTimeItem
                   key={index}
                   itemType={itemType}
+                  timeFilter={timeFilter}
+                  setTimeFilter={setTimeFilter}
                   index={index}
                 />
               ))}
@@ -116,6 +139,11 @@ function TeacherFilters() {
               setValue={setSchoolClass}
             />
           </div>
+
+          <TeacherMessageBox
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
 
           <div className="mt-12 flex items-center justify-center gap-4 xs:gap-6 sm:gap-8">
             <button

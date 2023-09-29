@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 interface Props {
   options: { value: string; text: string }[];
   name: string;
@@ -20,9 +22,14 @@ function TeacherFiltersInput({ options, name, label, value, setValue }: Props) {
         id={name}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="block w-[8.5rem] rounded-[0.25rem] border border-teal-950 p-1 text-base font-semibold text-teal-950 shadow-md xs:w-[9.5rem] xs:text-lg sm:w-52 sm:p-1.5 sm:text-xl xl:w-[12.5rem]"
+        className={twMerge(
+          "block w-[8.5rem] rounded-[0.25rem] border border-teal-950 p-1 text-base font-semibold text-teal-950 shadow-md xs:w-[9.5rem] xs:text-lg sm:w-52 sm:p-1.5 sm:text-xl xl:w-[12.5rem]",
+          !value && "text-slate-400",
+        )}
       >
-        <option value="">Todos</option>
+        <option value="" disabled hidden>
+          {label}
+        </option>
         {options.map((option, index) => (
           <option key={index} value={option.value} className="text-teal-950">
             {option.text}
