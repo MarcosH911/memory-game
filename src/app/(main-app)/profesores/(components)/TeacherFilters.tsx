@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiAdjustmentsHorizontal, HiMiniXMark } from "react-icons/hi2";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -48,9 +48,15 @@ function TeacherFilters() {
         ["stageFilter", stage],
         ["gradeFilter", grade],
         ["classFilter", schoolClass],
-      ]),
+      ])
     );
   };
+
+  useEffect(() => {
+    setStage(searchParams.get("stageFilter") || "");
+    setGrade(searchParams.get("gradeFilter") || "");
+    setSchoolClass(searchParams.get("classFilter") || "");
+  }, [searchParams]);
 
   return (
     <div>

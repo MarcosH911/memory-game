@@ -79,17 +79,19 @@ async function Page({ searchParams }: Props) {
       ...item,
       diamonds:
         studentsDiamondsData?.find(
-          (student) => student.username === item.username,
+          (student) => student.username === item.username
         )?.diamonds || 0,
     };
   });
 
   return (
-    <div>
-      <TeacherFilters />
-      {allStudentsData?.map((item, index) => (
-        <TeacherItem key={index} data={item} />
-      ))}
+    <div className="px-6">
+      {/* <TeacherFilters /> */}
+      <div className="grid xl:grid-cols-4 grid-cols-1 gap-y-6">
+        {allStudentsData?.map((item, index) => (
+          <TeacherItem key={index} data={item} />
+        ))}
+      </div>
     </div>
   );
 }
