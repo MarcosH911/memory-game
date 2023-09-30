@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiUser, HiLockClosed } from "react-icons/hi2";
 
@@ -38,6 +38,10 @@ function Page() {
     setIsLoading(false);
     router.refresh();
   };
+
+  useEffect(() => {
+    router.prefetch("/jugar");
+  }, [router]);
 
   return (
     <div className="flex min-h-full items-center justify-center bg-white py-8 md:bg-transparent md:py-0">

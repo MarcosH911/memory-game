@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HiMiniCheck, HiMiniPlus } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -20,12 +20,15 @@ function FeedbackInputBox() {
   const isBugTagSelected = tags.includes("bug");
   const isSuggestionTagSelected = tags.includes("suggestion");
 
-  const handleReload = (e: BeforeUnloadEvent) => {
-    if (text !== "") {
-      e.preventDefault();
-      e.returnValue = "";
-    }
-  };
+  const handleReload = useCallback(
+    (e: BeforeUnloadEvent) => {
+      if (text !== "") {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    },
+    [text],
+  );
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -76,7 +79,7 @@ function FeedbackInputBox() {
     window.addEventListener("beforeunload", handleReload);
 
     return () => window.removeEventListener("beforeunload", handleReload);
-  });
+  }, [handleReload]);
 
   return (
     <form

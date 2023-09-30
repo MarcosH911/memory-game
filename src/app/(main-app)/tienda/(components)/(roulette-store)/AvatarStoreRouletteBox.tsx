@@ -106,7 +106,7 @@ function AvatarStoreRouletteBox({
 
     animationTranslation.current =
       defaultAnimationTranslation + randomTranslation;
-  });
+  }, []);
 
   return (
     <div className="relative">

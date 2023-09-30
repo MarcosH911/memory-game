@@ -33,6 +33,12 @@ function ProfileButton() {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (isModalOpen) {
+      router.prefetch("/iniciar-sesion");
+    }
+  }, [isModalOpen, router]);
+
   return (
     <div className="relative ml-2 hidden sm:block">
       <Popover.Root

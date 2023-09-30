@@ -77,6 +77,8 @@ function TeacherFilters() {
         setErrorMessage("");
       }
     };
+
+    hideErrorMessage();
   }, [isOpen]);
 
   return (
