@@ -11,27 +11,17 @@ import getAvatarImage from "@/utils/getAvatarImage";
 import { HiOutlineUser } from "react-icons/hi2";
 import Spinner from "@/components/Spinner";
 import { twMerge } from "tailwind-merge";
+import useSWR from "swr";
 
 function ProfileButton() {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [fullName, setFullName] = useState("");
 
   const router = useRouter();
 
-  useEffect(() => {
-    const getUserData = async () => {
-      const profileDataResponse = await fetch("/api/profile/profile-data", {
-        method: "get",
-      });
-      const { data: profileData } = await profileDataResponse.json();
-      setAvatarUrl(getAvatarImage(profileData.avatar_path));
-      setFullName(profileData.full_name);
-    };
-
-    getUserData();
-  }, []);
+  const { data: profileData } = useSWR("/api/profile/profile-data");
+  const avatarUrl = getAvatarImage(profileData?.data.avatar_path);
+  const fullName = profileData?.data.full_name;
 
   const handleLogout = async () => {
     setIsLoading(true);

@@ -13,6 +13,7 @@ import {
 import AuthInputField from "../(components)/AuthInputField";
 import AuthMessageBox from "../(components)/AuthMessageBox";
 import AuthSubmitButton from "../(components)/AuthSubmitButton";
+import useSWR from "swr";
 
 const gradesList = [
   { value: "", text: "Seleccione un curso" },
@@ -35,9 +36,14 @@ function Page() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const [schoolsList, setSchoolsList] = useState<
-    { text: string; value: string }[]
-  >([]);
+  const { data: schoolsData } = useSWR("/api/schools");
+  const schoolsList =
+    schoolsData?.data.map(
+      (school: { school_name: string; school_value: string }) => ({
+        text: school.school_name,
+        value: school.school_value,
+      }),
+    ) || [];
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -100,24 +106,6 @@ function Page() {
       return gradesList;
     }
   };
-
-  useEffect(() => {
-    const fetchSchools = async () => {
-      const schoolsResponse = await fetch("/api/schools");
-      const schools = await schoolsResponse.json();
-
-      setSchoolsList(
-        schools.data.map(
-          (school: { school_name: string; school_value: string }) => ({
-            text: school.school_name,
-            value: school.school_value,
-          }),
-        ),
-      );
-    };
-
-    fetchSchools();
-  });
 
   return (
     <div className="flex h-fit min-h-full items-center justify-center bg-white py-8 md:h-full md:bg-transparent">

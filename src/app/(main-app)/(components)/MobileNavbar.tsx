@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { HiOutlineLogout } from "react-icons/hi";
 
-import getAvatarImage from "@/utils/getAvatarImage";
 import MenuNavbar from "./MenuNavbar";
 
 interface Props {

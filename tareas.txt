@@ -52,6 +52,8 @@ Change update POST request to PUT (or something)
 
 --------- OPTIMIZING ---------
 
+SWR
+
 Make login faster
 
 Update database level only when session ends

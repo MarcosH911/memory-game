@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 
 import "./globals.css";
+import { SWRProvider } from "./(components)/SWRProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -22,8 +23,10 @@ function RootLayout({ children }: Props) {
   return (
     <html lang="es" className={nunito.variable}>
       <body className="h-screen bg-teal-50">
-        {children}
-        <Analytics />
+        <SWRProvider>
+          {children}
+          <Analytics />
+        </SWRProvider>
       </body>
     </html>
   );
