@@ -31,7 +31,7 @@ function Page() {
       const { message } = await loginDataResponse.json();
       setLoginError(message);
     } else {
-      router.replace("/jugar");
+      router.push("/jugar");
       return;
     }
 

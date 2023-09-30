@@ -27,7 +27,7 @@ function ProfileButton() {
     setIsLoading(true);
     const response = await fetch("/api/auth/logout", { method: "post" });
     if (response.status === 200) {
-      router.replace("/iniciar-sesion");
+      router.push("/iniciar-sesion");
       return;
     }
     setIsLoading(false);
