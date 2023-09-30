@@ -32,6 +32,7 @@ function Page() {
       setLoginError(message);
     } else {
       router.push("/jugar");
+      console.log("Redirected to /jugar");
       return;
     }
 
