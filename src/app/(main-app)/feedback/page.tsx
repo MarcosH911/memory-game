@@ -6,21 +6,6 @@ import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
 import Spinner from "@/components/Spinner";
 
-const getFeedbackItems = async (
-  setFeedbackItems: React.Dispatch<any>,
-  offset: number,
-) => {
-  const feedbackItemsPromise = await fetch(
-    `/api/feedback/get-feedback?offset=${offset}`,
-    {
-      method: "get",
-    },
-  );
-  const { data: feedbackItemsData } = await feedbackItemsPromise.json();
-
-  setFeedbackItems((items: any) => [...items, ...feedbackItemsData]);
-};
-
 const getKey = (pageIndex: number, previousPageData: any) => {
   if (previousPageData && !previousPageData.data.length) return null;
   return `/api/feedback/get-feedback?offset=${pageIndex * 10}`;

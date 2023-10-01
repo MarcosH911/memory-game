@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   PiArrowFatDownBold,
   PiArrowFatDownFill,
   PiArrowFatUpBold,
   PiArrowFatUpFill,
 } from "react-icons/pi";
+import useSWR from "swr";
 
 interface Props {
   votes: number;
@@ -14,8 +15,10 @@ interface Props {
 }
 
 function FeedbackVotes({ votes, postId }: Props) {
-  const [userVote, setUserVote] = useState<-1 | 0 | 1>(0);
   const [totalVotes, setTotalVotes] = useState<number>(votes);
+  const { data: userVote, mutate: mutateVote } = useSWR(
+    `/api/feedback/get-user-vote?postId=${postId}`,
+  );
 
   const isUpdatingVotes = useRef(false);
 
@@ -26,46 +29,34 @@ function FeedbackVotes({ votes, postId }: Props) {
       method: "post",
       body: JSON.stringify({
         postId,
-        oldVote: userVote,
-        newVote: userVote === vote ? 0 : vote,
+        oldVote: userVote.data,
+        newVote: userVote.data === vote ? 0 : vote,
       }),
     });
 
     setTotalVotes((totalVotes) => {
-      if (userVote === vote) {
-        return totalVotes - userVote;
+      if (userVote.data === vote) {
+        return totalVotes - userVote.data;
       } else {
-        return totalVotes - userVote + vote;
+        return totalVotes - userVote.data + vote;
       }
     });
-    setUserVote((userVote) => (userVote === vote ? 0 : vote));
+    mutateVote(userVote.data === vote ? 0 : vote);
     isUpdatingVotes.current = false;
   };
-
-  useEffect(() => {
-    const handleGetUserVote = async () => {
-      const response = await fetch(
-        `/api/feedback/get-user-vote?postId=${postId}`,
-        {
-          method: "get",
-        },
-      );
-
-      const { data: vote } = await response.json();
-      setUserVote(vote);
-    };
-
-    handleGetUserVote();
-  }, [postId]);
 
   return (
     <div className="flex flex-col items-center justify-center px-3 text-lg font-semibold text-teal-800 xs:px-4 xs:text-xl sm:px-6">
       <div onClick={() => handleVote(1)} className="cursor-pointer">
-        {userVote === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
+        {userVote?.data === 1 ? <PiArrowFatUpFill /> : <PiArrowFatUpBold />}
       </div>
       <span className="text-lg font-bold text-teal-800">{totalVotes}</span>
       <div onClick={() => handleVote(-1)} className="cursor-pointer">
-        {userVote === -1 ? <PiArrowFatDownFill /> : <PiArrowFatDownBold />}
+        {userVote?.data === -1 ? (
+          <PiArrowFatDownFill />
+        ) : (
+          <PiArrowFatDownBold />
+        )}
       </div>
     </div>
   );
