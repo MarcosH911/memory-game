@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
 import Spinner from "@/components/Spinner";
+import useSWRInfinite from "swr/infinite";
 
 const getFeedbackItems = async (
   setFeedbackItems: React.Dispatch<any>,
@@ -22,27 +21,19 @@ const getFeedbackItems = async (
   setFeedbackItems((items: any) => [...items, ...feedbackItemsData]);
 };
 
+const getKey = (pageIndex: number, previousPageData: any) => {
+  if (previousPageData && !previousPageData.data.length) return null;
+  return `/api/feedback/get-feedback?offset=${pageIndex * 10}`;
+};
+
 function Page() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [offset, setOffset] = useState(0);
-  const [feedbackItems, setFeedbackItems] = useState<
-    {
-      id: string;
-      text: string;
-      tags: string[];
-      votes: number;
-    }[]
-  >([]);
-
-  useEffect(() => {
-    const getItems = async () => {
-      setIsLoading(true);
-      await getFeedbackItems(setFeedbackItems, offset);
-      setIsLoading(false);
-    };
-
-    getItems();
-  }, [offset]);
+  const {
+    data: feedbackData,
+    size,
+    setSize,
+    isLoading,
+    isValidating,
+  } = useSWRInfinite(getKey);
 
   return (
     <div className="overflow-x-hidden pb-20">
@@ -55,17 +46,19 @@ function Page() {
       <div className="mx-auto flex max-w-4xl flex-col justify-start gap-6 px-3 xs:px-5 sm:px-10 md:px-20">
         <FeedbackInputBox />
         <hr className="-mx-[100vw] my-4 w-[200vw] border-slate-300 sm:my-6" />
-        {feedbackItems.map((item, index) => (
-          <FeedbackItem
-            key={index}
-            data={item}
-            setOffset={setOffset}
-            isLast={index === feedbackItems.length - 1}
-          />
-        ))}
+        {feedbackData?.map((feedbackItem, dataIndex) =>
+          feedbackItem.data.map((item: any, index: number) => (
+            <FeedbackItem
+              key={index}
+              data={item}
+              setSize={setSize}
+              isLast={index + dataIndex * 10 === size * 10 - 1}
+            />
+          )),
+        )}
       </div>
       <div className="relative mt-20">
-        <Spinner visible={isLoading} size="5xl" />
+        <Spinner visible={isLoading || isValidating} size="5xl" />
       </div>
     </div>
   );

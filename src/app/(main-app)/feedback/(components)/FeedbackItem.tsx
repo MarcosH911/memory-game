@@ -7,11 +7,11 @@ import FeedbackItemTag from "./FeedbackItemTag";
 
 interface Props {
   data: { id: string; text: string; tags: string[]; votes: number };
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
+  setSize: React.Dispatch<React.SetStateAction<number>>;
   isLast: boolean;
 }
 
-function FeedbackItem({ data, setOffset, isLast }: Props) {
+function FeedbackItem({ data, setSize, isLast }: Props) {
   const itemRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function FeedbackItem({ data, setOffset, isLast }: Props) {
 
     const observer = new IntersectionObserver(([entry]) => {
       if (isLast && entry.isIntersecting) {
-        setOffset((offset) => offset + 10);
+        setSize((size) => size + 1);
         observer.unobserve(entry.target);
       }
     });
@@ -31,7 +31,7 @@ function FeedbackItem({ data, setOffset, isLast }: Props) {
         observer.disconnect();
       }
     };
-  }, [isLast, setOffset]);
+  }, [isLast, setSize]);
 
   return (
     <div
@@ -41,7 +41,7 @@ function FeedbackItem({ data, setOffset, isLast }: Props) {
       <FeedbackVotes votes={data.votes} postId={data.id} />
       <div className="flex flex-col justify-center">
         <div className="absolute top-4 flex items-center gap-1.5">
-          {data.tags.map((tag, index) => (
+          {data.tags?.map((tag, index) => (
             <FeedbackItemTag key={index} tag={tag} />
           ))}
         </div>
