@@ -10,7 +10,7 @@ export async function GET() {
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
   if (!userId) {
-    console.error("There was an error getting the user");
+    console.error("There was an error getting the user in user points");
     return NextResponse.error();
   }
 

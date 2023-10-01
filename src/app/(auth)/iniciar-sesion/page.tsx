@@ -40,7 +40,7 @@ function Page() {
   };
 
   useEffect(() => {
-    router.prefetch("/jugar");
+    router.prefetch("/jugar?prefetch=true");
   }, [router]);
 
   return (

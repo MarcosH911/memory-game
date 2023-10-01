@@ -39,7 +39,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
     if (!userId) {
-      console.error("There was an error getting the user");
+      console.error("There was an error getting the user in store buy buttons");
       return;
     }
 

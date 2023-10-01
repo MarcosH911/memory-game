@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
   if (!userId) {
-    console.error("There was an error getting the user");
+    console.error("There was an error getting the user in feedback");
     return NextResponse.error();
   }
 

@@ -2,12 +2,16 @@ import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  // matcher: ["/((?!_next/|api/).*)"],
-  matcher: ["/aaa"],
+  matcher: ["/((?!_next/|api/|_vercel/).*)"],
 };
 
 export const middleware = async (request: NextRequest) => {
   const response = NextResponse.next();
+
+  if (request.nextUrl.searchParams.get("prefetch") === "true") {
+    return response;
+  }
+
   const supabase = createMiddlewareClient<Database>({
     req: request,
     res: response,

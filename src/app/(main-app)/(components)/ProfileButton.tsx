@@ -1,17 +1,16 @@
 "use client";
 
+import useSWR from "swr";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Image from "next/image";
-import * as Popover from "@radix-ui/react-popover";
 import { HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineUser } from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
+import * as Popover from "@radix-ui/react-popover";
 
 import getAvatarImage from "@/utils/getAvatarImage";
-import { HiOutlineUser } from "react-icons/hi2";
 import Spinner from "@/components/Spinner";
-import { twMerge } from "tailwind-merge";
-import useSWR from "swr";
 
 function ProfileButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +34,7 @@ function ProfileButton() {
 
   useEffect(() => {
     if (isModalOpen) {
-      router.prefetch("/iniciar-sesion");
+      router.prefetch("/iniciar-sesion?prefetch=true");
     }
   }, [isModalOpen, router]);
 

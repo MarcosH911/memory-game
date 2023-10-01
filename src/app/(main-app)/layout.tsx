@@ -18,31 +18,41 @@ async function Layout({ children }: { children: React.ReactNode }) {
 
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
-  if (!userId) {
-    console.error("There was an error getting the user");
-    return null;
-  }
+  let profileData = { full_name: "", avatar_path: "" };
+  let pointsData = { total_coins: 0, total_diamonds: 0 };
 
-  const pointsDataPromise = supabase.from("user_points").select("*").single();
+  if (userId) {
+    const pointsDataPromise = supabase.from("user_points").select("*").single();
 
-  const profileDataPromise = supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
+    const profileDataPromise = supabase
+      .from("profiles")
+      .select("full_name, avatar_path")
+      .eq("user_id", userId)
+      .single();
 
-  const [
-    { data: profileData, error: profileError },
-    { data: pointsData, error: pointsError },
-  ] = await Promise.all([profileDataPromise, pointsDataPromise]);
+    const [
+      { data: newProfileData, error: profileError },
+      { data: newPointsData, error: pointsError },
+    ] = await Promise.all([profileDataPromise, pointsDataPromise]);
 
-  if (pointsError) {
-    console.error("There was an error selecting the user points");
-    return;
-  }
-  if (profileError || !profileData) {
-    console.error("There was an error selecting the user profile");
-    return;
+    if (pointsError) {
+      console.error("There was an error selecting the user points");
+      return;
+    }
+    if (profileError) {
+      console.error("There was an error selecting the user profile");
+      return;
+    }
+
+    if (newProfileData) {
+      profileData = newProfileData;
+    }
+    if (newPointsData) {
+      pointsData = newPointsData as {
+        total_coins: number;
+        total_diamonds: number;
+      };
+    }
   }
 
   const avatarUrl = getAvatarImage(profileData.avatar_path);

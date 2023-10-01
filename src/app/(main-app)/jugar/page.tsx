@@ -183,9 +183,9 @@ function PlayGame() {
 
   useEffect(() => {
     if (isPlaying) {
-      router.push(pathname + "?playing=true");
+      router.replace(pathname + "?playing=true");
     } else {
-      router.push(pathname);
+      router.replace(pathname);
     }
   }, [isPlaying, pathname, router]);
 
