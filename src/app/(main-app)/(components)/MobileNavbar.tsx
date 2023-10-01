@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { HiOutlineLogout } from "react-icons/hi";
 
+import Spinner from "@/components/Spinner";
 import MenuNavbar from "./MenuNavbar";
 
 interface Props {
@@ -16,14 +17,17 @@ interface Props {
 
 function MobileNavbar({ avatarUrl, fullName }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoadingLogout, setIsLoadingLogout] = useState(false);
 
   const router = useRouter();
 
   const handleLogout = async () => {
+    setIsLoadingLogout(true);
     const response = await fetch("/api/auth/logout", { method: "post" });
     if (response.status === 200) {
       router.push("/iniciar-sesion");
     }
+    setIsLoadingLogout(false);
   };
 
   return (
@@ -58,10 +62,17 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
           <MenuNavbar onClick={() => setIsOpen(false)} />
           <li
             onClick={handleLogout}
-            className="flex cursor-pointer items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600"
+            className="flex cursor-pointer items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600 relative"
           >
-            <HiOutlineLogout />
-            <span>Cerrar sesión</span>
+            <span className="absolute w-full h-full text-teal-950">
+              <Spinner visible={isLoadingLogout} size="2xl" />
+            </span>
+            <HiOutlineLogout
+              className={twMerge(isLoadingLogout && "opacity-0")}
+            />
+            <span className={twMerge(isLoadingLogout && "opacity-0")}>
+              Cerrar sesión
+            </span>
           </li>
         </ul>
       </nav>

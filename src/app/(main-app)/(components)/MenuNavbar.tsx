@@ -40,6 +40,12 @@ function MenuNavbar({ onClick }: Props) {
         text="Colección"
         onClick={onClick}
       />
+      <MenuNavbarItem
+        href="/profesores"
+        Icon={HiOutlineShoppingBag}
+        text="Profesores"
+        onClick={onClick}
+      />
     </>
   );
 }
