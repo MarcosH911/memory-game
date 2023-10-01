@@ -60,7 +60,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
         ["stageFilter", stage],
         ["gradeFilter", grade],
         ["classFilter", schoolClass],
-      ])
+      ]),
     );
   };
 
@@ -74,8 +74,8 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
           (school: { school_name: string; school_value: string }) => ({
             text: school.school_name,
             value: school.school_value,
-          })
-        )
+          }),
+        ),
       );
     };
 
@@ -93,7 +93,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
     <div
       className={twMerge(
         type === "normal" && "block xl:hidden",
-        type === "advanced" && "hidden xl:block"
+        type === "advanced" && "hidden xl:block",
       )}
     >
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
@@ -106,7 +106,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
           <div
             className={twMerge(
               "-mt-4 mb-8 flex flex-col items-center justify-center gap-6",
-              type === "advanced" && "hidden"
+              type === "advanced" && "hidden",
             )}
           >
             <ul className="flex rounded-full bg-slate-200 shadow-inner shadow-slate-950/20">
@@ -187,7 +187,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
               onClick={() => setIsOpen(false)}
               className={twMerge(
                 "w-24 rounded-md border border-slate-300/50 bg-slate-200 py-1.5 text-lg font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg xs:w-28 xs:py-2 xs:text-xl sm:w-40 sm:py-3 sm:text-2xl",
-                type === "normal" && "hidden"
+                type === "normal" && "hidden",
               )}
             >
               Cancelar
@@ -203,7 +203,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
         onClick={() => setIsOpen(true)}
         className={twMerge(
           "flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-10 py-3 font-semibold text-slate-950 shadow-md transition duration-200 hover:bg-slate-300 hover:shadow-lg",
-          type === "normal" && "mx-auto mb-4 mt-6"
+          type === "normal" && "mx-auto mb-4 mt-6",
         )}
       >
         <HiAdjustmentsHorizontal className="text-xl" />

@@ -1,9 +1,10 @@
 "use client";
 
+import useSWRInfinite from "swr/infinite";
+
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
 import Spinner from "@/components/Spinner";
-import useSWRInfinite from "swr/infinite";
 
 const getFeedbackItems = async (
   setFeedbackItems: React.Dispatch<any>,
@@ -15,7 +16,6 @@ const getFeedbackItems = async (
       method: "get",
     },
   );
-
   const { data: feedbackItemsData } = await feedbackItemsPromise.json();
 
   setFeedbackItems((items: any) => [...items, ...feedbackItemsData]);
@@ -37,7 +37,7 @@ function Page() {
 
   return (
     <div className="overflow-x-hidden pb-20">
-      <h1 className="pt-8 text-center text-5xl font-bold text-emerald-950 sm:text-6xl">
+      <h1 className="pt-8 text-center text-5xl font-bold text-teal-950 sm:text-6xl">
         Feedback
       </h1>
       <h2 className="mb-8 mt-4 text-center text-lg text-teal-800 sm:mb-10 sm:mt-6 sm:text-xl">

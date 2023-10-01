@@ -36,7 +36,7 @@ function FeedbackItem({ data, setSize, isLast }: Props) {
   return (
     <div
       ref={itemRef}
-      className="relative flex rounded-2xl bg-white py-6 pr-6 text-teal-950 shadow-lg sm:pr-12"
+      className="relative flex rounded-2xl bg-white pr-6 text-teal-950 shadow-lg sm:pr-12"
     >
       <FeedbackVotes votes={data.votes} postId={data.id} />
       <div className="flex flex-col justify-center">
@@ -45,7 +45,7 @@ function FeedbackItem({ data, setSize, isLast }: Props) {
             <FeedbackItemTag key={index} tag={tag} />
           ))}
         </div>
-        <span className="flex items-center text-base xs:text-lg">
+        <span className="flex items-center py-10 text-base xs:text-lg">
           {data.text}
         </span>
       </div>

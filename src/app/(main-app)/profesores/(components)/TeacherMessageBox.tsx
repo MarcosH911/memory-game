@@ -10,7 +10,7 @@ function TeacherMessageBox({ errorMessage, setErrorMessage }: Props) {
   return (
     <div
       className={twMerge(
-        "relative mt-8 -mb-8 flex items-center rounded border border-red-400 bg-red-50 px-2 py-2 text-xs text-red-700",
+        "relative -mb-8 mt-8 flex items-center rounded border border-red-400 bg-red-50 px-2 py-2 text-xs text-red-700",
         !errorMessage && "hidden",
       )}
     >
