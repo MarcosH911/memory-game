@@ -31,7 +31,7 @@ async function AvatarStoreRoulette({
   const selectedAvatarPath = avatarPaths[102];
 
   const hasEnoughCoins = userPoints.coins >= 60;
-  const hasEnoughDiamonds = userPoints.coins >= 15;
+  const hasEnoughDiamonds = userPoints.diamonds >= 15;
 
   return (
     <div className="mb-24 flex flex-col items-center justify-center">

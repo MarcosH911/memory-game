@@ -10,6 +10,7 @@ import setSearchParams from "@/helpers/setSearchParams";
 import { twMerge } from "tailwind-merge";
 import RankingFiltersTimeItem from "./RankingFiltersTimeItem";
 import RankingFiltersPointsItem from "./RankingFiltersPointsItem";
+import useSWR from "swr";
 
 interface Props {
   type?: "normal" | "advanced";
@@ -33,9 +34,14 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
   const [schoolClass, setSchoolClass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const [schoolsList, setSchoolsList] = useState<
-    { text: string; value: string }[]
-  >([]);
+  const { data: schoolsList } = useSWR("/api/schools");
+  const formattedSchoolsList =
+    schoolsList?.data.map(
+      (school: { school_name: string; school_value: string }) => ({
+        text: school.school_name,
+        value: school.school_value,
+      }),
+    ) || [];
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -63,24 +69,6 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
       ]),
     );
   };
-
-  useEffect(() => {
-    const fetchSchools = async () => {
-      const schoolsResponse = await fetch("/api/schools");
-      const schools = await schoolsResponse.json();
-
-      setSchoolsList(
-        schools.data.map(
-          (school: { school_name: string; school_value: string }) => ({
-            text: school.school_name,
-            value: school.school_value,
-          }),
-        ),
-      );
-    };
-
-    fetchSchools();
-  }, []);
 
   useEffect(() => {
     setSchool(searchParams.get("schoolFilter") || "");
@@ -134,7 +122,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
             <RankingFiltersAdvancedInput
               name={"school" + type}
               label="Colegio"
-              options={schoolsList}
+              options={formattedSchoolsList}
               value={school}
               setValue={setSchool}
             />

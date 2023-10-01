@@ -12,8 +12,8 @@ interface Props {
 function TeacherItem({ data }: Props) {
   const avatarUrl = getAvatarImage(data.avatar_path);
   const timePlayed = {
-    hours: Math.floor(data.diamonds / 60),
-    minutes: data.diamonds % 60,
+    hours: Math.floor((data.diamonds * 1.25) / 60),
+    minutes: Math.floor(data.diamonds * 1.25) % 60,
   };
 
   return (

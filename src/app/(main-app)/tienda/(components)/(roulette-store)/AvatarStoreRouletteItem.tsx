@@ -12,7 +12,7 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
     <div className="flex h-[calc((100vw-1rem)/3)] w-[calc((100vw-1rem)/3)] flex-shrink-0 items-center justify-center bg-gradient-to-b from-pink-500 via-red-500 to-yellow-400 p-2 xs:p-3 md:h-[calc((100vw-1rem)/5)] md:w-[calc((100vw-1rem)/5)] xl:h-64 xl:w-64 xl:p-4">
       <div className="relative h-full w-full">
         <Image
-          priority={index < 6}
+          priority={index <= 5}
           loading="eager"
           src={data}
           alt="Avatar image"

@@ -1,10 +1,3 @@
-/*
-Partidas jugadas (diamantes)
-Tiempo jugado (partidas jugadas * tiempo)
-Filtros obligatorios
-Dia, semana, mes, año, todo el tiempo
-*/
-
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
