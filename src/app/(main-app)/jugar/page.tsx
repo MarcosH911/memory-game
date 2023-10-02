@@ -9,13 +9,14 @@ import PlaySpaceButton from "./(components)/PlaySpaceButton";
 import PlaySquare from "./(components)/PlaySquare";
 import PlayStartScreen from "./(components)/PlayStartScreen";
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
+import PlayTutorial from "./(tutorial)/PlayTutorial";
 
 const baseSequenceLength = 20;
 const numTargets = 6;
 
 const getTargetsCount = (
   generatedSequence: MutableRefObject<number[]>,
-  level: number
+  level: number,
 ) => {
   let count = 0;
   for (let i = level; i < generatedSequence.current.length; i++) {
@@ -28,7 +29,7 @@ const getTargetsCount = (
 
 const getGeneratedSequence = (
   generatedSequence: MutableRefObject<number[]>,
-  level: number
+  level: number,
 ) => {
   generatedSequence.current = [];
 
@@ -39,7 +40,7 @@ const getGeneratedSequence = (
   let targetsCount = getTargetsCount(generatedSequence, level);
   while (targetsCount != numTargets) {
     const randomIndex = Math.trunc(
-      Math.random() * (generatedSequence.current.length - level) + level
+      Math.random() * (generatedSequence.current.length - level) + level,
     );
     const changeFirst = !Math.trunc(Math.random() * 2);
     if (
@@ -49,7 +50,7 @@ const getGeneratedSequence = (
     ) {
       if (changeFirst) {
         generatedSequence.current[randomIndex - level] = Math.trunc(
-          Math.random() * 8
+          Math.random() * 8,
         );
       } else {
         generatedSequence.current[randomIndex] = Math.trunc(Math.random() * 8);
@@ -198,6 +199,7 @@ function PlayGame() {
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
+      <PlayTutorial />
       <PlayLevelTitle level={level} />
       <PlayStartScreen
         onClick={playGame}
