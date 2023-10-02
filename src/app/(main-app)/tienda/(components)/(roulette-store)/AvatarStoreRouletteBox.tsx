@@ -110,7 +110,7 @@ function AvatarStoreRouletteBox({
 
   return (
     <div className="relative">
-      <div className="relative h-[calc((100vw-1rem)/3)] w-[calc(100vw-1rem)] overflow-hidden rounded-lg md:h-[calc((100vw-1rem)/5)] xl:h-64 xl:w-[80rem]">
+      <div className="relative aspect-[3] w-[calc(100vw-1rem)] overflow-hidden rounded-lg md:aspect-[5] xl:w-[min(calc(100vw-1rem),80rem)]">
         <div
           ref={rouletteItemsRef}
           onTransitionEnd={async () => {

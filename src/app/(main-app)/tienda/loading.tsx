@@ -7,14 +7,14 @@ function Loading() {
           <div className="absolute left-1/2 top-1/2 h-4 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-400 xs:h-6 sm:h-8"></div>
         </h1>
         <div className="relative">
-          <div className="relative h-[calc((100vw-1rem)/3)] w-[calc(100vw-1rem)] overflow-hidden rounded-lg md:h-[calc((100vw-1rem)/5)] xl:h-64 xl:w-[80rem]">
+          <div className="relative aspect-[3] w-[calc(100vw-1rem)] overflow-hidden rounded-lg md:aspect-[5] xl:w-[min(calc(100vw-1rem),80rem)]">
             <div className="flex flex-row flex-nowrap items-center justify-start divide-x-2 divide-teal-50 rounded-lg">
               {Array(5)
                 .fill(true)
                 .map((_, index) => (
                   <div
                     key={index}
-                    className="flex h-[calc((100vw-1rem)/3)] w-[calc((100vw-1rem)/3)] flex-shrink-0 items-center justify-center bg-slate-200 p-2 xs:p-3 md:h-[calc((100vw-1rem)/5)] md:w-[calc((100vw-1rem)/5)] xl:h-64 xl:w-64 xl:p-4"
+                    className="flex aspect-square w-[calc((100vw-1rem)/3)] flex-shrink-0 items-center justify-center bg-slate-200 p-2 xs:p-3 md:w-[calc((100vw-1rem)/5)] xl:w-[min(calc((100vw-1rem)/5),16rem)] xl:p-4"
                   >
                     <div className="relative h-full w-full">
                       <div className="aspect-square h-fit rounded-full border-2 border-slate-400 bg-slate-300 xs:border-4"></div>

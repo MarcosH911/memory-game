@@ -62,9 +62,9 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
           <MenuNavbar onClick={() => setIsOpen(false)} />
           <li
             onClick={handleLogout}
-            className="flex cursor-pointer items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600 relative"
+            className="relative flex cursor-pointer items-center gap-1.5 border-transparent py-1 pr-2 text-lg font-semibold text-teal-950 transition hover:text-teal-600"
           >
-            <span className="absolute w-full h-full text-teal-950">
+            <span className="absolute h-full w-full text-teal-950">
               <Spinner visible={isLoadingLogout} size="2xl" />
             </span>
             <HiOutlineLogout
