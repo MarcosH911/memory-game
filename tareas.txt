@@ -1,14 +1,6 @@
 ------------ BUGS ------------
 
-Bug where you start playing before level has loaded
-
-Ranking refetch data
-
 Refetch on logout and login
-
-Redirecting when no search params
-
-Avatar bug in ranking
 
 
 -------- ORGANIZATION --------

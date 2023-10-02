@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import sleep from "@/helpers/sleep";
@@ -21,7 +15,7 @@ const numTargets = 6;
 
 const getTargetsCount = (
   generatedSequence: MutableRefObject<number[]>,
-  level: number,
+  level: number
 ) => {
   let count = 0;
   for (let i = level; i < generatedSequence.current.length; i++) {
@@ -34,7 +28,7 @@ const getTargetsCount = (
 
 const getGeneratedSequence = (
   generatedSequence: MutableRefObject<number[]>,
-  level: number,
+  level: number
 ) => {
   generatedSequence.current = [];
 
@@ -45,7 +39,7 @@ const getGeneratedSequence = (
   let targetsCount = getTargetsCount(generatedSequence, level);
   while (targetsCount != numTargets) {
     const randomIndex = Math.trunc(
-      Math.random() * (generatedSequence.current.length - level) + level,
+      Math.random() * (generatedSequence.current.length - level) + level
     );
     const changeFirst = !Math.trunc(Math.random() * 2);
     if (
@@ -55,7 +49,7 @@ const getGeneratedSequence = (
     ) {
       if (changeFirst) {
         generatedSequence.current[randomIndex - level] = Math.trunc(
-          Math.random() * 8,
+          Math.random() * 8
         );
       } else {
         generatedSequence.current[randomIndex] = Math.trunc(Math.random() * 8);
@@ -100,7 +94,7 @@ function PlayGame() {
 
     do {
       await sleep(500);
-    } while (isInserting.current);
+    } while (isInserting.current || level === -1);
 
     await sleep(1000);
 

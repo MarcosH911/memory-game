@@ -30,7 +30,7 @@ function Page() {
     if (loginDataResponse.status === 400) {
       const { message } = await loginDataResponse.json();
       setLoginError(message);
-    } else {
+    } else if (loginDataResponse.status === 200) {
       router.push("/jugar");
       return;
     }
