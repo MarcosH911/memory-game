@@ -14,7 +14,7 @@ async function AvatarStoreRoulette({
   allAvatars,
 }: Props) {
   const avatarPaths = allAvatars.filter(
-    (avatarPath) => !userAvatars.includes(avatarPath),
+    (avatarPath) => !userAvatars.includes(avatarPath)
   );
 
   while (avatarPaths.length < 106) {
@@ -24,7 +24,7 @@ async function AvatarStoreRoulette({
   avatarPaths.length = 106;
 
   const avatarsUrls = avatarPaths.map((avatarPath: string) =>
-    getAvatarImage(avatarPath),
+    getAvatarImage(avatarPath)
   );
 
   const selectedAvatarUrl = avatarsUrls[102];
@@ -34,7 +34,7 @@ async function AvatarStoreRoulette({
   const hasEnoughDiamonds = userPoints.diamonds >= 15;
 
   return (
-    <div className="mb-24 flex flex-col items-center justify-center">
+    <div className="mb-24 flex flex-col items-center justify-center overflow-x-hidden">
       <h1 className="mb-6 text-4xl font-semibold tracking-tight text-emerald-950 xs:text-5xl sm:text-6xl lg:text-7xl">
         ¡Gira la ruleta!
       </h1>

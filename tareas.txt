@@ -1,16 +1,8 @@
 ------------ BUGS ------------
 
-Change teacher nav icon
-
-Fix height bug when text wraps in teachers tab
-
-Fill images sizes (avatar store)
+Roulette bug where always goes to the same place
 
 Roulette bug where you get an avatar you shouldn't
-
-Fix responsive roulette
-
-Loading state in mobile log out
 
 School fetch bug
 

@@ -58,6 +58,8 @@ function AvatarStoreRouletteBox({
     if (isSpinningRoulette) return;
     setIsSpinningRoulette(true);
 
+    getAnimationTranslation();
+
     updateSelectedAvatarUrl();
 
     const insertAvatarPromise = fetch("/api/avatars/insert-avatar", {
@@ -94,7 +96,7 @@ function AvatarStoreRouletteBox({
     updateSelectedAvatarUrl,
   ]);
 
-  useEffect(() => {
+  const getAnimationTranslation = () => {
     const viewportWidth = window.innerWidth || 0;
     let squareWidth = viewportWidth / 16 - 1;
     squareWidth /= viewportWidth < 768 ? 3 : 5;
@@ -106,7 +108,7 @@ function AvatarStoreRouletteBox({
 
     animationTranslation.current =
       defaultAnimationTranslation + randomTranslation;
-  }, []);
+  };
 
   return (
     <div className="relative">
