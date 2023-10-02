@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  HiOutlineAcademicCap,
   HiOutlinePlay,
   HiOutlineShoppingBag,
   HiOutlineShoppingCart,
@@ -42,7 +43,7 @@ function MenuNavbar({ onClick }: Props) {
       />
       <MenuNavbarItem
         href="/profesores"
-        Icon={HiOutlineShoppingBag}
+        Icon={HiOutlineAcademicCap}
         text="Profesores"
         onClick={onClick}
       />
