@@ -1,30 +1,14 @@
 ------------ BUGS ------------
 
-Roulette bug where always goes to the same place
-
-Roulette bug where you get an avatar you shouldn't
-
-School fetch bug
-
-Refetch after insert feedback and insert points
-
-Login is slow because it redirects to /play
-
-Updating level
+Bug where you start playing before level has loaded
 
 Ranking refetch data
 
 Refetch on logout and login
 
-Animate modal on close
-
 Redirecting when no search params
 
-Add security to admin users creating other users
-
 Avatar bug in ranking
-
-Loading state takes too long
 
 
 -------- ORGANIZATION --------
@@ -33,20 +17,12 @@ Refactor info messages
 
 Refactor filters
 
-Route handlers types
-
 Order imports
 
 Make all top level functions not arrow functions
 
-Change update POST request to PUT (or something)
-
 
 --------- OPTIMIZING ---------
-
-SWR
-
-Make login faster
 
 Update database level only when session ends
 
@@ -56,26 +32,10 @@ Server component when possible
 
 Create index for database
 
-Cache
-
 
 -------- IMPROVEMENTS --------
 
-Style feedback votes
-
-Ranking mobile filters only accept button
-
-Make store loading by parts
-
-Fix mobile loading state
-
-Suspense in roulette items
-
-Style ranking again
-
 Do something while inserting in play
-
-Handle roulette for devices with worse connection
 
 Toast instead of console.error()
 
@@ -91,20 +51,12 @@ Error handling/states
 
 Remove all console.log() / console.error()
 
-Use optimistic to update before fetch
-
-Store ranking filters in local storage to preserve search params on change
+Store ranking and teacher filters in local storage to preserve search params on change
 
 Revalidate data
 
-Cache data
-
-Spinner on ranking refresh while router.refresh()
-
 
 ---------- FEATURES ----------
-
-School logo in ranking
 
 Buy color packs
 
@@ -124,21 +76,7 @@ Different avatar categories
 
 Register dropdown from RadixUI
 
-Teachers
-  School
-  Students grade
-
-Students grade in ranking
-
-Students school in ranking
-
-Responsive
-
-Lighthouse
-
 Server actions
-
-Feedback button
 
 Landing page
 
