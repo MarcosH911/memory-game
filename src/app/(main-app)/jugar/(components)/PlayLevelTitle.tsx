@@ -9,7 +9,7 @@ function PlayLevelTitle({ level }: Props) {
     <h1
       className={twMerge(
         "relative mb-4 mt-6 rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-5xl font-bold text-teal-950 shadow-md shadow-teal-200/50 2xl:text-6xl",
-        level === -1 && "text-transparent"
+        level === -1 && "text-transparent",
       )}
     >
       Nivel {level === -1 ? 0 : level}

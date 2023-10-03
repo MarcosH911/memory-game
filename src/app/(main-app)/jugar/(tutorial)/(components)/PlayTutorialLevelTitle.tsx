@@ -2,14 +2,16 @@ import { twMerge } from "tailwind-merge";
 
 interface Props {
   level: number;
+  type?: "small" | "big";
 }
 
-function PlayTutorialLevelTitle({ level }: Props) {
+function PlayTutorialLevelTitle({ level, type = "big" }: Props) {
   return (
     <h1
       className={twMerge(
-        "relative mb-4 mt-6 rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-6xl font-bold text-teal-950 shadow-md shadow-teal-200/50",
-        level === -1 && "text-transparent"
+        "relative rounded-lg border border-teal-200 bg-teal-100 px-6 py-3 text-7xl font-bold text-teal-950 shadow-md shadow-teal-200/50",
+        type === "small" && "px-[2vh] py-[1vh] text-[4vh] leading-[4.5vh]",
+        level === -1 && "text-transparent",
       )}
     >
       Nivel {level === -1 ? 0 : level}
