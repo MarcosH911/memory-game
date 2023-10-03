@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Change "level" for "nivel"
+
 Refetch on logout and login
 
 
