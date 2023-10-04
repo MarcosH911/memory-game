@@ -22,7 +22,7 @@ function PlayTutorialStep3() {
 
   return (
     <PlayTutorialStepWrapper>
-      <ul className="mb-10 space-y-3 font-semibold leading-tight">
+      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
         <li>
           Tienes un <strong className="font-extrabold">botón</strong> que puedes
           activar.

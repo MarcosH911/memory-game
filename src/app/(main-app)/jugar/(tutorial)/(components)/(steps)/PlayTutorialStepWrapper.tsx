@@ -19,7 +19,7 @@ function PlayTutorialStepWrapper({ children }: Props) {
           Paso {step}
         </h2>
       </div>
-      <div className="flex h-full flex-col pb-10">{children}</div>
+      <div className="flex h-full flex-col pb-4 h-md:pb-10">{children}</div>
       <PlayTutorialButtons />
     </div>
   );

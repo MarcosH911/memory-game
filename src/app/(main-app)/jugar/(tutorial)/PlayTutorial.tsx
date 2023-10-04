@@ -20,7 +20,7 @@ function PlayTutorial() {
       <Dialog.Root open={true} onOpenChange={() => setIsOpen((open) => !open)}>
         <Dialog.Trigger />
         <Dialog.Overlay />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 border-slate-200 bg-cyan-50 px-4 xl:h-[50rem] xl:w-[32.5rem] xl:rounded-xl xl:border xl:px-12 xl:shadow-2xl">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 border-slate-200 bg-cyan-50 w-[32.5rem] rounded-xl border h-[95vh] px-12 shadow-2xl">
           {step === 1 && <PlayTutorialStep1 />}
           {step === 2 && <PlayTutorialStep2 />}
           {step === 3 && <PlayTutorialStep3 />}

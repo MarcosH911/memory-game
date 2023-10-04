@@ -7,7 +7,7 @@ interface Props {
 
 function PlayTutorialSquares({ selectedSquare, type = "big" }: Props) {
   return (
-    <div className="relative grid aspect-square w-full grid-cols-3 grid-rows-3">
+    <div className="relative grid aspect-square h-[min(100%,26.25rem)] grid-cols-3 grid-rows-3">
       {Array(8)
         .fill(true)
         .map((_, index) => (
@@ -19,7 +19,7 @@ function PlayTutorialSquares({ selectedSquare, type = "big" }: Props) {
               className={twMerge(
                 "h-full select-none rounded-2xl border border-teal-600 border-opacity-30 bg-teal-300 transition duration-100",
                 selectedSquare === index &&
-                  "border-opacity-100 bg-teal-600 shadow-[0_0_15px_3px] shadow-slate-900/20",
+                  "border-opacity-100 bg-teal-600 shadow-[0_0_15px_3px] shadow-slate-900/20"
               )}
             ></div>
           </div>

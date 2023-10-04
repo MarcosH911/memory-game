@@ -20,7 +20,7 @@ function PlayTutorialStep2() {
 
   return (
     <PlayTutorialStepWrapper>
-      <ul className="space-y-3 pb-10 font-semibold leading-tight">
+      <ul className="space-y-3 h-md:pb-10 pb-4 font-semibold leading-tight">
         <li>
           Tienes un <strong className="font-extrabold">nivel</strong> que va
           subiendo o bajando.

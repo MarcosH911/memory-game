@@ -15,6 +15,9 @@ const config: Config = {
       },
       screens: {
         xs: "425px",
+        "h-sm": { raw: "(min-height: 600px)" },
+        "h-md": { raw: "(min-height: 700px)" },
+        "h-lg": { raw: "(min-height: 800px)" },
       },
       keyframes: {
         "up-down": {
