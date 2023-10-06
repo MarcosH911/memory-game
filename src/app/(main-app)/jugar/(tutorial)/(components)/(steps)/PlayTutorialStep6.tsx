@@ -30,11 +30,11 @@ function PlayTutorialStep5() {
         </li>
       </ul>
 
-      <div className="my-auto">
-        <div className="mb-8 flex items-center justify-center">
+      <div className="flex h-full flex-col items-center justify-center">
+        <div className="mb-2 flex items-center justify-center h-md:mb-4 h-lg:mb-8">
           <PlayTutorialLevelTitle level={2} type="small" />
         </div>
-        <div className="relative my-auto aspect-[2]">
+        <div className="relative aspect-[2] h-[min(15rem,100%)]">
           <Image
             src="/tutorial/Example-2.png"
             alt="Example image"

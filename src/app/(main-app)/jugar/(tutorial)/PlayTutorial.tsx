@@ -15,20 +15,27 @@ const totalSteps = 6;
 
 function PlayTutorial() {
   const [isOpen, setIsOpen] = useState(true);
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
 
   return (
     <StepContext.Provider value={{ step, setStep, totalSteps }}>
       <Dialog.Root open={true} onOpenChange={() => setIsOpen((open) => !open)}>
         <Dialog.Trigger />
         <Dialog.Overlay />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 h-[95vh] w-[32.5rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-slate-200 bg-cyan-50 px-12 shadow-2xl">
-          {step === 1 && <PlayTutorialStep1 />}
-          {step === 2 && <PlayTutorialStep2 />}
-          {step === 3 && <PlayTutorialStep3 />}
-          {step === 4 && <PlayTutorialStep4 />}
-          {step === 5 && <PlayTutorialStep5 />}
-          {step === 6 && <PlayTutorialStep6 />}
+        <Dialog.Content asChild>
+          <div className="fixed left-1/2 top-1/2 z-50 flex h-[95vh] w-[32.5rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-slate-200 shadow-2xl">
+            <div
+              style={{ transform: `translateX(${(step - 1) * -32.5}rem)` }}
+              className="flex transition duration-300"
+            >
+              <PlayTutorialStep1 />
+              <PlayTutorialStep2 />
+              <PlayTutorialStep3 />
+              <PlayTutorialStep4 />
+              <PlayTutorialStep5 />
+              <PlayTutorialStep6 />
+            </div>
+          </div>
         </Dialog.Content>
       </Dialog.Root>
     </StepContext.Provider>
