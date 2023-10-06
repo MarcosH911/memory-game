@@ -15,7 +15,7 @@ const totalSteps = 6;
 
 function PlayTutorial() {
   const [isOpen, setIsOpen] = useState(true);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
 
   return (
     <StepContext.Provider value={{ step, setStep, totalSteps }}>
