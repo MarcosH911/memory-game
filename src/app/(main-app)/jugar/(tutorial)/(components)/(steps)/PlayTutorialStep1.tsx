@@ -23,8 +23,8 @@ function PlayTutorialStep1() {
   }, []);
 
   return (
-    <PlayTutorialStepWrapper>
-      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
+    <PlayTutorialStepWrapper step={1}>
+      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           Hay <strong className="font-extrabold">8 cuadrados</strong> como se
           muestra a continuación.
@@ -39,7 +39,7 @@ function PlayTutorialStep1() {
           iluminan.
         </li>
       </ul>
-      <div className="h-full flex items-center justify-center">
+      <div className="flex h-full items-center justify-center">
         <div className="flex h-full items-center justify-center">
           <PlayTutorialSquares selectedSquare={selectedSquare} />
         </div>

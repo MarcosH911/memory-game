@@ -118,7 +118,7 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
             </ul>
           </div>
 
-          <div className="mx-auto grid w-[19.05rem] grid-cols-2 grid-rows-2 gap-x-6 gap-y-4 xs:w-[21.3rem] xs:gap-x-8 xs:gap-y-6 sm:w-[28.5rem] sm:gap-y-8 xl:gap-x-16">
+          <div className="mx-auto grid w-[19.05rem] grid-cols-2 grid-rows-2 gap-x-6 gap-y-4 sm:w-[28.5rem] sm:gap-y-8 xl:gap-x-16 xs:w-[21.3rem] xs:gap-x-8 xs:gap-y-6">
             <RankingFiltersAdvancedInput
               name={"school" + type}
               label="Colegio"
@@ -164,17 +164,17 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
             />
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-4 xs:gap-6 sm:gap-8">
+          <div className="mt-12 flex items-center justify-center gap-4 sm:gap-8 xs:gap-6">
             <button
               onClick={handleApplyFilters}
-              className="sx:w-28 w-24 rounded-md border border-teal-900 bg-teal-700 py-1.5 text-lg font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg xs:py-2 xs:text-xl sm:w-40 sm:py-3 sm:text-2xl"
+              className="sx:w-28 w-24 rounded-md border border-teal-900 bg-teal-700 py-1.5 text-lg font-semibold text-slate-50 shadow-md transition duration-200 hover:border-transparent hover:bg-teal-800 hover:shadow-lg sm:w-40 sm:py-3 sm:text-2xl xs:py-2 xs:text-xl"
             >
               Aplicar
             </button>
             <button
               onClick={() => setIsOpen(false)}
               className={twMerge(
-                "w-24 rounded-md border border-slate-300/50 bg-slate-200 py-1.5 text-lg font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg xs:w-28 xs:py-2 xs:text-xl sm:w-40 sm:py-3 sm:text-2xl",
+                "w-24 rounded-md border border-slate-300/50 bg-slate-200 py-1.5 text-lg font-semibold text-slate-950 shadow-md transition duration-200 hover:border-transparent hover:bg-slate-300 hover:shadow-lg sm:w-40 sm:py-3 sm:text-2xl xs:w-28 xs:py-2 xs:text-xl",
                 type === "normal" && "hidden",
               )}
             >

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
+import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep2() {
   const [level, setLevel] = useState(1);
@@ -19,8 +20,8 @@ function PlayTutorialStep2() {
   }, []);
 
   return (
-    <PlayTutorialStepWrapper>
-      <ul className="space-y-3 h-md:pb-10 pb-4 font-semibold leading-tight">
+    <PlayTutorialStepWrapper step={2}>
+      <ul className="space-y-3 pb-4 font-semibold leading-tight h-md:pb-10">
         <li>
           Tienes un <strong className="font-extrabold">nivel</strong> que va
           subiendo o bajando.

@@ -1,29 +1,63 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import StepContext from "@/contexts/StepContext";
+import TutorialContext from "@/contexts/TutorialContext";
 import PlayTutorialStep1 from "./(components)/(steps)/PlayTutorialStep1";
 import PlayTutorialStep2 from "./(components)/(steps)/PlayTutorialStep2";
 import PlayTutorialStep3 from "./(components)/(steps)/PlayTutorialStep3";
 import PlayTutorialStep4 from "./(components)/(steps)/PlayTutorialStep4";
 import PlayTutorialStep5 from "./(components)/(steps)/PlayTutorialStep5";
 import PlayTutorialStep6 from "./(components)/(steps)/PlayTutorialStep6";
+import { RxQuestionMarkCircled } from "react-icons/rx";
 
 const totalSteps = 6;
 
 function PlayTutorial() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
 
+  const [hasPlayedTutorial, setHasPlayedTutorial] = useState(true);
+
+  useEffect(() => {
+    setHasPlayedTutorial(!!localStorage.getItem("hasPlayedTutorial"));
+    if (!hasPlayedTutorial) {
+      setIsOpen(true);
+    }
+  }, [hasPlayedTutorial]);
+
   return (
-    <StepContext.Provider value={{ step, setStep, totalSteps }}>
-      <Dialog.Root open={true} onOpenChange={() => setIsOpen((open) => !open)}>
-        <Dialog.Trigger />
-        <Dialog.Overlay />
+    <TutorialContext.Provider
+      value={{
+        step,
+        setStep,
+        totalSteps,
+        setIsOpen,
+        hasPlayedTutorial: hasPlayedTutorial,
+        setHasPlayedTutorial,
+      }}
+    >
+      <Dialog.Root
+        open={isOpen}
+        onOpenChange={(open) => {
+          !open && hasPlayedTutorial && setIsOpen(false);
+        }}
+      >
+        <Dialog.Trigger asChild>
+          <button
+            onClick={() => {
+              setStep(1);
+              setIsOpen(true);
+            }}
+            className="absolute right-5 top-5 z-30 rounded-full p-1 text-3xl text-teal-900 transition duration-200 hover:bg-teal-600/20 hover:text-teal-950"
+          >
+            <RxQuestionMarkCircled />
+          </button>
+        </Dialog.Trigger>
+        <Dialog.Overlay className="fixed inset-0 z-50 animate-show-modal-overlay bg-black/10 backdrop-blur-sm data-[state=closed]:animate-fade-out" />
         <Dialog.Content asChild>
-          <div className="fixed left-1/2 top-1/2 z-50 flex h-[95vh] w-[32.5rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-slate-200 shadow-2xl">
+          <div className="fixed left-1/2 top-1/2 z-50 flex h-[95vh] w-[32.5rem] -translate-x-1/2 -translate-y-1/2 animate-show-modal overflow-hidden rounded-xl border border-slate-200 shadow-2xl data-[state=closed]:animate-fade-out">
             <div
               style={{ transform: `translateX(${(step - 1) * -32.5}rem)` }}
               className="flex transition duration-300"
@@ -38,7 +72,7 @@ function PlayTutorial() {
           </div>
         </Dialog.Content>
       </Dialog.Root>
-    </StepContext.Provider>
+    </TutorialContext.Provider>
   );
 }
 

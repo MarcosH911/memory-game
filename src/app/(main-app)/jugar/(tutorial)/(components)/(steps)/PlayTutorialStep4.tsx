@@ -7,6 +7,7 @@ import PlayTutorialSpaceButton from "../PlayTutorialSpaceButton";
 import sleep from "@/helpers/sleep";
 import PlayTutorialSquares from "../PlayTutorialSquares";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
+import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep4() {
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
@@ -28,7 +29,7 @@ function PlayTutorialStep4() {
   }, []);
 
   return (
-    <PlayTutorialStepWrapper>
+    <PlayTutorialStepWrapper step={4}>
       <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           Debes <strong className="font-extrabold">activar</strong> el botón

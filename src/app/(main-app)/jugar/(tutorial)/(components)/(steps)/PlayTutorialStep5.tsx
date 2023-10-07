@@ -4,10 +4,11 @@ import Image from "next/image";
 
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
+import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep5() {
   return (
-    <PlayTutorialStepWrapper>
+    <PlayTutorialStepWrapper step={5}>
       <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           En cada <strong className="font-extrabold">recuadro</strong> del

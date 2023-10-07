@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialSpaceButton from "../PlayTutorialSpaceButton";
 import sleep from "@/helpers/sleep";
+import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep3() {
   const [isSpacePressed, setIsSpacePressed] = useState(false);
@@ -21,8 +22,8 @@ function PlayTutorialStep3() {
   }, [isSpacePressed]);
 
   return (
-    <PlayTutorialStepWrapper>
-      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
+    <PlayTutorialStepWrapper step={3}>
+      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           Tienes un <strong className="font-extrabold">botón</strong> que puedes
           activar.
