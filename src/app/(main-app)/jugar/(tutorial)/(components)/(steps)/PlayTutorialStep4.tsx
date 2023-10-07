@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 
+import sleep from "@/helpers/sleep";
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialSpaceButton from "../PlayTutorialSpaceButton";
-import sleep from "@/helpers/sleep";
 import PlayTutorialSquares from "../PlayTutorialSquares";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
-import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep4() {
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);

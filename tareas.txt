@@ -1,6 +1,6 @@
 ------------ BUGS ------------
 
-Change "level" for "nivel"
+Play tutorial buttons jitter
 
 Refetch on logout and login
 

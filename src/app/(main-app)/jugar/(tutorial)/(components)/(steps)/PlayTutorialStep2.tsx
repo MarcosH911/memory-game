@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
-import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep2() {
   const [level, setLevel] = useState(1);

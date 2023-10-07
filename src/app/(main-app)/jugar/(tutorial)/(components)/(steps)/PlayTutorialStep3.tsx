@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import sleep from "@/helpers/sleep";
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialSpaceButton from "../PlayTutorialSpaceButton";
-import sleep from "@/helpers/sleep";
-import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep3() {
   const [isSpacePressed, setIsSpacePressed] = useState(false);

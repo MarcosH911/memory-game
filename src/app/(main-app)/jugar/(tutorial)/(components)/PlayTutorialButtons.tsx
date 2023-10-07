@@ -1,7 +1,8 @@
-import TutorialContext from "@/contexts/TutorialContext";
 import { useContext } from "react";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
+
+import TutorialContext from "@/contexts/TutorialContext";
 
 interface Props {
   step: number;
@@ -26,7 +27,7 @@ function PlayTutorialButtons({ step }: Props) {
       {step > 1 && (
         <button
           onClick={() => handleSetStep(-1)}
-          className="flex items-center justify-center gap-1.5 rounded-md bg-teal-600 px-6 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none"
+          className="flex items-center justify-center gap-1 rounded-md bg-teal-600 px-5 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none xs:gap-1.5 xs:px-6"
         >
           <HiArrowLeft />
           <span>
@@ -38,7 +39,7 @@ function PlayTutorialButtons({ step }: Props) {
         <button
           onClick={() => handleSetStep(1)}
           className={twMerge(
-            "flex items-center justify-center gap-1.5 rounded-md bg-teal-600 px-6 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none",
+            "flex items-center justify-center gap-1.5 rounded-md bg-teal-600 px-5 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none xs:px-6",
             step === totalSteps &&
               "bg-teal-300 font-bold text-teal-900 hover:bg-teal-400",
           )}

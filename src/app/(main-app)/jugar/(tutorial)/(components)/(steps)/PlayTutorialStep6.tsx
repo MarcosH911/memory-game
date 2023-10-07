@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
-import PlayTutorialButtons from "../PlayTutorialButtons";
 
 function PlayTutorialStep5() {
   return (
@@ -35,7 +34,7 @@ function PlayTutorialStep5() {
         <div className="mb-2 flex items-center justify-center h-md:mb-4 h-lg:mb-8">
           <PlayTutorialLevelTitle level={2} type="small" />
         </div>
-        <div className="relative aspect-[2] h-[min(15rem,100%)]">
+        <div className="relative aspect-[2] h-[min(15rem,100%,calc((100vw-2rem)/2))]">
           <Image
             src="/tutorial/Example-2.png"
             alt="Example image"
