@@ -32,6 +32,7 @@ function Page() {
       setLoginError(message);
     } else if (loginDataResponse.status === 200) {
       router.push("/jugar");
+      router.refresh();
       return;
     }
 

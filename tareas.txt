@@ -1,9 +1,5 @@
 ------------ BUGS ------------
 
-Refetch on logout and login
-
-Opening teachers tab is too slow
-
 
 -------- ORGANIZATION --------
 
