@@ -11,6 +11,7 @@ import PlayStartScreen from "./(components)/PlayStartScreen";
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayTutorial from "./(tutorial)/PlayTutorial";
 import toast from "react-hot-toast";
+import waitFor from "@/helpers/waitFor";
 
 const baseSequenceLength = 6;
 const numTargets = 6;
@@ -79,6 +80,7 @@ function PlayGame() {
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const [level, setLevel] = useState(-1);
 
+  const levelRef = useRef(level);
   const generatedSequence = useRef<number[]>([]);
   const isInserting = useRef(false);
   const correctHits = useRef(0);
@@ -93,9 +95,9 @@ function PlayGame() {
   const handleSpacePress = () => {
     if (isPlaying && !isSpacePressed) {
       if (
-        sequenceStep.current >= level &&
+        sequenceStep.current >= levelRef.current &&
         generatedSequence.current[sequenceStep.current] ===
-          generatedSequence.current[sequenceStep.current - level]
+          generatedSequence.current[sequenceStep.current - levelRef.current]
       ) {
         correctHits.current++;
       } else {
@@ -110,18 +112,13 @@ function PlayGame() {
 
     setIsPlaying(true);
 
-    do {
-      await sleep(500);
-      console.log(level, isInserting.current);
-    } while (isInserting.current || level === -1);
+    await waitFor(() => !isInserting.current && levelRef.current != -1, 500);
 
-    await sleep(1000);
+    await sleep(1500);
 
     correctHits.current = 0;
     incorrectHits.current = 0;
     isFirstTime.current = false;
-
-    console.log("AAA");
 
     for (
       sequenceStep.current = 0;
@@ -142,7 +139,7 @@ function PlayGame() {
   const insertData = async () => {
     const insertPointsPromise = fetch("/api/points/insert-points", {
       method: "post",
-      body: JSON.stringify({ coins: level, diamonds: 1 }),
+      body: JSON.stringify({ coins: levelRef.current, diamonds: 1 }),
     });
 
     let insertLevelPromise: null | Promise<Response> = null;
@@ -150,29 +147,26 @@ function PlayGame() {
     if (correctHits.current - incorrectHits.current >= (numTargets * 4) / 5) {
       insertLevelPromise = fetch("/api/play/update-level", {
         method: "post",
-        body: JSON.stringify({ level: level + 1 }),
+        body: JSON.stringify({ level: levelRef.current + 1 }),
       });
-      setLevel((level) => {
-        getGeneratedSequence(generatedSequence, level + 1);
-        return level + 1;
-      });
+      setLevel((level) => level + 1);
+      getGeneratedSequence(generatedSequence, levelRef.current + 1);
       levelChange.current = 1;
     } else if (
       correctHits.current - incorrectHits.current < numTargets / 2 &&
-      level > 1
+      levelRef.current > 1
     ) {
       insertLevelPromise = fetch("/api/play/update-level", {
         method: "post",
-        body: JSON.stringify({ level: level - 1 }),
+        body: JSON.stringify({ level: levelRef.current - 1 }),
       });
-      setLevel((level) => {
-        getGeneratedSequence(generatedSequence, level - 1);
-        return level - 1;
-      });
+      setLevel((level) => level - 1);
+      getGeneratedSequence(generatedSequence, levelRef.current - 1);
       levelChange.current = -1;
     } else {
       levelChange.current = 0;
     }
+    levelRef.current += levelChange.current;
 
     setIsPlaying(false);
 
@@ -200,7 +194,7 @@ function PlayGame() {
 
   useEffect(() => {
     const initGame = async () => {
-      if (isFirstTime && level === -1) {
+      if (isFirstTime && levelRef.current === -1) {
         const response = await fetch("/api/play/get-level", { method: "get" });
 
         if (response.status !== 200) {
@@ -209,13 +203,13 @@ function PlayGame() {
 
         const { data: userLevel } = await response.json();
         setLevel(userLevel);
-        console.log("Level set");
-        getGeneratedSequence(generatedSequence, level);
+        levelRef.current = userLevel;
+        getGeneratedSequence(generatedSequence, levelRef.current);
       }
     };
 
     initGame();
-  }, [level]);
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
