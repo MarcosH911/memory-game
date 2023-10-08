@@ -18,10 +18,6 @@ function TeacherFiltersTimeItem({
   setTimeFilter,
   index,
 }: Props) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const rankingType = searchParams.get("timeFilter") || "day";
-
   return (
     <li onClick={() => setTimeFilter(itemType)}>
       <button

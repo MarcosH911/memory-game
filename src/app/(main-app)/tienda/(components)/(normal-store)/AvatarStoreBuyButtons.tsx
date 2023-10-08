@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 
 import Spinner from "@/components/Spinner";
 import setSearchParams from "@/helpers/setSearchParams";
+import toast from "react-hot-toast";
 
 interface Props {
   avatarPath: string;
@@ -39,7 +40,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
     if (!userId) {
-      console.error("There was an error getting the user in store buy buttons");
+      toast.error("Ha ocurrido un error inesperado");
       return;
     }
 
@@ -61,18 +62,17 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
       await Promise.all([insertAvatarPromise, insertPointsPromise]);
 
     if (insertPointsError) {
-      console.error("There was an error inserting the points");
+      toast.error("Ha ocurrido un error inesperado");
+      return;
     }
     if (insertAvatarError) {
-      console.error("There was an error inserting the avatar");
+      toast.error("Ha ocurrido un error inesperado");
       return;
     }
 
     router.replace(
       setSearchParams(pathname, searchParams, [["hasBoughtAvatar", "true"]]),
-      {
-        scroll: false,
-      },
+      { scroll: false },
     );
     router.refresh();
   };

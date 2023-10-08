@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 import CollectionAvatarItem from "./(components)/CollectionAvatarItem";
+import toast from "react-hot-toast/headless";
 
 export const dynamic = "force-dynamic";
 
@@ -10,14 +11,17 @@ async function Page() {
 
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
-  if (!userId) return null;
+  if (!userId) {
+    toast.error("Ha ocurrido un error inesperado");
+    return null;
+  }
 
   const { data: userAvatarsData, error: userAvatarsError } = await supabase
     .from("user_avatars")
     .select("*");
 
   if (userAvatarsError) {
-    console.error("There was an error selecting the user avatars");
+    toast.error("Ha ocurrido un error inesperado");
     return null;
   }
 
@@ -29,16 +33,16 @@ async function Page() {
       .single();
 
   if (selectedAvatarError) {
-    console.error("There was an error selecting the selected avatar");
+    toast.error("Ha ocurrido un error inesperado");
     return null;
   }
 
   return (
-    <div className="mx-auto py-8 md:max-w-[60rem] xl:max-w-[80rem] xs:max-w-[40rem]">
-      <h1 className="mb-8 text-center text-5xl font-semibold text-teal-950 lg:text-7xl xs:text-6xl">
+    <div className="mx-auto py-8 xs:max-w-[40rem] md:max-w-[60rem] xl:max-w-[80rem]">
+      <h1 className="mb-8 text-center text-5xl font-semibold text-teal-950 xs:text-6xl lg:text-7xl">
         Avatares ({userAvatarsData.length})
       </h1>
-      <div className="mx-3 grid grid-cols-2 gap-x-3 gap-y-3 md:grid-cols-3 xl:grid-cols-4 xs:mx-8 xs:gap-x-6 xs:gap-y-10">
+      <div className="mx-3 grid grid-cols-2 gap-x-3 gap-y-3 xs:mx-8 xs:gap-x-6 xs:gap-y-10 md:grid-cols-3 xl:grid-cols-4">
         {userAvatarsData.map((item, index) => (
           <CollectionAvatarItem
             key={index}

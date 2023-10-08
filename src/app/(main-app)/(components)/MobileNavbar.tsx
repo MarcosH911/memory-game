@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
@@ -26,6 +27,8 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
     const response = await fetch("/api/auth/logout", { method: "post" });
     if (response.status === 200) {
       router.push("/iniciar-sesion");
+    } else {
+      toast.error("Ha ocurrido un error inesperado");
     }
     setIsLoadingLogout(false);
   };

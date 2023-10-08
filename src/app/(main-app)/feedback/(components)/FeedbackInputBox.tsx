@@ -8,6 +8,7 @@ import { twMerge } from "tailwind-merge";
 
 import Spinner from "@/components/Spinner";
 import FeedbackInputMessageBox from "./FeedbackInputMessageBox";
+import toast from "react-hot-toast";
 
 function FeedbackInputBox() {
   const [text, setText] = useState("");
@@ -61,6 +62,8 @@ function FeedbackInputBox() {
       setTags([]);
       inputRef.current!.textContent = "";
       (document.activeElement as HTMLElement).blur();
+    } else {
+      toast.error("Ha ocurrido un error inesperado");
     }
     setIsLoading(false);
   };

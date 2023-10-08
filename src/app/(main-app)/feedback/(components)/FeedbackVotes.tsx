@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 import {
   PiArrowFatDownBold,
   PiArrowFatDownFill,
@@ -16,16 +17,22 @@ interface Props {
 
 function FeedbackVotes({ votes, postId }: Props) {
   const [totalVotes, setTotalVotes] = useState<number>(votes);
-  const { data: userVote, mutate: mutateVote } = useSWR(
-    `/api/feedback/get-user-vote?postId=${postId}`,
-  );
+  const {
+    data: userVote,
+    error: userError,
+    mutate: mutateVote,
+  } = useSWR(`/api/feedback/get-user-vote?postId=${postId}`);
+
+  if (userError) {
+    toast.error("Ha ocurrido un error inesperado");
+  }
 
   const isUpdatingVotes = useRef(false);
 
   const handleVote = async (vote: -1 | 1) => {
     if (isUpdatingVotes.current) return;
     isUpdatingVotes.current = true;
-    await fetch("/api/feedback/insert-vote", {
+    const insertVotesPromise = await fetch("/api/feedback/insert-vote", {
       method: "post",
       body: JSON.stringify({
         postId,
@@ -33,6 +40,10 @@ function FeedbackVotes({ votes, postId }: Props) {
         newVote: userVote.data === vote ? 0 : vote,
       }),
     });
+
+    if (insertVotesPromise.status !== 200) {
+      toast.error("Ha ocurrido un error inesperado");
+    }
 
     setTotalVotes((totalVotes) => {
       if (userVote.data === vote) {

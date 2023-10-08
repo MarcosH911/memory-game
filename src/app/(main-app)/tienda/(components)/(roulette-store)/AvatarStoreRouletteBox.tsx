@@ -7,6 +7,7 @@ import AvatarStoreRouletteModal from "./AvatarStoreRouletteModal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AvatarStoreRouletteItem from "./AvatarStoreRouletteItem";
 import sleep from "@/helpers/sleep";
+import toast from "react-hot-toast";
 
 interface Props {
   avatarsUrls: string[];
@@ -75,7 +76,15 @@ function AvatarStoreRouletteBox({
       }),
     });
 
-    await Promise.all([insertAvatarPromise, insertPointsPromise]);
+    const [insertAvatarData, insertPointsData] = await Promise.all([
+      insertAvatarPromise,
+      insertPointsPromise,
+    ]);
+
+    if (insertAvatarData.status !== 200 || insertPointsData.status !== 200) {
+      toast.error("Ha ocurrido un error inesperado");
+      return;
+    }
 
     handleAnimateRoulette("start");
 

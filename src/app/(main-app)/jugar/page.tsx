@@ -10,6 +10,7 @@ import PlaySquare from "./(components)/PlaySquare";
 import PlayStartScreen from "./(components)/PlayStartScreen";
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayTutorial from "./(tutorial)/PlayTutorial";
+import toast from "react-hot-toast";
 
 const baseSequenceLength = 20;
 const numTargets = 6;
@@ -166,10 +167,21 @@ function PlayGame() {
     setIsPlaying(false);
 
     isInserting.current = true;
+
     if (insertLevelPromise) {
-      await Promise.all([insertPointsPromise, insertLevelPromise]);
+      const [insertPoints, insertLevel] = await Promise.all([
+        insertPointsPromise,
+        insertLevelPromise,
+      ]);
+
+      if (insertPoints.status !== 200 || insertLevel.status !== 200) {
+        toast.error("Ha ocurrido un error inesperado");
+      }
     } else {
-      await Promise.all([insertPointsPromise]);
+      const [insertPoints] = await Promise.all([insertPointsPromise]);
+      if (insertPoints.status !== 200) {
+        toast.error("Ha ocurrido un error inesperado");
+      }
     }
     isInserting.current = false;
 
@@ -180,6 +192,11 @@ function PlayGame() {
     const initGame = async () => {
       if (isFirstTime && level === -1) {
         const response = await fetch("/api/play/get-level", { method: "get" });
+
+        if (response.status !== 200) {
+          toast.error("Ha ocurrido un error inesperado");
+        }
+
         const { data: userLevel } = await response.json();
         setLevel(userLevel);
         getGeneratedSequence(generatedSequence, level);

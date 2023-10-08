@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 import getAvatarImage from "@/utils/getAvatarImage";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface Props {
   data: { avatar_path: string | null };
@@ -30,7 +31,7 @@ function CollectionAvatarItem({ data, isSelected, userId }: Props) {
       .eq("user_id", userId);
 
     if (error) {
-      console.error("There was an error selecting the avatar");
+      toast.error("Ha ocurrido un error inesperado");
       return;
     }
 

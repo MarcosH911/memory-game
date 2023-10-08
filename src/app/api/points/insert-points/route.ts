@@ -1,3 +1,4 @@
+import CustomError from "@/helpers/CustomError";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -5,25 +6,30 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  const response = await request.json();
-  const supabase = createRouteHandlerClient<Database>({ cookies });
-  const userId = (await supabase.auth.getSession()).data.session?.user.id;
+  try {
+    const response = await request.json();
+    const supabase = createRouteHandlerClient<Database>({ cookies });
+    const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
-  if (!userId) {
-    console.error("There was an error getting the userId to insert the points");
-    return NextResponse.error();
+    if (!userId) {
+      throw new CustomError("", 400);
+    }
+
+    const { error } = await supabase.from("points_transactions").insert({
+      user_id: userId,
+      coins: response.coins,
+      diamonds: response.diamonds,
+    });
+
+    if (error) {
+      throw new CustomError("", 400);
+    }
+
+    return NextResponse.json({ status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { message: error.message },
+      { status: error.status },
+    );
   }
-
-  const { error } = await supabase.from("points_transactions").insert({
-    user_id: userId,
-    coins: response.coins,
-    diamonds: response.diamonds,
-  });
-
-  if (error) {
-    console.error("There was an error inserting the points");
-    return NextResponse.error();
-  }
-
-  return NextResponse.json({ status: 200 });
 }

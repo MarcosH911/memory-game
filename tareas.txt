@@ -14,18 +14,10 @@ Make all top level functions not arrow functions
 
 --------- OPTIMIZING ---------
 
-Update database level only when session ends
-
-Parallel fetching when possible (nextjs data fetching patterns)
-
-Server component when possible
-
 Create index for database
 
 
 -------- IMPROVEMENTS --------
-
-Do something while inserting in play
 
 Toast instead of console.error()
 

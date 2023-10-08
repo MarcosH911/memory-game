@@ -11,6 +11,7 @@ import * as Popover from "@radix-ui/react-popover";
 
 import getAvatarImage from "@/utils/getAvatarImage";
 import Spinner from "@/components/Spinner";
+import toast from "react-hot-toast";
 
 function ProfileButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +29,8 @@ function ProfileButton() {
     if (response.status === 200) {
       router.push("/iniciar-sesion");
       return;
+    } else {
+      toast.error("Ha ocurrido un error inesperado");
     }
     setIsLoading(false);
   };

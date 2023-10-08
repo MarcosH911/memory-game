@@ -4,6 +4,7 @@ import { Nunito } from "next/font/google";
 
 import "./globals.css";
 import { SWRProvider } from "./(components)/SWRProvider";
+import ToasterProvider from "@/providers/ToasterProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ function RootLayout({ children }: Props) {
   return (
     <html lang="es" className={nunito.variable}>
       <body className="h-screen bg-teal-50">
+        <ToasterProvider />
         <SWRProvider>
           {children}
           <Analytics />

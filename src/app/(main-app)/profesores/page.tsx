@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 import TeacherFilters from "./(components)/TeacherFilters";
 import TeacherItem from "./(components)/TeacherItem";
+import toast from "react-hot-toast";
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -20,7 +21,7 @@ async function Page({ searchParams }: Props) {
 
   if (!stageFilter || !gradeFilter || !classFilter) {
     return (
-      <div className="flex flex-col items-center justify-center px-8 lg:px-6 xs:px-4">
+      <div className="flex flex-col items-center justify-center px-8 xs:px-4 lg:px-6">
         <TeacherFilters />
       </div>
     );
@@ -29,7 +30,7 @@ async function Page({ searchParams }: Props) {
   const userId = (await supabase.auth.getUser()).data.user?.id;
 
   if (!userId) {
-    console.error("No user id found");
+    toast.error("Ha ocurrido un error inesperado");
     return;
   }
 
@@ -40,7 +41,7 @@ async function Page({ searchParams }: Props) {
     .single();
 
   if (schoolError) {
-    console.error("Error getting school");
+    toast.error("Ha ocurrido un error inesperado");
   }
 
   const { data: studentsData, error: studentsError } = await supabase
@@ -58,7 +59,7 @@ async function Page({ searchParams }: Props) {
     });
 
   if (studentsError) {
-    console.error("Error getting student data");
+    toast.error("Ha ocurrido un error inesperado");
   }
 
   const { data: studentsDiamondsData, error: studentsDiamondsError } =
@@ -73,7 +74,7 @@ async function Page({ searchParams }: Props) {
       });
 
   if (studentsDiamondsError) {
-    console.error("Error getting student diamonds");
+    toast.error("Ha ocurrido un error inesperado");
   }
 
   const allStudentsData = studentsData?.map((item) => {
@@ -87,9 +88,9 @@ async function Page({ searchParams }: Props) {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center px-8 lg:px-6 xs:px-4">
+    <div className="flex flex-col items-center justify-center px-8 xs:px-4 lg:px-6">
       <TeacherFilters />
-      <div className="grid w-full max-w-7xl grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 xl:grid-cols-4 xs:grid-cols-2">
+      <div className="grid w-full max-w-7xl grid-cols-1 gap-x-4 gap-y-4 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 xl:grid-cols-4">
         {allStudentsData?.map((item, index) => (
           <TeacherItem key={index} data={item} />
         ))}

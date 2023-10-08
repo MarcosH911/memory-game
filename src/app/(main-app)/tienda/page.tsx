@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 import AvatarStore from "./(components)/(normal-store)/AvatarStore";
 import AvatarStoreRoulette from "./(components)/(roulette-store)/AvatarStoreRoulette";
+import toast from "react-hot-toast";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,7 @@ async function Page() {
     const { data, error } = await supabase.from("user_points").select("*");
 
     if (error) {
-      console.error("There was an error selecting the user points");
+      toast.error("Ha ocurrido un error inesperado");
       return null;
     }
 
@@ -31,7 +32,7 @@ async function Page() {
       .list("");
 
     if (error) {
-      console.error("There was an error getting all the avatars");
+      toast.error("Ha ocurrido un error inesperado");
       return null;
     }
 
@@ -57,7 +58,7 @@ async function Page() {
       .select("avatar_path");
 
     if (!data || error) {
-      console.error("There was an error getting the user avatars");
+      toast.error("Ha ocurrido un error inesperado");
       return null;
     }
 
@@ -88,6 +89,7 @@ async function Page() {
   ]);
 
   if (!userPoints || !userAvatars || !allAvatars) {
+    toast.error("Ha ocurrido un error inesperado");
     return null;
   }
 

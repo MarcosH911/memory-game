@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 import RankingFiltersTimeItem from "./RankingFiltersTimeItem";
 import RankingFiltersPointsItem from "./RankingFiltersPointsItem";
 import useSWR from "swr";
+import toast from "react-hot-toast";
 
 interface Props {
   type?: "normal" | "advanced";
@@ -34,7 +35,12 @@ function RankingFiltersAdvanced({ type = "normal" }: Props) {
   const [schoolClass, setSchoolClass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: schoolsList } = useSWR("/api/schools");
+  const { data: schoolsList, error: schoolsListError } = useSWR("/api/schools");
+
+  if (schoolsListError) {
+    toast.error("Ha ocurrido un error inesperado");
+  }
+
   const formattedSchoolsList =
     schoolsList?.data.map(
       (school: { school_name: string; school_value: string }) => ({

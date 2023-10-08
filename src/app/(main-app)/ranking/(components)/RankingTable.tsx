@@ -1,6 +1,7 @@
 import supabaseClient from "@/utils/supabaseClient";
 import RankingRow from "./RankingRow";
 import RakingTableReloadButton from "./RankingTableReloadButton";
+import toast from "react-hot-toast";
 
 export const revalidate = 20;
 
@@ -50,7 +51,7 @@ async function RankingTable({
     });
 
   if (error) {
-    console.error(error);
+    toast.error("Ha ocurrido un error inesperado");
   }
 
   return (

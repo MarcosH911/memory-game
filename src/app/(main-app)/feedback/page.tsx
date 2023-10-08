@@ -5,6 +5,7 @@ import useSWRInfinite from "swr/infinite";
 import FeedbackItem from "./(components)/FeedbackItem";
 import FeedbackInputBox from "./(components)/FeedbackInputBox";
 import Spinner from "@/components/Spinner";
+import toast from "react-hot-toast";
 
 const getKey = (pageIndex: number, previousPageData: any) => {
   if (previousPageData && !previousPageData.data.length) return null;
@@ -14,11 +15,16 @@ const getKey = (pageIndex: number, previousPageData: any) => {
 function Page() {
   const {
     data: feedbackData,
+    error,
     size,
     setSize,
     isLoading,
     isValidating,
   } = useSWRInfinite(getKey);
+
+  if (error) {
+    toast.error("Ha ocurrido un error inesperado");
+  }
 
   return (
     <div className="overflow-x-hidden pb-20">
