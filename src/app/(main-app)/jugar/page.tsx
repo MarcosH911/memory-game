@@ -13,7 +13,7 @@ import PlayTutorial from "./(tutorial)/PlayTutorial";
 import toast from "react-hot-toast";
 import waitFor from "@/helpers/waitFor";
 
-const baseSequenceLength = 6;
+const baseSequenceLength = 20;
 const numTargets = 6;
 
 const getTargetsCount = (
