@@ -19,7 +19,7 @@ function PlayTutorialStepWrapper({ children, step }: Props) {
   };
 
   return (
-    <div className="relative flex h-screen w-screen items-center justify-center bg-cyan-50 py-4 text-teal-950 sm:h-[95vh] sm:w-[32.5rem] h-md:py-6 h-lg:py-8">
+    <div className="h-md:py-6 h-lg:py-8 relative flex h-screen w-screen items-center justify-center bg-cyan-50 py-4 text-teal-950 sm:h-[95vh] sm:w-[32.5rem]">
       <div
         style={{ backfaceVisibility: "hidden" }}
         className="flex h-full w-full flex-col px-4 xs:w-[30rem] xs:px-12"
@@ -34,11 +34,11 @@ function PlayTutorialStepWrapper({ children, step }: Props) {
         )}
         <div>
           <h1 className="text-4xl font-bold">Instrucciones</h1>
-          <h2 className="mb-4 text-lg font-semibold text-teal-900 h-sm:mb-6">
+          <h2 className="h-sm:mb-6 mb-4 text-lg font-semibold text-teal-900">
             {step < 5 ? `Paso ${step}` : `Ejemplo ${step - 4}`}
           </h2>
         </div>
-        <div className="flex h-full flex-col pb-4 h-md:pb-10">{children}</div>
+        <div className="h-md:pb-10 flex h-full flex-col pb-4">{children}</div>
         <PlayTutorialButtons step={step} />
       </div>
     </div>

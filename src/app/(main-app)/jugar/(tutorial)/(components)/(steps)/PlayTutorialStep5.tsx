@@ -8,7 +8,7 @@ import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
 function PlayTutorialStep5() {
   return (
     <PlayTutorialStepWrapper step={5}>
-      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
+      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
         <li>
           En cada <strong className="font-extrabold">recuadro</strong> del
           ejemplo hay una <strong className="font-extrabold">pantalla</strong>
@@ -31,7 +31,7 @@ function PlayTutorialStep5() {
       </ul>
 
       <div className="flex h-full flex-col items-center justify-center">
-        <div className="mb-2 flex items-center justify-center h-md:mb-4 h-lg:mb-8">
+        <div className="h-md:mb-4 h-lg:mb-8 mb-2 flex items-center justify-center">
           <PlayTutorialLevelTitle level={1} type="small" />
         </div>
         <div className="relative aspect-[2] h-[min(15rem,100%,calc((100vw-2rem)/2))]">

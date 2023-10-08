@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
-const plugin = require("tailwindcss/plugin");
+
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 const config: Config = {
   content: [
@@ -8,16 +9,17 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      xs: "425px",
+      ...defaultTheme.screens,
+      "h-sm": { raw: "(min-height: 600px)" },
+      "h-md": { raw: "(min-height: 700px)" },
+      "h-lg": { raw: "(min-height: 800px)" },
+    },
     extend: {
       fontFamily: { sans: ["var(--font-nunito)"] },
       transitionDuration: {
         "250": "250ms",
-      },
-      screens: {
-        xs: "425px",
-        "h-sm": { raw: "(min-height: 600px)" },
-        "h-md": { raw: "(min-height: 700px)" },
-        "h-lg": { raw: "(min-height: 800px)" },
       },
       keyframes: {
         "up-down": {

@@ -24,7 +24,7 @@ function PlayTutorialStep1() {
 
   return (
     <PlayTutorialStepWrapper step={1}>
-      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
+      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
         <li>
           Hay <strong className="font-extrabold">8 cuadrados</strong> como se
           muestra a continuación.

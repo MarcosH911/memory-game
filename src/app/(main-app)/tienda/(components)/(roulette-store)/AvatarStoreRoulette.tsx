@@ -14,7 +14,7 @@ async function AvatarStoreRoulette({
   allAvatars,
 }: Props) {
   const avatarPaths = allAvatars.filter(
-    (avatarPath) => !userAvatars.includes(avatarPath)
+    (avatarPath) => !userAvatars.includes(avatarPath),
   );
 
   while (avatarPaths.length < 106) {
@@ -24,7 +24,7 @@ async function AvatarStoreRoulette({
   avatarPaths.length = 106;
 
   const avatarsUrls = avatarPaths.map((avatarPath: string) =>
-    getAvatarImage(avatarPath)
+    getAvatarImage(avatarPath),
   );
 
   const selectedAvatarUrl = avatarsUrls[102];
