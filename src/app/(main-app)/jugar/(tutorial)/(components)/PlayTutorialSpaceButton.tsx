@@ -18,12 +18,13 @@ function PlayTutorialSpaceButton({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent): void => {
+      if (type === "small") return;
       if (e.code === "Space") {
         setIsSpacePressed && setIsSpacePressed(true);
         spaceButtonRef.current?.focus();
       }
     },
-    [setIsSpacePressed],
+    [setIsSpacePressed, type],
   );
 
   useEffect(() => {

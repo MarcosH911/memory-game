@@ -1,6 +1,6 @@
 ------------ BUGS ------------
 
-Play tutorial buttons jitter
+Hide tutorial icon on play
 
 Refetch on logout and login
 
