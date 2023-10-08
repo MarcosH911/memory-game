@@ -198,7 +198,7 @@ function PlayGame() {
   }, [isPlaying, pathname, router]);
 
   return (
-    <div className="flex h-full flex-col items-center justify-center">
+    <div className="relative flex h-full flex-col items-center justify-center overflow-hidden">
       <PlayTutorial />
       <PlayLevelTitle level={level} />
       <PlayStartScreen

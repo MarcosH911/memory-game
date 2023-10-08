@@ -11,14 +11,18 @@ import PlayTutorialStep4 from "./(components)/(steps)/PlayTutorialStep4";
 import PlayTutorialStep5 from "./(components)/(steps)/PlayTutorialStep5";
 import PlayTutorialStep6 from "./(components)/(steps)/PlayTutorialStep6";
 import { RxQuestionMarkCircled } from "react-icons/rx";
+import { useSearchParams } from "next/navigation";
+import { twMerge } from "tailwind-merge";
 
 const totalSteps = 6;
 
 function PlayTutorial() {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
-
   const [hasPlayedTutorial, setHasPlayedTutorial] = useState(true);
+
+  const searchParams = useSearchParams();
+  const isPlaying = searchParams.has("playing", "true");
 
   useEffect(() => {
     setHasPlayedTutorial(!!localStorage.getItem("hasPlayedTutorial"));
@@ -50,7 +54,10 @@ function PlayTutorial() {
               setStep(1);
               setIsOpen(true);
             }}
-            className="absolute right-5 top-5 z-30 rounded-full p-1 text-3xl text-teal-900 transition duration-200 hover:bg-teal-600/20 hover:text-teal-950"
+            className={twMerge(
+              "absolute right-5 top-5 z-30 rounded-full p-1 text-3xl text-teal-900 opacity-100 transition duration-300 hover:bg-teal-600/20 hover:text-teal-950",
+              isPlaying && "translate-x-10 opacity-0",
+            )}
           >
             <RxQuestionMarkCircled />
           </button>
