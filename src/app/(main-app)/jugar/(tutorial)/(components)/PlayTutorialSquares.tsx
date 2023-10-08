@@ -17,8 +17,7 @@ function PlayTutorialSquares({ selectedSquare, type = "big" }: Props) {
           >
             <div
               className={twMerge(
-                "h-full select-none rounded-2xl border border-teal-600 border-opacity-30 bg-teal-300 transition duration-100",
-                type === "small" && "h-lg:rounded-2xl rounded-[1.5vh]",
+                "h-full select-none rounded-[12.5%] border border-teal-600 border-opacity-30 bg-teal-300 transition duration-100",
                 selectedSquare === index &&
                   "border-opacity-100 bg-teal-600 shadow-[0_0_15px_3px] shadow-slate-900/20",
               )}
