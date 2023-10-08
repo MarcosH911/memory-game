@@ -10,7 +10,6 @@ import MobileNavbar from "./(components)/MobileNavbar";
 import NavbarWrapper from "./(components)/NavbarWrapper";
 import MainAppLayoutWrapper from "./(components)/MainAppLayoutWrapper";
 import getAvatarImage from "@/utils/getAvatarImage";
-import toast from "react-hot-toast";
 
 export const dynamic = "force-dynamic";
 
@@ -37,11 +36,11 @@ async function Layout({ children }: { children: React.ReactNode }) {
     ] = await Promise.all([profileDataPromise, pointsDataPromise]);
 
     if (pointsError) {
-      toast.error("Ha ocurrido un error inesperado");
+      // TODO
       return;
     }
     if (profileError) {
-      toast.error("Ha ocurrido un error inesperado");
+      // TODO
       return;
     }
 

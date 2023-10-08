@@ -2,7 +2,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 import CollectionAvatarItem from "./(components)/CollectionAvatarItem";
-import toast from "react-hot-toast/headless";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +11,7 @@ async function Page() {
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
   if (!userId) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
     return null;
   }
 
@@ -21,7 +20,7 @@ async function Page() {
     .select("*");
 
   if (userAvatarsError) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
     return null;
   }
 
@@ -33,7 +32,7 @@ async function Page() {
       .single();
 
   if (selectedAvatarError) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
     return null;
   }
 

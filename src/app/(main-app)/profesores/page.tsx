@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 import TeacherFilters from "./(components)/TeacherFilters";
 import TeacherItem from "./(components)/TeacherItem";
-import toast from "react-hot-toast";
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -30,7 +29,7 @@ async function Page({ searchParams }: Props) {
   const userId = (await supabase.auth.getUser()).data.user?.id;
 
   if (!userId) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
     return;
   }
 
@@ -41,7 +40,7 @@ async function Page({ searchParams }: Props) {
     .single();
 
   if (schoolError) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
   }
 
   const { data: studentsData, error: studentsError } = await supabase
@@ -59,7 +58,7 @@ async function Page({ searchParams }: Props) {
     });
 
   if (studentsError) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
   }
 
   const { data: studentsDiamondsData, error: studentsDiamondsError } =
@@ -74,7 +73,7 @@ async function Page({ searchParams }: Props) {
       });
 
   if (studentsDiamondsError) {
-    toast.error("Ha ocurrido un error inesperado");
+    // TODO
   }
 
   const allStudentsData = studentsData?.map((item) => {

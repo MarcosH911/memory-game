@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Error screen inside server components instead of toast
+
 
 -------- ORGANIZATION --------
 
