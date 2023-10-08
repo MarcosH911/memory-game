@@ -12,7 +12,7 @@ import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayTutorial from "./(tutorial)/PlayTutorial";
 import toast from "react-hot-toast";
 
-const baseSequenceLength = 20;
+const baseSequenceLength = 6;
 const numTargets = 6;
 
 const getTargetsCount = (
@@ -85,9 +85,25 @@ function PlayGame() {
   const incorrectHits = useRef(0);
   const isFirstTime = useRef(true);
   const levelChange = useRef<1 | 0 | -1>(0);
+  const sequenceStep = useRef(0);
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const handleSpacePress = () => {
+    if (isPlaying && !isSpacePressed) {
+      if (
+        sequenceStep.current >= level &&
+        generatedSequence.current[sequenceStep.current] ===
+          generatedSequence.current[sequenceStep.current - level]
+      ) {
+        correctHits.current++;
+      } else {
+        incorrectHits.current++;
+      }
+      setIsSpacePressed(true);
+    }
+  };
 
   const playGame = async () => {
     if (isPlaying) return;
@@ -96,6 +112,7 @@ function PlayGame() {
 
     do {
       await sleep(500);
+      console.log(level, isInserting.current);
     } while (isInserting.current || level === -1);
 
     await sleep(1000);
@@ -104,26 +121,19 @@ function PlayGame() {
     incorrectHits.current = 0;
     isFirstTime.current = false;
 
-    for (let i = 0; i < generatedSequence.current.length; i++) {
-      setSelectedSquare(generatedSequence.current[i]);
+    console.log("AAA");
+
+    for (
+      sequenceStep.current = 0;
+      sequenceStep.current < generatedSequence.current.length;
+      sequenceStep.current++
+    ) {
+      setSelectedSquare(generatedSequence.current[sequenceStep.current]);
       await sleep(700);
       setSelectedSquare(null);
       await sleep(2300);
 
-      setIsSpacePressed((isPressed) => {
-        if (isPressed) {
-          if (
-            i >= level &&
-            generatedSequence.current[i] ===
-              generatedSequence.current[i - level]
-          ) {
-            correctHits.current++;
-          } else {
-            incorrectHits.current++;
-          }
-        }
-        return false;
-      });
+      setIsSpacePressed(false);
     }
 
     insertData();
@@ -199,6 +209,7 @@ function PlayGame() {
 
         const { data: userLevel } = await response.json();
         setLevel(userLevel);
+        console.log("Level set");
         getGeneratedSequence(generatedSequence, level);
       }
     };
@@ -241,6 +252,7 @@ function PlayGame() {
       <PlaySpaceButton
         isSpacePressed={isSpacePressed}
         setIsSpacePressed={setIsSpacePressed}
+        handleSpacePress={handleSpacePress}
       />
     </div>
   );

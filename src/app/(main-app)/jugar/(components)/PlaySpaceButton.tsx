@@ -1,24 +1,42 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
   isSpacePressed: boolean;
   setIsSpacePressed: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSpacePress: () => void;
 }
 
-function PlaySpaceButton({ isSpacePressed, setIsSpacePressed }: Props) {
+function PlaySpaceButton({
+  isSpacePressed,
+  setIsSpacePressed,
+  handleSpacePress,
+}: Props) {
+  const [isPlaying, setIsPlaying] = useState(false);
   const spaceButtonRef = useRef<HTMLButtonElement | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setIsPlaying(searchParams.get("playing") === "true");
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!isPlaying) {
+      setIsSpacePressed(false);
+    }
+  }, [isPlaying, setIsSpacePressed]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent): void => {
       if (e.code === "Space") {
-        setIsSpacePressed(true);
+        handleSpacePress();
         spaceButtonRef.current?.focus();
       }
     },
-    [setIsSpacePressed],
+    [handleSpacePress],
   );
 
   useEffect(() => {

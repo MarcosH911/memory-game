@@ -1,5 +1,8 @@
 ------------ BUGS ------------
 
+Play mistakes bug
+
+Fix bug where game doesn't play reloading with playing=true and starting too soon
 
 -------- ORGANIZATION --------
 
