@@ -18,6 +18,14 @@ async function Page({ searchParams }: Props) {
   const gradeFilter = searchParams.gradeFilter as string;
   const classFilter = searchParams.classFilter as string;
 
+  if (!stageFilter || !gradeFilter || !classFilter) {
+    return (
+      <div className="flex flex-col items-center justify-center px-8 lg:px-6 xs:px-4">
+        <TeacherFilters />
+      </div>
+    );
+  }
+
   const userId = (await supabase.auth.getUser()).data.user?.id;
 
   if (!userId) {
@@ -79,9 +87,9 @@ async function Page({ searchParams }: Props) {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center px-8 xs:px-4 lg:px-6">
+    <div className="flex flex-col items-center justify-center px-8 lg:px-6 xs:px-4">
       <TeacherFilters />
-      <div className="grid w-full max-w-7xl grid-cols-1 gap-x-4 gap-y-4 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 xl:grid-cols-4">
+      <div className="grid w-full max-w-7xl grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 xl:grid-cols-4 xs:grid-cols-2">
         {allStudentsData?.map((item, index) => (
           <TeacherItem key={index} data={item} />
         ))}
