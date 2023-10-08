@@ -1,8 +1,5 @@
 ------------ BUGS ------------
 
-Play mistakes bug
-
-Fix bug where game doesn't play reloading with playing=true and starting too soon
 
 -------- ORGANIZATION --------
 
@@ -22,23 +19,9 @@ Create index for database
 
 -------- IMPROVEMENTS --------
 
-Toast instead of console.error()
-
-Try catch in route handlers
-
-Update things faster (when clicking navigation, selecting or buying an avatar...)
-
-Return status in route handlers
-
-Handle errors in route handlers
-
 Error handling/states
 
-Remove all console.log() / console.error()
-
 Store ranking and teacher filters in local storage to preserve search params on change
-
-Revalidate data
 
 
 ---------- FEATURES ----------
