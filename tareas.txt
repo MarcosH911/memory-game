@@ -2,12 +2,6 @@
 
 Refetch on logout and login
 
-Shop avatars loading too slow
-
-Avatar collection too small
-
-Tutorial image sizes()
-
 
 -------- ORGANIZATION --------
 
