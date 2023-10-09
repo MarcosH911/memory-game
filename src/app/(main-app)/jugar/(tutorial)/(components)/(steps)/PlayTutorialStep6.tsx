@@ -39,6 +39,7 @@ function PlayTutorialStep5() {
             src="/tutorial/Example-2.png"
             alt="Example image"
             quality={100}
+            priority
             fill
             sizes="30rem"
             className="bg-slate-300"
