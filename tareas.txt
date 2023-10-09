@@ -1,11 +1,5 @@
 ------------ BUGS ------------
 
-Error screen inside server components instead of toast
-
-Add background color to tutorial images so people know it's loading
-
-Check tutorial images sizes
-
 
 -------- ORGANIZATION --------
 

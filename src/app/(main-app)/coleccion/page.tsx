@@ -11,8 +11,7 @@ async function Page() {
   const userId = (await supabase.auth.getSession()).data.session?.user.id;
 
   if (!userId) {
-    // TODO
-    return null;
+    throw new Error();
   }
 
   const { data: userAvatarsData, error: userAvatarsError } = await supabase
@@ -20,8 +19,7 @@ async function Page() {
     .select("*");
 
   if (userAvatarsError) {
-    // TODO
-    return null;
+    throw new Error();
   }
 
   const { data: selectedAvatarData, error: selectedAvatarError } =
@@ -32,8 +30,7 @@ async function Page() {
       .single();
 
   if (selectedAvatarError) {
-    // TODO
-    return null;
+    throw new Error();
   }
 
   return (

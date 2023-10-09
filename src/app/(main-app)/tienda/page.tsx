@@ -13,8 +13,7 @@ async function Page() {
     const { data, error } = await supabase.from("user_points").select("*");
 
     if (error) {
-      // TODO
-      return null;
+      throw new Error();
     }
 
     let points = {
@@ -31,8 +30,7 @@ async function Page() {
       .list("");
 
     if (error) {
-      // TODO
-      return null;
+      throw new Error();
     }
 
     const avatarPathsData = data.map((avatarData) => avatarData.name);
@@ -57,8 +55,7 @@ async function Page() {
       .select("avatar_path");
 
     if (!data || error) {
-      // TODO
-      return null;
+      throw new Error();
     }
 
     const avatarPathsData = data.map((avatarData) => avatarData.avatar_path);
@@ -88,8 +85,7 @@ async function Page() {
   ]);
 
   if (!userPoints || !userAvatars || !allAvatars) {
-    // TODO
-    return null;
+    throw new Error();
   }
 
   return (

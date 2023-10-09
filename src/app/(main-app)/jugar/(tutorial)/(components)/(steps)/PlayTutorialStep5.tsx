@@ -41,6 +41,7 @@ function PlayTutorialStep5() {
             quality={100}
             fill
             sizes="30rem"
+            className="bg-slate-300"
           />
         </div>
       </div>

@@ -36,12 +36,9 @@ async function Layout({ children }: { children: React.ReactNode }) {
     ] = await Promise.all([profileDataPromise, pointsDataPromise]);
 
     if (pointsError) {
-      // TODO
-      return;
+      throw new Error();
     }
     if (profileError) {
-      // TODO
-      return;
     }
 
     if (newProfileData) {

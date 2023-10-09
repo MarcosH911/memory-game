@@ -29,8 +29,7 @@ async function Page({ searchParams }: Props) {
   const userId = (await supabase.auth.getUser()).data.user?.id;
 
   if (!userId) {
-    // TODO
-    return;
+    throw new Error();
   }
 
   const { data: schoolFilter, error: schoolError } = await supabase
@@ -40,7 +39,7 @@ async function Page({ searchParams }: Props) {
     .single();
 
   if (schoolError) {
-    // TODO
+    throw new Error();
   }
 
   const { data: studentsData, error: studentsError } = await supabase
@@ -58,7 +57,7 @@ async function Page({ searchParams }: Props) {
     });
 
   if (studentsError) {
-    // TODO
+    throw new Error();
   }
 
   const { data: studentsDiamondsData, error: studentsDiamondsError } =
@@ -73,7 +72,7 @@ async function Page({ searchParams }: Props) {
       });
 
   if (studentsDiamondsError) {
-    // TODO
+    throw new Error();
   }
 
   const allStudentsData = studentsData?.map((item) => {
@@ -81,7 +80,7 @@ async function Page({ searchParams }: Props) {
       ...item,
       diamonds:
         studentsDiamondsData?.find(
-          (student) => student.username === item.username,
+          (student) => student.username === item.username
         )?.diamonds || 0,
     };
   });

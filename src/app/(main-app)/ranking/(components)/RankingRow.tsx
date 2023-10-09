@@ -21,7 +21,13 @@ function RankingRow({ data, index, type }: Props) {
         {index + 1}
       </td>
       <td className="flex w-[22.5%] items-center justify-center xs:w-[25%]">
-        <Image src={avatarUrl} alt="Avatar Image" width={40} height={40} />
+        <Image
+          src={avatarUrl}
+          alt="Avatar Image"
+          width={40}
+          height={40}
+          className="rounded-full bg-slate-300"
+        />
       </td>
       <td className="flex w-[30%] items-center justify-center text-center font-medium xs:w-[25%]">
         {data.full_name}
@@ -31,7 +37,7 @@ function RankingRow({ data, index, type }: Props) {
           "flex w-[25%] items-center justify-center gap-1 font-semibold",
           type === "coins" && "text-yellow-600",
           type === "diamonds" && "text-purple-600",
-          type === "max_level" && "text-green-600",
+          type === "max_level" && "text-green-600"
         )}
       >
         {type === "coins" ? (

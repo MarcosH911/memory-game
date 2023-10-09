@@ -50,7 +50,7 @@ async function RankingTable({
     });
 
   if (error) {
-    // TODO
+    throw new Error();
   }
 
   return (
