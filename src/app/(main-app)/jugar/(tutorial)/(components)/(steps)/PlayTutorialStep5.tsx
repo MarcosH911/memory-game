@@ -40,7 +40,7 @@ function PlayTutorialStep5() {
             alt="Example image"
             quality={100}
             fill
-            sizes="min(15rem,100%,calc((100vw-2rem)/2))"
+            sizes="30rem"
           />
         </div>
       </div>
