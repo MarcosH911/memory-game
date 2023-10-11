@@ -2,6 +2,8 @@
 
 prettier.config.js
 
+/bulk-register/.data
+
 # dependencies
 /node_modules
 /.pnp

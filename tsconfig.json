@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts",
-    "src/app/(auth)/registrar/api/callback/route.sx"
+    "src/app/(auth)/registrar/api/callback/route.sx",
+    "bulk-register/register.js"
   ],
   "exclude": ["node_modules"]
 }
