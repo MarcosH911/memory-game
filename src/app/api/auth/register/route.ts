@@ -85,12 +85,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: "Usuario registrado correctamente" },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error: any) {
     return NextResponse.json(
       { message: error.message },
-      { status: error.status },
+      { status: error.status }
     );
   }
 }
