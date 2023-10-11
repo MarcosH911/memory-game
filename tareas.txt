@@ -27,6 +27,8 @@ Handle users with same username
 
 File for when a page is not found
 
+Style error page
+
 Store ranking and teacher filters in local storage to preserve search params on change
 
 
