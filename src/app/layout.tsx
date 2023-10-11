@@ -1,18 +1,19 @@
 import { Analytics } from "@vercel/analytics/react";
-import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import type { Metadata } from "next";
 
 import "./globals.css";
-import { SWRProvider } from "./(components)/SWRProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
+import { SWRProvider } from "./(components)/SWRProvider";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const metadata: Metadata = {
-  title: "Memory game",
-  description: "An amazing game to test and to improve your visual memory!",
+  title: "CogniAprendo | Aumenta tu Cociente Intelectual",
+  description:
+    "El único juego respaldado por evidencia científica que aumenta tu Cociente Intelectual",
 };
 
 const nunito = Nunito({
