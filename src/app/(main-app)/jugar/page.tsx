@@ -105,7 +105,6 @@ function PlayGame() {
       }
       setIsSpacePressed(true);
     }
-    console.log(correctHits.current, incorrectHits.current);
   };
 
   const playGame = async () => {
