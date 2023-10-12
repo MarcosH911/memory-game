@@ -2,6 +2,8 @@
 
 Icon of a square
 
+Admin users can't access /registrar
+
 
 -------- ORGANIZATION --------
 

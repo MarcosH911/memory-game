@@ -59,7 +59,7 @@ function AuthInputField({
             className={twMerge(
               "w-full rounded-md bg-transparent px-2 py-1 pl-1 text-base transition placeholder:text-base focus:outline-none",
               !value && "text-gray-400",
-              disabled && "hover:cursor-wait",
+              disabled && "hover:cursor-not-allowed",
             )}
           >
             {options?.map((item, index) => (
@@ -87,7 +87,7 @@ function AuthInputField({
             placeholder={placeholder}
             className={twMerge(
               "w-full max-w-xs bg-transparent px-2 py-1 text-base text-teal-950 transition placeholder:text-base focus:outline-none group-focus-within:placeholder:opacity-0 md:w-64",
-              disabled && "hover:cursor-wait",
+              disabled && "hover:cursor-not-allowed",
             )}
           />
         )}
