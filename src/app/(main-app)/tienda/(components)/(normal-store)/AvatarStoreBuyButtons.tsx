@@ -25,7 +25,7 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
   const supabase = createClientComponentClient<Database>();
 
   const hasEnoughCoins = userPoints.coins >= 100;
-  const hasEnoughDiamonds = userPoints.coins >= 25;
+  const hasEnoughDiamonds = userPoints.diamonds >= 25;
 
   const handleBuy = async (type: "coins" | "diamonds") => {
     if (
