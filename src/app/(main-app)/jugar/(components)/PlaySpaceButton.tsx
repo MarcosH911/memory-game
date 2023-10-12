@@ -47,7 +47,7 @@ function PlaySpaceButton({
 
   return (
     <button
-      onClick={() => setIsSpacePressed(true)}
+      onClick={handleSpacePress}
       ref={spaceButtonRef}
       className={twMerge(
         "relative my-2 h-20 w-full max-w-[min(24rem,95vw)] -translate-y-2 rounded-lg border-4 border-slate-600 bg-slate-100 shadow-xl shadow-black/60 transition duration-300 focus:outline-none sm:max-w-md md:max-w-lg xl:h-24 xl:max-w-xl 2xl:h-28 2xl:max-w-3xl",
