@@ -1,8 +1,6 @@
 ------------ BUGS ------------
 
-Icon of a square
-
-Admin users can't access /registrar
+Ranking not updating
 
 
 -------- ORGANIZATION --------

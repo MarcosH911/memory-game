@@ -1,8 +1,10 @@
-import supabaseClient from "@/utils/supabaseClient";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+
 import RankingRow from "./RankingRow";
 import RakingTableReloadButton from "./RankingTableReloadButton";
 
-export const revalidate = 20;
+export const revalidate = 60;
 
 interface Props {
   pointsFilter: string;
@@ -28,6 +30,8 @@ async function RankingTable({
     class?: string;
   } = {};
 
+  const supabase = createServerComponentClient({ cookies });
+
   if (schoolFilter) {
     advancedFilters.school = schoolFilter;
   }
@@ -41,7 +45,7 @@ async function RankingTable({
     advancedFilters.class = classFilter;
   }
 
-  const { data, error } = await supabaseClient
+  const { data, error } = await supabase
     .from(timeFilter)
     .select("*")
     .match(advancedFilters)
@@ -55,7 +59,7 @@ async function RankingTable({
 
   return (
     <div className="relative rounded-lg sm:shadow-xl">
-      <RakingTableReloadButton finishedReloading={true} />
+      <RakingTableReloadButton />
       <table className="w-full">
         <thead>
           <tr className="flex h-16 items-center justify-around bg-teal-700 px-0 text-base font-semibold text-teal-50 shadow-xl xs:text-lg xs:font-bold sm:rounded-t-lg sm:pl-4 sm:pr-8 md:px-12 lg:px-24">

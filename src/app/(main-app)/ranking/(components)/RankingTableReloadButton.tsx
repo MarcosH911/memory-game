@@ -2,15 +2,11 @@
 
 import sleep from "@/helpers/sleep";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiMiniArrowPath } from "react-icons/hi2";
 import { PiSpinnerBold } from "react-icons/pi";
 
-function RakingTableReloadButton({
-  finishedReloading,
-}: {
-  finishedReloading: boolean;
-}) {
+function RakingTableReloadButton() {
   const [isReloading, setIsReloading] = useState(false);
   const router = useRouter();
 
@@ -20,12 +16,6 @@ function RakingTableReloadButton({
     await sleep(750);
     setIsReloading(false);
   };
-
-  useEffect(() => {
-    if (finishedReloading) {
-      setIsReloading(false);
-    }
-  }, [finishedReloading]);
 
   return (
     <div className="hidden sm:block">
