@@ -130,6 +130,7 @@ function Page() {
                 type="text"
                 value={username}
                 setValue={setUsername}
+                autoComplete="off"
               />
 
               <AuthInputField
@@ -141,6 +142,7 @@ function Page() {
                 type="text"
                 value={fullName}
                 setValue={setFullName}
+                autoComplete="off"
               />
 
               <AuthInputField
@@ -169,6 +171,7 @@ function Page() {
                 placeholder="Escriba la contraseña"
                 value={password}
                 setValue={setPassword}
+                autoComplete="off"
               />
             </div>
             <div>
