@@ -2,12 +2,11 @@ import { twMerge } from "tailwind-merge";
 
 interface Props {
   selectedSquare: number | null;
-  type?: "small" | "big";
 }
 
-function PlayTutorialSquares({ selectedSquare, type = "big" }: Props) {
+function PlayTutorialSquares({ selectedSquare }: Props) {
   return (
-    <div className="relative grid aspect-square h-[min(100%,26.25rem)] grid-cols-3 grid-rows-3">
+    <div className="relative grid h-[min(100%,26.25rem)] w-full grid-cols-3 grid-rows-3">
       {Array(8)
         .fill(true)
         .map((_, index) => (

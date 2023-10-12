@@ -1,6 +1,8 @@
 ------------ BUGS ------------
 
-Ranking not updating
+Feedback vote buttons with too much delay
+
+On mobile instructions should be smaller
 
 
 -------- ORGANIZATION --------

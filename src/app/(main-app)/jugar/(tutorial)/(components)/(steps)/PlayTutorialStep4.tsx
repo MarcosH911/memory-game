@@ -29,7 +29,7 @@ function PlayTutorialStep4() {
 
   return (
     <PlayTutorialStepWrapper step={4}>
-      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
+      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           Debes <strong className="font-extrabold">activar</strong> el botón
           cuando se{" "}
@@ -45,10 +45,10 @@ function PlayTutorialStep4() {
         </li>
       </ul>
 
-      <div className="h-sm:gap-4 flex h-full flex-col items-center justify-center gap-2">
+      <div className="flex h-full flex-col items-center justify-center gap-2 h-sm:gap-4">
         <PlayTutorialLevelTitle level={1} type="small" />
-        <div className="aspect-square h-full">
-          <PlayTutorialSquares selectedSquare={selectedSquare} type="small" />
+        <div className="aspect-square h-[min(100%,calc(100vw-2rem))]">
+          <PlayTutorialSquares selectedSquare={selectedSquare} />
         </div>
         <PlayTutorialSpaceButton
           isSpacePressed={isSpacePressed}
