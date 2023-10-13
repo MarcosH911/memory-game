@@ -81,7 +81,7 @@ async function RankingTable({
         </thead>
       </table>
 
-      <div className="scrollbar-ranking h-[calc(100vh-14.7rem)] overflow-y-auto sm:h-[calc(100vh-16rem)] sm:rounded-b-lg 2xl:h-[calc(100vh-18rem)]">
+      <div className="scrollbar-ranking h-[calc(100dvh-14.7rem)] overflow-y-auto sm:h-[calc(100dvh-16rem)] sm:rounded-b-lg 2xl:h-[calc(100dvh-18rem)]">
         <table className="w-full rounded-lg">
           <tbody className="h-full rounded-lg">
             {data?.map((item, index) => (
