@@ -2,7 +2,10 @@
 
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { twMerge } from "tailwind-merge";
+import toast from "react-hot-toast";
 
+import waitFor from "@/helpers/waitFor";
 import sleep from "@/helpers/sleep";
 import PlayCenterCrosshair from "./(components)/PlayCenterCrosshair";
 import PlaySpaceButton from "./(components)/PlaySpaceButton";
@@ -10,8 +13,6 @@ import PlaySquare from "./(components)/PlaySquare";
 import PlayStartScreen from "./(components)/PlayStartScreen";
 import PlayLevelTitle from "./(components)/PlayLevelTitle";
 import PlayTutorial from "./(tutorial)/PlayTutorial";
-import toast from "react-hot-toast";
-import waitFor from "@/helpers/waitFor";
 
 const baseSequenceLength = 20;
 const numTargets = 6;
@@ -79,7 +80,9 @@ function PlayGame() {
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const [level, setLevel] = useState(-1);
+  const [feedbackColor, setFeedbackColor] = useState("");
 
+  const isSpacePressedRef = useRef(false);
   const levelRef = useRef(level);
   const generatedSequence = useRef<number[]>([]);
   const isInserting = useRef(false);
@@ -88,9 +91,18 @@ function PlayGame() {
   const isFirstTime = useRef(true);
   const levelChange = useRef<1 | 0 | -1>(0);
   const sequenceStep = useRef(0);
+  const gamesPlayed = useRef(0);
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const showFeedback = async (color: string) => {
+    if (gamesPlayed.current > 10) return;
+
+    setFeedbackColor(color);
+    await sleep(200);
+    setFeedbackColor("");
+  };
 
   const handleSpacePress = () => {
     if (isPlaying && !isSpacePressed) {
@@ -100,10 +112,13 @@ function PlayGame() {
           generatedSequence.current[sequenceStep.current - levelRef.current]
       ) {
         correctHits.current++;
+        showFeedback("green");
       } else {
         incorrectHits.current++;
+        showFeedback("red");
       }
       setIsSpacePressed(true);
+      isSpacePressedRef.current = true;
     }
   };
 
@@ -130,7 +145,16 @@ function PlayGame() {
       setSelectedSquare(null);
       await sleep(2300);
 
+      if (
+        sequenceStep.current >= levelRef.current &&
+        !isSpacePressedRef.current &&
+        generatedSequence.current[sequenceStep.current] ===
+          generatedSequence.current[sequenceStep.current - levelRef.current]
+      ) {
+        showFeedback("blue");
+      }
       setIsSpacePressed(false);
+      isSpacePressedRef.current = false;
     }
 
     insertData();
@@ -172,6 +196,9 @@ function PlayGame() {
 
     isInserting.current = true;
 
+    gamesPlayed.current++;
+    localStorage.setItem("gamesPlayed", String(gamesPlayed.current));
+
     if (insertLevelPromise) {
       const [insertPoints, insertLevel] = await Promise.all([
         insertPointsPromise,
@@ -212,6 +239,10 @@ function PlayGame() {
   }, []);
 
   useEffect(() => {
+    gamesPlayed.current = Number(localStorage.getItem("gamesPlayed")) || 0;
+  }, []);
+
+  useEffect(() => {
     if (isPlaying) {
       router.replace(pathname + "?playing=true");
     } else {
@@ -220,7 +251,14 @@ function PlayGame() {
   }, [isPlaying, pathname, router]);
 
   return (
-    <div className="relative flex h-full flex-col items-center justify-center overflow-hidden">
+    <div
+      className={twMerge(
+        "relative flex h-full flex-col items-center justify-center overflow-hidden bg-teal-50 transition duration-150",
+        feedbackColor === "green" && "bg-green-200",
+        feedbackColor === "red" && "bg-red-200",
+        feedbackColor === "blue" && "bg-sky-200",
+      )}
+    >
       <PlayTutorial />
       <PlayLevelTitle level={level} />
       <PlayStartScreen

@@ -17,9 +17,7 @@ function PlayTutorialStep1() {
       await sleep(1000);
     }, 2000);
 
-    return () => {
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   return (

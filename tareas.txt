@@ -6,6 +6,14 @@ Improve instructions
 
 Space bar feedback in first 10 games
 
+Fix safari roulette bug
+
+Fallback for dvh
+
+Fix bug where you can buy roulette without having enough points
+
+Fix bug where registering new user doesn't give admin role
+
 
 -------- ORGANIZATION --------
 

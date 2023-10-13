@@ -12,7 +12,7 @@ interface Props {
 }
 
 function PlayTutorialStepWrapper({ children, step }: Props) {
-  const { hasPlayedTutorial, setIsOpen, setStep } = useContext(TutorialContext);
+  const { hasPlayedTutorial, setIsOpen } = useContext(TutorialContext);
 
   const handleClose = () => {
     setIsOpen && setIsOpen(false);
@@ -35,7 +35,11 @@ function PlayTutorialStepWrapper({ children, step }: Props) {
         <div>
           <h1 className="text-4xl font-bold">Instrucciones</h1>
           <h2 className="mb-4 text-lg font-semibold text-teal-900 h-sm:mb-6">
-            {step < 5 ? `Paso ${step}` : `Ejemplo ${step - 4}`}
+            {step <= 4
+              ? `Paso ${step}`
+              : step <= 6
+              ? `Ejemplo ${step - 4}`
+              : "Ayuda"}
           </h2>
         </div>
         <div className="flex h-full flex-col pb-4 h-md:pb-10">{children}</div>

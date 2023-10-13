@@ -47,8 +47,10 @@ function PlayTutorialButtons({ step }: Props) {
           <span>
             {step + 1 <= 4
               ? `Paso ${step + 1}`
-              : step < totalSteps
+              : step + 1 <= 6
               ? `Ejemplo ${step - 3}`
+              : step < totalSteps
+              ? `Ayuda`
               : `¡Comenzar!`}
           </span>
           {step < totalSteps && <HiArrowRight />}
