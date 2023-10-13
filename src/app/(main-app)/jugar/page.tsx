@@ -112,10 +112,8 @@ function PlayGame() {
           generatedSequence.current[sequenceStep.current - levelRef.current]
       ) {
         correctHits.current++;
-        showFeedback("green");
       } else {
         incorrectHits.current++;
-        showFeedback("red");
       }
       setIsSpacePressed(true);
       isSpacePressedRef.current = true;
@@ -147,12 +145,18 @@ function PlayGame() {
 
       if (
         sequenceStep.current >= levelRef.current &&
-        !isSpacePressedRef.current &&
         generatedSequence.current[sequenceStep.current] ===
           generatedSequence.current[sequenceStep.current - levelRef.current]
       ) {
-        showFeedback("blue");
+        if (isSpacePressedRef.current) {
+          showFeedback("green");
+        } else {
+          showFeedback("blue");
+        }
+      } else if (isSpacePressedRef.current) {
+        showFeedback("red");
       }
+
       setIsSpacePressed(false);
       isSpacePressedRef.current = false;
     }
