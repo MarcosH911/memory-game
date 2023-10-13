@@ -34,9 +34,9 @@ function PlayTutorialStep4() {
           Debes <strong className="font-extrabold">activar</strong> el botón
           cuando se{" "}
           <strong className="font-extrabold">
-            ilumine el mismo cuadrado que <em>N</em> veces atrás
+            ilumine el mismo cuadrado que <em>N</em> veces antes
           </strong>
-          , donde <em>N</em> es el nivel en el que estas{" "}
+          , donde <em>N</em> es el nivel en el que estás.
         </li>
         <li>
           Mira los <strong className="font-extrabold">ejemplos</strong> de las{" "}

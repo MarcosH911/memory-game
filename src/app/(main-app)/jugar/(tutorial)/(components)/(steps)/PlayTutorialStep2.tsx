@@ -20,7 +20,7 @@ function PlayTutorialStep2() {
 
   return (
     <PlayTutorialStepWrapper step={2}>
-      <ul className="h-md:pb-10 space-y-3 pb-4 font-semibold leading-tight">
+      <ul className="space-y-3 pb-4 font-semibold leading-tight h-md:pb-10">
         <li>
           Tienes un <strong className="font-extrabold">nivel</strong> que va
           subiendo o bajando.
@@ -34,7 +34,7 @@ function PlayTutorialStep2() {
         <li>
           Cuanto <strong className="font-extrabold">más alto</strong> el nivel,{" "}
           <strong className="font-extrabold">más difícil</strong> se vuelve el
-          juego
+          juego.
         </li>
       </ul>
 
