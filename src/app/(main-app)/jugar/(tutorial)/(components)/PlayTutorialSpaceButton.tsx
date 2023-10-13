@@ -40,7 +40,7 @@ function PlayTutorialSpaceButton({
       className={twMerge(
         "relative h-20 w-full max-w-[min(24rem,95vw)] -translate-y-2 rounded-lg border-4 border-slate-600 bg-slate-100 shadow-xl shadow-black/60 transition duration-300 focus:outline-none sm:max-w-md md:max-w-lg xl:h-20 xl:max-w-xl 2xl:h-20 2xl:max-w-3xl xl:h-sm:h-24 2xl:h-sm:h-28",
         type === "small" &&
-          "mt-1 h-[10dvh] w-[30dvh] border-[3px] xl:h-[10dvh] 2xl:h-[10dvh] h-sm:mt-0 xl:h-sm:h-[10dvh] 2xl:h-sm:h-[10dvh] h-md:w-[40dvh] h-md:border-4",
+          "mt-1 h-[10svh] w-[30svh] border-[3px] xl:h-[10svh] 2xl:h-[10svh] h-sm:mt-0 xl:h-sm:h-[10svh] 2xl:h-sm:h-[10svh] h-md:w-[40svh] h-md:border-4",
         isSpacePressed &&
           "translate-y-0 bg-slate-200 shadow-sm shadow-black/30",
       )}
