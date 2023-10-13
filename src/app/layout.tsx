@@ -24,7 +24,7 @@ const nunito = Nunito({
 function RootLayout({ children }: Props) {
   return (
     <html lang="es" className={nunito.variable}>
-      <body className="h-screen bg-teal-50">
+      <body className="h-[100dvh] bg-teal-50">
         <ToasterProvider />
         <SWRProvider>
           {children}

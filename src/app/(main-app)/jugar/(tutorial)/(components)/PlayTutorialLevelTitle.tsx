@@ -11,7 +11,7 @@ function PlayTutorialLevelTitle({ level, type = "big" }: Props) {
       className={twMerge(
         "relative rounded-lg border border-teal-200 bg-teal-100 px-5 py-3 text-5xl font-bold text-teal-950 shadow-md shadow-teal-200/50 xs:px-6 h-md:text-7xl",
         type === "small" &&
-          "px-[1.5svh] py-0 text-[3.5svh] h-md:px-[2svh] h-md:text-[5svh]",
+          "px-[1.5dvh] py-0 text-[3.5dvh] h-md:px-[2dvh] h-md:text-[5dvh]",
         level === -1 && "text-transparent",
       )}
     >

@@ -6,13 +6,13 @@ interface Props {
 
 function Error({ reset }: Props) {
   return (
-    <div className="h-screen flex-col w-screen bg-red-600 flex items-center justify-center">
-      <h1 className="text-red-50 font-medium text-center px-4 text-4xl xs:text-5xl sm:text-7xl mb-8">
+    <div className="flex h-[100dvh] w-screen flex-col items-center justify-center bg-red-600">
+      <h1 className="mb-8 px-4 text-center text-4xl font-medium text-red-50 xs:text-5xl sm:text-7xl">
         Ha ocurrido un error inesperado
       </h1>
       <button
         onClick={() => reset()}
-        className="bg-red-50 text-red-900 px-6 py-3 rounded-md text-2xl font-bold hover:bg-red-100 shadow-lg hover:shadow-xl transition duration-200"
+        className="rounded-md bg-red-50 px-6 py-3 text-2xl font-bold text-red-900 shadow-lg transition duration-200 hover:bg-red-100 hover:shadow-xl"
       >
         Intentar de nuevo
       </button>
