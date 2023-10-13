@@ -40,7 +40,7 @@ function PlayTutorialStep1() {
         </li>
       </ul>
       <div className="flex h-full items-center justify-center gap-2 h-sm:gap-4">
-        <div className="aspect-square h-[min(100%,calc(100vw-2rem))]">
+        <div className="aspect-square h-[min(100%,calc(100vw-2rem),24rem)]">
           <PlayTutorialSquares selectedSquare={selectedSquare} />
         </div>
       </div>

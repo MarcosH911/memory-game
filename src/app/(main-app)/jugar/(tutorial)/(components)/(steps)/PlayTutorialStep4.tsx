@@ -47,7 +47,7 @@ function PlayTutorialStep4() {
 
       <div className="flex h-full flex-col items-center justify-center gap-2 h-sm:gap-4">
         <PlayTutorialLevelTitle level={1} type="small" />
-        <div className="aspect-square h-[min(100%,calc(100vw-2rem))]">
+        <div className="aspect-square h-[min(100%,calc(100vw-2rem),28rem)]">
           <PlayTutorialSquares selectedSquare={selectedSquare} />
         </div>
         <PlayTutorialSpaceButton

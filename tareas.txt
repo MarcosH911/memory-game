@@ -4,6 +4,10 @@ Feedback vote buttons with too much delay
 
 On mobile instructions should be smaller
 
+Improve instructions
+
+Space bar feedback in first 10 games
+
 
 -------- ORGANIZATION --------
 
