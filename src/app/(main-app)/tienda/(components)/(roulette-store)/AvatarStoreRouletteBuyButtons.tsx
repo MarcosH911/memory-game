@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { BiSolidCoinStack } from "react-icons/bi";
 import { IoDiamond } from "react-icons/io5";
 import Spinner from "@/components/Spinner";
+import toast from "react-hot-toast";
 
 interface Props {
   handleSpinRoulette: (type: "coins" | "diamonds") => Promise<void>;
@@ -28,7 +29,21 @@ function AvatarStoreRouletteBuyButtons({
     }
 
     setIsLoading(type);
-    await handleSpinRoulette(type);
+    const pointsResponse = await fetch("/api/points/get-points", {
+      cache: "no-store",
+    });
+    if (pointsResponse.status === 200) {
+      const pointsData = await pointsResponse.json();
+      if (pointsData.data.coins < 60 && type === "coins") {
+        toast.error("No tienes suficientes monedas");
+      } else if (pointsData.data.diamonds < 15 && type === "diamonds") {
+        toast.error("No tienes suficientes diamantes");
+      } else {
+        await handleSpinRoulette(type);
+      }
+    } else {
+      toast.error("Ha ocurrido un error inesperado");
+    }
     setIsLoading("");
   };
 

@@ -36,6 +36,25 @@ function AvatarStoreBuyButtons({ avatarPath, userPoints }: Props) {
     }
 
     setIsLoading(type);
+    const pointsResponse = await fetch("/api/points/get-points", {
+      cache: "no-store",
+    });
+    if (pointsResponse.status === 200) {
+      const pointsData = await pointsResponse.json();
+      if (pointsData.data.coins < 100 && type === "coins") {
+        toast.error("No tienes suficientes monedas");
+        setIsLoading("");
+        return;
+      } else if (pointsData.data.diamonds < 25 && type === "diamonds") {
+        toast.error("No tienes suficientes diamantes");
+        setIsLoading("");
+        return;
+      }
+    } else {
+      toast.error("Ha ocurrido un error inesperado");
+      setIsLoading("");
+      return;
+    }
 
     const userId = (await supabase.auth.getSession()).data.session?.user.id;
 

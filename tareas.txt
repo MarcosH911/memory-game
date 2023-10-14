@@ -4,8 +4,6 @@ Feedback vote buttons with too much delay
 
 Fix safari roulette bug
 
-Fallback for dvh
-
 Fix bug where you can buy roulette without having enough points
 
 Fix bug where registering new user doesn't give admin role
