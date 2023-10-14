@@ -1,7 +1,5 @@
 ------------ BUGS ------------
 
-Feedback vote buttons with too much delay
-
 
 -------- ORGANIZATION --------
 
