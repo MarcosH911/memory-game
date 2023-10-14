@@ -85,7 +85,7 @@ function TeacherFilters() {
     <div>
       <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <Dialog.Overlay className="fixed inset-0 z-40 animate-show-modal-overlay bg-black/10 data-[state=closed]:animate-fade-out" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 h-[100dvh] w-screen origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 px-2 py-20 shadow-2xl data-[state=closed]:animate-fade-out sm:h-fit sm:w-fit sm:px-12 sm:py-12">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 h-[100vh] w-screen origin-center -translate-x-1/2 -translate-y-1/2 animate-show-modal rounded-xl border border-slate-100 bg-slate-50 px-2 py-20 shadow-2xl data-[state=closed]:animate-fade-out supports-[height:100dvh]:h-[100dvh] sm:h-fit sm:w-fit sm:px-12 sm:py-12">
           <h1 className="mb-14 block text-center text-3xl font-semibold text-teal-950 sm:text-4xl">
             Filtros
           </h1>

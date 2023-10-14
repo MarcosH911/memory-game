@@ -2,10 +2,6 @@
 
 Feedback vote buttons with too much delay
 
-Improve instructions
-
-Space bar feedback in first 10 games
-
 Fix safari roulette bug
 
 Fallback for dvh

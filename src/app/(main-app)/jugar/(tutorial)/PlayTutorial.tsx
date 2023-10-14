@@ -65,7 +65,7 @@ function PlayTutorial() {
         </Dialog.Trigger>
         <Dialog.Overlay className="fixed inset-0 z-50 animate-show-modal-overlay bg-black/10 backdrop-blur-sm data-[state=closed]:animate-fade-out" />
         <Dialog.Content asChild>
-          <div className="fixed left-1/2 top-1/2 z-50 flex h-[100dvh] w-screen -translate-x-1/2 -translate-y-1/2 animate-show-modal overflow-hidden rounded-xl border border-slate-200 shadow-2xl data-[state=closed]:animate-fade-out sm:h-[95dvh] sm:w-[32.5rem]">
+          <div className="fixed left-1/2 top-1/2 z-50 flex h-[100vh] w-screen -translate-x-1/2 -translate-y-1/2 animate-show-modal overflow-hidden rounded-xl border border-slate-200 shadow-2xl data-[state=closed]:animate-fade-out supports-[height:100dvh]:h-[100dvh] sm:h-[95vh] sm:w-[32.5rem] sm:supports-[height:95dvh]:h-[95dvh]">
             <div
               style={{
                 transform: `translateX(-${((step - 1) / totalSteps) * 100}%)`,

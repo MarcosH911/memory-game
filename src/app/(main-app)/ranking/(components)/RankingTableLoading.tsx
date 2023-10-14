@@ -32,7 +32,7 @@ function RankingTableLoading() {
         </thead>
       </table>
 
-      <div className="h-[calc(100dvh-14.7rem)] overflow-y-hidden sm:h-[calc(100dvh-16rem)] sm:rounded-b-lg 2xl:h-[calc(100dvh-18rem)]">
+      <div className="h-[calc(100vh-14.7rem)] overflow-y-hidden supports-[height:100dvh]:h-[calc(100dvh-14.7rem)] sm:h-[calc(100vh-16rem)] sm:rounded-b-lg sm:supports-[height:100dvh]:h-[calc(100dvh-16rem)] 2xl:h-[calc(100vh-18rem)] 2xl:supports-[height:100dvh]:h-[calc(100dvh-18rem)]">
         <table className="w-full rounded-lg">
           <tbody className="h-full rounded-lg">
             {Array(14)

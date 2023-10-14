@@ -47,7 +47,7 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
       </button>
       <nav
         className={twMerge(
-          "fixed left-0 top-0 z-40 h-[100dvh] w-full translate-x-0 bg-teal-50 px-6 py-28 transition duration-300 xs:w-fit",
+          "fixed left-0 top-0 z-40 h-[100vh] w-full translate-x-0 bg-teal-50 px-6 py-28 transition duration-300 supports-[height:100dvh]:h-[100dvh] xs:w-fit",
           !isOpen && "-translate-x-full opacity-0",
         )}
       >
@@ -82,7 +82,7 @@ function MobileNavbar({ avatarUrl, fullName }: Props) {
       <div
         onClick={() => setIsOpen(false)}
         className={twMerge(
-          "invisible fixed right-0 top-0 z-30 h-[100dvh] w-full bg-black/30 opacity-0 transition-all duration-300",
+          "invisible fixed right-0 top-0 z-30 h-[100vh] w-full bg-black/30 opacity-0 transition-all duration-300 supports-[height:100dvh]:h-[100dvh]",
           isOpen && "visible opacity-100",
         )}
       ></div>
