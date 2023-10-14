@@ -30,7 +30,7 @@ async function RankingTable({
     class?: string;
   } = {};
 
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createServerComponentClient<Database>({ cookies });
 
   if (schoolFilter) {
     advancedFilters.school = schoolFilter;

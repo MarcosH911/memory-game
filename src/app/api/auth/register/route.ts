@@ -47,9 +47,7 @@ export async function POST(request: Request) {
       await supabaseServiceClient.auth.admin.createUser({
         email: fakeEmail,
         password: response.password,
-        user_metadata: {
-          data: { role: response.role },
-        },
+        user_metadata: { role: response.role },
         email_confirm: true,
       });
 

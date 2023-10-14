@@ -9,15 +9,15 @@ function AvatarStoreRouletteItem({ data, index }: Props) {
   if (!data) return null;
 
   return (
-    <div className="flex aspect-square w-[calc((100vw-1rem)/3)] flex-shrink-0 items-center justify-center bg-gradient-to-b from-pink-500 via-red-500 to-yellow-400 p-2 md:w-[calc((100vw-1rem)/5)] xl:w-[min(calc((100vw-1rem)/5),16rem)] xl:p-4 xs:p-3">
-      <div className="relative h-full w-full">
+    <div className="flex h-[calc((100vw-1rem)/3)] w-[calc((100vw-1rem)/3)] flex-shrink-0 items-center justify-center bg-gradient-to-b from-pink-500 via-red-500 to-yellow-400 p-2 xs:p-3 md:h-[calc((100vw-1rem)/5)] md:w-[calc((100vw-1rem)/5)] xl:h-[min(calc((100vw-1rem)/5),16rem)] xl:w-[min(calc((100vw-1rem)/5),16rem)] xl:p-4">
+      <div className="relative h-full w-full rounded-full">
         <Image
           priority={index <= 5}
           loading="eager"
           src={data}
           alt="Avatar image"
           fill
-          sizes="33cw, (min-width: 768px) 25vw, (min-width: 1280px) 80rem"
+          sizes="33vw, (min-width: 768px) 25vw, (min-width: 1280px) 80rem"
           quality={index > 5 && index < 90 ? 1 : 75}
           className="rounded-full border-2 border-teal-950 bg-teal-950 xs:border-4"
         />
