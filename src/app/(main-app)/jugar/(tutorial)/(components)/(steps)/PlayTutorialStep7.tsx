@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 import sleep from "@/helpers/sleep";
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 
-function PlayTutorialStep5() {
+function PlayTutorialStep7() {
   const [feedbackColor, setFeedbackColor] = useState<string>("");
 
   useEffect(() => {
@@ -73,4 +73,4 @@ function PlayTutorialStep5() {
   );
 }
 
-export default PlayTutorialStep5;
+export default PlayTutorialStep7;

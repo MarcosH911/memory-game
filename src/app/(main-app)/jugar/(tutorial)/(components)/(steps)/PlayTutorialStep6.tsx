@@ -5,7 +5,7 @@ import Image from "next/image";
 import PlayTutorialStepWrapper from "./PlayTutorialStepWrapper";
 import PlayTutorialLevelTitle from "../PlayTutorialLevelTitle";
 
-function PlayTutorialStep5() {
+function PlayTutorialStep6() {
   return (
     <PlayTutorialStepWrapper step={6}>
       <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
@@ -50,4 +50,4 @@ function PlayTutorialStep5() {
   );
 }
 
-export default PlayTutorialStep5;
+export default PlayTutorialStep6;

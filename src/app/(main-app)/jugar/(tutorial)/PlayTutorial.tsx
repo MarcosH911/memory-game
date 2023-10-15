@@ -14,8 +14,9 @@ import { RxQuestionMarkCircled } from "react-icons/rx";
 import { useSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import PlayTutorialStep7 from "./(components)/(steps)/PlayTutorialStep7";
+import PlayTutorialStep8 from "./(components)/(steps)/PlayTutorialStep8";
 
-const totalSteps = 7;
+const totalSteps = 8;
 
 function PlayTutorial() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,6 +80,7 @@ function PlayTutorial() {
               <PlayTutorialStep5 />
               <PlayTutorialStep6 />
               <PlayTutorialStep7 />
+              <PlayTutorialStep8 />
             </div>
           </div>
         </Dialog.Content>
