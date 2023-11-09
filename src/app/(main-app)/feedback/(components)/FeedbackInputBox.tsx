@@ -2,13 +2,14 @@
 
 import type { FormEvent } from "react";
 
+import toast from "react-hot-toast";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HiMiniCheck, HiMiniPlus } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+import { useRouter } from "next/navigation";
 
-import Spinner from "@/components/Spinner";
 import FeedbackInputMessageBox from "./FeedbackInputMessageBox";
-import toast from "react-hot-toast";
+import Spinner from "@/components/Spinner";
 
 function FeedbackInputBox() {
   const [text, setText] = useState("");
@@ -17,6 +18,7 @@ function FeedbackInputBox() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const inputRef = useRef<HTMLSpanElement>(null);
+  const router = useRouter();
 
   const isBugTagSelected = tags.includes("bug");
   const isSuggestionTagSelected = tags.includes("suggestion");
@@ -61,7 +63,9 @@ function FeedbackInputBox() {
       setText("");
       setTags([]);
       inputRef.current!.textContent = "";
+      toast.success("Sugerencia añadida correctamente");
       (document.activeElement as HTMLElement).blur();
+      router.refresh();
     } else {
       toast.error("Ha ocurrido un error inesperado");
     }

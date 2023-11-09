@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       user_id: userId,
       coins: response.coins,
       diamonds: response.diamonds,
+      level: response.level,
     });
 
     if (error) {

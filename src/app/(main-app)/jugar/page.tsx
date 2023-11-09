@@ -167,7 +167,11 @@ function PlayGame() {
   const insertData = async () => {
     const insertPointsPromise = fetch("/api/points/insert-points", {
       method: "post",
-      body: JSON.stringify({ coins: levelRef.current, diamonds: 1 }),
+      body: JSON.stringify({
+        coins: levelRef.current * 3,
+        diamonds: 1,
+        level: levelRef.current,
+      }),
     });
 
     let insertLevelPromise: null | Promise<Response> = null;

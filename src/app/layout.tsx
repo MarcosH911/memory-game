@@ -11,9 +11,9 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "CogniAprendo | Aumenta tu Cociente Intelectual",
+  title: "CogniAprendo | Aumenta tu Inteligencia Fluida",
   description:
-    "El único juego respaldado por evidencia científica que aumenta tu Cociente Intelectual",
+    "El único juego respaldado por evidencia científica que aumenta tu Inteligencia Fluida",
 };
 
 const nunito = Nunito({
