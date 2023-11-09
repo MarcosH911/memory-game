@@ -22,7 +22,7 @@ function PlayTutorialStep3() {
 
   return (
     <PlayTutorialStepWrapper step={3}>
-      <ul className="h-md:mb-10 mb-4 space-y-3 font-semibold leading-tight">
+      <ul className="mb-4 space-y-3 font-semibold leading-tight h-md:mb-10">
         <li>
           Tienes un <strong className="font-extrabold">botón</strong> que puedes
           activar.
@@ -46,6 +46,7 @@ function PlayTutorialStep3() {
         <PlayTutorialSpaceButton
           isSpacePressed={isSpacePressed}
           setIsSpacePressed={setIsSpacePressed}
+          step={3}
         />
       </div>
     </PlayTutorialStepWrapper>

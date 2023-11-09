@@ -1,30 +1,34 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import TutorialContext from "@/contexts/TutorialContext";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
   isSpacePressed: boolean;
   setIsSpacePressed: React.Dispatch<React.SetStateAction<boolean>> | null;
+  step: number;
   type?: "small" | "big";
 }
 
 function PlayTutorialSpaceButton({
   isSpacePressed,
   setIsSpacePressed,
+  step,
   type = "big",
 }: Props) {
   const spaceButtonRef = useRef<HTMLButtonElement | null>(null);
+  const { step: currentStep } = useContext(TutorialContext);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent): void => {
-      if (type === "small") return;
+      if (type === "small" || step !== currentStep) return;
       if (e.code === "Space") {
         setIsSpacePressed && setIsSpacePressed(true);
         spaceButtonRef.current?.focus();
       }
     },
-    [setIsSpacePressed, type],
+    [currentStep, setIsSpacePressed, step, type],
   );
 
   useEffect(() => {
