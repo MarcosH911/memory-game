@@ -27,6 +27,7 @@ function PlayTutorialButtons({ step }: Props) {
       {step > 1 && (
         <button
           onClick={() => handleSetStep(-1)}
+          tabIndex={-1}
           className="flex items-center justify-center gap-1 rounded-md bg-teal-600 px-5 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none xs:gap-1.5 xs:px-6"
         >
           <HiArrowLeft />
@@ -41,6 +42,7 @@ function PlayTutorialButtons({ step }: Props) {
       {step <= totalSteps && (
         <button
           onClick={() => handleSetStep(1)}
+          tabIndex={-1}
           className={twMerge(
             "flex items-center justify-center gap-1.5 rounded-md bg-teal-600 px-5 py-2 text-lg font-semibold text-teal-50 shadow-lg transition duration-150 hover:bg-teal-700 hover:shadow-xl active:shadow-none xs:px-6",
             step === totalSteps &&

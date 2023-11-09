@@ -1,5 +1,7 @@
 ------------ BUGS ------------
 
+Tutorial tab bug
+
 
 -------- ORGANIZATION --------
 

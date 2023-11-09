@@ -54,6 +54,7 @@ function PlayTutorialStep4() {
           isSpacePressed={isSpacePressed}
           setIsSpacePressed={null}
           type="small"
+          step={4}
         />
       </div>
     </PlayTutorialStepWrapper>

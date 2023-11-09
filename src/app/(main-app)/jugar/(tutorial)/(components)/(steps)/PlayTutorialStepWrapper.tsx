@@ -27,6 +27,7 @@ function PlayTutorialStepWrapper({ children, step }: Props) {
         {hasPlayedTutorial && (
           <button
             onClick={handleClose}
+            tabIndex={-1}
             className="absolute right-4 top-4 rounded-full p-1 text-3xl text-teal-900 transition duration-200 hover:bg-teal-600/20"
           >
             <HiMiniXMark />
